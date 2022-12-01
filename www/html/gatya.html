@@ -20,16 +20,22 @@
 </head>
 
 <body>
+    <!-- プレイヤー情報表示 -->
     <div class="flame">
         <div class="rank">
             <p class="rank_text">ランク<br>100</p>
         </div>
         <div class="other">
             <div class="bers"><meter class="ber" max="100" low="20" high="80" value="50">50%</meter>
-                <meter class="ber" max="100" low="20" high="80" value="90">90%</meter></div>
-                <p class="name">player</p>
+                <meter class="ber" max="100" low="20" high="80" value="90">90%</meter><div class="circle"></div></div>
+            <p class="name">player</p>
         </div>
     </div>
+    <!-- 設定画面への遷移ボタン -->
+    <div class="setting">
+        <img class="setting_image" src="../image/gear.png" onclick="toSet()">
+    </div>
+    <!-- ガチャ画面の表示 -->
     <div data-role="page" id="gatya" data-role="content">
         <img class="gatya_image" src="../image/danjyon.jpeg"><br>
         <p class="gatya_title">武器ガチャ</p>

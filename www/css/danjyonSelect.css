@@ -16,3 +16,8 @@
     height: 200px;
     background-color: white;
 }
+
+/* ダンジョン選択画面のボタン */
+.danjyon {
+    background-color: #5FD1D9;
+}
