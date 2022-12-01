@@ -1,9 +1,18 @@
 class Image {
 
     static initialize() {
+        this.createStageImages();
+    }
+
+    static createElement(){
+        //TODO
+    }
+
+    static createStageImages(){
         //stageImages 床　無　壁上右下左　角　道角
         this.stageImages = [];
-        for(let i=0; i<5; i++){
+        for(let i=0; i < Config.stageImageTotal; i++){
+            //TODO const image = createElement(i+1)
             const image = document.getElementById(`stage${i+1}`);
             image.removeAttribute('id');
             image.width = Config.stageImgWidth;
@@ -23,11 +32,17 @@ class Image {
             newImage2.style.transform = "rotate(270deg)"
             this.stageImages.push(newImage2);
             }
-           
         }
     }
 
-    //getStageImage
-    //メソッドを定義
+
+    static createCharacterImages(){
+        //TODO
+    }
+
+     static getStageImage(index) {
+        const image = this.stageImages[index - 1].cloneNode(true);
+        return image;
+    }
 }
 
