@@ -1,0 +1,23 @@
+/* アイテム一覧 */
+.item_list {
+    display: flex;
+    gap: 10px;
+    border: solid black;
+    background-color: white;
+    padding: 0px 10px;
+    position: absolute;
+    top: 70px;
+    left: 340px;
+}
+
+/* アイテムの仕切り */
+.border {
+    border: solid black;
+}
+
+/* アイテム画面のボタン */
+.item_buttons {
+    position: absolute;
+    top: 310px;
+    left: 82px;
+}

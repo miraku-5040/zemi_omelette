@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <script src="../js/page.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- アイテム画面のCSS -->
+    <link rel="stylesheet" href="../css/item.css">
+</head>
+
+<body>
+    <!-- プレイヤー情報表示 -->
+    <div class="flame">
+        <div class="rank">
+            <p class="rank_text">ランク<br>100</p>
+        </div>
+        <div class="other">
+            <div class="bers"><meter class="ber" max="100" low="20" high="80" value="50">50%</meter>
+                <meter class="ber" max="100" low="20" high="80" value="90">90%</meter></div>
+            <p class="name">player</p>
+        </div>
+    </div>
+    <!-- 設定画面への遷移ボタン -->
+    <img class="setting" src="image/gear.png" onclick="toSet()">
+    <!-- アイテム情報表示 -->
+    <div class="content_position">
+        <div class="item_list">
+            <p class="border">アイテム１</p>
+            <p class="border">アイテム２</p>
+            <p class="border">アイテム３</p>
+        </div>
+
+        <!-- 各画面への遷移ボタン -->
+        <div class="buttons">
+            <button class="mypage" onclick="toSelectDanjyon()">マイページ</button>
+            <button class="danjyon" onclick="toSelectDanjyon()">ダンジョン</button>
+            <button class="item" onclick="toItem()">持ち物</button>
+            <button class="power" onclick="toPower()">強化</button>
+            <button class="gatya" onclick="toGatya()">ガチャ</button>
+        </div>
+    </div>
+</body>
+
+</html>
