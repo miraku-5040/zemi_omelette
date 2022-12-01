@@ -4,16 +4,22 @@ class Image {
         this.createStageImages();
     }
 
-    static createElement(){
-        //TODO
+    static createElement(name,i){
+        // 要素を作成
+        var elem = document.createElement(`img`);
+        // id
+        elem.id = `${name}${i}`;
+        //src
+         elem.src = `img/${name}_${i}.png`;
+        return elem;
     }
 
     static createStageImages(){
         //stageImages 床　無　壁上右下左　角　道角
         this.stageImages = [];
         for(let i=0; i < Config.stageImageTotal; i++){
-            //TODO const image = createElement(i+1)
-            const image = document.getElementById(`stage${i+1}`);
+            const image = this.createElement('stage',i+1);
+            //const image = document.getElementById(`stage${i+1}`);
             image.removeAttribute('id');
             image.width = Config.stageImgWidth;
             image.height = Config.stageImgHeight;
