@@ -35,15 +35,21 @@
     </div>
     <!-- アイテム情報表示 -->
     <div class="content_position">
+        <!-- 装備情報表示 -->
+        <div class="equipment">
+            <img class="material" src="../image/soad/soad-provisional.png">
+            <img class="material" src="../image/shield/shield-provisional.png">
+            <img class="material" src="../image/decoration/juel-provisional.png">
+        </div>
+
+        <!-- アイテムリスト表示 -->
         <div class="item_list">
-            <p class="border">アイテム１</p>
-            <p class="border">アイテム２</p>
-            <p class="border">アイテム３</p>
+            <img class="material" src="../image/item/item-provisional.png">
         </div>
 
         <!-- 各画面への遷移ボタン -->
         <div class="buttons">
-            <button class="mypage" onclick="toSelectDanjyon()">マイページ</button>
+            <button class="mypage" onclick="toMypage()">マイページ</button>
             <button class="danjyon" onclick="toSelectDanjyon()">ダンジョン</button>
             <button class="item" onclick="toItem()">持ち物</button>
             <button class="power" onclick="toPower()">強化</button>
