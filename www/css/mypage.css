@@ -1,0 +1,33 @@
+/* キャラクター画像 */
+.character_position {
+    border: solid black;
+    position: absolute;
+    top: 70px;
+    width: 230px;
+    height: 196px;
+}
+
+/* ユーザ詳細 */
+.user_detail {
+    border: solid black;
+    background-color: white;
+    display: flex;
+    gap: 10px;
+    padding: 10px 10px;
+    position: absolute;
+    top: 70px;
+    left: 270px;
+    width: 240px;
+    height: 175px;
+}
+
+/* マイページ画面のボタン */
+.mypage_buttons {
+    position: absolute;
+    top: 310px;
+    left: 82px;
+}
+
+.mypage {
+    background-color: #5FD1D9;
+}

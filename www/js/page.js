@@ -1,11 +1,11 @@
+function toMypage() {
+    // マイページ画面へ遷移
+    window.location.href = "mypage.html";
+}
+
 function toSelectDanjyon() {
     // ダンジョン選択画面へ遷移
     window.location.href = "index.html";
-}
-
-function toDanjyon() {
-    // ダンジョン画面へ遷移
-    window.location.href = "danjyon.html";
 }
 
 function toGatya() {
@@ -31,4 +31,9 @@ function toPower() {
 function toSet() {
     // 設定画面へ遷移
     window.location.href = "setting.html";
+}
+
+function toDanjyon() {
+    // ダンジョン画面へ遷移
+    window.location.href = "danjyon.html";
 }

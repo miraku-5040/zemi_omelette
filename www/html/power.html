@@ -36,19 +36,25 @@
     </div>
 
     <!-- 装備画面の表示 -->
-    <p class="gear">装備１</p>
+    <!-- 強化対象装備 -->
+    <img class="power_item" src="../image/soad/soad-provisional.png">
+
+    <!-- 強化用アイテム -->
     <div class="useItemList">
-        <p class="useItem" value="アイテム１"></p>
-        <p class="useItem" value="アイテム２"></p>
+        <img class="useItem" src="../image/item/item-provisional.png">
+        <img class="useItem" src="../image/item/item-provisional.png">
     </div>
+
+    <!-- 強化対象装備・強化アイテム一覧 -->
     <div class="item_list">
-        <p class="border">装備２</p>
-        <p class="border">装備３</p>
-        <p class="border" value="アイテム３"></p>
+        <img class="material" src="../image/soad/soad-provisional.png">
+        <img class="material" src="../image/shield/shield-provisional.png">
+        <img class="material" src="../image/item/item-provisional.png">
     </div>
+    
     <!-- 各画面への遷移ボタン -->
     <div class="power_buttons buttons">
-        <button class="mypage" onclick="toSelectDanjyon()">マイページ</button>
+        <button class="mypage" onclick="toMypage()">マイページ</button>
         <button class="danjyon" onclick="toSelectDanjyon()">ダンジョン</button>
         <button class="item" onclick="toItem()">持ち物</button>
         <button class="power" onclick="toPower()">強化</button>
