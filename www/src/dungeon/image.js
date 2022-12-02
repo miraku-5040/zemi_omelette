@@ -2,6 +2,12 @@ class Image {
 
     static initialize() {
         this.createStageImages();
+        this.createCharacterImages();
+
+        const image = document.getElementById(`stage`);
+        image.style.left = 0 * Config.stageImgWidth + "px";
+        image.style.top = 0 * Config.stageImgHeight + "px";
+        image.style.position = 'absolute';
     }
 
     static createElement(name,i){
@@ -44,15 +50,21 @@ class Image {
     static createCharacterImages(){
         this.characterImages = [];
         const image = this.createElement('character',1);
+        console.log(image);
         image.removeAttribute('id');
         image.width = Config.stageImgWidth;
         image.height = Config.stageImgHeight;
         image.style.position = 'absolute';
-        this.stageImages.push(image);
+        this.characterImages.push(image);
     }
 
      static getStageImage(index) {
         const image = this.stageImages[index - 1].cloneNode(true);
+        return image;
+    }
+
+     static getCharacterImage(index) {
+        const image = this.characterImages[index - 1].cloneNode(true);
         return image;
     }
 }

@@ -7,6 +7,11 @@ class Stage {
         stageElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
         this.stageElement = stageElement;
 
+        const characterElement = document.getElementById("character");
+        characterElement.style.width = Config.stageImgWidth + 'px';
+        characterElement.style.height = Config.stageImgHeight + 'px';
+        this.characterElement = characterElement;
+
         // メモリを準備する
         this.board = [[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
 [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,9,5,5,5,5,5,5,10,2,2,2,2,2,2,2,9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,10,2,2,2],
@@ -49,6 +54,7 @@ class Stage {
                 }
             }
         }
+        this.setCharacterImage()
     }
 
     static setStageImage(x, y, stageImageNumber) {
@@ -62,5 +68,15 @@ class Stage {
             stageImageNumber: stageImageNumber,
             element: stageImage
         }
+    }
+
+    static setCharacterImage() {
+        // 画像を作成し配置する
+        const characterImage = Image.getCharacterImage(1);
+        characterImage.style.left = 9 * Config.stageImgWidth + "px";
+        characterImage.style.top = 4 * Config.stageImgHeight + "px";
+        this.characterElement.appendChild(characterImage);
+        // メモリにセットする
+        //this.board[y][x].characterImageNumber = 1;
     }
 }

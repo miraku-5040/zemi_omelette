@@ -1,6 +1,6 @@
 class Controle{
 
-static initialize () {
+    static initialize () {
         // キーボードの入力を確認する
         this.keyStatus = {
             right: false,

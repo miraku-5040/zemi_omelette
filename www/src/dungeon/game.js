@@ -10,7 +10,7 @@ function initialize() {
     // ステージを準備する
     Stage.initialize();
     //コントローラを準備する
-    Controle.initialize();
+    //Controle.initialize();
 
     mode = 'stert';
 }
