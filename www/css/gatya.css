@@ -7,21 +7,31 @@
     height: 200px;
 }
 
-/* ガチャを引くボタン */
+/* ガチャのタイトル */
+.gatya_title {
+    color: gold;
+    position: absolute;
+    top: 50px;
+    left: 72px;
+    font-size: x-large;
+    font-weight: 800;
+}
+
+/* ガチャを引くボタン達 */
 .gatya_button {
     position: absolute;
-    top: 230px;
-    right: 72px;
+    top: 220px;
+    right: 70px;
     display: flex;
     gap: 20px;
 }
 
-/* ガチャのタイトル */
-.gatya_title {
-    color: white;
-    position: absolute;
-    top: 60px;
-    left: 72px;
+/* ガチャを引くボタン */
+.pull {
+    background-color: gold;
+    color: black;
+    width: 60px;
+    height: 30px;
 }
 
 /* ガチャ画面のボタン */

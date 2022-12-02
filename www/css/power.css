@@ -3,8 +3,8 @@
     border: solid black;
     background-color: white;
     position: absolute;
-    top: 70px;
-    left: 130px;
+    top: 80px;
+    left: 160px;
 }
 
 /* 使用するアイテムのリスト */
@@ -14,7 +14,7 @@
     border: solid black;
     background-color: white;
     position: absolute;
-    top: 240px;
+    top: 230px;
     left: 80px;
     width: 200px;
     height: 30px;
@@ -30,6 +30,8 @@
 .item_list {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+    overflow: scroll;
     border: solid black;
     background-color: white;
     padding: 10px 10px;
@@ -37,7 +39,7 @@
     top: 70px;
     left: 340px;
     width: 250px;
-    height: 200px;
+    height: 175px;
 }
 
 /* 一覧の中身 */

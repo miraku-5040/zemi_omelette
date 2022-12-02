@@ -63,7 +63,6 @@ body {
 /* フレーム */
 .flame {
     display: flex;
-    background-color: #ffff92;
     width: 200px;
     height: 45px;
     border-radius: 30px;
@@ -72,13 +71,18 @@ body {
     left: 50px;
 }
 
+/* プレイヤー情報の画像 */
+.player_image {
+    width: 200px;
+    height: 45px;
+}
+
 /* ランクの丸 */
 .rank {
-    border: 2px solid #CCCC66;
-    background-color: #ffffb4;
     width: 45px;
     height: 45px;
     border-radius: 30px;
+
 }
 
 /* ランクのテキスト */
@@ -86,36 +90,33 @@ body {
     font-size: 10px;
     text-align:center;
     color: rgb(29, 223, 3);
+    position: absolute;
+    top: 0px;
+    left: 6px;
 }
 
 /* 二本のバーの位置 */
 .bers {
-    border: 2px solid #CCCC66;
-    border-radius: 30px;
-    border-left: none;
     display: flex;
-    gap: 5px;
+    gap: 3px;
     width: 150px;
+    position: absolute;
+    top: 5px;
+    left: 40px;
 }
 
 /* バーの大きさ */
 .ber {
-    width: 70px;
-}
-
-/* バーの横の丸 */
-.circle {
-    border: 2px solid #CCCC66;
-    border-radius: 30px;
-    width: 15px;
+    width: 69px;
+    height: 10px;
 }
 
 /* プレイヤー名 */
 .name {
     font-size: 15px;
     position: absolute;
-    top: 9px;
-    left: 50px;
+    top: 6px;
+    left: 45px;
     color: rgb(29, 223, 3);
 }
 

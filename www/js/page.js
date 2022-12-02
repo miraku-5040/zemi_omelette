@@ -5,7 +5,7 @@ function toMypage() {
 
 function toSelectDanjyon() {
     // ダンジョン選択画面へ遷移
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
 }
 
 function toGatya() {
@@ -13,9 +13,14 @@ function toGatya() {
     window.location.href = "gatya.html";
 }
 
-function result() {
-    // ガチャ結果画面へ遷移
-    window.location.href = "result.html";
+function resultOne() {
+    // 1回ガチャ結果画面へ遷移
+    window.location.href = "resultOne.html";
+}
+
+function resultTen() {
+    // 10回ガチャ結果画面へ遷移
+    window.location.href = "resultTen.html";
 }
 
 function toItem() {
