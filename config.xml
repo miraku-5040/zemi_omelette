@@ -3,7 +3,7 @@
   <name>Minimum Template</name>
   <description>Made with Monaca (http://monaca.mobi)</description>
   <author/>
-  <content src="html/index.html"/>
+  <content src="index.html"/>
   <allow-navigation href="*"/>
   <preference name="loglevel" value="DEBUG"/>
   <preference name="AndroidLaunchMode" value="singleTop"/>
