@@ -1,2 +1,147 @@
-/**/
+/* 共通設定 */
+body {
+    background-color: #FFFF80;
+}
 
+/* ４つのボタンの位置 */
+.buttons {
+    position: absolute;
+    top: 300px;
+    transform: translate(-40px, 0px);
+}
+
+/* マイページボタンの設定 */
+.mypage {
+    background-color: #D9D9D9;
+    color: black;
+    position: absolute;
+    width: 119px;
+    height: 38px;
+}
+
+/* ダンジョンボタンの設定 */
+.danjyon {
+    background-color: #D9D9D9;
+    color: black;
+    position: absolute;
+    width: 119px;
+    height: 38px;
+    left: 119px;
+}
+
+/* 持ち物ボタンの設定 */
+.item {
+    background-color: #D9D9D9;
+    color: black;
+    position: absolute;
+    width: 119px;
+    height: 38px;
+    left: 238px;
+}
+
+/* 強化ボタンの設定 */
+.power {
+    background-color: #D9D9D9;
+    color: black;
+    position: absolute;
+    width: 119px;
+    height: 38px;
+    left: 357px;
+}
+
+/* ガチャボタンの設定 */
+.gatya {
+    background-color: #D9D9D9;
+    color: black;
+    position: absolute;
+    width: 119px;
+    height: 38px;
+    left: 476px;
+}
+
+/* プレイヤー表示 */
+/* フレーム */
+.flame {
+    display: flex;
+    background-color: #ffff92;
+    width: 200px;
+    height: 45px;
+    border-radius: 30px;
+    position: absolute;
+    top: 15px;
+    left: 50px;
+}
+
+/* ランクの丸 */
+.rank {
+    border: 2px solid #CCCC66;
+    background-color: #ffffb4;
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+}
+
+/* ランクのテキスト */
+.rank_text {
+    font-size: 10px;
+    text-align:center;
+    color: rgb(29, 223, 3);
+}
+
+/* 二本のバーの位置 */
+.bers {
+    border: 2px solid #CCCC66;
+    border-radius: 30px;
+    border-left: none;
+    display: flex;
+    gap: 5px;
+    width: 150px;
+}
+
+/* バーの大きさ */
+.ber {
+    width: 70px;
+}
+
+/* バーの横の丸 */
+.circle {
+    border: 2px solid #CCCC66;
+    border-radius: 30px;
+    width: 15px;
+}
+
+/* プレイヤー名 */
+.name {
+    font-size: 15px;
+    position: absolute;
+    top: 9px;
+    left: 50px;
+    color: rgb(29, 223, 3);
+}
+
+/* 設定アイコン */
+/* 設定アイコンの枠 */
+.setting {
+    background-color: #FFBB55;
+    border-radius: 30px;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+}
+
+/* 設定アイコンの画像 */
+.setting_image{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 13px;
+    right: 13px;
+}
+
+/* 表示内容の位置 */
+.content_position {
+    position: absolute;
+    left: 80px;
+}

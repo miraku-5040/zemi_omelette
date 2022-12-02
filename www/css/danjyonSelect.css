@@ -1,0 +1,23 @@
+/* ダンジョン選択画面 */
+/* ダンジョンのイメージ画像の表示 */
+.image {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 200px;
+    height: 200px;
+}
+
+/* ダンジョン選択のボタン */
+.note {
+    position: absolute;
+    top: 70px;
+    width: 516px;
+    height: 200px;
+    background-color: white;
+}
+
+/* ダンジョン選択画面のボタン */
+.danjyon {
+    background-color: #5FD1D9;
+}

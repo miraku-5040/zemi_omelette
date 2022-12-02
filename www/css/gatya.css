@@ -1,0 +1,36 @@
+/* ガチャの背景 */
+.gatya_image {
+    position: absolute;
+    top: 70px;
+    left: 62px;
+    width: 556px;
+    height: 200px;
+}
+
+/* ガチャを引くボタン */
+.gatya_button {
+    position: absolute;
+    top: 230px;
+    right: 72px;
+    display: flex;
+    gap: 20px;
+}
+
+/* ガチャのタイトル */
+.gatya_title {
+    color: white;
+    position: absolute;
+    top: 60px;
+    left: 72px;
+}
+
+/* ガチャ画面のボタン */
+.gatya_buttons {
+    position: absolute;
+    top: 310px;
+    left: 82px;
+}
+
+.gatya {
+    background-color: #5FD1D9;
+}
