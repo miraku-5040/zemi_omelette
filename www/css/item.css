@@ -10,6 +10,8 @@
 .item_list {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+    overflow: scroll;
     border: solid black;
     background-color: white;
     padding: 10px 10px;
