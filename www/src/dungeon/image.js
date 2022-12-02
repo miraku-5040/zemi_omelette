@@ -19,7 +19,6 @@ class Image {
         this.stageImages = [];
         for(let i=0; i < Config.stageImageTotal; i++){
             const image = this.createElement('stage',i+1);
-            //const image = document.getElementById(`stage${i+1}`);
             image.removeAttribute('id');
             image.width = Config.stageImgWidth;
             image.height = Config.stageImgHeight;
@@ -43,7 +42,13 @@ class Image {
 
 
     static createCharacterImages(){
-        //TODO
+        this.characterImages = [];
+        const image = this.createElement('character',1);
+        image.removeAttribute('id');
+        image.width = Config.stageImgWidth;
+        image.height = Config.stageImgHeight;
+        image.style.position = 'absolute';
+        this.stageImages.push(image);
     }
 
      static getStageImage(index) {
