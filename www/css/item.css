@@ -1,18 +1,30 @@
+/* 装備品一覧 */
+.equipment {
+    display: flex;
+    gap: 30px;
+    position: absolute;
+    top: 90px;
+}
+
 /* アイテム一覧 */
 .item_list {
     display: flex;
     gap: 10px;
     border: solid black;
     background-color: white;
-    padding: 0px 10px;
+    padding: 10px 10px;
     position: absolute;
     top: 70px;
-    left: 340px;
+    left: 220px;
+    width: 280px;
+    height: 175px;
 }
 
-/* アイテムの仕切り */
-.border {
+/* アイテム単品 */
+.material {
     border: solid black;
+    width: 30px;
+    height: 30px;
 }
 
 /* アイテム画面のボタン */

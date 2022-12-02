@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <!-- JS -->
     <script src="../components/loader.js">
     </script>
@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="../components/loader.css">
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
-    <!-- ダンジョン選択画面のCSS -->
-    <link rel="stylesheet" href="../css/danjyonSelect.css">
+    <!-- マイページ画面のCSS -->
+    <link rel="stylesheet" href="../css/mypage.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
         </div>
         <div class="other">
             <div class="bers"><meter class="ber" max="100" low="20" high="80" value="50">50%</meter>
-                <meter class="ber" max="100" low="20" high="80" value="90">90%</meter><div class="circle"></div></div>
+                <meter class="ber" max="100" low="20" high="80" value="90">90%</meter></div>
             <p class="name">player</p>
         </div>
     </div>
@@ -33,13 +33,17 @@
     <div class="setting">
         <img class="setting_image" src="../image/gear.png" onclick="toSet()">
     </div>
-    <!-- ダンジョン情報表示 -->
+    <!-- ユーザ情報表示 -->
     <div class="content_position">
-        <button class="note" onclick="toDanjyon()"><img class="image" src="../image/danjyon.jpeg"><p>ダンジョンの説明</p></button>
+        <img class="character_position" src="../image/character/yuusya.png">
+
+        <!-- ユーザ説明表示 -->
+        <div class="user_detail">
+        </div>
 
         <!-- 各画面への遷移ボタン -->
         <div class="buttons">
-            <button class="mypage" onclick="toSelectDanjyon()">マイページ</button>
+            <button class="mypage" onclick="toMypage()">マイページ</button>
             <button class="danjyon" onclick="toSelectDanjyon()">ダンジョン</button>
             <button class="item" onclick="toItem()">持ち物</button>
             <button class="power" onclick="toPower()">強化</button>
