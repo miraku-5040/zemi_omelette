@@ -1,4 +1,5 @@
 /* データベースアクセスを行うjs */
+/* 作成中は固定値を記載して、後からDBに変更する */
 class Database{
 
     static applicationKey = '143f42bd82f20826946c4c8cc877ce1bd500d3097a29a5c8a5abf86d903af183';
@@ -7,9 +8,7 @@ class Database{
 
     /* 初期化 */
     static initialize(){
-        this.ncmb = new NCMB(this.applicationKey, this.clientKey);
-        //this.test();
-        this.getPlayer(1);
+        //this.ncmb = new NCMB(this.applicationKey, this.clientKey);
     }
 
     /* DB接続テストのメソッド */
@@ -27,28 +26,9 @@ class Database{
         });
     }
 
-    /* プレイヤー取得 */
+    /* プレイヤー情報取得 */
     static getPlayer(id = NaN){
-        const checkedId = Number(id);
-        if(checkedId === NaN){
-            //引数エラー
-            return null;
-        }
-        const PlayerDataStore = 
-        this.ncmb.DataStore('player');
-        let queryResultArray = [];
-        PlayerDataStore.equalTo("player_id", checkedId)
-         .order("player_id",true)
-         .fetchAll()
-         .then(function(results){
-             for(let i = 0; i < results.length; i++){
-                queryResultArray.push(results[i]);
-             }
-          }).catch(function(err){
-            console.log(err);
-          });
-          console.log(queryResultArray); //test
-          return queryResultArray;
+        let playerData = {};
+        return playerData;
     }
 }
-window.addEventListener('load', Database.initialize());
