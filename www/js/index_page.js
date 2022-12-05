@@ -45,7 +45,7 @@ function modalOpen() {
     modal.style.display = 'block';
 }
 
-function modalclose() {
+function modalClose() {
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('explanationModal');
     modal.style.display = 'none';
