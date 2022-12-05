@@ -12,7 +12,7 @@ function initialize() {
     // ステージを準備する
     Stage.initialize();
     //コントローラを準備する
-    Controle.initialize();
+    Control.initialize();
     // 開始フラグ
     mode = 'start';
     // フレームを初期化する
@@ -27,7 +27,7 @@ function loop() {
             break;
         case 'player':
             // プレイヤーのターン
-            
+            Player.playing(frame)
             mode = 'checkFall';
             break;
         case 'enemy':

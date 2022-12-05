@@ -2,6 +2,7 @@ class Player{
 
     static playing(frame){
              const image = document.getElementById(`stage`);
+             keyStatus = Control.getPressedKeyStatus();
         /*if(Controle.keyStatus.up && Controle.keyStatus.right) {
 
         }
@@ -14,17 +15,21 @@ class Player{
         if(Controle.keyStatus.down && Controle.keyStatus.right) {
 
         }*/
-        if(Controle.keyStatus.up) {
+        if(keyStatus.up) {
             image.style.top = -1 * Config.stageImgHeight + "px";
+            console.log(image.style.top)
         }
-        if(Controle.keyStatus.down) {
+        if(keyStatus.down) {
             image.style.top = 1 * Config.stageImgHeight + "px";
+            console.log(image.style.top)
         }
-        if(Controle.keyStatus.right) {
+        if(keyStatus.right) {
             image.style.left = -1 * Config.stageImgWidth + "px";
+            console.log(image.style.left)
         }
-        if(Controle.keyStatus.left) {
+        if(keyStatus.left) {
             image.style.left = 1 * Config.stageImgWidth + "px";
+            console.log(image.style.left)
         }
         return 'enemy';
     }
