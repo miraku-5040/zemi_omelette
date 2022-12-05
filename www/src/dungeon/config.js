@@ -8,4 +8,5 @@ Config.stageCols = 54; // ステージの横の個数
 Config.stageRows = 30; // ステージの縦の個数
 
 Config.stageImageTotal = 5;
+Config.characterImageTotal = 1;
 

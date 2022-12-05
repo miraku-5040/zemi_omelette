@@ -61,13 +61,15 @@ class Image {
      * **/
     static createCharacterImages(){
         this.characterImages = [];
-        const image = this.createElement('character',1);
-        console.log(image);
-        image.removeAttribute('id');
-        image.width = Config.stageImgWidth;
-        image.height = Config.stageImgHeight;
-        image.style.position = 'absolute';
-        this.characterImages.push(image);
+        for(let i=0; i < Config.characterImageTotal; i++){
+            const image = this.createElement('character',i+1);
+            console.log(image);
+            image.removeAttribute('id');
+            image.width = Config.stageImgWidth;
+            image.height = Config.stageImgHeight;
+            image.style.position = 'absolute';
+            this.characterImages.push(image);
+        }
     }
 
     /**
