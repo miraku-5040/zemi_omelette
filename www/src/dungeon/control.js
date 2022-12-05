@@ -2,9 +2,6 @@ class Control{
 
     static pressedKeyStatus; //キーボード入力のフラグ
     static longPressKeyStatus; //キーボード入力長押しのフラグ
-    static #lastPressKey; //最後に押したキー
-    static #lastPressKeyCount; //最後に押したキーの回数カウント
-    static #longPressCount; //長押し判定するカウント数
 
     static initialize () {
         // キーボードの入力を確認する
@@ -22,10 +19,6 @@ class Control{
             up: false,
             down: false
         };
-
-        this.#lastPressKey = null;
-        this.#lastPressKeyCount = 0;
-        this.#longPressKeyStatus = 10;
 
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
