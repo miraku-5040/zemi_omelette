@@ -1,6 +1,10 @@
 class Control{
 
     static pressedKeyStatus; //キーボード入力のフラグ
+    static longPressKeyStatus; //キーボード入力長押しのフラグ
+    static #lastPressKey; //最後に押したキー
+    static #lastPressKeyCount; //最後に押したキーの回数カウント
+    static #longPressCount; //長押し判定するカウント数
 
     static initialize () {
         // キーボードの入力を確認する
@@ -11,42 +15,58 @@ class Control{
             down: false
         };
 
+        //キーボード長押しの入力を確認する
+        this.longPressedKeyStatus = {
+            right: false,
+            left: false,
+            up: false,
+            down: false
+        };
+
+        this.#lastPressKey = null;
+        this.#lastPressKeyCount = 0;
+        this.#longPressKeyStatus = 10;
+
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
-            DevelopmentMessage.setMessage(e.code);
+            // TODO 長押し判定の処理を追加する
             // キーボードが押された場合
-            switch(e.code) {
-                case 37: // 左向きキー
+            switch(e.key) {
+                case "ArrowLeft": // 左向きキー
                     this.pressedKeyStatus.left = true;
                     e.preventDefault(); return false;
-                case 38: // 上向きキー
-                    this.keyStatus.up = true;
+                case "ArrowUp": // 上向きキー
+                    this.pressedKeyStatus.up = true;
                     e.preventDefault(); return false;
-                case 39: // 右向きキー
-                    this.keyStatus.right = true;
+                case "ArrowRight": // 右向きキー
+                    this.pressedKeyStatus.right = true;
                     e.preventDefault(); return false;
-                case 40: // 下向きキー
-                    this.keyStatus.down = true;
+                case "ArrowDown": // 下向きキー
+                    this.pressedKeyStatus.down = true;
                     e.preventDefault(); return false;
             }
         });
         document.addEventListener('keyup', (e) => {
             // キーボードが離された場合
-            switch(e.code) {
-                case 37: // 左向きキー
-                    this.keyStatus.left = false;
+            switch(e.key) {
+                case "ArrowLeft": // 左向きキー
+                    this.pressedKeyStatus.left = false;
+                    this.longPressedKeyStatus.left = false;
                     e.preventDefault(); return false;
-                case 38: // 上向きキー
-                    this.keyStatus.up = false;
+                case "ArrowUp": // 上向きキー
+                    this.pressedKeyStatus.up = false;
+                    this.longPressedKeyStatus.up = false;
                     e.preventDefault(); return false;
-                case 39: // 右向きキー
-                    this.keyStatus.right = false;
+                case "ArrowRight": // 右向きキー
+                    this.pressedKeyStatus.right = false;
+                    this.longPressedKeyStatus.right = false;
                     e.preventDefault(); return false;
-                case 40: // 下向きキー
-                    this.keyStatus.down = false;
+                case "ArrowDown": // 下向きキー
+                    this.pressedKeyStatus.down = false;
+                    this.longPressedKeyStatus.down = false;
                     e.preventDefault(); return false;
             }
-        });  
+        });
     }
     /* pressedKeyStatus取得 */
     static getPressedKeyStatus(){
