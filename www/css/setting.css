@@ -4,6 +4,11 @@
     left: 30px;
 }
 
+/* 設定画面のタイトルの文字 */
+.setting_title {
+    color: gold;
+}
+
 /* 変更内容 */
 .changes {
     background-color: white;
@@ -14,7 +19,7 @@
 
 /* タイトル画面へ遷移するボタン */
 .start_button {
-    background-color: #D9D9D9;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
     border-top: 4px solid #eeeeee;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
@@ -32,7 +37,7 @@
 
 /* 変更ボタン */
 .change_button {
-    background-color: #D9D9D9;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
     border-top: 4px solid #eeeeee;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;

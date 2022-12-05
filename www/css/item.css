@@ -24,6 +24,7 @@
 
 /* アイテム単品 */
 .material {
+    background-color: white;
     border: solid black;
     width: 30px;
     height: 30px;
@@ -37,7 +38,7 @@
 }
 
 .item {
-    background-color: #5FD1D9;
+    background: linear-gradient(45deg, #57c1c9 0%, #62d6df 45%, #97f8ff 70%, #62d6df 85%, #57c1c9 90% 100%);
     border-top: 4px solid #6ae7f0;
     border-right: 4px solid #4da9af;
     border-bottom: 4px solid #4da9af;

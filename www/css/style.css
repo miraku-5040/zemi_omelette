@@ -1,6 +1,6 @@
 /* 共通設定 */
 body {
-    background-color: #FFFF80;
+    background-color: #201a57;
 }
 
 /* ４つのボタンの位置 */
@@ -12,11 +12,11 @@ body {
 
 /* マイページボタンの設定 */
 .mypage {
-    background-color: #D9D9D9;
-    border-top: 4px solid #eeeeee;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
-    border-left: 4px solid #eeeeee;
+    border-left: 4px solid #e6e6e6;
     border-radius: 0;
     color: black;
     font-family: serif;
@@ -28,11 +28,11 @@ body {
 
 /* ダンジョンボタンの設定 */
 .danjyon {
-    background-color: #D9D9D9;
-    border-top: 4px solid #eeeeee;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
-    border-left: 4px solid #eeeeee;
+    border-left: 4px solid #e6e6e6;
     border-radius: 0;
     color: black;
     font-family: serif;
@@ -45,11 +45,11 @@ body {
 
 /* 持ち物ボタンの設定 */
 .item {
-    background-color: #D9D9D9;
-    border-top: 4px solid #eeeeee;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
-    border-left: 4px solid #eeeeee;
+    border-left: 4px solid #e6e6e6;
     border-radius: 0;
     color: black;
     font-family: serif;
@@ -62,11 +62,11 @@ body {
 
 /* 強化ボタンの設定 */
 .power {
-    background-color: #D9D9D9;
-    border-top: 4px solid #eeeeee;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
-    border-left: 4px solid #eeeeee;
+    border-left: 4px solid #e6e6e6;
     border-radius: 0;
     color: black;
     font-family: serif;
@@ -79,11 +79,11 @@ body {
 
 /* ガチャボタンの設定 */
 .gatya {
-    background-color: #D9D9D9;
-    border-top: 4px solid #eeeeee;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
-    border-left: 4px solid #eeeeee;
+    border-left: 4px solid #e6e6e6;
     border-radius: 0;
     color: black;
     font-family: serif;
@@ -158,13 +158,13 @@ body {
 /* 設定アイコン */
 /* 設定アイコンの枠 */
 .setting {
-    background-color: #FFBB55;
-    border: 4px outset #FFBB55;
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+    border: 4px outset gold;
     border-radius: 30px;
     width: 45px;
     height: 45px;
     position: absolute;
-    top: 15px;
+    top: 10px;
     right: 30px;
 }
 

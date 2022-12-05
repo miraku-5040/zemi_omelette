@@ -1,5 +1,6 @@
 /* ガチャ結果のタイトル */
 .result_title {
+    color: gold;
     position: absolute;
     left: 60px;
 }
@@ -37,7 +38,7 @@
 
 /* ガチャ後の選択ボタン */
 .result_button {
-    background-color: #D9D9D9;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
     border-top: 4px solid #eeeeee;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;

@@ -18,19 +18,22 @@
 }
 
 .note_button {
-    background-color: #D9D9D9;
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
     border-top: 4px solid #eeeeee;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
     border-left: 4px solid #eeeeee;
     border-radius: 0;
     color: black;
+    font-family: serif;
+    font-weight: 900;
     width: 100px;
     height: 40px;
 }
 
 /* ダンジョン選択画面のボタン */
 .danjyon {
+    background: linear-gradient(45deg, #57c1c9 0%, #62d6df 45%, #97f8ff 70%, #62d6df 85%, #57c1c9 90% 100%);
     background-color: #5FD1D9;
     border-top: 4px solid #6ae7f0;
     border-right: 4px solid #4da9af;
