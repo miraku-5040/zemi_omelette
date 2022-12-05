@@ -1,53 +1,18 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <!-- JS -->
-    <script src="components/loader.js">
-    </script>
-    <script src="js/index_page.js"></script>
-    <!-- CSS -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <link rel="stylesheet" href="components/loader.css">
-    <!-- 共通のCSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- ダンジョン選択画面のCSS -->
-    <link rel="stylesheet" href="css/danjyonSelect.css">
+    <script src="components/loader.js"></script>
+    <script>
+        window.addEventListener('load', function(){
+            location.href = "/dungeon.html"; //HTMLのパスを書く
+        })
+    </script>
 </head>
-
 <body>
-    <!-- プレイヤー情報表示 -->
-    <div class="flame">
-        <img class="player_image" src="image/player.png">
-        <div class="rank">
-            <p class="rank_text">ランク<br>100</p>
-        </div>
-        <div class="other">
-            <div class="bers"><meter class="ber" max="100" low="20" high="80" value="50">50%</meter>
-                <meter class="ber" max="100" low="20" high="80" value="90">90%</meter>
-            </div>
-            <p class="name">player</p>
-        </div>
-    </div>
-    <!-- 設定画面への遷移ボタン -->
-    <div class="setting">
-        <img class="setting_image" src="image/gear.png" onclick="toSet()">
-    </div>
-    <!-- ダンジョン情報表示 -->
-    <div class="content_position">
-        <button class="note" onclick="toDanjyon()"><img class="image" src="image/danjyon.jpeg"><p>ダンジョンの説明</p></button>
-
-        <!-- 各画面への遷移ボタン -->
-        <div class="buttons">
-            <button class="mypage" onclick="toMypage()">マイページ</button>
-            <button class="danjyon" onclick="toSelectDanjyon()">ダンジョン</button>
-            <button class="item" onclick="toItem()">持ち物</button>
-            <button class="power" onclick="toPower()">強化</button>
-            <button class="gatya" onclick="toGatya()">ガチャ</button>
-        </div>
-    </div>
+    <!-- TODO: Please edit here -->
 </body>
-
 </html>
