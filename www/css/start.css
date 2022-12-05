@@ -1,0 +1,15 @@
+/* ゲーム名の位置 */
+.title_position {
+    position: absolute;
+    top: 50px;
+    left: 270px;
+    font-size: xxx-large;
+}
+
+/* 押す場所の位置 */
+.tap_position {
+    position: absolute;
+    top: 200px;
+    left: 300px;
+    font-size: x-large;
+}
