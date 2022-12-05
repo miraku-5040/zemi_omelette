@@ -1,4 +1,4 @@
-class Controle{
+class Control{
 
     static pressedKeyStatus; //キーボード入力のフラグ
 
