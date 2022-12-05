@@ -12,7 +12,7 @@ class Stage {
         characterElement.style.height = Config.stageImgHeight + 'px';
         this.characterElement = characterElement;
 
-        // メモリを準備する
+                // メモリを準備する
         this.board = [
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,9,5,5,5,5,5,5,10,2,2,2,2,2,2,2,9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,10,2,2,2],
@@ -56,7 +56,14 @@ class Stage {
                 }
             }
         }
+        
         this.setCharacterImage()
+    }
+
+    static createStage(){
+        //ランダム生成
+        //キャラの最初の座標特定
+
     }
 
     static setStageImage(x, y, stageImageNumber) {

@@ -1,35 +1,35 @@
 class Player{
 
-    static playing(frame){
+     static initialize () {
+        this.stageStatusTop = 0;
+        this.stageStatusLeft = 0;
+     }
+
+    
+
+    static playing(){
              const image = document.getElementById(`stage`);
-             keyStatus = Control.getPressedKeyStatus();
-        /*if(Controle.keyStatus.up && Controle.keyStatus.right) {
-
-        }
-        if(Controle.keyStatus.up && Controle.keyStatus.left) {
-
-        }
-        if(Controle.keyStatus.down && Controle.keyStatus.left) {
-
-        }
-        if(Controle.keyStatus.down && Controle.keyStatus.right) {
-
-        }*/
+             let keyStatus = Control.getPressedKeyStatus();
+             
         if(keyStatus.up) {
-            image.style.top = -1 * Config.stageImgHeight + "px";
-            console.log(image.style.top)
+            this.stageStatusTop+=1
+            image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
+            console.log(this.stageStatusLeft+" "+this.stageStatusTop);
         }
         if(keyStatus.down) {
-            image.style.top = 1 * Config.stageImgHeight + "px";
-            console.log(image.style.top)
+            this.stageStatusTop-=1
+            image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
+            console.log(this.stageStatusLeft+" "+this.stageStatusTop);
         }
         if(keyStatus.right) {
-            image.style.left = -1 * Config.stageImgWidth + "px";
-            console.log(image.style.left)
+            this.stageStatusLeft-=1
+            image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
+            console.log(this.stageStatusLeft+" "+this.stageStatusTop);
         }
         if(keyStatus.left) {
-            image.style.left = 1 * Config.stageImgWidth + "px";
-            console.log(image.style.left)
+            this.stageStatusLeft+=1
+            image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
+            console.log(this.stageStatusLeft+" "+this.stageStatusTop);
         }
         return 'enemy';
     }

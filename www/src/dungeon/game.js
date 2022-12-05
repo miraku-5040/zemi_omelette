@@ -17,18 +17,20 @@ function initialize() {
     mode = 'start';
     // フレームを初期化する
     frame = 0;
+    Player.initialize();
 }
 
 function loop() {
     switch(mode) {
         case 'start':
             // 開始
+            Stage.createStage();
             mode = 'player';
             break;
         case 'player':
             // プレイヤーのターン
-            Player.playing(frame)
-            mode = 'checkFall';
+           Player.playing();
+            mode = 'enemy';
             break;
         case 'enemy':
             // 敵のターン
