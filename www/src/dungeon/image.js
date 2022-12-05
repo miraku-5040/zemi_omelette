@@ -1,15 +1,22 @@
 class Image {
 
+    /**
+     * 画像の生成
+     * ステージの配置
+     * **/
     static initialize() {
         this.createStageImages();
         this.createCharacterImages();
 
         const image = document.getElementById(`stage`);
-        image.style.left = 0 * Config.stageImgWidth + "px";
-        image.style.top = 0 * Config.stageImgHeight + "px";
+        image.style.left = -2 * Config.stageImgWidth + "px";
+        image.style.top = -3 * Config.stageImgHeight + "px";
         image.style.position = 'absolute';
     }
-
+    /**
+     *  画像の要素を作成
+     *  サンプル： <img src="img/stage_1.png" id="stage1">
+     * **/
     static createElement(name,i){
         // 要素を作成
         var elem = document.createElement(`img`);
@@ -20,8 +27,10 @@ class Image {
         return elem;
     }
 
+    /**
+     * stageImagesに床、無、壁上右下左、角上右下左、道角上右下左の14個の画像が入る
+     * **/
     static createStageImages(){
-        //stageImages 床　無　壁上右下左　角　道角
         this.stageImages = [];
         for(let i=0; i < Config.stageImageTotal; i++){
             const image = this.createElement('stage',i+1);
@@ -30,23 +39,26 @@ class Image {
             image.height = Config.stageImgHeight;
             image.style.position = 'absolute';
             this.stageImages.push(image);
-            if(i>1){
-            const newImage = image.cloneNode(false);
-            newImage.style.transform = "rotate(90deg)"
-            this.stageImages.push(newImage);
-
-            const newImage1 = image.cloneNode(false);
-            newImage1.style.transform = "rotate(180deg)"
-            this.stageImages.push(newImage1);
-
-            const newImage2 = image.cloneNode(false);
-            newImage2.style.transform = "rotate(270deg)"
-            this.stageImages.push(newImage2);
+            if(i > 1){
+                this.quadrupleDirection(image);
             }
         }
     }
 
+    /**
+     * 回転させて挿入する処理
+     * **/
+    static quadrupleDirection(image){
+        for(let i=1; i < 4 ; i++){
+        const newImage = image.cloneNode(false);
+        newImage.style.transform  = "rotate("+90*i+"deg)"
+        this.stageImages.push(newImage);
+        }
+    }
 
+    /**
+     * chracterImagesにプレイキャラ、エネミーの画像が入る
+     * **/
     static createCharacterImages(){
         this.characterImages = [];
         const image = this.createElement('character',1);
@@ -58,11 +70,17 @@ class Image {
         this.characterImages.push(image);
     }
 
+    /**
+     * stageImagesの要素を取得
+     * **/
      static getStageImage(index) {
         const image = this.stageImages[index - 1].cloneNode(true);
         return image;
     }
 
+    /**
+     * characterImagesの要素を取得
+     * **/
      static getCharacterImage(index) {
         const image = this.characterImages[index - 1].cloneNode(true);
         return image;

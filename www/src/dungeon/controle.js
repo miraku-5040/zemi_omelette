@@ -117,4 +117,10 @@ class Controle{
             }
         }
     }
+
+    /**
+     * 方向キーの取得
+     * **/
+    static directionKey(){
+    }
 }

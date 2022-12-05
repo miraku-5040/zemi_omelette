@@ -2,17 +2,21 @@
 window.addEventListener("load", () => {
     // まずステージを整える
     initialize();
+    loop();
 });
 
 function initialize() {
+    console.log(screen.width+" "+screen.height)
     // 画像を準備する
     Image.initialize();
     // ステージを準備する
     Stage.initialize();
     //コントローラを準備する
-    //Controle.initialize();
-
-    mode = 'stert';
+    Controle.initialize();
+    // 開始フラグ
+    mode = 'start';
+    // フレームを初期化する
+    frame = 0;
 }
 
 function loop() {
@@ -26,9 +30,9 @@ function loop() {
             
             mode = 'checkFall';
             break;
-        case 'player':
-            // プレイヤーのターン
-            mode = 'checkFall';
+        case 'enemy':
+            // 敵のターン
+            mode = 'player';
             break;
     }
     frame++;
