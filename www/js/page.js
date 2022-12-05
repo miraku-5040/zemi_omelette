@@ -38,6 +38,11 @@ function toSet() {
     window.location.href = "setting.html";
 }
 
+function toStart() {
+    // ダンジョン画面へ遷移
+    window.location.href = "start.html";
+}
+
 function toDanjyon() {
     // ダンジョン画面へ遷移
     window.location.href = "danjyon.html";
