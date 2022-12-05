@@ -37,3 +37,16 @@ function toDanjyon() {
     // ダンジョン画面へ遷移
     window.location.href = "html/danjyon.html";
 }
+
+// モーダルウィンドウ用js
+function modalOpen() {
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('explanationModal');
+    modal.style.display = 'block';
+}
+
+function modalclose() {
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('explanationModal');
+    modal.style.display = 'none';
+}

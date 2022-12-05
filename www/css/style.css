@@ -13,7 +13,14 @@ body {
 /* マイページボタンの設定 */
 .mypage {
     background-color: #D9D9D9;
+    border-top: 4px solid #eeeeee;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #eeeeee;
+    border-radius: 0;
     color: black;
+    font-family: serif;
+    font-weight: 900;
     position: absolute;
     width: 119px;
     height: 38px;
@@ -22,7 +29,14 @@ body {
 /* ダンジョンボタンの設定 */
 .danjyon {
     background-color: #D9D9D9;
+    border-top: 4px solid #eeeeee;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #eeeeee;
+    border-radius: 0;
     color: black;
+    font-family: serif;
+    font-weight: 900;
     position: absolute;
     width: 119px;
     height: 38px;
@@ -32,7 +46,14 @@ body {
 /* 持ち物ボタンの設定 */
 .item {
     background-color: #D9D9D9;
+    border-top: 4px solid #eeeeee;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #eeeeee;
+    border-radius: 0;
     color: black;
+    font-family: serif;
+    font-weight: 900;
     position: absolute;
     width: 119px;
     height: 38px;
@@ -42,7 +63,14 @@ body {
 /* 強化ボタンの設定 */
 .power {
     background-color: #D9D9D9;
+    border-top: 4px solid #eeeeee;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #eeeeee;
+    border-radius: 0;
     color: black;
+    font-family: serif;
+    font-weight: 900;
     position: absolute;
     width: 119px;
     height: 38px;
@@ -52,7 +80,14 @@ body {
 /* ガチャボタンの設定 */
 .gatya {
     background-color: #D9D9D9;
+    border-top: 4px solid #eeeeee;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #eeeeee;
+    border-radius: 0;
     color: black;
+    font-family: serif;
+    font-weight: 900;
     position: absolute;
     width: 119px;
     height: 38px;
@@ -141,8 +176,32 @@ body {
     right: 13px;
 }
 
+
 /* 表示内容の位置 */
 .content_position {
     position: absolute;
     left: 80px;
+}
+
+/* モーダルウィンドウの設定 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #f4f4f4;
+  margin: 80px 200px;
+  width: 400px;
+  height: 200px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
 }
