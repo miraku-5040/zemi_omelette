@@ -29,7 +29,14 @@
 /* ガチャを引くボタン */
 .pull {
     background-color: gold;
+    border-top: 4px solid rgb(252, 232, 121);
+    border-right: 4px solid rgb(192, 163, 0);
+    border-bottom: 4px solid rgb(192, 163, 0);
+    border-left: 4px solid rgb(252, 232, 121);
+    border-radius: 0;
     color: black;
+    font-family: serif;
+    font-weight: 900;
     width: 60px;
     height: 30px;
 }
@@ -43,4 +50,9 @@
 
 .gatya {
     background-color: #5FD1D9;
+    border-top: 4px solid #6ae7f0;
+    border-right: 4px solid #4da9af;
+    border-bottom: 4px solid #4da9af;
+    border-left: 4px solid #6ae7f0;
+    border-radius: 0;
 }

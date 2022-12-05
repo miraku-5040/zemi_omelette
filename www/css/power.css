@@ -58,4 +58,9 @@
 
 .power {
     background-color: #5FD1D9;
+    border-top: 4px solid #6ae7f0;
+    border-right: 4px solid #4da9af;
+    border-bottom: 4px solid #4da9af;
+    border-left: 4px solid #6ae7f0;
+    border-radius: 0;
 }

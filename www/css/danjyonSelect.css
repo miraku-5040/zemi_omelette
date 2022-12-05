@@ -17,7 +17,97 @@
     background-color: white;
 }
 
+.note_button {
+    background-color: #D9D9D9;
+    border-top: 4px solid #eeeeee;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #eeeeee;
+    border-radius: 0;
+    color: black;
+    width: 100px;
+    height: 40px;
+}
+
 /* ダンジョン選択画面のボタン */
 .danjyon {
     background-color: #5FD1D9;
+    border-top: 4px solid #6ae7f0;
+    border-right: 4px solid #4da9af;
+    border-bottom: 4px solid #4da9af;
+    border-left: 4px solid #6ae7f0;
+    border-radius: 0;
+}
+
+/* モーダルウィンドウの設定 */
+/* モーダルウィンドウの背景 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* モーダルウィンドウの中身 */
+.modal-content {
+  background-color: #f4f4f4;
+  margin: 60px 110px;
+  width: 450px;
+  height: 250px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+
+/* モーダルウィンドウの画像 */
+.modal_image {
+    padding: 25px 25px;
+    width: 150px;
+    height: 200px;
+}
+
+/* モーダルウィンドウの文章 */
+.modal_text {
+    position: absolute;
+    top: 60px;
+    left: 335px;
+}
+
+.modal_title {
+    font-weight: bold;
+    font-size: 22px
+}
+
+.modal_note {
+    font-size: 12px;
+    position: absolute;
+    top: 55px;
+    left: 5px;
+}
+
+/* モーダルウィンドウのボタン */
+.modal_buttons {
+    position: absolute;
+    top: 255px;
+    left: 330px;
+}
+
+.calsel_button {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    width: 100px;
+    height: 30px;
+}
+
+.decision_button {
+    background-color: green;
+    color: white;
+    width: 100px;
+    height: 30px;
 }

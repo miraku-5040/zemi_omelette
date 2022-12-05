@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="components/loader.js">
+    </script>
+    <script src="js/index_page.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- ダンジョン選択画面のCSS -->
+    <link rel="stylesheet" href="css/danjyonSelect.css">
+</head>
+
+<body>
+    <!-- プレイヤー情報表示 -->
+    <div class="flame">
+        <img class="player_image" src="image/player.png">
+        <div class="rank">
+            <p class="rank_text">ランク<br>100</p>
+        </div>
+        <div class="other">
+            <div class="bers"><meter class="ber" max="100" low="20" high="80" value="50">50%</meter>
+                <meter class="ber" max="100" low="20" high="80" value="90">90%</meter>
+            </div>
+            <p class="name">player</p>
+        </div>
+    </div>
+    <!-- 設定画面への遷移ボタン -->
+    <div class="setting">
+        <img class="setting_image" src="image/gear.png" onclick="toSet()">
+    </div>
+    <!-- ダンジョン情報表示 -->
+    <div class="content_position">
+        <div class="note">
+            <button class="note_button" onclick="modalOpen()">ダンジョンの<br>名前</button>
+        </div>
+
+        <!-- 各画面への遷移ボタン -->
+        <div class="buttons">
+            <button class="mypage" onclick="toMypage()">マイページ</button>
+            <button class="danjyon" onclick="toSelectDanjyon()">ダンジョン</button>
+            <button class="item" onclick="toItem()">持ち物</button>
+            <button class="power" onclick="toPower()">強化</button>
+            <button class="gatya" onclick="toGatya()">ガチャ</button>
+        </div>
+    </div>
+
+    <!-- ダンジョン内容説明用のモーダルウィンドウ -->
+    <div id="explanationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                <img class="modal_image" src="image/danjyon.jpeg">
+                <div class="modal_text">
+                    <p class="modal_title">ダンジョンの名前</p>
+                    <p class="modal_note">ダンジョンの説明</p>
+                </div>
+                <div class="modal_buttons">
+                    <button class="calsel_button" onclick="modalClose()">キャンセル</button>
+                    <button class="decision_button" onclick="toDanjyon()">はじめる</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
