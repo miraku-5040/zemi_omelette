@@ -102,14 +102,23 @@
 
 .calsel_button {
     background-color: white;
-    border: 1px solid black;
+    border-top: 4px solid white;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid white;
+    border-radius: 0;
     color: black;
     width: 100px;
     height: 30px;
 }
 
 .decision_button {
-    background-color: green;
+    background: linear-gradient(45deg, green 0%, rgb(0, 194, 0) 45%, rgb(34, 255, 34) 70%, rgb(0, 194, 0) 85%, green 90% 100%);
+    border-top: 4px solid rgb(0, 196, 0);
+    border-right: 4px solid rgb(0, 160, 0);
+    border-bottom: 4px solid green;
+    border-left: 4px solid rgb(0, 196, 0);
+    border-radius: 0;
     color: white;
     width: 100px;
     height: 30px;
