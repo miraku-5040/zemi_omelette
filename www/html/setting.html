@@ -13,16 +13,23 @@
     <link rel="stylesheet" href="../components/loader.css">
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
+    <!-- 設定画面のCSS -->
+    <link rel="stylesheet" href="../css/setting.css">
 </head>
 
-<body>
+<body class="content_position">
     <h1>設定画面</h1>
-    <p>画面の明るさ</p>
-    <input type="range" min="0" max="11">
-    <p>音量</p>
-    <input type="range" min="0" max="11">
+    <div class="changes">
+        <p>画面の明るさ</p>
+        <input class="bar" type="range" min="0" max="11">
+    </div>
+    <br>
+    <div class="changes">
+        <p>音量</p>
+        <input type="range" min="0" max="11">
+    </div>
 
-    <button onclick="toSelectDanjyon()">変更</button>
+    <button class="change_button" onclick="toSelectDanjyon()">変更</button>
 </body>
 
 </html>

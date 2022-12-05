@@ -159,6 +159,7 @@ body {
 /* 設定アイコンの枠 */
 .setting {
     background-color: #FFBB55;
+    border: 4px outset #FFBB55;
     border-radius: 30px;
     width: 45px;
     height: 45px;

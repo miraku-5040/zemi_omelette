@@ -1,0 +1,73 @@
+/* 内容の位置 */
+.content_position {
+    position: absolute;
+    left: 30px;
+}
+
+/* 変更内容 */
+.changes {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 0px 40px 10px 30px;
+}
+
+/* 変更ボタン */
+.change_button {
+    background-color: #D9D9D9;
+    border-top: 4px solid #eeeeee;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #eeeeee;
+    border-radius: 0;
+    color: black;
+    font-family: serif;
+    font-weight: 900;
+    position: absolute;
+    top: 300px;
+    left: 470px;
+    width: 119px;
+    height: 38px;
+}
+
+
+
+/* ここ以下変更バーのデザイン */
+input[type="range"] {
+    -webkit-appearance: none; /* これ無しだとスタイルがほぼ全く反映されないので注意 */
+  appearance: none;
+  cursor: pointer; /* カーソルを分かりやすく */
+  outline: none; /* スライダーのアウトラインは見た目がキツイので消す */
+  height: 14px; /* バーの高さ */
+  width: 100%; /* バーの幅 */
+  background: #8acdff; /* バーの背景色 */
+  border-radius: 10px; /* バーの両端の丸み */
+  border: solid 3px #dff1ff; /* バー周囲の線 */
+}
+
+/* WebKit向けのつまみ */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /*  デフォルトのつまみのスタイルを解除 */
+  background: #53aeff; /* 背景色 */
+  width: 24px; /* 幅 */
+  height: 24px; /* 高さ */
+  border-radius: 50%; /* 円形に */
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15); /* 影 */
+}
+/* Moz向けのつまみ */
+input[type="range"]::-moz-range-thumb {
+  background: #53aeff; /* 背景色 */
+  width: 24px; /* 幅 */
+  height: 24px; /* 高さ */
+  border-radius: 50%; /* 円形に */
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15); /* 影 */
+  border: none; /* デフォルトの線を消す */
+}
+/* Firefoxで点線が周りに表示されてしまう問題の解消 */
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+/* つまみをドラッグしているときのスタイル */
+input[type="range"]:active::-webkit-slider-thumb {
+  box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+}
