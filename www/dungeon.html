@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <title>ダンジョン111</title>
+
+    <title>ダンジョン</title>
+
     <script src="components/loader.js"></script>
     <script src="src/dungeon/player.js"></script>
     <script src="src/dungeon/config.js"></script>
@@ -15,24 +17,50 @@
     <link rel="stylesheet" href="components/loader.css">
 </head>
     <body style="margin:0; background-color: #333333; overflow: hidden;">
-        <div>
-        <div id="enemy" style="position:relative; margin: 0 auto;"></div>
-        <div id="stage" style="position:relative; margin: 0 auto;"></div>
-        </div>
-        <div id="character" style="position:absolute; margin: 0;"></div>
-        <div id="status" style="position:absolute; background-color: #FFFFFF; left: 10px; top: 10px; width:125px; height:50px; margin: 0;">
-            <div id="hp" >15</div>
-            <div id="sp" >100</div>
-        </div>
-        <div id="control" style="position:absolute; margin: 0;">
-            <div id="directionKey" onclick="" style="position:absolute; left: 50px; top: 275px;width:80px; height:80px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
 
-            <div id="action" style="position:absolute; left: 600px; top: 250px; width:125px; height:125px;  margin: 0;">
-            <div id="attack" onclick="" style="position:absolute; left: 75px; top: 37.5px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
-            <div id="skill" onclick="" style="position:absolute; left: 0px; top: 37.5px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
-            <div id="item" onclick="" style="position:absolute; left: 37.5px; top: 0px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
-            <div id="defence" onclick="" style="position:absolute; left: 37.5px; top: 75px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
+        <!-- 移動するレイヤーをまとめたdiv、移動で動かす、ステージサイズに設定する -->
+        <div id="moving_layers" style="position:absolute; margin: 0;">
+            <div id="stage_layer" style="position:absolute; margin:0; top:0; left:0;">
+                <!-- ここにimgタグを置く -->
+            </div>
+            <div id="scope_layer" style="position:absolute; margin:0; top:0; left:0;">
+                <!-- ここにimgタグを置く -->
+            </div>
+            <div id="trap_layer" style="position:absolute; margin:0; top:0; left:0;">
+                <!-- ここにimgタグを置く -->
+            </div>
+            <div id="item_layer" style="position:absolute; margin:0; top:0; left:0;">
+                <!-- ここにimgタグを置く -->
+            </div>
+            <div id="enemy_layer" style="position:absolute; margin:0; top:0; left:0;">
+                <!-- ここにimgタグを置く -->
+            </div>
+        </div>
 
+        <!-- 移動しないレイヤーをまとめたdiv、画面サイズに設定する -->
+        <div id="fixed_layers" style="position:relative; margin:0; height:100%; width:100%;">
+            <div id="player_layer" style="position:absolute; margin:0; top:0; left:0; height:100%; width:100%;">
+                <!-- ここにimgタグを置く -->
+            </div>
+            <div id="effect_layer" style="position:absolute; margin:0; top:0; left:0; height:100%; width:100%;">
+                <!-- ここにimgタグを置く -->
+            </div>
+            <div id="infomation_layer" style="position:absolute; margin:0; top:0; left:0; height:100%; width:100%;">
+                <div id="infomation" style="position:absolute; background-color: #FFFFFF; left: 10px; top: 10px; width:125px; height:50px; margin: 0;">
+                    <div id="hp" >15</div>
+                    <div id="sp" >100</div>
+                </div>
+            </div>
+            <div id="control_layer" style="position:absolute; margin:0; top:0; left:0; height:100%; width:100%;">
+                <div id="directionKey" onclick="" style="position:absolute; left: 50px; top: 275px;width:80px; height:80px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
+
+                <div id="action" style="position:absolute; left: 600px; top: 250px; width:125px; height:125px;  margin: 0;">
+                <div id="attack" onclick="" style="position:absolute; left: 75px; top: 37.5px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
+                <div id="skill" onclick="" style="position:absolute; left: 0px; top: 37.5px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
+                <div id="item" onclick="" style="position:absolute; left: 37.5px; top: 0px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
+                <div id="defence" onclick="" style="position:absolute; left: 37.5px; top: 75px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
+
+                </div>
             </div>
         </div>
         
