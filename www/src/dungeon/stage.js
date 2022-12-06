@@ -7,10 +7,6 @@ class Stage {
         stageElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
         this.stageElement = stageElement;
 
-        const characterElement = document.getElementById("character");
-        characterElement.style.width = Config.stageImgWidth + 'px';
-        characterElement.style.height = Config.stageImgHeight + 'px';
-        this.characterElement = characterElement;
 
                 // メモリを準備する
         this.board = [
@@ -56,8 +52,10 @@ class Stage {
                 }
             }
         }
-        
-        this.setCharacterImage()
+        //キャラ移動用のステージの座標
+        this.stageStatusTop = 0;
+        this.stageStatusLeft = 0;
+
     }
 
     static createStage(){
@@ -79,13 +77,33 @@ class Stage {
         }
     }
 
-    static setCharacterImage() {
-        // 画像を作成し配置する
-        const characterImage = Image.getCharacterImage(1);
-        characterImage.style.left = 7 * Config.stageImgWidth + "px";
-        characterImage.style.top = 3 * Config.stageImgHeight + "px";
-        this.characterElement.appendChild(characterImage);
-        // メモリにセットする
-        //this.board[y][x].characterImageNumber = 1;
+    static moveStage(keyStatus){
+        const image = document.getElementById(`stage`);
+        switch(keyStatus){
+        case 'up':
+            this.stageStatusTop+=1
+            image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
+            return 'enemy';
+        case 'down':
+            this.stageStatusTop-=1
+            image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
+            return 'enemy';
+        case 'right':
+            this.stageStatusLeft-=1
+            image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
+            return 'enemy';
+        case 'left':
+            this.stageStatusLeft+=1
+            image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
+            return 'enemy';
+        }
+
     }
+
+    static checkStage(){
+        //移動できる床か判定
+
+    }
+
+
 }

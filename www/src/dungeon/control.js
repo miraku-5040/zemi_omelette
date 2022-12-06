@@ -2,7 +2,7 @@ class Control{
 
     static pressedKeyStatus; //キーボード入力のフラグ
     static longPressKeyStatus; //キーボード入力長押しのフラグ
-
+    //同時押しはキャンセルする
     static initialize () {
         // キーボードの入力を確認する
         this.pressedKeyStatus = {
@@ -63,6 +63,18 @@ class Control{
     }
     /* pressedKeyStatus取得 */
     static getPressedKeyStatus(){
-        return this.pressedKeyStatus;
+        //どのキーがtrueか確認
+        if(this.pressedKeyStatus.up) {
+            return 'up';
+        }
+        if(this.pressedKeyStatus.down) {
+            return 'down';
+        }
+        if(this.pressedKeyStatus.right) {
+            return 'right';
+        }
+        if(this.pressedKeyStatus.left) {
+            return 'left';
+        }
     }
 }
