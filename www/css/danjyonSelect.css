@@ -10,8 +10,10 @@
 
 /* ダンジョン選択のボタン */
 .note {
+    border: inset 10px black;
     position: absolute;
     top: 70px;
+    transform: translateX(-10px);
     width: 516px;
     height: 200px;
     background-color: white;

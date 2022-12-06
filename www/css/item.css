@@ -4,6 +4,15 @@
     gap: 30px;
     position: absolute;
     top: 90px;
+    transform: translateX(-10px);
+}
+
+/* アイテム単品 */
+.material {
+    background-color: white;
+    border: inset 5px black;
+    width: 30px;
+    height: 30px;
 }
 
 /* アイテム一覧 */
@@ -12,18 +21,18 @@
     gap: 10px;
     flex-wrap: wrap;
     overflow: scroll;
-    border: solid black;
+    border: inset 10px black;
     background-color: white;
     padding: 10px 10px;
     position: absolute;
     top: 70px;
-    left: 220px;
+    left: 205px;
     width: 280px;
     height: 175px;
 }
 
-/* アイテム単品 */
-.material {
+/* アイテムリスト内のアイテム */
+.list_material {
     background-color: white;
     border: solid black;
     width: 30px;
