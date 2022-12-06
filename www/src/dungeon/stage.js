@@ -2,7 +2,7 @@ class Stage {
 
     static initialize() {
         // HTML からステージの元となる要素を取得し、大きさを設定する
-        const stageElement = document.getElementById("stage");
+        const stageElement = document.getElementById("stage_layer");
         stageElement.style.width = Config.stageImgWidth * Config.stageCols + 'px';
         stageElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
         this.stageElement = stageElement;
@@ -53,8 +53,16 @@ class Stage {
             }
         }
         //キャラ移動用のステージの座標
-        this.stageStatusTop = 0;
-        this.stageStatusLeft = 0;
+        //ステージクリエイトで変更
+        
+        this.stageStatusTop = -3;
+        this.stageStatusLeft = -2;
+        const image = document.getElementById(`stage_layer`);
+        image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
+        image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
+        image.style.position = 'absolute';
+        
+        
 
     }
 
@@ -78,7 +86,7 @@ class Stage {
     }
 
     static moveStage(keyStatus){
-        const image = document.getElementById(`stage`);
+        const image = document.getElementById(`stage_layer`);
         switch(keyStatus){
         case 'up':
             this.stageStatusTop+=1
@@ -102,6 +110,25 @@ class Stage {
 
     static checkStage(top, left, keyStatus){
         //移動できる床か判定
+        console.log(top+" "+left);
+        switch(keyStatus){
+        case 'up':
+            console.log(this.board[top-1][left].stageImageNumber);
+            console.log(top-1+" "+left);
+            return true;
+        case 'down':
+            console.log(this.board[top+1][left].stageImageNumber);
+            console.log(top+1+" "+left);
+            return true;
+        case 'right':
+            console.log(this.board[top][left+1].stageImageNumber);
+            console.log(top+" "+(left+1));
+            return true;
+        case 'left':
+            console.log(this.board[top][left-1].stageImageNumber);   
+            console.log(top+" "+(left-1)); 
+            return true;
+        }
         return true;
     }
 

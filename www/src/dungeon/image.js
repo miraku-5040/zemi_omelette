@@ -7,11 +7,6 @@ class Image {
     static initialize() {
         this.createStageImages();
         this.createCharacterImages();
-
-        const image = document.getElementById(`stage`);
-        image.style.left = -2 * Config.stageImgWidth + "px";
-        image.style.top = -3 * Config.stageImgHeight + "px";
-        image.style.position = 'absolute';
     }
     /**
      *  画像の要素を作成

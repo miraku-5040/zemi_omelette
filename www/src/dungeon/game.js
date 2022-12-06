@@ -29,11 +29,13 @@ function loop() {
             mode = 'player';
             break;
         case 'player':
+        console.log('プレイヤー')
             // プレイヤーのターン
             //ボタン入力待ち
             mode = Player.playing();
             break;
         case 'move':
+        console.log('ムーブ')
             // 移動に関するとこ
             //床の判定含む
             mode = Player.moving();
@@ -61,11 +63,12 @@ function loop() {
             mode = 'end';
             break;
         case 'end':
-            if(frame < 30){
+            //3秒立つと2回判定になるなぞ？？？？
+            if(frame < 180){
                 mode = 'end';
             }else{
-            frame = 0;
-            mode = 'player';
+                frame = 0;
+                mode = 'player';
             }
             break;
         case 'nextfloor':

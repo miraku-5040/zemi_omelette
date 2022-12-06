@@ -2,10 +2,10 @@ class Player{
 
      static initialize () {
         this.playerStatus = {
-            top: 3,
-            left: 7
+            top: 6,
+            left: 9
         };
-        const characterElement = document.getElementById("character");
+        const characterElement = document.getElementById("player_layer");
         characterElement.style.width = Config.stageImgWidth + 'px';
         characterElement.style.height = Config.stageImgHeight + 'px';
         this.characterElement = characterElement;
@@ -37,7 +37,7 @@ class Player{
     static moving(){
         //床判定
         if(Stage.checkStage(this.playerStatus.top,this.playerStatus.left,this.keyStatus)){
-            console.log(this.keyStatus);
+            console.log('動くとこ')
             //キャラの座標更新
             this.setCharacterPosition(this.keyStatus);
             //ステージの位置更新
@@ -58,16 +58,16 @@ class Player{
     static setCharacterPosition(){
         switch(this.keyStatus){
         case 'up':
-            this.playerStatus.top+=1
-            break;
-        case 'down':
             this.playerStatus.top-=1
             break;
+        case 'down':
+            this.playerStatus.top+=1
+            break;
         case 'right':
-            this.playerStatus.left-=1
+            this.playerStatus.left+=1
             break;
         case 'left':
-            this.playerStatus.left+=1
+            this.playerStatus.left-=1
             break;
         }
     }
