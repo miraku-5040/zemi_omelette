@@ -19,7 +19,7 @@ function result() {
 }
 
 function toItem() {
-    // アイテム画面へ遷移
+    // 持ち物画面へ遷移
     window.location.href = "html/item.html";
 }
 
@@ -40,6 +40,9 @@ function toDanjyon() {
 
 // モーダルウィンドウ用js
 function modalOpen() {
+    // 音声再生
+    audio = new Audio("sound/menu_open.m4a");
+    audio.play();
     // モーダルウィンドウを開く
     const modal = document.getElementById('explanationModal');
     modal.style.display = 'block';
