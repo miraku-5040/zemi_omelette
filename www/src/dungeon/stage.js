@@ -100,9 +100,9 @@ class Stage {
 
     }
 
-    static checkStage(){
+    static checkStage(top, left, keyStatus){
         //移動できる床か判定
-
+        return true;
     }
 
 

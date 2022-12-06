@@ -17,6 +17,7 @@ class Player{
 
     static playing(){
         this.keyStatus = Control.getPressedKeyStatus();
+        
         switch(this.keyStatus){
         case 'up':
         case 'down':
@@ -35,13 +36,15 @@ class Player{
 
     static moving(){
         //床判定
-        
-        //キャラの座標更新
-        this.setCharacterPosition(this.keyStatus);
-        //ステージの位置更新
-        Stage.moveStage(this.keyStatus);
-        
-        return 'player';
+        if(Stage.checkStage(this.playerStatus.top,this.playerStatus.left,this.keyStatus)){
+            console.log(this.keyStatus);
+            //キャラの座標更新
+            this.setCharacterPosition(this.keyStatus);
+            //ステージの位置更新
+            Stage.moveStage(this.keyStatus);
+            return 'enemy';
+        }
+        return 'enemy';
     }
 
     static setCharacterImage() {

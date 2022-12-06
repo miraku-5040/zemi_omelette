@@ -36,8 +36,7 @@ function loop() {
         case 'move':
             // 移動に関するとこ
             //床の判定含む
-            Player.moving();
-            mode = 'enemy';
+            mode = Player.moving();
             // 階段なら mode = 'nextfloor'
             break;
         case 'attack':
