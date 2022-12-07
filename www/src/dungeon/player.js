@@ -21,7 +21,9 @@ class Player{
      }
 
     
-
+    /**
+     * control.jsから取得できる入力キーから次の動作を判断する
+     * **/
     static playing(){
         switch(Control.getPressedKeyStatus()){
         case 'up':
@@ -37,7 +39,6 @@ class Player{
             this.playerStatus.nextX = this.playerStatus.x - 1;
             return 'move';
         default:
-            console.log('なんかしろ')
             return 'player';
         }
         
@@ -46,7 +47,9 @@ class Player{
         //return 'menu';
 
     }
-
+    /**
+     * キャラの移動に関することをする
+     * **/
     static moving(){
         //床判定
         if(Stage.checkStage(this.playerStatus.nextX, this.playerStatus.nextY)){
@@ -60,6 +63,9 @@ class Player{
         return 'player';
     }
 
+    /**
+     * キャラクターを画面の真ん中に配置する
+     * **/
     static setCharacterImage() {
         // 画像を作成し配置する
         const characterImage = Image.getCharacterImage(1);
@@ -68,11 +74,16 @@ class Player{
         this.characterElement.appendChild(characterImage);
     }
 
+    /**
+     * 新しい座標をセットする
+     * **/
     static setCharacterPosition(){
         this.playerStatus.x = this.playerStatus.nextX
         this.playerStatus.y = this.playerStatus.nextY
     }
-
+    /**
+     * 現状維持の座標をセットする
+     * **/
     static steyCharacterPosition(){
         this.playerStatus.nextX = this.playerStatus.x
         this.playerStatus.nextY = this.playerStatus.y

@@ -6,7 +6,6 @@ window.addEventListener("load", () => {
 });
 
 function initialize() {
-    console.log(screen.width+" "+screen.height)
     // 画像を準備する
     Image.initialize();
     // ステージを準備する

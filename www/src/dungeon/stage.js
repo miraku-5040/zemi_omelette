@@ -80,7 +80,9 @@ class Stage {
         //キャラの最初の座標特定
 
     }
-
+    /**
+     * ステージ画像や画像番号をステージの2次元配列に格納する
+    **/
     static setStageImage(x, y, stageImageNumber) {
         // 画像を作成し配置する
         const stageImage = Image.getStageImage(stageImageNumber);
@@ -94,13 +96,18 @@ class Stage {
         }
     }
 
-    /* 移動 */
+    /**
+     * キャラクターの移動の際キャラクターの座標に応じてムービングレイヤーを動かす
+     * **/
     static moveStage(x, y){
         this.movingLayersElement.style.top = -y * Config.stageImgHeight + "px";
         this.movingLayersElement.style.left = -x * Config.stageImgWidth + "px";
 
     }
 
+    /**
+     * 引数からそのマスが移動可能か判断する
+     * **/
     static checkStage(x,y){
         //移動できる床か判定
         if(this.board[y][x].stageImageNumber == 1){
