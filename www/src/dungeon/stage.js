@@ -98,20 +98,15 @@ class Stage {
     static moveStage(x, y){
         this.movingLayersElement.style.top = -y * Config.stageImgHeight + "px";
         this.movingLayersElement.style.left = -x * Config.stageImgWidth + "px";
-        return 'enemy';
-
 
     }
 
     static checkStage(x,y){
         //移動できる床か判定
-        console.log(y+" "+x)
-        console.log(this.board[y][x].stageImageNumber)
-
         if(this.board[y][x].stageImageNumber == 1){
             return true;
         }
-        return true;
+        return false;
         
     }
 

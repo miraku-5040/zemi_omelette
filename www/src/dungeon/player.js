@@ -56,7 +56,8 @@ class Player{
             Stage.moveStage(this.playerStatus.x, this.playerStatus.y);
             return 'enemy';
         }
-        return 'enemy';
+        this.steyCharacterPosition();
+        return 'player';
     }
 
     static setCharacterImage() {
@@ -70,7 +71,11 @@ class Player{
     static setCharacterPosition(){
         this.playerStatus.x = this.playerStatus.nextX
         this.playerStatus.y = this.playerStatus.nextY
-        
+    }
+
+    static steyCharacterPosition(){
+        this.playerStatus.nextX = this.playerStatus.x
+        this.playerStatus.nextY = this.playerStatus.y
     }
 
 }
