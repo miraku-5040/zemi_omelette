@@ -108,52 +108,75 @@ body {
 
 /* プレイヤー情報の画像 */
 .player_image {
-    width: 200px;
-    height: 45px;
-}
-
-/* ランクの丸 */
-.rank {
-    width: 45px;
-    height: 45px;
-    border-radius: 30px;
-
+    width: 325px;
+    height: 55px;
 }
 
 /* ランクのテキスト */
 .rank_text {
-    font-size: 10px;
+    font-size: 13px;
     text-align:center;
     color: black;
     font-family: serif;
     font-weight: 900;
     position: absolute;
-    top: 0px;
-    left: 6px;
+    left: 8px;
 }
 
-/* 二本のバーの位置 */
+/* 二本のバー */
+/* 位置 */
 .bers {
-    display: flex;
-    gap: 3px;
     width: 150px;
     position: absolute;
-    top: 5px;
-    left: 40px;
+    transform: translateY(-15px);
+    left: 60px;
 }
 
-/* バーの大きさ */
-.ber {
-    width: 69px;
+/* HPバー */
+.hp_ber_title {
+    position: absolute;
+    top: 15px;
+}
+
+.hp_ber {
+    position: absolute;
+    top: 35px;
+    left: 25px;
+    width: 80px;
     height: 10px;
+}
+
+.hp_ber_amount {
+    position: absolute;
+    left: 60px;
+}
+
+/* MPバー */
+.mp_ber_title {
+    position: absolute;
+    top: 15px;
+    left: 120px;
+}
+
+.mp_ber {
+    position: absolute;
+    top: 35px;
+    left: 150px;
+    width: 80px;
+    height: 10px;
+}
+
+.mp_ber_amount {
+    position: absolute;
+    left: 180px;
 }
 
 /* プレイヤー名 */
 .name {
     font-size: 15px;
     position: absolute;
-    top: 7px;
-    left: 45px;
+    top: 20px;
+    left: 62px;
     color: black;
     font-family: serif;
     font-weight: 900;
