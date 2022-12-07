@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <!-- JS -->
     <script src="components/loader.js">
     </script>
@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="components/loader.css">
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- ダンジョン選択画面のCSS -->
-    <link rel="stylesheet" href="css/danjyonSelect.css">
+    <!-- マイページ画面のCSS -->
+    <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
@@ -35,38 +35,36 @@
     <div class="setting">
         <img class="setting_image" src="image/gear.png" onclick="toSet()">
     </div>
-    <!-- ダンジョン情報表示 -->
+    <!-- その他のボタン -->
+    <div class="other_icons">
+        <img class="icon" src="image/home_icon/notice.png">
+        <img class="icon" src="image/home_icon/present.png">
+    </div>
+    <!-- ユーザ情報表示 -->
+    <div class="player_info">
+        <p>攻撃力：</p>
+        <p>防御力：</p>
+        <p>HP：</p>
+        <p>MP：</p>
+    </div>
+
+    <!-- キャラクター表示 -->
     <div class="content_position">
-        <div class="note">
-            <button class="note_button" onclick="modalOpen()">ダンジョンの<br>名前</button>
+        <div class="player_position">
+            <img class="character_position" src="image/character/yuusya.png">
+            <p class="talk_box">僕は勇者！</p>
         </div>
+
+        <!-- ダンジョン選択画面への遷移ボタン -->
+        <button class="danjyon_select" onclick="toSelectDanjyon()">ダンジョン<br>選択</button>
 
         <!-- 各画面への遷移ボタン -->
         <div class="buttons">
-            <button class="mypage" onclick="toMypage()">マイページ</button>
+            <button class="mypage" onclick="toMypage()">ホーム</button>
             <button class="danjyon" onclick="toSelectDanjyon()">ダンジョン</button>
             <button class="item" onclick="toItem()">持ち物</button>
             <button class="power" onclick="toPower()">強化</button>
             <button class="gatya" onclick="toGatya()">ガチャ</button>
-        </div>
-    </div>
-
-    <!-- ダンジョン内容説明用のモーダルウィンドウ -->
-    <div id="explanationModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-                <img class="modal_image" src="image/danjyon.jpeg">
-                <div class="modal_text">
-                    <p class="modal_title">ダンジョンの名前</p>
-                    <p class="modal_note">ダンジョンの説明</p>
-                </div>
-                <div class="modal_buttons">
-                    <button class="calsel_button" onclick="modalClose()">キャンセル</button>
-                    <button class="decision_button" onclick="toDanjyon()">はじめる</button>
-                </div>
-            </div>
         </div>
     </div>
 </body>

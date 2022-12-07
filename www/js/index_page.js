@@ -1,15 +1,15 @@
-function toMypage() {
+function toHome() {
     // 音声再生
     go_sound();
     // マイページ画面へ遷移
-    setTimeout('window.location.href = "html/mypage.html"', 600);
+    setTimeout('window.location.href = "home.html"', 600);
 }
 
 function toSelectDanjyon() {
     // 音声再生
     go_sound();
     // ダンジョン選択画面へ遷移
-    setTimeout('window.location.href = "index.html"', 600);
+    setTimeout('window.location.href = "html/danjyonSelect.html"', 600);
 }
 
 function toGatya() {
@@ -38,33 +38,6 @@ function toSet() {
     go_sound();
     // 設定画面へ遷移
     setTimeout('window.location.href = "html/setting.html"', 600);
-}
-
-// モーダルウィンドウ用js
-//モーダルウィンドウを開く
-function modalOpen() {
-    // 音声再生
-    audio = new Audio("sound/menu_open.m4a");
-    audio.play();
-    // モーダルウィンドウを開く
-    const modal = document.getElementById('explanationModal');
-    modal.style.display = 'block';
-}
-
-function modalClose() {
-    // 音声再生
-    audio = new Audio("sound/cansel.m4a");
-    audio.play();
-    // モーダルウィンドウを閉じる
-    const modal = document.getElementById('explanationModal');
-    modal.style.display = 'none';
-}
-
-function toDanjyon() {
-    // 音声再生
-    audio = new Audio("sound/danjyon_start.m4a");
-    audio.play();
-    // ダンジョン画面へ遷移
 }
 
 // 音声再生用のjs
