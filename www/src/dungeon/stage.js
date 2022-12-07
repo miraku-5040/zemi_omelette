@@ -55,14 +55,16 @@ class Stage {
         //キャラ移動用のステージの座標
         //ステージクリエイトで変更
         
-        this.stageStatusTop = -3;
-        this.stageStatusLeft = -2;
-        const image = document.getElementById(`stage_layer`);
+        this.stageStatusTop = 3;
+        this.stageStatusLeft = 7;
+        const image = document.getElementById(`starting_point`);
         image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
         image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
         image.style.position = 'absolute';
-        
-        
+        const layer = document.getElementById(`moving_layers`);
+        layer.style.top = -6 * Config.stageImgHeight + "px";
+        layer.style.left = -9 * Config.stageImgWidth + "px";
+        layer.style.position = 'absolute';
 
     }
 
@@ -85,51 +87,25 @@ class Stage {
         }
     }
 
-    static moveStage(keyStatus){
-        const image = document.getElementById(`stage_layer`);
-        switch(keyStatus){
-        case 'up':
-            this.stageStatusTop+=1
-            image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
-            return 'enemy';
-        case 'down':
-            this.stageStatusTop-=1
-            image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
-            return 'enemy';
-        case 'right':
-            this.stageStatusLeft-=1
-            image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
-            return 'enemy';
-        case 'left':
-            this.stageStatusLeft+=1
-            image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
-            return 'enemy';
-        }
+    static moveStage(x,y){
+        const image = document.getElementById(`moving_layers`);
+        image.style.top = -y * Config.stageImgHeight + "px";
+        image.style.left = -x * Config.stageImgWidth + "px";
+        return 'enemy';
+
 
     }
 
-    static checkStage(top, left, keyStatus){
+    static checkStage(x,y){
         //移動できる床か判定
-        console.log(top+" "+left);
-        switch(keyStatus){
-        case 'up':
-            console.log(this.board[top-1][left].stageImageNumber);
-            console.log(top-1+" "+left);
-            return true;
-        case 'down':
-            console.log(this.board[top+1][left].stageImageNumber);
-            console.log(top+1+" "+left);
-            return true;
-        case 'right':
-            console.log(this.board[top][left+1].stageImageNumber);
-            console.log(top+" "+(left+1));
-            return true;
-        case 'left':
-            console.log(this.board[top][left-1].stageImageNumber);   
-            console.log(top+" "+(left-1)); 
+        console.log(y+" "+x)
+        console.log(this.board[y][x].stageImageNumber)
+
+        if(this.board[y][x].stageImageNumber == 1){
             return true;
         }
         return true;
+        
     }
 
 

@@ -2,8 +2,15 @@ class Player{
 
      static initialize () {
         this.playerStatus = {
-            top: 6,
-            left: 9
+            playerId: 1,
+            playerName: 1,
+            hp: {current: 1,max: 1 , min: 0},
+            sp: {current: 100,max: 100 , min: 0},
+            x:  6,
+            y:  9,
+            nextX: 6,
+            nextY: 9,
+            
         };
         const characterElement = document.getElementById("player_layer");
         characterElement.style.width = Config.stageImgWidth + 'px';
@@ -16,15 +23,21 @@ class Player{
     
 
     static playing(){
-        this.keyStatus = Control.getPressedKeyStatus();
-        
-        switch(this.keyStatus){
+        switch(Control.getPressedKeyStatus()){
         case 'up':
+            this.playerStatus.nextY = this.playerStatus.y - 1;
+            return 'move';
         case 'down':
+            this.playerStatus.nextY = this.playerStatus.y + 1;
+            return 'move';
         case 'right':
+            this.playerStatus.nextX = this.playerStatus.x + 1;
+            return 'move';
         case 'left':
+            this.playerStatus.nextX = this.playerStatus.x - 1;
             return 'move';
         default:
+            console.log('なんかしろ')
             return 'player';
         }
         
@@ -36,12 +49,11 @@ class Player{
 
     static moving(){
         //床判定
-        if(Stage.checkStage(this.playerStatus.top,this.playerStatus.left,this.keyStatus)){
-            console.log('動くとこ')
+        if(Stage.checkStage(this.playerStatus.nextX, this.playerStatus.nextY)){
             //キャラの座標更新
-            this.setCharacterPosition(this.keyStatus);
+            this.setCharacterPosition();
             //ステージの位置更新
-            Stage.moveStage(this.keyStatus);
+            Stage.moveStage(this.playerStatus.y, this.playerStatus.x);
             return 'enemy';
         }
         return 'enemy';
@@ -56,20 +68,9 @@ class Player{
     }
 
     static setCharacterPosition(){
-        switch(this.keyStatus){
-        case 'up':
-            this.playerStatus.top-=1
-            break;
-        case 'down':
-            this.playerStatus.top+=1
-            break;
-        case 'right':
-            this.playerStatus.left+=1
-            break;
-        case 'left':
-            this.playerStatus.left-=1
-            break;
-        }
+        this.playerStatus.x = this.playerStatus.nextX
+        this.playerStatus.y = this.playerStatus.nextY
+        
     }
 
 }
