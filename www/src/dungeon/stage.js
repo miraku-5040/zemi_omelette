@@ -1,11 +1,30 @@
 class Stage {
 
+    static movingLayersElement;
+    static stageLayerElement;
+
     static initialize() {
         // HTML からステージの元となる要素を取得し、大きさを設定する
-        const stageElement = document.getElementById("stage_layer");
-        stageElement.style.width = Config.stageImgWidth * Config.stageCols + 'px';
-        stageElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
-        this.stageElement = stageElement;
+        //キャラ移動用のステージの座標
+        //ステージクリエイトで変更
+        this.stageStatusTop = 3; //開発用
+        this.stageStatusLeft = 7; //開発用
+        const startingPointElement = document.getElementById(`starting_point`);
+        startingPointElement.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
+        startingPointElement.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
+        startingPointElement.style.position = 'absolute';
+
+        const movingLayersElement = document.getElementById(`moving_layers`);
+        movingLayersElement.style.top = -6 * Config.stageImgHeight + "px"; //開発用
+        movingLayersElement.style.left = -9 * Config.stageImgWidth + "px"; //開発用
+        movingLayersElement.style.position = 'absolute';
+        this.movingLayersElement = movingLayersElement;
+
+        const stageLayerElement = document.getElementById("stage_layer");
+        stageLayerElement.style.width = Config.stageImgWidth * Config.stageCols + 'px';
+        stageLayerElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
+        this.stageElement = stageLayerElement; //old
+        this.stageLayerElement = stageLayerElement; //new
 
 
                 // メモリを準備する
@@ -52,19 +71,7 @@ class Stage {
                 }
             }
         }
-        //キャラ移動用のステージの座標
-        //ステージクリエイトで変更
         
-        this.stageStatusTop = 3;
-        this.stageStatusLeft = 7;
-        const image = document.getElementById(`starting_point`);
-        image.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
-        image.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
-        image.style.position = 'absolute';
-        const layer = document.getElementById(`moving_layers`);
-        layer.style.top = -6 * Config.stageImgHeight + "px";
-        layer.style.left = -9 * Config.stageImgWidth + "px";
-        layer.style.position = 'absolute';
 
     }
 
@@ -79,7 +86,7 @@ class Stage {
         const stageImage = Image.getStageImage(stageImageNumber);
         stageImage.style.left = x * Config.stageImgWidth + "px";
         stageImage.style.top = y * Config.stageImgHeight + "px";
-        this.stageElement.appendChild(stageImage);
+        this.stageLayerElement.appendChild(stageImage);
         // メモリにセットする
         this.board[y][x] = {
             stageImageNumber: stageImageNumber,
@@ -87,10 +94,10 @@ class Stage {
         }
     }
 
-    static moveStage(x,y){
-        const image = document.getElementById(`moving_layers`);
-        image.style.top = -y * Config.stageImgHeight + "px";
-        image.style.left = -x * Config.stageImgWidth + "px";
+    /* 移動 */
+    static moveStage(x, y){
+        this.movingLayersElement.style.top = -y * Config.stageImgHeight + "px";
+        this.movingLayersElement.style.left = -x * Config.stageImgWidth + "px";
         return 'enemy';
 
 

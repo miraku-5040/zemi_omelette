@@ -6,10 +6,10 @@ class Player{
             playerName: 1,
             hp: {current: 1,max: 1 , min: 0},
             sp: {current: 100,max: 100 , min: 0},
-            x:  6,
-            y:  9,
-            nextX: 6,
-            nextY: 9,
+            x:  9,
+            y:  6,
+            nextX: 9,
+            nextY: 6,
             
         };
         const characterElement = document.getElementById("player_layer");
@@ -53,7 +53,7 @@ class Player{
             //キャラの座標更新
             this.setCharacterPosition();
             //ステージの位置更新
-            Stage.moveStage(this.playerStatus.y, this.playerStatus.x);
+            Stage.moveStage(this.playerStatus.x, this.playerStatus.y);
             return 'enemy';
         }
         return 'enemy';
