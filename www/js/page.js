@@ -1,15 +1,15 @@
-function toMypage() {
+function toHome() {
     // 音声再生
     go_sound();
     // マイページ画面へ遷移
-    setTimeout('window.location.href = "mypage.html"', 600);
+    setTimeout('window.location.href = "../home.html"', 600);
 }
 
 function toSelectDanjyon() {
     // 音声再生
     go_sound();
     // ダンジョン選択画面へ遷移
-    setTimeout('window.location.href = "../index.html"', 600);
+    setTimeout('window.location.href = "danjyonSelect.html"', 600);
 }
 
 function toGameImage() {
@@ -69,6 +69,26 @@ function toStart() {
     go_sound();
     // スタート画面へ遷移
     setTimeout('window.location.href = "start.html"', 600);
+}
+
+// モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function modalOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('explanationModal');
+    modal.style.display = 'block';
+}
+
+function modalClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('explanationModal');
+    modal.style.display = 'none';
 }
 
 // 音声再生用のjs

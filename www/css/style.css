@@ -10,7 +10,7 @@ body {
     transform: translate(-40px, 0px);
 }
 
-/* マイページボタンの設定 */
+/* ホームボタンの設定 */
 .mypage {
     background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
     border-top: 4px solid #e6e6e6;
@@ -181,6 +181,25 @@ body {
     right: 10px;
 }
 
+/* その他のアイコン */
+.other_icons {
+    display: flex;
+    gap: 15px;
+    position: absolute;
+    top: 23px;
+    right: 85px;
+}
+
+.icon {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #e6e6e6;
+    border-radius: 0;
+    width: 25px;
+    height: 25px;
+}
 
 /* 表示内容の位置 */
 .content_position {
