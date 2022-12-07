@@ -10,6 +10,13 @@ body {
     transform: translate(-40px, 0px);
 }
 
+/* ボタンのテキスト */
+.button_text {
+    position: absolute;
+    top: 20px;
+    left: 38px;
+}
+
 /* ホームボタンの設定 */
 .mypage {
     background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
@@ -23,10 +30,16 @@ body {
     font-weight: 900;
     position: absolute;
     width: 119px;
-    height: 38px;
+    height: 55px;
 }
 
-/* ダンジョンボタンの設定 */
+.homepage_icon {
+    position: absolute;
+    top: 0px;
+    left: 39px;
+}
+
+/* ダンジョン選択ボタンの設定 */
 .danjyon {
     background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
     border-top: 4px solid #e6e6e6;
@@ -39,8 +52,14 @@ body {
     font-weight: 900;
     position: absolute;
     width: 119px;
-    height: 38px;
+    height: 55px;
     left: 119px;
+}
+
+.danjyon_button_text {
+    position: absolute;
+    top: 20px;
+    left: 27px;
 }
 
 /* 持ち物ボタンの設定 */
@@ -56,7 +75,7 @@ body {
     font-weight: 900;
     position: absolute;
     width: 119px;
-    height: 38px;
+    height: 55px;
     left: 238px;
 }
 
@@ -73,8 +92,14 @@ body {
     font-weight: 900;
     position: absolute;
     width: 119px;
-    height: 38px;
+    height: 55px;
     left: 357px;
+}
+
+.power_button_text {
+    position: absolute;
+    top: 20px;
+    left: 43px;
 }
 
 /* ガチャボタンの設定 */
@@ -90,7 +115,7 @@ body {
     font-weight: 900;
     position: absolute;
     width: 119px;
-    height: 38px;
+    height: 55px;
     left: 476px;
 }
 
@@ -155,7 +180,7 @@ body {
 .mp_ber_title {
     position: absolute;
     top: 15px;
-    left: 120px;
+    left: 123px;
 }
 
 .mp_ber {
