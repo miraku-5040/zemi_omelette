@@ -32,6 +32,8 @@ class Enemy{
         //x=5, y=5に敵をセット
         this.enemyStatusArray[5][5] = {enemyId:1, enemyName:"スライム", distinction:2, hp:{current:100, max:100, min:0}, size:1};
         this.enemyIdArray.push(1);
+        //x=4, y=6に敵をセット
+        this.enemyStatusArray[6][4] = {enemyId:1, enemyName:"スライム", distinction:3, hp:{current:100, max:100, min:0}, size:1};
         //Imageでenemyの画像を読み込む
         Image.createEnemyImages(this.enemyIdArray);
         /* end */
@@ -47,32 +49,18 @@ class Enemy{
                 if(element === this.noDataItem){
                     return;
                 }
-                this.#screenRenderingExe(element, indexX, indexY);
+                this.screenRenderingOne(indexX, indexY);
             });
         });
     }
     static screenRenderingOne(indexX, indexY) {
-        const element = enemyStatusArray[indexY][indexX];
-        if(element === this.noDataItem){
-            return;
-        }
-        matchArray.forEach(element => this.#screenRenderingExe(element, indexX, indexY));
-    }
-    static #screenRenderingExe(enemyStatusArrayElement, indexX, indexY){
         const enemyLayerElement = document.getElementById("enemy_layer");
+        const enemyStatusArrayElement = enemyStatusArray[indexY][indexX];
         const imgElement = Image.getEnamyImage(enemyStatusArrayElement.enemyId);
         imgElement.id = "enemy_" + enemyStatusArrayElement.enemyId + "_" + enemyStatusArrayElement.distinction;
-        imgElement.style.top = indexX * Config.stageImgHeight + "px";
-        imgElement.style.left = indexY * Config.stageImgWidth + "px";
+        imgElement.style.top = indexY * Config.stageImgHeight + "px";
+        imgElement.style.left = indexX * Config.stageImgWidth + "px";
         enemyLayerElement.appendChild(imgElement);
-    }
-
-    /* 画面削除 */
-    static screenDeleteOne(indexX, indexY){
-    }
-    static #screenDeleteExe(enemyStatusArrayElement){
-        const imgElement = document.getElementById("enemy_" + enemyStatusArrayElement.enemyId + "_" + enemyStatusArrayElement.distinction);
-        imgElement.remove();
     }
 
     /* ステータス変化 */
@@ -112,7 +100,7 @@ class Enemy{
 
     /* 敵行動 */
     static action(){
-        this.updateNextMove();
+        this.updateNextMove(); //次の行動(移動先)を設定
         this.enemyStatusArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
                 if(element === this.noDataItem){
@@ -120,7 +108,7 @@ class Enemy{
                 }
                 console.log("element.type:" + element.next.type + ", x:" + element.next.x); //test
                 switch(element.next.type){
-                    case "move":
+                    case "move": //移動の場合
                         this.moving(indexX, indexY);
                         break;
                     default:
@@ -128,8 +116,8 @@ class Enemy{
                 }
             });
         });
-        this.enemyStatusArray = JSON.parse(JSON.stringify(this.tempEnemyStatusArray));
-        this.tempEnemyStatusArray.forEach((element) => element.fill(this.noDataItem));
+        this.enemyStatusArray = JSON.parse(JSON.stringify(this.tempEnemyStatusArray)); //ディープコピー
+        this.tempEnemyStatusArray.forEach((element) => element.fill(this.noDataItem)); //一時配列を初期化
     }
 
     /* 敵移動 */
@@ -138,11 +126,9 @@ class Enemy{
         const nextX = elementItem.next.x;
         const nextY = elementItem.next.y;
         const imgElement = document.getElementById("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
-        console.log(imgElement); //test
         imgElement.style.top = nextY * Config.stageImgHeight + "px";
         imgElement.style.left = nextX * Config.stageImgWidth + "px";
-        this.tempEnemyStatusArray[nextY][nextX] = elementItem;
-        console.log("movingCheck" + "_current" + currentX + ":" + currentY + "_next" + nextX + ":" + nextY);
+        this.tempEnemyStatusArray[nextY][nextX] = elementItem; //一時配列に次のデータをセットする
     }
 
     /* 敵配置
@@ -155,5 +141,15 @@ class Enemy{
      * 敵作成時にデータベースから敵のデータを取得する
     */
     static findDataBase(){
+    }
+
+    /* 指定マスに敵の存在チェック */
+    static checkEnemy(x, y){
+        if(enemyStatusArray[x][y] === this.noDataItem){
+            // 敵が存在しない
+            return false;
+        }
+        // 敵が存在する
+        return true;
     }
 }
