@@ -6,6 +6,9 @@ class Player{
             playerName: 1,
             hp: {current: 1,max: 1 , min: 0},
             sp: {current: 100,max: 100 , min: 0},
+            str: {current: 100,max: 100 , min: 0},
+            atk: {current: 100,max: 100 , min: 0},
+            def: {current: 100,max: 100 , min: 0},
             now:  {x:9, y:6},
             next: {x:9, y:6}
             
@@ -25,16 +28,16 @@ class Player{
     static playing(){
         switch(Control.getPressedKeyStatus()){
         case 'up':
-            this.playerStatus.nextY = this.playerStatus.now.y - 1;
+            this.playerStatus.next.y = this.playerStatus.now.y - 1;
             return 'move';
         case 'down':
-            this.playerStatus.nextY = this.playerStatus.now.y + 1;
+            this.playerStatus.next.y = this.playerStatus.now.y + 1;
             return 'move';
         case 'right':
-            this.playerStatus.nextX = this.playerStatus.now.x + 1;
+            this.playerStatus.next.x = this.playerStatus.now.x + 1;
             return 'move';
         case 'left':
-            this.playerStatus.nextX = this.playerStatus.now.x - 1;
+            this.playerStatus.next.x = this.playerStatus.now.x - 1;
             return 'move';
         default:
             return 'player';
