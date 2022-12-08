@@ -1,36 +1,41 @@
-/* 強化方法選択ボタン */
-.power_method_buttons {
-    display: flex;
-    gap: 30px;
+/* 強化する装備 */
+.power_item {
+    border: inset 5px black;
+    background-color: white;
     position: absolute;
-    top: 50px;
-    left: 90px;
+    top: 100px;
+    left: 150px;
 }
 
-.power_button {
+/* 使用するアイテムのリスト */
+.useItemList {
+    display: flex;
+    gap: 5px;
+    border: inset 5px black;
+    background-color: white;
+    position: absolute;
+    top: 150px;
+    left: 70px;
+    width: 200px;
+    height: 30px;
+}
+
+/* リストの中身 */
+.useItem {
+    width: 30px;
+    height: 30px;
+}
+
+/* 装備するボタン */
+.power_up {
     background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
     border-top: 4px solid #e6e6e6;
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
     border-left: 4px solid #e6e6e6;
     border-radius: 0;
-    position: relative;
-    top: 38px;
-    left: 30px;
-    width: 200px;
-    height: 200px;
-}
-
-.power_icon {
-    position: relative;
-    top: 20px;
-    width: 110px;
-    height: 110px;
-}
-
-.power_method_button_text {
     color: black;
-    font-size: 25px;
+    font-size: 15px;
     font-weight: bold;
     text-shadow: rgb(255, 255, 255) 1px 0px 0px,
      rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
@@ -39,8 +44,34 @@
     rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
     rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
     rgb(255, 255, 255) 0.96017px -0.279415px 0px;
-    position: relative;
-    left: 0px;
+    position: absolute;
+    top: 220px;
+    left: 125px;
+    width: 100px;
+    height: 40px;
+}
+
+/* アイテム一覧 */
+.item_list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    overflow: scroll;
+    border: inset 10px black;
+    background-color: white;
+    padding: 10px 10px;
+    position: absolute;
+    top: 85px;
+    left: 320px;
+    width: 250px;
+    height: 165px;
+}
+
+/* 一覧の中身 */
+.material {
+    border: solid black;
+    width: 30px;
+    height: 30px;
 }
 
 /* 強化画面のボタン */

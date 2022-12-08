@@ -16,8 +16,8 @@ function toGameImage() {
     // 音声再生
     audio = new Audio("../sound/start.m4a");
     audio.play();
-    // スタート画面からのダンジョン選択画面へ遷移
-    setTimeout('window.location.href = "../index.html"', 600);
+    // スタート画面からのマイページ画面へ遷移
+    setTimeout('window.location.href = "../home.html"', 600);
 }
 
 function toGatya() {
@@ -53,8 +53,22 @@ function toItem() {
 function toPower() {
     // 音声再生
     go_sound();
-    // 強化画面へ遷移
+    // 強化選択画面へ遷移
     setTimeout('window.location.href = "power.html"', 600);
+}
+
+function toPowerStrengthen() {
+    // 音声再生
+    go_sound();
+    // 強化画面へ遷移
+    setTimeout('window.location.href = "powerStrengthen.html"', 600);
+}
+
+function toPowerEvolution() {
+    // 音声再生
+    go_sound();
+    // 進化画面へ遷移
+    setTimeout('window.location.href = "powerEvolution.html"', 600);
 }
 
 function toSet() {

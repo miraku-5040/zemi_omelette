@@ -1,30 +1,30 @@
 /* ガチャの背景 */
 .gatya_image {
     position: absolute;
-    top: 70px;
+    top: 80px;
     left: 45px;
     width: 556px;
-    height: 200px;
-    border: inset 10px black;
+    height: 195px;
+    border: inset 9px black;
 }
 
 /* ガチャのタイトル */
 .gatya_title {
     color: gold;
+    font-weight: bold;
     position: absolute;
-    top: 60px;
+    top: 70px;
     left: 68px;
     font-size: x-large;
-    font-weight: 800;
 }
 
 /* ガチャを引くボタン達 */
 .gatya_button {
     position: absolute;
-    top: 230px;
-    right: 80px;
+    top: 235px;
+    right: 85px;
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 
 /* ガチャを引くボタン */
@@ -36,10 +36,17 @@
     border-left: 4px solid rgb(252, 232, 121);
     border-radius: 0;
     color: black;
-    font-family: serif;
-    font-weight: 900;
-    width: 60px;
-    height: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    width: 75px;
+    height: 35px;
 }
 
 /* ガチャ画面のボタン */

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <script src="../js/page.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 強化画面のCSS -->
+    <link rel="stylesheet" href="../css/powerStrengthen.css">
+</head>
+
+<body>
+    <!-- 装備画面の表示 -->
+    <!-- 強化対象装備 -->
+    <img class="power_item" src="../image/soad/soad-provisional.png">
+    <div class="power_target_text">
+        <p>レベル：50/100</p>
+        <p>総合力：10000</p>
+    </div>
+    <div class="decition_buttons">
+        <button class="cansel" onclick="toPower()">キャンセル</button>
+        <button class="power_up">強化する</button>
+    </div>
+
+    <!-- 強化用アイテム一覧 -->
+    <div class="item_frame">
+        <div class="power_for_item">
+            <img class="power_for_item_image" src="../image/item/item-provisional.png">
+            <p class="power_for_item_text">強化用アイテム</p>
+            <div class="power_for_item_count">
+                <button class="power_for_item_count_minus" onclick="toHome()"><p class="count_button_text">－</p></button>
+                <input class="power_for_item_count_number">
+                <button class="power_for_item_count_plus" onclick="toHome()"><p class="count_button_text">＋</p></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

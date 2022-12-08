@@ -16,6 +16,8 @@ function initialize() {
     Stage.initialize();
     //プレイヤーの準備
     Player.initialize();
+    //エネミーの準備
+    Enemy.initialize();
     //コントローラを準備する
     Control.initialize();
     // 開始フラグ
@@ -63,6 +65,8 @@ function loop() {
             break;
         case 'enemy':
             // 敵のターン
+            console.log("enemyCheck"); //test
+            Enemy.action();
             mode = 'end';
             break;
         case 'end':

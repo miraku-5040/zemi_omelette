@@ -1,10 +1,9 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
     <!-- JS -->
     <script src="../components/loader.js">
     </script>
@@ -13,10 +12,9 @@
     <link rel="stylesheet" href="../components/loader.css">
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
-    <!-- ダンジョン選択画面のCSS -->
-    <link rel="stylesheet" href="../css/danjyonSelect.css">
+    <!-- 進化画面のCSS -->
+    <link rel="stylesheet" href="../css/powerEvolution.css">
 </head>
-
 <body>
     <!-- プレイヤー情報表示 -->
     <div class="flame">
@@ -42,22 +40,29 @@
     <div class="setting">
         <img class="setting_image" src="../image/gear.png" onclick="toSet()">
     </div>
-    <!-- ダンジョン情報表示 -->
-    <div class="content_position">
-        <div class="note">
-            <div>
-                <img class="note_button_image" src="../image/danjyonSelectButton.png" onclick="modalOpen()">
-                <p class="note_button_text">ダンジョン<br>の名前</p>
-            </div>
-            <div>
-                <img class="note_button_image" src="../image/danjyonSelectButton.png" onclick="modalOpen()">
-                <p class="note_button_text">ダンジョン<br>の名前</p>
-            </div>
-        </div>
 
-        <!-- 各画面への遷移ボタン -->
-        <div class="buttons">
-            <button class="mypage" onclick="toHome()">
+    <!-- 装備画面の表示 -->
+    <!-- 強化対象装備 -->
+    <img class="power_item" src="../image/soad/soad-provisional.png">
+
+    <!-- 強化用アイテム -->
+    <div class="useItemList">
+        <img class="useItem" src="../image/item/item-provisional.png">
+        <img class="useItem" src="../image/item/item-provisional.png">
+    </div>
+
+    <button class="power_up">強化する</button>
+
+    <!-- 強化対象装備・強化アイテム一覧 -->
+    <div class="item_list">
+        <img class="material" src="../image/soad/soad-provisional.png">
+        <img class="material" src="../image/shield/shield-provisional.png">
+        <img class="material" src="../image/item/item-provisional.png">
+    </div>
+
+    <!-- 各画面への遷移ボタン -->
+    <div class="power_buttons buttons">
+        <button class="mypage" onclick="toHome()">
                 <img class="homepage_icon" src="../image/home_icon/home.png"><p class="button_text">ホーム</p></button>
             <button class="danjyon" onclick="toSelectDanjyon()">
                 <img class="homepage_icon" src="../image/home_icon/danjyon.png">
@@ -71,27 +76,6 @@
             <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="../image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>
-        </div>
-    </div>
-
-    <!-- ダンジョン内容説明用のモーダルウィンドウ -->
-    <div id="explanationModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-                <img class="modal_image" src="../image/danjyon.jpeg">
-                <div class="modal_text">
-                    <p class="modal_title">ダンジョンの名前</p>
-                    <p class="modal_note">ダンジョンの説明</p>
-                </div>
-                <div class="modal_buttons">
-                    <button class="calsel_button" onclick="modalClose()">キャンセル</button>
-                    <button class="decision_button" onclick="toDanjyon()">はじめる</button>
-                </div>
-            </div>
-        </div>
     </div>
 </body>
-
 </html>

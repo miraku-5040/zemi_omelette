@@ -58,8 +58,17 @@ class Image {
      * playerImagesにプレイキャラクターの画像が入る
      * **/
     static createPlayerImages(){
+        const errorIndex = 0;
         const name = "player";
         this.playerImages = new Map();
+        //エラー用の画像をセット
+        const errorImage = this.createElement("null", 0);
+        errorImage.removeAttribute('id');
+        errorImage.width = Config.stageImgWidth;
+        errorImage.height = Config.stageImgHeight;
+        errorImage.style.position = 'absolute';
+        this.playerImages.set(errorIndex, errorImage);
+
         for(let i=0; i < Config.characterImageTotal; i++){
             const image = this.createElement(name, i+1);
             image.removeAttribute('id');
@@ -75,17 +84,26 @@ class Image {
      * 引数のArrayで指定したenemyIdの画像をセットする
      */
     static createEnemyImages(enemyIdArray = []){
+        const errorIndex = 0;
         const name = "enemy";
         const stageImgHeight = Config.stageImgHeight;
         const stageImgWidth = Config.stageImgWidth;
         this.enemyImages = new Map();
+        //エラー用の画像をセット
+        const errorImage = this.createElement("null", 0);
+        errorImage.removeAttribute('id');
+        errorImage.width = stageImgWidth;
+        errorImage.height = stageImgHeight;
+        errorImage.style.position = 'absolute';
+        this.enemyImages.set(errorIndex, errorImage);
+
         enemyIdArray.forEach((element) => {
             const image = this.createElement(name, element);
             image.removeAttribute('id');
             image.width = stageImgWidth;
             image.height = stageImgHeight;
             image.style.position = 'absolute';
-            this.playerImages.set(Number(element), image);
+            this.enemyImages.set(Number(element), image);
         });
     }
 
@@ -111,10 +129,11 @@ class Image {
      * playerImagesの要素を取得
      */
     static getPlayerImage(playerId){
+        const errorIndex = 0;
         const matchItem = this.playerImages.get(playerId);
         if(matchItem === undefined){
             //存在しない場合
-            return null;
+            return this.playerImages.get(errorIndex).cloneNode();
         }
         const image = matchItem.element.cloneNode();
         return image;
@@ -124,12 +143,13 @@ class Image {
      * enemyImagesの要素を取得
      */
     static getEnamyImage(enemyId){
-        const matchItem = this.playerImages.get(enemyId);
+        const errorIndex = 0;
+        const matchItem = this.enemyImages.get(enemyId);
         if(matchItem === undefined){
             //存在しない場合
-            return null;
+            return this.enemyImages.get(errorIndex).cloneNode();
         }
-        const image = matchItem.element.cloneNode();
+        const image = matchItem.cloneNode();
         return image;
     }
 }
