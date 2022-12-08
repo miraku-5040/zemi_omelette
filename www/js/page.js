@@ -53,8 +53,22 @@ function toItem() {
 function toPower() {
     // 音声再生
     go_sound();
-    // 強化画面へ遷移
+    // 強化選択画面へ遷移
     setTimeout('window.location.href = "power.html"', 600);
+}
+
+function toPowerStrengthen() {
+    // 音声再生
+    go_sound();
+    // 強化画面へ遷移
+    setTimeout('window.location.href = "powerStrengthen.html"', 600);
+}
+
+function toPowerEvolution() {
+    // 音声再生
+    go_sound();
+    // 進化画面へ遷移
+    setTimeout('window.location.href = "powerEvolution.html"', 600);
 }
 
 function toSet() {

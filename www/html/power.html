@@ -44,39 +44,31 @@
         <img class="setting_image" src="../image/gear.png" onclick="toSet()">
     </div>
 
-    <!-- 装備画面の表示 -->
-    <!-- 強化対象装備 -->
-    <img class="power_item" src="../image/soad/soad-provisional.png">
+    <!-- 強化方法選択 -->
+    <div class="power_method_buttons">
+        <button class="power_button" onclick="toPowerStrengthen()">
+                <img class="power_icon" src="../image/power_icon/power.png">
+                <p class="power_method_button_text">強化</p></button>
 
-    <!-- 強化用アイテム -->
-    <div class="useItemList">
-        <img class="useItem" src="../image/item/item-provisional.png">
-        <img class="useItem" src="../image/item/item-provisional.png">
-    </div>
-
-    <button class="power_up">強化する</button>
-
-    <!-- 強化対象装備・強化アイテム一覧 -->
-    <div class="item_list">
-        <img class="material" src="../image/soad/soad-provisional.png">
-        <img class="material" src="../image/shield/shield-provisional.png">
-        <img class="material" src="../image/item/item-provisional.png">
+        <button class="power_button" onclick="toPowerEvolution()">
+                <img class="power_icon" src="../image/power_icon/power.png">
+                <p class="power_method_button_text">進化</p></button>
     </div>
 
     <!-- 各画面への遷移ボタン -->
     <div class="power_buttons buttons">
         <button class="mypage" onclick="toHome()">
                 <img class="homepage_icon" src="../image/home_icon/home.png"><p class="button_text">ホーム</p></button>
-            <button class="danjyon" onclick="toSelectDanjyon()">
+        <button class="danjyon" onclick="toSelectDanjyon()">
                 <img class="homepage_icon" src="../image/home_icon/danjyon.png">
                 <p class="danjyon_button_text">ダンジョン</p></button>
-            <button class="item" onclick="toItem()">
+        <button class="item" onclick="toItem()">
                 <img class="homepage_icon" src="../image/home_icon/item.png">
                 <p class="button_text">持ち物</p></button>
-            <button class="power" onclick="toPower()">
+        <button class="power" onclick="toPower()">
                 <img class="homepage_icon" src="../image/home_icon/power.png">
                 <p class="power_button_text">強化</p></button>
-            <button class="gatya" onclick="toGatya()">
+        <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="../image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>
     </div>

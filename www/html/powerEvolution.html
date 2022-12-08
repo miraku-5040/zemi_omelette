@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <script src="../js/page.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 進化画面のCSS -->
+    <link rel="stylesheet" href="../css/powerEvolution.css">
+</head>
+<body>
+    <!-- プレイヤー情報表示 -->
+    <div class="flame">
+        <img class="player_image" src="../image/player.png">
+        <p class="rank_text">ランク<br>100</p>
+        <div class="other">
+            <div class="bers">
+                <div class="ber_position">
+                    <p class="hp_ber_title">HP</p>
+                    <meter class="hp_ber" max="100" low="20" high="80" value="50"></meter>
+                    <p class="hp_ber_amount">50/100</p>
+                </div>
+                <div class="ber_position">
+                    <p class="mp_ber_title">MP</p>
+                    <meter class="mp_ber" max="100" low="20" high="80" value="90">90%</meter>
+                    <p class="mp_ber_amount">90/100</p>
+                </div>
+            </div>
+            <p class="name">player</p>
+        </div>
+    </div>
+    <!-- 設定画面への遷移ボタン -->
+    <div class="setting">
+        <img class="setting_image" src="../image/gear.png" onclick="toSet()">
+    </div>
+
+    <!-- 装備画面の表示 -->
+    <!-- 強化対象装備 -->
+    <img class="power_item" src="../image/soad/soad-provisional.png">
+
+    <!-- 強化用アイテム -->
+    <div class="useItemList">
+        <img class="useItem" src="../image/item/item-provisional.png">
+        <img class="useItem" src="../image/item/item-provisional.png">
+    </div>
+
+    <button class="power_up">強化する</button>
+
+    <!-- 強化対象装備・強化アイテム一覧 -->
+    <div class="item_list">
+        <img class="material" src="../image/soad/soad-provisional.png">
+        <img class="material" src="../image/shield/shield-provisional.png">
+        <img class="material" src="../image/item/item-provisional.png">
+    </div>
+
+    <!-- 各画面への遷移ボタン -->
+    <div class="power_buttons buttons">
+        <button class="mypage" onclick="toHome()">
+                <img class="homepage_icon" src="../image/home_icon/home.png"><p class="button_text">ホーム</p></button>
+            <button class="danjyon" onclick="toSelectDanjyon()">
+                <img class="homepage_icon" src="../image/home_icon/danjyon.png">
+                <p class="danjyon_button_text">ダンジョン</p></button>
+            <button class="item" onclick="toItem()">
+                <img class="homepage_icon" src="../image/home_icon/item.png">
+                <p class="button_text">持ち物</p></button>
+            <button class="power" onclick="toPower()">
+                <img class="homepage_icon" src="../image/home_icon/power.png">
+                <p class="power_button_text">強化</p></button>
+            <button class="gatya" onclick="toGatya()">
+                <img class="homepage_icon" src="../image/home_icon/gatya.png">
+                <p class="button_text">ガチャ</p></button>
+    </div>
+</body>
+</html>
