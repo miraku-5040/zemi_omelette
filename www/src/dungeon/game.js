@@ -16,6 +16,8 @@ function initialize() {
     Stage.initialize();
     //プレイヤーの準備
     Player.initialize();
+    //エネミーの準備
+    Enemy.initialize();
     //コントローラを準備する
     Control.initialize();
     // 開始フラグ
