@@ -1,12 +1,15 @@
 class Image {
 
+    static playerImages; //playerのimgElementのMap
+    static enemyImages; //enemyのimgElementのMap
+
     /**
      * 画像の生成
-     * ステージの配置
+     * elementを持つ
      * **/
     static initialize() {
         this.createStageImages();
-        this.createCharacterImages();
+        this.createPlayerImages();
     }
     /**
      *  画像の要素を作成
@@ -52,19 +55,38 @@ class Image {
     }
 
     /**
-     * chracterImagesにプレイキャラ、エネミーの画像が入る
+     * playerImagesにプレイキャラクターの画像が入る
      * **/
-    static createCharacterImages(){
-        this.characterImages = [];
+    static createPlayerImages(){
+        const name = "player";
+        this.playerImages = new Map();
         for(let i=0; i < Config.characterImageTotal; i++){
-            const image = this.createElement('character',i+1);
-            console.log(image);
+            const image = this.createElement(name, i+1);
             image.removeAttribute('id');
             image.width = Config.stageImgWidth;
             image.height = Config.stageImgHeight;
             image.style.position = 'absolute';
-            this.characterImages.push(image);
+            this.playerImages.set(i+1, image);
         }
+    }
+
+    /**
+     * enemyImagesにエネミーキャラクターの画像が入る
+     * 引数のArrayで指定したenemyIdの画像をセットする
+     */
+    static createEnemyImages(enemyIdArray = []){
+        const name = "enemy";
+        const stageImgHeight = Config.stageImgHeight;
+        const stageImgWidth = Config.stageImgWidth;
+        this.enemyImages = new Map();
+        enemyIdArray.forEach((element) => {
+            const image = this.createElement(name, element);
+            image.removeAttribute('id');
+            image.width = stageImgWidth;
+            image.height = stageImgHeight;
+            image.style.position = 'absolute';
+            this.playerImages.set(Number(element), image);
+        });
     }
 
     /**
@@ -76,10 +98,38 @@ class Image {
     }
 
     /**
-     * characterImagesの要素を取得
+     * playerのimgをcharacterImagesの要素を取得
+     * 
+     * getPlayerImageに変更する
      * **/
-     static getCharacterImage(index) {
-        const image = this.characterImages[index - 1].cloneNode(true);
+     static getCharacterImage(index) { 
+        const matchImage = this.playerImages.get(index);
+        return matchImage.cloneNode();
+    }
+
+    /**
+     * playerImagesの要素を取得
+     */
+    static getPlayerImage(playerId){
+        const matchItem = this.playerImages.get(playerId);
+        if(matchItem === undefined){
+            //存在しない場合
+            return null;
+        }
+        const image = matchItem.element.cloneNode();
+        return image;
+    }
+
+    /**
+     * enemyImagesの要素を取得
+     */
+    static getEnamyImage(enemyId){
+        const matchItem = this.playerImages.get(enemyId);
+        if(matchItem === undefined){
+            //存在しない場合
+            return null;
+        }
+        const image = matchItem.element.cloneNode();
         return image;
     }
 }
