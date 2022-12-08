@@ -145,7 +145,6 @@ class Image {
     static getEnamyImage(enemyId){
         const errorIndex = 0;
         const matchItem = this.enemyImages.get(enemyId);
-        console.log("ImageCheck:" + matchItem);
         if(matchItem === undefined){
             //存在しない場合
             return this.enemyImages.get(errorIndex).cloneNode();
