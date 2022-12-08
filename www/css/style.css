@@ -140,6 +140,19 @@ body {
     height: 25px;
 }
 
+/* ホームボタン */
+.go_home {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #e6e6e6;
+    border-radius: 0;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
 /* フッターボタン */
 /* ４つのボタンの位置 */
 .buttons {
