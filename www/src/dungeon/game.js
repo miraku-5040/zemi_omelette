@@ -5,6 +5,10 @@ window.addEventListener("load", () => {
     loop();
 });
 
+let mode; // ゲームの現在の状況
+let frame; // ゲームの現在フレーム（1/60秒ごとに1追加される）
+let turn; // ゲームの現在ターン数
+
 function initialize() {
     // 画像を準備する
     Image.initialize();
@@ -18,6 +22,8 @@ function initialize() {
     mode = 'start';
     // フレームを初期化する
     frame = 0;
+    turn = 1;
+    
 }
 
 function loop() {
@@ -60,7 +66,10 @@ function loop() {
             mode = 'end';
             break;
         case 'end':
-                mode = 'player';
+            Player.spDecrease(turn);
+            
+            turn++
+            mode = 'player';
             break;
         case 'nextfloor':
             //次のフロアの準備及び次々のフロアの作成

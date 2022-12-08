@@ -89,5 +89,16 @@ class Player{
         this.playerStatus.nextY = this.playerStatus.y
     }
 
+    /**
+     * ターンによる満腹度の減少
+     * **/
+    static spDecrease(turn){
+        if(turn%10 == 0){
+            this.playerStatus.sp.current-=1;
+            document.getElementById("sp").innerHTML = this.playerStatus.sp.current;
+        }
+    }
+
+
 }
 
