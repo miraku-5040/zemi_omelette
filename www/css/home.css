@@ -6,9 +6,11 @@
     padding: 0px 10px 30px 10px;
     position: absolute;
     top: 80px;
-    left: 35px;
-    width: 170px;
+    left: 40px;
+    width: 160px;
     height: 150px;
+    font-weight: bold;
+    border: solid rgb(189, 160, 0);
 }
 
 /* キャラクターのフレーム */
@@ -37,6 +39,7 @@
     transform: translateX(-15px);
     width: 250px;
     height: 60px;
+    font-weight: bold;
 }
 
 /* ダンジョン選択画面への遷移ボタン */
@@ -47,14 +50,35 @@
     border-bottom: 4px solid #999999;
     border-left: 4px solid #e6e6e6;
     border-radius: 50px;
-    color: black;
-    font-family: serif;
-    font-weight: 1000;
     position: absolute;
     top: 80px;
     left: 430px;
     width: 100px;
     height: 100px;
+}
+
+/* ダンジョン選択画面への遷移ボタンのアイコン */
+.danjyon_select_icon {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+/* ダンジョン選択画面への遷移ボタンのテキスト */
+.danjyon_select_text {
+    position: absolute;
+    top: 35px;
+    left: 13px;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
 }
 
 /* ホーム画面のボタン */
