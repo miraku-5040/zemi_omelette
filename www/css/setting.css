@@ -7,6 +7,7 @@
 /* 設定画面のタイトルの文字 */
 .setting_title {
     color: gold;
+    font-weight: bold;
 }
 
 /* 変更内容 */
@@ -15,6 +16,10 @@
     border: 1px solid black;
     border-radius: 50px;
     padding: 0px 40px 10px 30px;
+}
+
+.setting_text {
+    font-weight: bold;
 }
 
 /* タイトル画面へ遷移するボタン */
@@ -26,8 +31,15 @@
     border-left: 4px solid #eeeeee;
     border-radius: 0;
     color: black;
-    font-family: serif;
-    font-weight: 900;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
     position: absolute;
     top: 300px;
     left: 330px;
@@ -44,8 +56,15 @@
     border-left: 4px solid #eeeeee;
     border-radius: 0;
     color: black;
-    font-family: serif;
-    font-weight: 900;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
     position: absolute;
     top: 300px;
     left: 470px;

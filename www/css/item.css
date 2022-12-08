@@ -3,16 +3,41 @@
     display: flex;
     gap: 30px;
     position: absolute;
-    top: 90px;
+    top: 100px;
     transform: translateX(-10px);
 }
 
 /* アイテム単品 */
 .material {
     background-color: white;
-    border: inset 5px black;
+    border: inset 4px black;
     width: 30px;
     height: 30px;
+}
+
+/* 装備するボタン */
+.equip {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #e6e6e6;
+    border-radius: 0;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    position: absolute;
+    top: 220px;
+    left: 35px;
+    width: 100px;
+    height: 40px;
 }
 
 /* アイテム一覧 */
@@ -21,14 +46,14 @@
     gap: 10px;
     flex-wrap: wrap;
     overflow: scroll;
-    border: inset 10px black;
+    border: inset 9px black;
     background-color: white;
     padding: 10px 10px;
     position: absolute;
-    top: 70px;
+    top: 80px;
     left: 205px;
     width: 280px;
-    height: 175px;
+    height: 165px;
 }
 
 /* アイテムリスト内のアイテム */

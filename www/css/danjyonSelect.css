@@ -8,29 +8,36 @@
     height: 200px;
 }
 
-/* ダンジョン選択のボタン */
+/* ダンジョン選択のボタンの枠 */
 .note {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    overflow: scroll;
     border: inset 10px black;
+    padding: 13px;
     position: absolute;
-    top: 70px;
+    top: 75px;
     transform: translateX(-10px);
-    width: 516px;
-    height: 200px;
+    width: 486px;
+    height: 160px;
     background-color: white;
 }
 
-.note_button {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #eeeeee;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #eeeeee;
-    border-radius: 0;
+/* ダンジョン選択のボタン */
+.note_button_image{
+    width: 80px;
+    height: 105px;
+}
+
+.note_button_text {
+    position: relative;
+    transform: translateY(-93px);
+    left: 0px;
+    text-align: center;
+    font-size: 13px;
     color: black;
-    font-family: serif;
-    font-weight: 900;
-    width: 100px;
-    height: 40px;
+    font-weight: bold;
 }
 
 /* ダンジョン選択画面のボタン */

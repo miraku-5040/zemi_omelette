@@ -16,8 +16,8 @@ function toGameImage() {
     // 音声再生
     audio = new Audio("../sound/start.m4a");
     audio.play();
-    // スタート画面からのダンジョン選択画面へ遷移
-    setTimeout('window.location.href = "../index.html"', 600);
+    // スタート画面からのマイページ画面へ遷移
+    setTimeout('window.location.href = "../home.html"', 600);
 }
 
 function toGatya() {
