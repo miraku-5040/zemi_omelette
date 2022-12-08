@@ -6,10 +6,8 @@ class Player{
             playerName: 1,
             hp: {current: 1,max: 1 , min: 0},
             sp: {current: 100,max: 100 , min: 0},
-            x:  9,
-            y:  6,
-            nextX: 9,
-            nextY: 6,
+            now:  {x:9, y:6},
+            next: {x:9, y:6}
             
         };
         const characterElement = document.getElementById("player_layer");
@@ -27,16 +25,16 @@ class Player{
     static playing(){
         switch(Control.getPressedKeyStatus()){
         case 'up':
-            this.playerStatus.nextY = this.playerStatus.y - 1;
+            this.playerStatus.nextY = this.playerStatus.now.y - 1;
             return 'move';
         case 'down':
-            this.playerStatus.nextY = this.playerStatus.y + 1;
+            this.playerStatus.nextY = this.playerStatus.now.y + 1;
             return 'move';
         case 'right':
-            this.playerStatus.nextX = this.playerStatus.x + 1;
+            this.playerStatus.nextX = this.playerStatus.now.x + 1;
             return 'move';
         case 'left':
-            this.playerStatus.nextX = this.playerStatus.x - 1;
+            this.playerStatus.nextX = this.playerStatus.now.x - 1;
             return 'move';
         default:
             return 'player';
@@ -52,11 +50,11 @@ class Player{
      * **/
     static moving(){
         //床判定
-        if(Stage.checkStage(this.playerStatus.nextX, this.playerStatus.nextY)){
+        if(Stage.checkStage(this.playerStatus.next.x, this.playerStatus.next.y)){
             //キャラの座標更新
             this.setCharacterPosition();
             //ステージの位置更新
-            Stage.moveStage(this.playerStatus.x, this.playerStatus.y);
+            Stage.moveStage(this.playerStatus.now.x, this.playerStatus.now.y);
             return 'enemy';
         }
         this.steyCharacterPosition();
@@ -78,15 +76,15 @@ class Player{
      * 新しい座標をセットする
      * **/
     static setCharacterPosition(){
-        this.playerStatus.x = this.playerStatus.nextX
-        this.playerStatus.y = this.playerStatus.nextY
+        this.playerStatus.now.x = this.playerStatus.next.x
+        this.playerStatus.now.y = this.playerStatus.next.y
     }
     /**
      * 現状維持の座標をセットする
      * **/
     static steyCharacterPosition(){
-        this.playerStatus.nextX = this.playerStatus.x
-        this.playerStatus.nextY = this.playerStatus.y
+        this.playerStatus.next.x = this.playerStatus.now.x
+        this.playerStatus.next.y = this.playerStatus.now.y
     }
 
     /**
