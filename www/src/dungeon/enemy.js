@@ -55,7 +55,7 @@ class Enemy{
     }
     static screenRenderingOne(indexX, indexY) {
         const enemyLayerElement = document.getElementById("enemy_layer");
-        const enemyStatusArrayElement = enemyStatusArray[indexY][indexX];
+        const enemyStatusArrayElement = this.enemyStatusArray[indexY][indexX];
         const imgElement = Image.getEnamyImage(enemyStatusArrayElement.enemyId);
         imgElement.id = "enemy_" + enemyStatusArrayElement.enemyId + "_" + enemyStatusArrayElement.distinction;
         imgElement.style.top = indexY * Config.stageImgHeight + "px";
