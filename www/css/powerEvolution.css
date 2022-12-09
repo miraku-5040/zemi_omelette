@@ -3,31 +3,60 @@
     border: inset 5px black;
     background-color: white;
     position: absolute;
-    top: 100px;
-    left: 150px;
+    top: 80px;
+    left: 110px;
+    width: 100px;
+    height: 100px;
 }
 
-/* 使用するアイテムのリスト */
-.useItemList {
-    display: flex;
-    gap: 5px;
-    border: inset 5px black;
-    background-color: white;
+.power_target_text {
+    border: solid rgb(189, 160, 0);
+    padding-left: 10px;
+    line-height: 10px;
+    flex-wrap: wrap;
+    overflow: scroll;
+    background-color: rgba(255,255,255,0.8);
     position: absolute;
-    top: 150px;
-    left: 70px;
-    width: 200px;
-    height: 30px;
+    top: 220px;
+    left: 40px;
+    width: 240px;
+    height: 110px;
 }
 
-/* リストの中身 */
-.useItem {
-    width: 30px;
-    height: 30px;
+/* 強化用アイテム一覧の枠 */
+.item_frame {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    overflow: scroll;
+    border: inset 8px black;
+    background-color: white;
+    padding: 10px 10px;
+    position: absolute;
+    top: 55px;
+    left: 320px;
+    width: 250px;
+    height: 175px;
 }
 
-/* 装備するボタン */
-.power_up {
+/* 強化用アイテムの画像 */
+.power_for_item_image {
+    border: solid black;
+    width: 40px;
+    height: 40px;
+}
+
+/* 意思決定ボタン達 */
+.decition_buttons {
+    position: absolute;
+    top: 287px;
+    left: 365px;
+    display: flex;
+    gap: 20px;
+}
+
+/* キャンセルボタン */
+.cansel {
     background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
     border-top: 4px solid #e6e6e6;
     border-right: 4px solid #adadad;
@@ -44,48 +73,95 @@
     rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
     rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
     rgb(255, 255, 255) 0.96017px -0.279415px 0px;
-    position: absolute;
-    top: 220px;
-    left: 125px;
+    width: 120px;
+    height: 50px;
+}
+/* 強化するボタン */
+.power_up {
+    background: linear-gradient(45deg, green 0%, rgb(0, 194, 0) 45%, rgb(34, 255, 34) 70%, rgb(0, 194, 0) 85%, green 90% 100%);
+    border-top: 4px solid rgb(0, 196, 0);
+    border-right: 4px solid rgb(0, 160, 0);
+    border-bottom: 4px solid green;
+    border-left: 4px solid rgb(0, 196, 0);
+    border-radius: 0;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
     width: 100px;
-    height: 40px;
+    height: 50px;
 }
 
-/* アイテム一覧 */
-.item_list {
+/* モーダルウィンドウの設定 */
+/* モーダルウィンドウの背景 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* モーダルウィンドウの中身 */
+.modal-content {
+  background-color: #f4f4f4;
+  margin: 60px 110px;
+  width: 450px;
+  height: 250px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+
+.modal-body {
+    padding: 10px 20px 0px 20px;
+}
+
+/* モーダルウィンドウの文章 */
+.modal_title {
+    font-weight: bold;
+    font-size: 22px
+}
+
+/* モーダルウィンドウのボタン */
+.modal_buttons {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
-    overflow: scroll;
-    border: inset 10px black;
-    background-color: white;
-    padding: 10px 10px;
     position: absolute;
-    top: 85px;
-    left: 320px;
-    width: 250px;
-    height: 165px;
+    top: 255px;
+    left: 330px;
 }
 
-/* 一覧の中身 */
-.material {
-    border: solid black;
-    width: 30px;
+.calsel_button {
+    background-color: white;
+    border-top: 4px solid white;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid white;
+    border-radius: 0;
+    color: black;
+    width: 100px;
     height: 30px;
 }
 
-/* 強化画面のボタン */
-.power_buttons {
-    position: absolute;
-    top: 308px;
-    left: 80px;
-}
-
-.power {
-    background: linear-gradient(45deg, #57c1c9 0%, #62d6df 45%, #97f8ff 70%, #62d6df 85%, #57c1c9 90% 100%);
-    border-top: 4px solid #6ae7f0;
-    border-right: 4px solid #4da9af;
-    border-bottom: 4px solid #4da9af;
-    border-left: 4px solid #6ae7f0;
+.decision_button {
+    background: linear-gradient(45deg, green 0%, rgb(0, 194, 0) 45%, rgb(34, 255, 34) 70%, rgb(0, 194, 0) 85%, green 90% 100%);
+    border-top: 4px solid rgb(0, 196, 0);
+    border-right: 4px solid rgb(0, 160, 0);
+    border-bottom: 4px solid green;
+    border-left: 4px solid rgb(0, 196, 0);
     border-radius: 0;
+    color: white;
+    width: 100px;
+    height: 30px;
 }

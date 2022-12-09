@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <script src="../js/page.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 進化画面のCSS -->
+    <link rel="stylesheet" href="../css/weaponSelect.css">
+</head>
+<body>
+    <!-- 強化用アイテム一覧 -->
+    <div class="item_frame">
+        <img class="weapon" src="../image/item/item-provisional.png">
+    </div>
+    <div class="decition_buttons">
+        <button class="cansel" onclick="toPowerEvolution()">キャンセル</button>
+        <button class="power_up" onclick="toPowerEvolution()">変更する</button>
+    </div>
+</body>
+</html>
