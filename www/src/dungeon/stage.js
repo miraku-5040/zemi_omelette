@@ -110,10 +110,14 @@ class Stage {
      * **/
     static checkStage(x,y){
         //移動できる床か判定
-        if(this.board[y][x].stageImageNumber == 1){
-            return true;
+        if(this.board[y][x].stageImageNumber != 1){
+            return false;
         }
-        return false;
+        if(Enemy.checkEnemy(x,y)){
+            return false;
+        }
+        return true;
+        
         
     }
 
