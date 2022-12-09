@@ -20,7 +20,7 @@
 <body>
     <!-- 装備画面の表示 -->
     <!-- 強化対象装備 -->
-    <img class="power_item" src="../image/soad/soad-provisional.png">
+    <img class="power_item" src="../image/soad/soad-provisional.png" onclick="toWeapon()">
     <div class="power_target_text">
         <p>レベル：50/100</p>
         <p>総合力：10000</p>
@@ -36,9 +36,15 @@
             <img class="power_for_item_image" src="../image/item/item-provisional.png">
             <p class="power_for_item_text">強化用アイテム</p>
             <div class="power_for_item_count">
-                <button class="power_for_item_count_minus" onclick="toHome()"><p class="count_button_text">－</p></button>
-                <input class="power_for_item_count_number">
-                <button class="power_for_item_count_plus" onclick="toHome()"><p class="count_button_text">＋</p></button>
+                <button class="power_for_item_count_minus" onclick="countDownMore()">
+                    <p class="count_button_text">&lt;&lt;</p></button>
+                <button class="power_for_item_count_minus" onclick="countDown()">
+                    <p class="count_button_text">－</p></button>
+                <input class="power_for_item_count_number" id="counter" value="0">
+                <button class="power_for_item_count_plus" onclick="countUp()">
+                    <p class="count_button_text">＋</p></button>
+                <button class="power_for_item_count_plus" onclick="countUpMore()">
+                    <p class="count_button_text">&gt;&gt;</p></button>
             </div>
         </div>
     </div>
