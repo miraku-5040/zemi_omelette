@@ -71,11 +71,24 @@ function toPowerEvolution() {
     setTimeout('window.location.href = "powerEvolution.html"', 600);
 }
 
-function toWeapon() {
+function toWeaponPower() {
     // 音声再生
     go_sound();
     // 強化武器選択画面へ遷移
-    setTimeout('window.location.href = "weaponSelect.html"', 600);
+    setTimeout('window.location.href = "weaponSelectPower.html"', 600);
+}
+
+function toWeaponEvo() {
+    // 音声再生
+    go_sound();
+    // 進化武器選択画面へ遷移
+    setTimeout('window.location.href = "weaponSelectEvo.html"', 600);
+}
+
+function toDanjyon() {
+    // 音声再生
+    audio = new Audio("../sound/danjyon_start.m4a");
+    audio.play();
 }
 
 function toSet() {
@@ -110,46 +123,6 @@ function modalClose() {
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('explanationModal');
     modal.style.display = 'none';
-}
-
-//カウントダウンjs
-function countDown() {
-    let element = document.getElementById('counter');
-    let countNumber = Number(element.value);
-    if (countNumber > 0) {
-        element.value = countNumber - 1;
-    }
-}
-
-function countDownMore() {
-    let element = document.getElementById('counter');
-    element.value = 0;
-}
-
-// カウントアップjs
-function countUp() {
-    let element = document.getElementById('counter');
-    let countNumber = Number(element.value);
-    element.value = countNumber + 1;
-}
-
-function countUpMore() {
-    let element = document.getElementById('counter');
-    element.value = 100;
-}
-
-// 武器選択js
-function selected() {
-    // モーダルウィンドウを閉じる
-    const weaponFrame = document.getElementById('weapon');
-    weaponFrame.style.border = 'solid gold';
-}
-
-// 武器選択中js
-function selectNow() {
-    // モーダルウィンドウを閉じる
-    const weaponFrame = document.getElementById('weapon');
-    weaponFrame.style.border = 'solid gold';
 }
 
 // 音声再生用のjs
