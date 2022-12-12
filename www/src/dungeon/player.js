@@ -4,11 +4,15 @@ class Player{
         this.playerStatus = {
             playerId: 1,
             playerName: 1,
-            hp: {current: 1,max: 1 , min: 0},
-            sp: {current: 100,max: 100 , min: 0},
-            str: {current: 100,max: 100 , min: 0},
-            atk: {current: 100,max: 100 , min: 0},
-            def: {current: 100,max: 100 , min: 0},
+            lebel: 1,
+            //ここより下開発用データ
+            hp: {current: 15,max: 15 , min: 0}, //体力
+            sp: {current: 100,max: 100 , min: 0},//満腹度
+            atk: {current: 5,max: 100 , min: 0},//攻撃力
+            def: {current: 2,max: 100 , min: 0},//防御力
+            cri: {current: 0.05,max: 0.25 , min: 0},//会心率
+            avd: {current: 0.01,max: 0.05 , min: 0},//回避率
+            dex: {current: 100,max: 100 , min: 0},//命中率
             now:  {x:9, y:6},
             next: {x:9, y:6}
             

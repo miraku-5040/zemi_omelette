@@ -69,7 +69,6 @@ class Enemy{
 
     /* 移動先設定 */
     static updateNextMove() {
-        console.log("updateNextMoveCheck"); //test
         /* 開発用に上下に動くようにする */
         this.enemyStatusArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
@@ -78,7 +77,6 @@ class Enemy{
                 }
                 if(indexY % 2 === 0){
                     //偶数 up
-                    console.log("up"); //test
                     const nextItem = {};
                     nextItem.type = "move";
                     nextItem.x = indexX;
@@ -86,7 +84,6 @@ class Enemy{
                     element.next = nextItem;
                 }else{
                     //奇数 down
-                    console.log("down"); //test
                     const nextItem = {};
                     nextItem.type = "move";
                     nextItem.x = indexX;
@@ -106,7 +103,6 @@ class Enemy{
                 if(element === this.noDataItem){
                     return;
                 }
-                console.log("element.type:" + element.next.type + ", x:" + element.next.x); //test
                 switch(element.next.type){
                     case "move": //移動の場合
                         this.moving(indexX, indexY);
@@ -145,7 +141,8 @@ class Enemy{
 
     /* 指定マスに敵の存在チェック */
     static checkEnemy(x, y){
-        if(enemyStatusArray[x][y] === this.noDataItem){
+        console.log(this.enemyStatusArray[y][x])
+        if(this.enemyStatusArray[y][x] === this.noDataItem){
             // 敵が存在しない
             return false;
         }

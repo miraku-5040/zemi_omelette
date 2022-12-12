@@ -65,7 +65,6 @@ function loop() {
             break;
         case 'enemy':
             // 敵のターン
-            console.log("enemyCheck"); //test
             Enemy.action();
             mode = 'end';
             break;

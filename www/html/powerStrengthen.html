@@ -9,6 +9,7 @@
     <script src="../components/loader.js">
     </script>
     <script src="../js/page.js"></script>
+    <script src="../js/weapon.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../components/loader.css">
     <!-- 共通のCSS -->
@@ -20,14 +21,14 @@
 <body>
     <!-- 装備画面の表示 -->
     <!-- 強化対象装備 -->
-    <img class="power_item" src="../image/soad/soad-provisional.png" onclick="toWeapon()">
+    <img class="power_item" src="../image/soad/soad-provisional.png" onclick="toWeaponPower()">
     <div class="power_target_text">
         <p>レベル：50/100</p>
         <p>総合力：10000</p>
     </div>
     <div class="decition_buttons">
         <button class="cansel" onclick="toPower()">キャンセル</button>
-        <button class="power_up">強化する</button>
+        <button class="power_up" onclick="powerUpSuccsess()">強化する</button>
     </div>
 
     <!-- 強化用アイテム一覧 -->
