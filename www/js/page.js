@@ -125,6 +125,45 @@ function modalClose() {
     modal.style.display = 'none';
 }
 
+// ガチャ用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function modalOpen1() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('gatyaOneModal');
+    modal.style.display = 'block';
+}
+
+function modalClose1() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('gatyaOneModal');
+    modal.style.display = 'none';
+}
+
+//モーダルウィンドウを開く
+function modalOpen10() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('gatyaTenModal');
+    modal.style.display = 'block';
+}
+
+function modalClose10() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('gatyaTenModal');
+    modal.style.display = 'none';
+}
+
 // 音声再生用のjs
 // 画面遷移用の音声再生
 function go_sound() {

@@ -1,34 +1,3 @@
-// モーダルウィンドウ用js
-//モーダルウィンドウを開く
-function confirmationOpen() {
-    // 音声再生
-    audio = new Audio("../sound/menu_open.m4a");
-    audio.play();
-    // モーダルウィンドウを開く
-    const modal = document.getElementById('confirmationModal');
-    modal.style.display = 'block';
-}
-
-// 武器進化成功
-function powerUpSuccsess() {
-    // 音声再生
-    audio = new Audio("../sound/succsess.m4a");
-    audio.play();
-    // モーダルウィンドウを閉じる
-    const modal = document.getElementById('confirmationModal');
-    modal.style.display = 'none';
-}
-
-// 進化キャンセル
-function confirmationClose() {
-    // 音声再生
-    audio = new Audio("../sound/cansel.m4a");
-    audio.play();
-    // モーダルウィンドウを閉じる
-    const modal = document.getElementById('confirmationModal');
-    modal.style.display = 'none';
-}
-
 //カウントダウンjs
 function countDown() {
     let element = document.getElementById('counter');
@@ -81,12 +50,6 @@ function changeSoad() {
     document.getElementById('weapon').src = soad;
 }
 
-// 武器強化成功音
-function powerUpSuccsess() {
-    audio = new Audio("../sound/succsess.m4a");
-    audio.play();
-}
-
 // 装備js
 function equip() {
     audio = new Audio("../sound/equip.m4a");
@@ -98,4 +61,70 @@ function equip() {
 function go_sound() {
     audio = new Audio("../sound/select.m4a");
     audio.play();
+}
+
+
+
+// 進化モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function confirmationOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('confirmationModal');
+    modal.style.display = 'block';
+}
+
+// 進化キャンセル
+function confirmationClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('confirmationModal');
+    modal.style.display = 'none';
+}
+
+// 武器進化成功
+function EvolutionSuccsess() {
+    // 音声再生
+    audio = new Audio("../sound/succsess.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('confirmationModal');
+    modal.style.display = 'none';
+}
+
+
+
+// 強化モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function PowerUpOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('powerUpModal');
+    modal.style.display = 'block';
+}
+
+// 強化キャンセル
+function PowerUpClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('powerUpModal');
+    modal.style.display = 'none';
+}
+
+// 武器強化成功
+function PowerUpSuccsess() {
+    // 音声再生
+    audio = new Audio("../sound/succsess.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('powerUpModal');
+    modal.style.display = 'none';
 }

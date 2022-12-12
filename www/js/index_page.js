@@ -8,6 +8,7 @@ function toHome() {
 function toSelectDanjyon() {
     // 音声再生
     go_sound();
+    getDanjyonData();
     // ダンジョン選択画面へ遷移
     setTimeout('window.location.href = "html/danjyonSelect.html"', 600);
 }

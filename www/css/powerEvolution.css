@@ -124,7 +124,9 @@
 }
 
 .modal-body {
-    padding: 10px 20px 0px 20px;
+    position: relative;
+    top: 20px;
+    left: 30px;
 }
 
 /* モーダルウィンドウの文章 */
@@ -137,9 +139,9 @@
 .modal_buttons {
     display: flex;
     gap: 10px;
-    position: absolute;
-    top: 255px;
-    left: 330px;
+    position: relative;
+    top: 80px;
+    left: 190px;
 }
 
 .calsel_button {

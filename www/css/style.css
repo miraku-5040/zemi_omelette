@@ -21,6 +21,15 @@ body {
     height: 55px;
 }
 
+/* 経験値のバー */
+.exp_ber {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 53px;
+    height: 53px;
+}
+
 /* ランクのテキスト */
 .rank_text {
     font-size: 13px;
@@ -55,6 +64,7 @@ body {
     left: 25px;
     width: 80px;
     height: 10px;
+    background-color: green;
 }
 
 .hp_ber_amount {
@@ -79,6 +89,7 @@ body {
     left: 150px;
     width: 80px;
     height: 10px;
+    background-color: orange;
 }
 
 .mp_ber_amount {
