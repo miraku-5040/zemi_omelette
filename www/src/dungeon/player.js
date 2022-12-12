@@ -14,7 +14,9 @@ class Player{
             avd: {current: 0.01,max: 0.05 , min: 0},//回避率
             dex: {current: 100,max: 100 , min: 0},//命中率
             now:  {x:9, y:6},
-            next: {x:9, y:6}
+            next: {x:9, y:6},
+            direction: 'down'
+
             
         };
         const characterElement = document.getElementById("player_layer");
@@ -43,6 +45,22 @@ class Player{
         case 'left':
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             return 'move';
+        case 'upDirection':
+            this.playerStatus.next.y = this.playerStatus.now.y - 1;
+            this.playerStatus.direction ='up';
+            return 'stay';
+        case 'downDirection':
+            this.playerStatus.next.y = this.playerStatus.now.y + 1;
+            this.playerStatus.direction ='down';
+            return 'stay';
+        case 'rightDirection':
+            this.playerStatus.next.x = this.playerStatus.now.x + 1;
+            this.playerStatus.direction ='right';
+            return 'stay';
+        case 'leftDirection':
+            this.playerStatus.next.x = this.playerStatus.now.x - 1;
+            this.playerStatus.direction ='left';
+            return 'stay';
         default:
             return 'player';
         }
@@ -52,6 +70,14 @@ class Player{
         //return 'menu';
 
     }
+    /**
+     * キャラの進行方向を決める
+     * **/
+     static guide(){
+         //進行方向を表示する　TODO
+         document.getElementById('direction').innerHTML = this.playerStatus.direction;
+         this.steyCharacterPosition();
+     }
     /**
      * キャラの移動に関することをする
      * **/

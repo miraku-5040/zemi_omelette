@@ -38,7 +38,13 @@ function loop() {
         case 'player':
             // プレイヤーのターン
             //ボタン入力待ち
-            mode = Player.playing();
+            mode = Player.playing()
+            console.log(mode)
+            break;
+        case 'stay':
+            //ターンを消費しない行動をする
+            Player.guide();
+            mode = 'player'
             break;
         case 'move':
             // 移動に関するとこ
