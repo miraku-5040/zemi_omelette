@@ -39,7 +39,6 @@ function loop() {
             // プレイヤーのターン
             //ボタン入力待ち
             mode = Player.playing()
-            console.log(mode)
             break;
         case 'stay':
             //ターンを消費しない行動をする

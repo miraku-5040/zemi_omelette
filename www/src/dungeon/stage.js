@@ -116,9 +116,11 @@ class Stage {
         if(Enemy.checkEnemy(x,y)){
             return false;
         }
-        return true;
-        
-        
+        return true;   
+    }
+
+    static getStageBoard(){
+        return this.board
     }
 
 

@@ -16,8 +16,6 @@ class Player{
             now:  {x:9, y:6},
             next: {x:9, y:6},
             direction: 'down'
-
-            
         };
         const characterElement = document.getElementById("player_layer");
         characterElement.style.width = Config.stageImgWidth + 'px';
@@ -128,6 +126,10 @@ class Player{
             this.playerStatus.sp.current-=1;
             document.getElementById("sp").innerHTML = this.playerStatus.sp.current;
         }
+    }
+
+    static getPlayerNowPosition(){
+        return this.playerStatus.now
     }
 
 

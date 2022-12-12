@@ -1,5 +1,5 @@
-    
-    function node(parent=null, position=null){
+class Aster{
+    static node(parent=null, position=null){
         let node = {parent: parent, //親ノードの設定
                 position: {x:position.x,y:position.y},//(row, column)のタプル ※row：行、column：列
                 g:0,
@@ -9,7 +9,7 @@
         return node;
         }
 
-    function astar(maze,start,end){
+    static astar(maze,start,end){
         
         //指定された迷路の指定された開始点から指定された終了点までのパスとして連想配列を返します
         // maze: 迷路リスト、start:スタートポジション、end:ゴールポジション
@@ -17,9 +17,9 @@
 
         // Create start and end node
         // スタート、エンド（ゴール）ノードの初期化
-        let start_node = node(null, start); // 親ノードは無し
+        let start_node = this.node(null, start); // 親ノードは無し
         start_node.g = start_node.h = start_node.f = 0
-        let end_node = node(null, end);
+        let end_node = this.node(null, end);
         end_node.g = end_node.h = end_node.f = 0
 
         this.open_list = [] // 経路候補を入れとくリスト
@@ -27,16 +27,21 @@
         // Add the start node
         // 経路候補にスタートノードを追加して計算スタート
         this.open_list.push(start_node)
-
+        let i=0
         //最後を見つけるまでループする
-        while(open_list.length > 0){
+        while(this.open_list.length > 0 || i < 10000){ 
+            i++
+            console.log(i)
+            if(i > 1000){
+                return false
+            }
             //現在のノードを取得する
-            let current_node = open_list[0]
+            let current_node = this.open_list[0]
             let current_index = 0
-            for(let index in open_list){
+            for(let index in this.open_list){
                 //オープンリストの中でF値が一番小さいノードを選ぶ
-                if(open_list[index].f < current_node.f){
-                current_node = open_list[index]
+                if(this.open_list[index].f < current_node.f){
+                current_node = this.open_list[index]
                 current_index = index
                 }
             }
@@ -60,7 +65,7 @@
 
         // for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0), (-1, -1), (-1, 1), (1, -1), (1, 1)]: // 斜め移動ありの場合
         const positions = [{x:0,y:-1}, {x:0, y:1}, {x:-1, y:0}, {x:1, y:0}]
-        for(index in positions){ // 上下左右移動のみ 
+        for(let index in positions){ // 上下左右移動のみ 
             //ノード位置取得
             let node_position = { x:current_node.position.x + positions[index].x,  y:current_node.position.y + positions[index].y}
             
@@ -72,7 +77,8 @@
             }
 
             //移動できる位置に限る（障害物は移動できない）
-            if(maze[node_position.x][node_position.y] > 2){
+            console.log(maze[node_position.x][node_position.y].stageImageNumber)
+            if(maze[node_position.x][node_position.y] > 1){
                 continue;
             }
 
@@ -86,7 +92,7 @@
 
             // Child is on the closed list
             let closed_child_list = []
-            for(closed_child in this.closed_list){
+            for(let closed_child in this.closed_list){
                 if(closed_child == children[index]){
                     closed_child_list.push(closed_child)
                 }
@@ -105,7 +111,7 @@
 
             // Child is already in the open list
             let open_node_list = []
-            for(open_node in this.open_list){
+            for(let open_node in this.open_list){
                 if(open_node == children[index]){
                     open_node_list.push(open_node)
                 }
@@ -116,7 +122,7 @@
 
             // Add the child to the open list
             // 子ノードをオープンリストに追加
-            open_list.push(children[index])
+            this.open_list.push(children[index])
         }
         }
         }
@@ -124,8 +130,8 @@
     }
 
 
-    function example(){
-
+    static enemyMove(maze,start,end){
+        /*
         let maze = [[0, 0, 0, 0, 0],
                 [0, 1, 0, 0, 0],
                 [0, 0, 0, 0, 0],
@@ -133,8 +139,9 @@
                 [0, 0, 0, 1, 0]]
 
         let start = {x:0, y:0}
-        let end = {x:4, y:4}
-        let a = astar(maze,start,end)
-
-        console.log(a)
+        let end = {x:4, y:4}*/
+        let result = this.astar(maze,start,end)
+        console.log(result[result.length-2])
+        return result[result.length-2];
     }
+}

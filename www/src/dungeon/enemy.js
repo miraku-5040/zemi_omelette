@@ -75,21 +75,12 @@ class Enemy{
                 if(element === this.noDataItem){
                     return;
                 }
-                if(indexY % 2 === 0){
-                    //偶数 up
-                    const nextItem = {};
-                    nextItem.type = "move";
-                    nextItem.x = indexX;
-                    nextItem.y = indexY -1;
-                    element.next = nextItem;
-                }else{
-                    //奇数 down
-                    const nextItem = {};
-                    nextItem.type = "move";
-                    nextItem.x = indexX;
-                    nextItem.y = indexY +1;
-                    element.next = nextItem;
-                }
+                const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
+                let next = {};
+                next.type = 'move';
+                next.x = result.x;
+                next.y = result.y;
+                element.next = next;
             });
         });
         /* end */
@@ -141,7 +132,6 @@ class Enemy{
 
     /* 指定マスに敵の存在チェック */
     static checkEnemy(x, y){
-        console.log(this.enemyStatusArray[y][x])
         if(this.enemyStatusArray[y][x] === this.noDataItem){
             // 敵が存在しない
             return false;
