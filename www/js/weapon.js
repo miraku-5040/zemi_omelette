@@ -25,9 +25,9 @@ function countUpMore() {
 }
 
 // 武器選択js
-function selected() {
+function selected(element) {
     // 枠の色を変更する
-    const weaponFrame = document.getElementById('weapon');
+    const weaponFrame = document.getElementById(element.id);
     if (weaponFrame.style.border == 'solid gold') {
         audio = new Audio("../sound/select_cansel.m4a");
         audio.play();

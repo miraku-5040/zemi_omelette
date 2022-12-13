@@ -46,8 +46,8 @@
     </div>
     <!-- その他のボタン -->
     <div class="other_icons">
-        <img class="icon" src="image/notice.png" onclick="modalOpen()">
-        <img class="icon" src="image/present.png">
+        <img class="icon" src="image/notice.png" onclick="noticeModalOpen()">
+        <img class="icon" src="image/present.png" onclick="presentModalOpen()">
     </div>
     <!-- ユーザ情報表示 -->
     <div class="player_info">
@@ -88,17 +88,36 @@
         </div>
     </div>
 
-    <!-- ダンジョン内容説明用のモーダルウィンドウ -->
+    <!-- お知らせ用のモーダルウィンドウ -->
     <div id="noticeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>お知らせ</h2>
             </div>
             <div class="modal-body">
-                <button class="notice_button"><h2>メンテナンスのお知らせ</h2><p>2022年12月23日にメンテナンスを</p></button>
+                <button class="notice_button"><h2>メンテナンスのお知らせ</h2>
+                <p>2022年12月23日にメンテナンスを行います。</p></button>
             </div>
             <div class="modal-fotter">
-                <button class="modal_close_button" onclick="modalClose()">閉じる</button>
+                <button class="modal_close_button" onclick="noticeModalClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- プレゼント用のモーダルウィンドウ -->
+    <div id="presentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>プレゼントボックス</h2>
+            </div>
+            <div class="modal-body">
+                <div class="present_box">
+                    <h4 class="present_title">強化素材×30</h4>
+                    <p class="present_text">リリース直前生放送の報酬</p>
+                    <button class="present_button">受け取る</button></div>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_close_button" onclick="presentModalClose()">閉じる</button>
             </div>
         </div>
     </div>

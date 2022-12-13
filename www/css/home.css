@@ -142,6 +142,7 @@
     border: solid 2px #e2e2d4;
     color: black;
     width: 450px;
+    height: 70px;
     border-radius: 10px;
 }
 
@@ -157,5 +158,41 @@
     border: solid 2px #e2e2d4;
     color: black;
     width: 100px;
+    height: 30px;
+}
+
+/* プレゼントのみのCSS */
+.present_box {
+    background-color: #F4F4E8;
+    border: solid 2px #e2e2d4;
+    color: black;
+    width: 420px;
+    height: 60px;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+
+.present_title {
+    position: relative;
+    transform: translateY(-15px);
+}
+
+.present_border {
+    width: 3px;
+    height: 50px;
+}
+
+.present_text {
+    position: relative;
+    transform: translateY(-35px);
+}
+
+.present_button {
+    background-color: #e2e2d4;
+    color: black;
+    position: relative;
+    transform: translateY(-102px);
+    left: 345px;
+    width: 80px;
     height: 30px;
 }

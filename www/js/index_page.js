@@ -48,9 +48,9 @@ function go_sound() {
     audio.play();
 }
 
-// モーダルウィンドウ用js
+// お知らせ用モーダルウィンドウ用js
 //モーダルウィンドウを開く
-function modalOpen() {
+function noticeModalOpen() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
@@ -59,11 +59,31 @@ function modalOpen() {
     modal.style.display = 'block';
 }
 
-function modalClose() {
+function noticeModalClose() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('noticeModal');
+    modal.style.display = 'none';
+}
+
+// プレゼント用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function presentModalOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('presentModal');
+    modal.style.display = 'block';
+}
+
+function presentModalClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('presentModal');
     modal.style.display = 'none';
 }
