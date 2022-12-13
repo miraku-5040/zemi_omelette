@@ -47,3 +47,23 @@ function go_sound() {
     audio = new Audio("sound/select.m4a");
     audio.play();
 }
+
+// モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function modalOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('noticeModal');
+    modal.style.display = 'block';
+}
+
+function modalClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('noticeModal');
+    modal.style.display = 'none';
+}

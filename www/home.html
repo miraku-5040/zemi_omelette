@@ -37,7 +37,7 @@
                     <p class="mp_ber_amount">90/100</p>
                 </div>
             </div>
-            <p id="userName" class="name"></p>
+            <p id="userName" class="name">player</p>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->
@@ -46,7 +46,7 @@
     </div>
     <!-- その他のボタン -->
     <div class="other_icons">
-        <img class="icon" src="image/notice.png">
+        <img class="icon" src="image/notice.png" onclick="modalOpen()">
         <img class="icon" src="image/present.png">
     </div>
     <!-- ユーザ情報表示 -->
@@ -85,6 +85,21 @@
             <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>
+        </div>
+    </div>
+
+    <!-- ダンジョン内容説明用のモーダルウィンドウ -->
+    <div id="noticeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>お知らせ</h2>
+            </div>
+            <div class="modal-body">
+                <button class="notice_button"><h2>メンテナンスのお知らせ</h2><p>2022年12月23日にメンテナンスを</p></button>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_close_button" onclick="modalClose()">閉じる</button>
+            </div>
         </div>
     </div>
 </body>
