@@ -10,7 +10,7 @@ class Aster{
         }
 
     static astar(maze,start,end){
-        
+
         //指定された迷路の指定された開始点から指定された終了点までのパスとして連想配列を返します
         // maze: 迷路リスト、start:スタートポジション、end:ゴールポジション
         // ゴールまでの最短経路のリストを返す関数
@@ -27,13 +27,13 @@ class Aster{
         // Add the start node
         // 経路候補にスタートノードを追加して計算スタート
         this.open_list.push(start_node)
-        let i=0
+
         //最後を見つけるまでループする
-        while(this.open_list.length > 0 || i < 10000){ 
+        let i = 0;
+        while(this.open_list.length > 0){
             i++
-            console.log(i)
-            if(i > 1000){
-                return false
+            if(i > 5000){
+                break;
             }
             //現在のノードを取得する
             let current_node = this.open_list[0]
@@ -68,7 +68,7 @@ class Aster{
         for(let index in positions){ // 上下左右移動のみ 
             //ノード位置取得
             let node_position = { x:current_node.position.x + positions[index].x,  y:current_node.position.y + positions[index].y}
-            
+
 
             // Make sure within range
             // 迷路内の移動に限る
@@ -77,7 +77,6 @@ class Aster{
             }
 
             //移動できる位置に限る（障害物は移動できない）
-            console.log(maze[node_position.x][node_position.y].stageImageNumber)
             if(maze[node_position.x][node_position.y] > 1){
                 continue;
             }
@@ -97,7 +96,7 @@ class Aster{
                     closed_child_list.push(closed_child)
                 }
             }
-            if(closed_child_list.length > 0){
+            if(closed_child_list.length > 1){
                 continue
             }
 
@@ -131,17 +130,13 @@ class Aster{
 
 
     static enemyMove(maze,start,end){
-        /*
-        let maze = [[0, 0, 0, 0, 0],
-                [0, 1, 0, 0, 0],
-                [0, 0, 0, 0, 0],
-                [0, 0, 0, 1, 0],
-                [0, 0, 0, 1, 0]]
 
-        let start = {x:0, y:0}
-        let end = {x:4, y:4}*/
+        /*let maze =
+        let start = {x:5, y:5}
+        let end = {x:7, y:9}*/
+        /*end = {x: end.y,y:end.x}*/
         let result = this.astar(maze,start,end)
-        console.log(result[result.length-2])
-        return result[result.length-2];
+
+        return result[result.length-2]
     }
 }

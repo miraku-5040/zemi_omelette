@@ -26,14 +26,9 @@ class Enemy{
     /* 階開始の処理 */
     static startFloor(){
         /* 開発用にデータをセットする */
-        //x=7, y=7に敵をセット
-        this.enemyStatusArray[7][7] = {enemyId:1, enemyName:"スライム", distinction:1, hp:{current:100, max:100, min:0}, size:1};
-        this.enemyIdArray.push(1);
         //x=5, y=5に敵をセット
         this.enemyStatusArray[5][5] = {enemyId:1, enemyName:"スライム", distinction:2, hp:{current:100, max:100, min:0}, size:1};
         this.enemyIdArray.push(1);
-        //x=4, y=6に敵をセット
-        this.enemyStatusArray[6][4] = {enemyId:1, enemyName:"スライム", distinction:3, hp:{current:100, max:100, min:0}, size:1};
         //Imageでenemyの画像を読み込む
         Image.createEnemyImages(this.enemyIdArray);
         /* end */
@@ -75,7 +70,8 @@ class Enemy{
                 if(element === this.noDataItem){
                     return;
                 }
-                const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
+                const result = Aster.enemyMove
+                (Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
                 let next = {};
                 next.type = 'move';
                 next.x = result.x;
