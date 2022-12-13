@@ -21,23 +21,24 @@
 
 <body>
     <!-- プレイヤー情報表示 -->
-    <div class="flame">
+     <div class="flame">
         <img class="player_image" src="../image/player.png">
+        <meter class="exp_ber" max="100" value="50"></meter>
         <p class="rank_text">ランク<br>100</p>
         <div class="other">
             <div class="bers">
                 <div class="ber_position">
                     <p class="hp_ber_title">HP</p>
-                    <meter class="hp_ber" max="100" low="20" high="80" value="50"></meter>
+                    <meter class="hp_ber" max="100" value="50"></meter>
                     <p class="hp_ber_amount">50/100</p>
                 </div>
                 <div class="ber_position">
                     <p class="mp_ber_title">MP</p>
-                    <meter class="mp_ber" max="100" low="20" high="80" value="90">90%</meter>
+                    <meter class="mp_ber" max="100" value="90">90%</meter>
                     <p class="mp_ber_amount">90/100</p>
                 </div>
             </div>
-            <p class="name">player</p>
+            <p id="userName" class="name">player</p>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->
@@ -50,8 +51,8 @@
         <p class="gatya_title">武器ガチャ</p>
         <!-- ガチャボタン -->
         <div class="gatya_button">
-            <button class="pull" onclick="resultOne()">1連</button>
-            <button class="pull" onclick="resultTen()">10連</button>
+            <button class="pull" onclick="modalOpen1()">1連</button>
+            <button class="pull" onclick="modalOpen10()">10連</button>
         </div>
         <!-- 各画面への遷移ボタン -->
         <div class="gatya_buttons buttons">
@@ -69,6 +70,38 @@
             <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="../image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>
+        </div>
+    </div>
+
+    <!-- ダンジョン内容説明用のモーダルウィンドウ -->
+    <div id="gatyaOneModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                <p class="modal_title">ガチャを引きますか？</p>
+                <p>使用した素材は削除されます。</p>
+                <div class="modal_buttons">
+                    <button class="calsel_button" onclick="modalClose1()">キャンセル</button>
+                    <button class="decision_button" onclick="resultOne()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ダンジョン内容説明用のモーダルウィンドウ -->
+    <div id="gatyaTenModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                <p class="modal_title">ガチャを引きますか？</p>
+                <p>使用した素材は削除されます。</p>
+                <div class="modal_buttons">
+                    <button class="calsel_button" onclick="modalClose10()">キャンセル</button>
+                    <button class="decision_button" onclick="resultTen()">OK</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>

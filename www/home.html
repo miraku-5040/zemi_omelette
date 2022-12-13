@@ -8,6 +8,7 @@
     <!-- JS -->
     <script src="components/loader.js">
     </script>
+    <script src="js/db.js"></script>
     <script src="js/index_page.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="components/loader.css">
@@ -21,21 +22,22 @@
     <!-- プレイヤー情報表示 -->
     <div class="flame">
         <img class="player_image" src="image/player.png">
+        <meter class="exp_ber" max="100" value="50"></meter>
         <p class="rank_text">ランク<br>100</p>
         <div class="other">
             <div class="bers">
                 <div class="ber_position">
                     <p class="hp_ber_title">HP</p>
-                    <meter class="hp_ber" max="100" low="20" high="80" value="50"></meter>
+                    <meter class="hp_ber" max="100" value="50"></meter>
                     <p class="hp_ber_amount">50/100</p>
                 </div>
                 <div class="ber_position">
                     <p class="mp_ber_title">MP</p>
-                    <meter class="mp_ber" max="100" low="20" high="80" value="90">90%</meter>
+                    <meter class="mp_ber" max="100" value="90">90%</meter>
                     <p class="mp_ber_amount">90/100</p>
                 </div>
             </div>
-            <p class="name">player</p>
+            <p id="userName" class="name">player</p>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->
@@ -44,15 +46,15 @@
     </div>
     <!-- その他のボタン -->
     <div class="other_icons">
-        <img class="icon" src="image/notice.png">
-        <img class="icon" src="image/present.png">
+        <img class="icon" src="image/notice.png" onclick="noticeModalOpen()">
+        <img class="icon" src="image/present.png" onclick="presentModalOpen()">
     </div>
     <!-- ユーザ情報表示 -->
     <div class="player_info">
         <p>攻撃力：100</p>
-        <p>防御力：50</p>
-        <p>HP：100</p>
-        <p>MP：100</p>
+        <p>回避率：100</p>
+        <p>会心率：100</p>
+        <p>命中率：100</p>
     </div>
 
     <!-- キャラクター表示 -->
@@ -83,6 +85,40 @@
             <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>
+        </div>
+    </div>
+
+    <!-- お知らせ用のモーダルウィンドウ -->
+    <div id="noticeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>お知らせ</h2>
+            </div>
+            <div class="modal-body">
+                <button class="notice_button"><h2>メンテナンスのお知らせ</h2>
+                <p>2022年12月23日にメンテナンスを行います。</p></button>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_close_button" onclick="noticeModalClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- プレゼント用のモーダルウィンドウ -->
+    <div id="presentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>プレゼントボックス</h2>
+            </div>
+            <div class="modal-body">
+                <div class="present_box">
+                    <h4 class="present_title">強化素材×30</h4>
+                    <p class="present_text">リリース直前生放送の報酬</p>
+                    <button class="present_button">受け取る</button></div>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_close_button" onclick="presentModalClose()">閉じる</button>
+            </div>
         </div>
     </div>
 </body>

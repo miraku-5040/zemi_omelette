@@ -8,6 +8,7 @@ function toHome() {
 function toSelectDanjyon() {
     // 音声再生
     go_sound();
+    getDanjyonData();
     // ダンジョン選択画面へ遷移
     setTimeout('window.location.href = "html/danjyonSelect.html"', 600);
 }
@@ -45,4 +46,44 @@ function toSet() {
 function go_sound() {
     audio = new Audio("sound/select.m4a");
     audio.play();
+}
+
+// お知らせ用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function noticeModalOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('noticeModal');
+    modal.style.display = 'block';
+}
+
+function noticeModalClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('noticeModal');
+    modal.style.display = 'none';
+}
+
+// プレゼント用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function presentModalOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('presentModal');
+    modal.style.display = 'block';
+}
+
+function presentModalClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('presentModal');
+    modal.style.display = 'none';
 }

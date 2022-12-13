@@ -20,23 +20,24 @@
 
 <body>
     <!-- プレイヤー情報表示 -->
-    <div class="flame">
+     <div class="flame">
         <img class="player_image" src="../image/player.png">
+        <meter class="exp_ber" max="100" value="50"></meter>
         <p class="rank_text">ランク<br>100</p>
         <div class="other">
             <div class="bers">
                 <div class="ber_position">
                     <p class="hp_ber_title">HP</p>
-                    <meter class="hp_ber" max="100" low="20" high="80" value="50"></meter>
+                    <meter class="hp_ber" max="100" value="50"></meter>
                     <p class="hp_ber_amount">50/100</p>
                 </div>
                 <div class="ber_position">
                     <p class="mp_ber_title">MP</p>
-                    <meter class="mp_ber" max="100" low="20" high="80" value="90">90%</meter>
+                    <meter class="mp_ber" max="100" value="90">90%</meter>
                     <p class="mp_ber_amount">90/100</p>
                 </div>
             </div>
-            <p class="name">player</p>
+            <p id="userName" class="name">player</p>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->

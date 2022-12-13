@@ -31,8 +31,8 @@
 
     <!-- 進化用アイテム一覧 -->
     <div class="item_frame">
-        <img class="power_for_item_image" id="weapon" src="../image/item/item-provisional.png" onclick="selected()">
-        <img class="power_for_item_image" id="weapon" src="../image/item/item-provisional.png" onclick="selected()">
+        <img class="power_for_item_image" id="weapon1" src="../image/item/item-provisional.png" onclick="selected(this)">
+        <img class="power_for_item_image" id="weapon2" src="../image/item/item-provisional.png" onclick="selected(this)">
     </div>
 
     <!-- 進化確認用のモーダルウィンドウ -->
@@ -42,9 +42,10 @@
             </div>
             <div class="modal-body">
                 <p class="modal_title">本当に進化しますか？</p>
+                <p>進化に使用した素材は削除されます。</p>
                 <div class="modal_buttons">
                     <button class="calsel_button" onclick="confirmationClose()">キャンセル</button>
-                    <button class="decision_button" onclick="powerUpSuccsess()">する</button>
+                    <button class="decision_button" onclick="EvolutionSuccsess()">する</button>
                 </div>
             </div>
         </div>
