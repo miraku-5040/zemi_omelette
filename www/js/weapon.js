@@ -65,6 +65,38 @@ function go_sound() {
 
 
 
+// 武器詳細モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function item_detail() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('itemDetailModal');
+    modal.style.display = 'block';
+}
+
+// キャンセル
+function detail_Close() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('itemDetailModal');
+    modal.style.display = 'none';
+}
+
+// アイテム使用
+function use_item() {
+    // 音声再生
+    audio = new Audio("../sound/succsess.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('itemDetailModal');
+    modal.style.display = 'none';
+}
+
+
 // 進化モーダルウィンドウ用js
 //モーダルウィンドウを開く
 function confirmationOpen() {

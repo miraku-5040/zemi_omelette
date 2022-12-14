@@ -8,9 +8,10 @@ function toHome() {
 function toSelectDanjyon() {
     // 音声再生
     go_sound();
-    getDanjyonData();
     // ダンジョン選択画面へ遷移
     setTimeout('window.location.href = "danjyonSelect.html"', 600);
+    // 情報取得
+    getDanjyonData();
 }
 
 function toGameImage() {
@@ -49,6 +50,13 @@ function toItem() {
     go_sound();
     // 持ち物画面へ遷移
     setTimeout('window.location.href = "item.html"', 600);
+}
+
+function toEquip() {
+    // 音声再生
+    go_sound();
+    // 装備画面へ遷移
+    setTimeout('window.location.href = "equip.html"', 600);
 }
 
 function toPower() {

@@ -51,10 +51,16 @@
     height: 50px;
 }
 
+.power_for_item_number {
+    position: relative;
+    transform: translateY(-40px);
+    left: 28px;
+}
+
 /* 強化用アイテムのテキスト */
 .power_for_item_text {
     position: relative;
-    transform: translateY(-78px);
+    transform: translateY(-118px);
     left: 63px;
     font-weight: bold;
 }
@@ -64,7 +70,7 @@
     display: flex;
     gap: 7px;
     position: relative;
-    transform: translateY(-92px);
+    transform: translateY(-132px);
     left: 63px;
 }
 

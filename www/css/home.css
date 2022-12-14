@@ -42,6 +42,23 @@
     font-weight: bold;
 }
 
+/* サウンドアイコン */
+.sound_button {
+    background-color: rgb(177, 177, 177);
+    position: relative;
+    transform: translateY(-90px);
+    left: 225px;
+    width: 30px;
+    height: 30px;
+}
+
+.sound_icon {
+    position: relative;
+    transform: translateX(-10px);
+    width: 25px;
+    height: 25px;
+}
+
 /* ダンジョン選択画面への遷移ボタン */
 .danjyon_select {
     background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
@@ -89,11 +106,11 @@
 }
 
 .mypage {
-    background: linear-gradient(45deg, #57c1c9 0%, #62d6df 45%, #97f8ff 70%, #62d6df 85%, #57c1c9 90% 100%);
-    border-top: 4px solid #6ae7f0;
-    border-right: 4px solid #4da9af;
-    border-bottom: 4px solid #4da9af;
-    border-left: 4px solid #6ae7f0;
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+    border-top: 4px solid rgb(255, 225, 52);
+    border-right: 4px solid rgb(197, 168, 0);
+    border-bottom: 4px solid rgb(197, 168, 0);
+    border-left: 4px solid rgb(255, 225, 52);
     border-radius: 0;
 }
 

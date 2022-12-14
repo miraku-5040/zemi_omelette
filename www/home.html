@@ -8,7 +8,9 @@
     <!-- JS -->
     <script src="components/loader.js">
     </script>
-    <script src="js/db.js"></script>
+    <!-- DBJS -->
+    <script src="js/db/danjyon_db.js"></script>
+    <!-- pageJS -->
     <script src="js/index_page.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="components/loader.css">
@@ -62,6 +64,8 @@
         <div class="player_position">
             <img class="character_position" src="image/character/yuusya.png">
             <p class="talk_box">僕は勇者！</p>
+            <button class="sound_button" onclick="voice_fire()">
+            <img class="sound_icon" src="image/sound.png"></button>
         </div>
 
         <!-- ダンジョン選択画面への遷移ボタン -->
@@ -75,13 +79,16 @@
                 <img class="homepage_icon" src="image/home_icon/home.png"><p class="button_text">ホーム</p></button>
             <button class="danjyon" onclick="toSelectDanjyon()">
                 <img class="homepage_icon" src="image/home_icon/danjyon.png">
-                <p class="danjyon_button_text">ダンジョン</p></button>
+                <p class="small_button_text">ダンジョン</p></button>
+            <button class="equip" onclick="toEquip()">
+                <img class="homepage_icon" src="image/home_icon/equip.png">
+                <p class="button_text">装備</p></button>
             <button class="item" onclick="toItem()">
                 <img class="homepage_icon" src="image/home_icon/item.png">
                 <p class="button_text">持ち物</p></button>
             <button class="power" onclick="toPower()">
                 <img class="homepage_icon" src="image/home_icon/power.png">
-                <p class="power_button_text">強化</p></button>
+                <p class="button_text">強化</p></button>
             <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>

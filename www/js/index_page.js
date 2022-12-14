@@ -8,9 +8,10 @@ function toHome() {
 function toSelectDanjyon() {
     // 音声再生
     go_sound();
-    getDanjyonData();
     // ダンジョン選択画面へ遷移
     setTimeout('window.location.href = "html/danjyonSelect.html"', 600);
+    // 情報取得
+    getDanjyonData();
 }
 
 function toGatya() {
@@ -25,6 +26,13 @@ function toItem() {
     go_sound();
     // 持ち物画面へ遷移
     setTimeout('window.location.href = "html/item.html"', 600);
+}
+
+function toEquip() {
+    // 音声再生
+    go_sound();
+    // 装備画面へ遷移
+    setTimeout('window.location.href = "html/equip.html"', 600);
 }
 
 function toPower() {
@@ -45,6 +53,17 @@ function toSet() {
 // 画面遷移用の音声再生
 function go_sound() {
     audio = new Audio("sound/select.m4a");
+    audio.play();
+}
+
+// キャラクターのボイス再生
+function voice_fire() {
+    var random = Math.floor( Math.random() * 11 );
+    if (random > 5) {
+        audio = new Audio("sound/hello.m4a");
+    } else {
+        audio = new Audio("sound/go.m4a");
+    }
     audio.play();
 }
 
