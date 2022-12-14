@@ -7,50 +7,64 @@ class Skill{
 
     static skillDataMap; //スキル内容を保存するMap (skilld : {内容})
     // スキル内容の形式 {scope:「範囲のデータ」, effect:「効果のデータ」}
+    static skillUserData; //スキル使用者のデータ
 
     /* 初期化 */
     static initialize(){
         this.skillDataMap = new Map();
-
+        this.skillUserData = {};
     }
 
     /* playerから通常攻撃を呼び出し */
-    static playerUseNormalAttack(skillId, playerId, nowX, nowY, direction) {
-        // TODO
+    static playerUseNormalAttack(playerId) {
+        const normalAttackId = 1;
+        this.playerUseSkill(normalAttackId, playerId);
     }
 
     /* playerからスキル呼び出し */
-    static playerUseSkill(skillId, playerId, nowX, nowY, direction){
-        // TODO
-    }
-
-    /* gameからスキル情報確認とcontrolの操作を取得 */
-    static skillOperation(){
-        // TODO
-    }
-
-    /* スキル使用 */
-    static skillExe(){
-        // TODO
-    }
-
-// private
-    /* スキル使用(player) */
-    static playerUseSkill(skillId, playerId, nowX, nowY, direction){
+    static playerUseSkill(skillId,playerId){
         const skillUserData = {};
         skillUserData.type = "player";
         skillUserData.skillId = skillId;
         skillUserData.playerId = playerId;
-        skillUserData.nowX = nowX;
-        skillUserData.nowY = nowY;
-        skillUserData.direction = direction;
+        //skillUserData.nowX = nowX; // TODO get
+        //skillUserData.nowY = nowY; // TODO get
+        //skillUserData.direction = direction; // TODO get
         skillUserData.level = Player.getPlayerLevel(playerId);
         const playerAttackStatus = Player.getPlayerAttackStatus;
         for(let key in playerAttackStatus){
             skillUserData[key] = playerAttackStatus[key];
         }
-        this.useSkill(skillUserData); //共通のスキル処理
+        this.skillUserData = skillUserData;
     }
+
+    /* gameからスキル情報確認とcontrolの操作を取得 */
+    static skillReady(){
+        // TODO
+    }
+
+    /* スキル使用 */
+    static skillGo(){
+        // TODO
+    }
+
+// private
+    /* スキル使用(player) */
+    // static playerUseSkill(skillId, playerId, nowX, nowY, direction){
+    //     const skillUserData = {};
+    //     skillUserData.type = "player";
+    //     skillUserData.skillId = skillId;
+    //     skillUserData.playerId = playerId;
+    //     skillUserData.nowX = nowX;
+    //     skillUserData.nowY = nowY;
+    //     skillUserData.direction = direction;
+    //     skillUserData.level = Player.getPlayerLevel(playerId);
+    //     const playerAttackStatus = Player.getPlayerAttackStatus;
+    //     for(let key in playerAttackStatus){
+    //         skillUserData[key] = playerAttackStatus[key];
+    //     }
+    //     this.useSkill(skillUserData); //共通のスキル処理
+    // }
     /* スキル使用(enemy) */
     static enemyUseSkill(skillId, nowX, nowY, direction){
         const skillUserData = {};
