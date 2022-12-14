@@ -8,7 +8,9 @@
     <!-- JS -->
     <script src="../components/loader.js">
     </script>
-    <script src="../js/db.js"></script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <!-- pageJS -->
     <script src="../js/page.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../components/loader.css">
@@ -20,7 +22,7 @@
 
 <body>
     <!-- プレイヤー情報表示 -->
-     <div class="flame">
+    <div class="flame">
         <img class="player_image" src="../image/player.png">
         <meter class="exp_ber" max="100" value="50"></meter>
         <p class="rank_text">ランク<br>100</p>
@@ -46,10 +48,10 @@
     </div>
     <!-- ダンジョン情報表示 -->
     <div class="content_position">
-        <div class="note">
+        <div class="note" id="note">
             <div>
-                <img class="note_button_image" src="../image/danjyonSelectButton.png" onclick="modalOpen()">
-                <p class="note_button_text">ダンジョン<br>の名前</p>
+            <img class="note_button_image" src="../image/danjyonSelectButton.png" onclick="modalOpen()">
+            <p class="note_button_text">ダンジョン<br>の名前</p>
             </div>
         </div>
 
@@ -59,13 +61,16 @@
                 <img class="homepage_icon" src="../image/home_icon/home.png"><p class="button_text">ホーム</p></button>
             <button class="danjyon" onclick="toSelectDanjyon()">
                 <img class="homepage_icon" src="../image/home_icon/danjyon.png">
-                <p class="danjyon_button_text">ダンジョン</p></button>
+                <p class="small_button_text">ダンジョン</p></button>
+            <button class="equip" onclick="toEquip()">
+                <img class="homepage_icon" src="../image/home_icon/equip.png">
+                <p class="button_text">装備</p></button>
             <button class="item" onclick="toItem()">
                 <img class="homepage_icon" src="../image/home_icon/item.png">
                 <p class="button_text">持ち物</p></button>
             <button class="power" onclick="toPower()">
                 <img class="homepage_icon" src="../image/home_icon/power.png">
-                <p class="power_button_text">強化</p></button>
+                <p class="button_text">強化</p></button>
             <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="../image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>
