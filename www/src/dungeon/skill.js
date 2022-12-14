@@ -15,12 +15,12 @@ class Skill{
     }
 
     /* playerから通常攻撃を呼び出し */
-    static playerUseNormalAttack() {
+    static playerUseNormalAttack(skillId, playerId, nowX, nowY, direction) {
         // TODO
     }
 
     /* playerからスキル呼び出し */
-    static playerUseSkill(){
+    static playerUseSkill(skillId, playerId, nowX, nowY, direction){
         // TODO
     }
 
