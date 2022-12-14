@@ -5,6 +5,17 @@ class Enemy{
     static tempEnemyStatusArray; //移動時の一時データ
     static noDataItem;
     static enemyIdArray; //エネミーのidの配列
+    /*{enemyId:1, 
+            enemyName:"スライム", 
+            distinction:2,
+            level: 1,
+            hp: {current: 15,max: 15 , min: 0}, //体力
+            atk: {current: 5,max: 100 , min: 0},//攻撃力
+            def: {current: 2,max: 100 , min: 0},//防御力
+            cri: {current: 0.05,max: 0.25 , min: 0},//会心率
+            avd: {current: 0.01,max: 0.05 , min: 0},//回避率
+            dex: {current: 100,max: 100 , min: 0},//命中率 
+            size:1}*/
 
     /* 初期化 */
     static initialize() {
@@ -27,7 +38,17 @@ class Enemy{
     static startFloor(){
         /* 開発用にデータをセットする */
         //x=5, y=5に敵をセット
-        this.enemyStatusArray[5][5] = {enemyId:1, enemyName:"スライム", distinction:2, hp:{current:100, max:100, min:0}, size:1};
+        this.enemyStatusArray[5][5] = {
+            enemyId:1, 
+            enemyName:"スライム", 
+            distinction:2, 
+            hp:{current:10, max:999, min:0}, 
+            atk: {current: 2,max: 200 , min: 0},//攻撃力
+            def: {current: 1,max: 2 , min: 0},//防御力
+            cri: {current: 0.05,max: 0.25 , min: 0},//会心率
+            avd: {current: 0.01,max: 0.05 , min: 0},//回避率
+            dex: {current: 1,max: 100 , min: 0.5},//命中率 
+            size:1};
         this.enemyIdArray.push(1);
         //Imageでenemyの画像を読み込む
         Image.createEnemyImages(this.enemyIdArray);
@@ -135,4 +156,68 @@ class Enemy{
         // 敵が存在する
         return true;
     }
+
+    /*座標に応じた敵のレベル取得*/
+    static getEnemyLevel(x,y){
+        return this.enemyStatusArray[x][y].level
+    }
+
+    /*座標に応じた敵の現在の攻撃能力取得*/
+    static getEnemyAttackStatus(x,y){
+        let enemyStatus = {};
+        if(this.enemyStatusArray[x][y].atk.current > this.enemyStatusArray.atk.max){
+            enemyStatus.atk = this.enemyStatusArray.atk.max
+        }else if(this.enemyStatusArray[x][y].atk.current < this.enemyStatusArray.atk.min){
+            enemyStatus.atk = this.enemyStatusArray.atk.min
+        }else{
+            enemyStatus.atk = this.enemyStatusArray.atk.current
+        }
+
+        if(this.enemyStatusArray[x][y].cri.current > this.enemyStatusArray.cri.max){
+            enemyStatus.cri = this.enemyStatusArray.cri.max
+        }else if(this.enemyStatusArray[x][y].cri.current < this.enemyStatusArray.cri.min){
+            enemyStatus.cri = this.enemyStatusArray.cri.min
+        }else{
+            enemyStatus.cri = this.enemyStatusArray.cri.current
+        }
+
+        if(this.enemyStatusArray[x][y].dex.current > this.enemyStatusArray.dex.max){
+            enemyStatus.dex = this.enemyStatusArray.dex.max
+        }else if(this.enemyStatusArray[x][y].dex.current < this.enemyStatusArray.dex.min){
+            enemyStatus.dex = this.enemyStatusArray.dex.min
+        }else{
+            enemyStatus.dex = this.enemyStatusArray.dex.current
+        }
+        return  enemyStatus;
+    }
+
+    /*座標に応じた敵の現在の防御能力取得*/
+    static getEnemyAttackStatus(x,y){
+        let enemyStatus = {};
+        if(this.enemyStatusArray[x][y].def.current > this.enemyStatusArray.def.max){
+            enemyStatus.def = this.enemyStatusArray.def.max
+        }else if(this.enemyStatusArray[x][y].def.current < this.enemyStatusArray.def.min){
+            enemyStatus.def = this.enemyStatusArray.def.min
+        }else{
+            enemyStatus.def = this.enemyStatusArray.def.current
+        }
+
+        if(this.enemyStatusArray[x][y].avd.current > this.enemyStatusArray.adv.max){
+            enemyStatus.adv = this.enemyStatusArray.adv.max
+        }else if(this.enemyStatusArray[x][y].adv.current < this.enemyStatusArray.adv.min){
+            enemyStatus.adv = this.enemyStatusArray.adv.min
+        }else{
+            enemyStatus.adv = this.enemyStatusArray.adv.current
+        }
+
+        return enemyStatus;
+    }
+
+    static enemyStatusFluctuation(x,y,status){
+        //TODO
+        for(let s in status){
+            this.enemyStatusArray[x][y][s].current += status.s
+        }
+}
+
 }

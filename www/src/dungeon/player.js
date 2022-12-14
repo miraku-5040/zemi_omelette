@@ -4,7 +4,7 @@ class Player{
         this.playerStatus = {
             playerId: 1,
             playerName: 1,
-            lebel: 1,
+            level: 1,
             //ここより下開発用データ
             hp: {current: 15,max: 15 , min: 0}, //体力
             sp: {current: 100,max: 100 , min: 0},//満腹度
