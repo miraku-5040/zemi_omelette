@@ -14,6 +14,8 @@ class Player{
             avd: {current: 0.01,max: 0.05 , min: 0},//回避率
             dex: {current: 100,max: 100 , min: 0},//命中率
             exp: 0,//これまでの経験値
+            weapon:{skill: 1},
+            job:{skill: 2},
             now:  {x:9, y:6},
             next: {x:9, y:6},
             direction: 'down'
@@ -97,7 +99,14 @@ class Player{
             this.playerStatus.direction ='leftdown';
             return 'stay';
         case 'attack':
-
+            Skill.playerUseNormalAttack(this.playerStatus.playerId);
+            return 'skillReady'
+        case 'skill1':
+            Skill.playerUseSkill(this.playerStatus.weapon.skill,this.playerStatus.playerId);
+            return 'skillReady'
+        case 'skill2':
+            Skill.playerUseSkill(this.playerStatus.job.skill,this.playerStatus.playerId);
+            return 'skillReady'
         default:
             return 'player';
         }
@@ -128,6 +137,7 @@ class Player{
         this.setCharacterPosition();
         //ステージの位置更新
         Stage.moveStage(this.playerStatus.now.x, this.playerStatus.now.y);
+        //足元チェック
         if(true){
             return 'enemy';
         }else{
@@ -138,7 +148,11 @@ class Player{
 
     /* キャラの攻撃に関する*/
     static attack(){
-        
+        Player.playerUseNormalAttack(this.playerStatus.playerId);
+    }
+
+    static skill(){
+        Player.playerUseNormalAttack(this.playerStatus.playerId);
     }
 
     /**

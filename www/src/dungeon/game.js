@@ -47,12 +47,22 @@ function loop() {
             break;
         case 'move':
             // 移動に関するとこ
-            //床の判定含む
+            //動ける床の判定含む
             mode = Player.moving();
-            // 階段なら mode = 'nextfloor'
             break;
         case 'attack':
             // 攻撃に関するとこ
+            Player.attack();
+            mode = 'enemy';
+            break;
+        case 'skillReady':
+            // スキルの前準備に関するとこ
+            Skill.skillReady();
+            mode = 'skillGo';
+            break;
+        case 'skillGo':
+            // スキルの前準備に関するとこ
+            Skill.skillGo();
             mode = 'enemy';
             break;
         case 'item':
@@ -65,8 +75,8 @@ function loop() {
             break;
         case 'field':
             //トラップ
-            //階段
             //落ちてるアイテム
+            // 階段なら mode = 'nextfloor'
             break;
         case 'enemy':
             // 敵のターン

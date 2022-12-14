@@ -22,7 +22,6 @@ class Control{
         };
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
-            // TODO 長押し判定の処理を追加する
             // キーボードが押された場合
             switch(e.key) {
                 case "4": // 左向きキー
