@@ -21,6 +21,7 @@
     left: 40px;
     width: 240px;
     height: 110px;
+    font-weight: bold;
 }
 
 /* 強化用アイテム一覧の枠 */
@@ -39,19 +40,30 @@
     height: 175px;
 }
 
+/* 進化アイテムのボーダー */
+.item_border {
+    border: 2px solid black;
+    width: 44px;
+    height: 60px;
+}
+
 /* 強化用アイテムの画像 */
 .power_for_item_image {
-    border: solid black;
+    background-color: rgb(214, 0, 214);
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 10px solid white;
+    border-left: 2px solid white;
     width: 40px;
     height: 40px;
 }
 
 /* レベル表示 */
 .level_text {
-    color: black;
     position: relative;
-    transform: translateY(-40px);
-    left: 10px;
+    transform: translateY(-30px);
+    left: 5px;
+    font-weight: bold;
 }
 
 /* 意思決定ボタン達 */

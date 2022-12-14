@@ -10,6 +10,8 @@
     </script>
     <!-- DBJS -->
     <script src="js/db/danjyon_db.js"></script>
+    <script src="js/db/item_db.js"></script>
+    <script src="js/db/weapon_db.js"></script>
     <!-- pageJS -->
     <script src="js/index_page.js"></script>
     <!-- CSS -->
@@ -39,7 +41,10 @@
                     <p class="mp_ber_amount">90/100</p>
                 </div>
             </div>
-            <p id="userName" class="name">player</p>
+            <div class="exp_content">
+                <p class="exp_text">Exp：10000/20000</p>
+                <meter class="exp_ber" max="100" value="50"></meter>
+            </div>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->
@@ -53,6 +58,7 @@
     </div>
     <!-- ユーザ情報表示 -->
     <div class="player_info">
+        <p>プレイヤー名：player</p>
         <p>攻撃力：100</p>
         <p>回避率：100</p>
         <p>会心率：100</p>

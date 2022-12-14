@@ -8,6 +8,11 @@
     <!-- JS -->
     <script src="../components/loader.js">
     </script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
+    <!-- pageJS -->
     <script src="../js/page.js"></script>
     <script src="../js/weapon.js"></script>
     <!-- CSS -->
@@ -23,6 +28,7 @@
     <!-- 強化対象装備 -->
     <img class="power_item" src="../image/soad/soad-provisional.png" onclick="toWeaponPower()">
     <div class="power_target_text">
+        <h3>&lt;ソード&gt;</h3>
         <p>レベル：50/100</p>
         <p>総合力：10000</p>
     </div>
@@ -35,8 +41,7 @@
     <div class="item_frame">
         <div class="power_for_item">
             <img class="power_for_item_image" src="../image/item/item-provisional.png">
-            <p class="power_for_item_number">×30</p>
-            <p class="power_for_item_text">強化用アイテム</p>
+            <p class="power_for_item_text">SR強化用アイテム</p>
             <div class="power_for_item_count">
                 <button class="power_for_item_count_minus" onclick="countDownMore()">
                     <p class="count_button_text">&lt;&lt;</p></button>

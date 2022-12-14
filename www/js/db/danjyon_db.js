@@ -16,19 +16,21 @@ function getDanjyonData() {
             setDanjyonName(results);
         })
         .catch(function (err) {
-            console.log("ng"+err);
+            console.log("ng" + err);
         });
 
     // ダンジョン名をHTMLに埋め込む
     function setDanjyonName(results) {
         // 情報取得
-        for (var i = 0; i <= results.length-1; i++) {
+        for (var i = 0; i <= results.length - 1; i++) {
             console.log(results.length);
             var danjyon = results[i];
             // 新しいHTML要素を作成
             var danjyonHtml = '<div><img class="note_button_image" src="../image/danjyonSelectButton.png" onclick="modalOpen()"><p class="note_button_text">' + danjyon.danjyon_name + '</p></div>';
             // 作成した要素を追加
-            document.getElementById("note").insertAdjacentHTML('beforeend', danjyonHtml);
+            window.onload = function () {
+                document.getElementById("note").insertAdjacentHTML('beforeend', danjyonHtml)
+            }
             console.log("ok3");
         }
     }

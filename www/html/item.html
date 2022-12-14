@@ -10,6 +10,8 @@
     </script>
     <!-- DBJS -->
     <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
     <!-- weaponJS -->
@@ -41,7 +43,10 @@
                     <p class="mp_ber_amount">90/100</p>
                 </div>
             </div>
-            <p id="userName" class="name">player</p>
+            <div class="exp_content">
+                <p class="exp_text">Exp：10000/20000</p>
+                <meter class="exp_ber" max="100" value="50"></meter>
+            </div>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->
@@ -60,6 +65,13 @@
                 <img class="list_material" id="weapon" src="../image/item/item-provisional.png">
                 <p class="item_text_position">×30</p>
             </div>
+        </div>
+
+        <div class="weapon_type_buttons">
+            <button class="weapon_type_button" onclick="">剣</button>
+            <button class="weapon_type_button" onclick="">盾</button>
+            <button class="weapon_type_button" onclick="">宝石</button>
+            <button class="weapon_type_button" onclick="">その他</button>
         </div>
 
         <!-- 各画面への遷移ボタン -->
