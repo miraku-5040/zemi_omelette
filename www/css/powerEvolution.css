@@ -46,6 +46,14 @@
     height: 40px;
 }
 
+/* レベル表示 */
+.level_text {
+    color: black;
+    position: relative;
+    transform: translateY(-40px);
+    left: 10px;
+}
+
 /* 意思決定ボタン達 */
 .decition_buttons {
     position: absolute;

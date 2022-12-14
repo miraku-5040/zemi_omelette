@@ -93,7 +93,6 @@ class Stage {
     static createStage(){
         //ランダム生成
         //キャラの最初の座標特定
-
     }
     /**
      * ステージ画像や画像番号をステージの2次元配列に格納する
@@ -126,12 +125,12 @@ class Stage {
     static checkStage(x,y){
         //移動できる床か判定
         if(this.board[y][x].stageImageNumber != 1){
-            return false;
+            return true;
         }
         if(Enemy.checkEnemy(x,y)){
-            return false;
+            return true;
         }
-        return true;   
+        return false;   
     }
 
     static getStageBoard(){

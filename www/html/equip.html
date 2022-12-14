@@ -19,7 +19,7 @@
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- アイテム画面のCSS -->
-    <link rel="stylesheet" href="../css/item.css">
+    <link rel="stylesheet" href="../css/equip.css">
 </head>
 
 <body>
@@ -50,15 +50,19 @@
     </div>
     <!-- アイテム情報表示 -->
     <div class="content_position">
-        <!-- アイテムリスト表示 -->
+        <!-- 装備情報表示 -->
+        <div class="equipment">
+            <img class="material" id="soad" src="../image/soad/soad-provisional.png">
+            <img class="material" id="shield" src="../image/shield/shield-provisional.png">
+            <img class="material" id="decoration" src="../image/decoration/juel-provisional.png">
+        </div>
+        <button class="equipment_button" onclick="equip()">装備する</button>
+
+        <!-- 武器リスト表示 -->
         <div class="item_list">
-            <div class="item_border" onclick="item_detail()">
-                <img class="list_material" id="weapon" src="../image/item/item-provisional.png">
-                <p class="item_text_position">×30</p>
-            </div>
             <div class="item_border">
-                <img class="list_material" id="weapon" src="../image/item/item-provisional.png">
-                <p class="item_text_position">×30</p>
+                <img class="list_material" id="weapon" src="../image/soad/soad-provisional.png" onclick="changeSoad()">
+                <p class="item_text_position">Lv1</p>
             </div>
         </div>
 
@@ -81,25 +85,6 @@
             <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="../image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>
-        </div>
-    </div>
-
-    <!-- ダンジョン内容説明用のモーダルウィンドウ -->
-    <div id="itemDetailModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-                <img class="modal_image" src="../image/item/item-provisional.png">
-                <div class="modal_text">
-                    <p class="modal_title">SR回復素材</p>
-                    <p class="modal_note">プレイヤーのHPを100回復する</p>
-                </div>
-                <div class="modal_buttons">
-                    <button class="calsel_button" onclick="detail_Close()">キャンセル</button>
-                    <button class="decision_button" onclick="use_item()">使用する</button>
-                </div>
-            </div>
         </div>
     </div>
 </body>

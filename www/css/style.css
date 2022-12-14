@@ -167,16 +167,32 @@ body {
 /* フッターボタン */
 /* ４つのボタンの位置 */
 .buttons {
+    display: flex;
+    gap: 0px;
     position: absolute;
     top: 300px;
     transform: translate(-40px, 0px);
 }
 
+/* アイコン */
+.homepage_icon {
+    position: relative;
+    top: 0px;
+    left: 3px;
+}
+
 /* ボタンのテキスト */
+.small_button_text {
+    position: relative;
+    transform: translateY(-15px);
+    left: 3px;
+    font-size: smaller;
+}
+
 .button_text {
-    position: absolute;
-    top: 15px;
-    left: 35px;
+    position: relative;
+    transform: translateY(-20px);
+    left: 3px;
 }
 
 /* ホームボタンの設定 */
@@ -197,16 +213,8 @@ body {
     rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
     rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
     rgb(255, 255, 255) 0.96017px -0.279415px 0px;
-    position: absolute;
-    width: 119px;
+    width: 98px;
     height: 55px;
-}
-
-/* アイコン */
-.homepage_icon {
-    position: absolute;
-    top: 0px;
-    left: 39px;
 }
 
 /* ダンジョン選択ボタンの設定 */
@@ -227,16 +235,36 @@ body {
     rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
     rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
     rgb(255, 255, 255) 0.96017px -0.279415px 0px;
-    position: absolute;
-    width: 119px;
+    width: 98px;
     height: 55px;
-    left: 119px;
 }
 
 .danjyon_button_text {
     position: absolute;
     top: 15px;
     left: 21px;
+}
+
+/* 装備ボタンの設定 */
+.equip {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #e6e6e6;
+    border-radius: 0;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    width: 98px;
+    height: 55px;
 }
 
 /* 持ち物ボタンの設定 */
@@ -257,10 +285,8 @@ body {
     rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
     rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
     rgb(255, 255, 255) 0.96017px -0.279415px 0px;
-    position: absolute;
-    width: 119px;
+    width: 98px;
     height: 55px;
-    left: 238px;
 }
 
 /* 強化ボタンの設定 */
@@ -281,10 +307,8 @@ body {
     rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
     rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
     rgb(255, 255, 255) 0.96017px -0.279415px 0px;
-    position: absolute;
-    width: 119px;
+    width: 98px;
     height: 55px;
-    left: 357px;
 }
 
 .power_button_text {
@@ -311,10 +335,8 @@ body {
     rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
     rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
     rgb(255, 255, 255) 0.96017px -0.279415px 0px;
-    position: absolute;
-    width: 119px;
+    width: 98px;
     height: 55px;
-    left: 476px;
 }
 
 /* 表示内容の位置 */

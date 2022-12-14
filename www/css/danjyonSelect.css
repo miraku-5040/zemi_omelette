@@ -42,12 +42,11 @@
 
 /* ダンジョン選択画面のボタン */
 .danjyon {
-    background: linear-gradient(45deg, #57c1c9 0%, #62d6df 45%, #97f8ff 70%, #62d6df 85%, #57c1c9 90% 100%);
-    background-color: #5FD1D9;
-    border-top: 4px solid #6ae7f0;
-    border-right: 4px solid #4da9af;
-    border-bottom: 4px solid #4da9af;
-    border-left: 4px solid #6ae7f0;
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+    border-top: 4px solid rgb(255, 225, 52);
+    border-right: 4px solid rgb(197, 168, 0);
+    border-bottom: 4px solid rgb(197, 168, 0);
+    border-left: 4px solid rgb(255, 225, 52);
     border-radius: 0;
 }
 

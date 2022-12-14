@@ -8,6 +8,9 @@
     <!-- JS -->
     <script src="../components/loader.js">
     </script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <!-- pageJS -->
     <script src="../js/page.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../components/loader.css">
@@ -55,18 +58,21 @@
             <button class="pull" onclick="modalOpen10()">10連</button>
         </div>
         <!-- 各画面への遷移ボタン -->
-        <div class="gatya_buttons buttons">
+        <div class="gatya_buttons">
             <button class="mypage" onclick="toHome()">
                 <img class="homepage_icon" src="../image/home_icon/home.png"><p class="button_text">ホーム</p></button>
             <button class="danjyon" onclick="toSelectDanjyon()">
                 <img class="homepage_icon" src="../image/home_icon/danjyon.png">
-                <p class="danjyon_button_text">ダンジョン</p></button>
+                <p class="small_button_text">ダンジョン</p></button>
+            <button class="equip" onclick="toEquip()">
+                <img class="homepage_icon" src="../image/home_icon/equip.png">
+                <p class="button_text">装備</p></button>
             <button class="item" onclick="toItem()">
                 <img class="homepage_icon" src="../image/home_icon/item.png">
                 <p class="button_text">持ち物</p></button>
             <button class="power" onclick="toPower()">
                 <img class="homepage_icon" src="../image/home_icon/power.png">
-                <p class="power_button_text">強化</p></button>
+                <p class="button_text">強化</p></button>
             <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon" src="../image/home_icon/gatya.png">
                 <p class="button_text">ガチャ</p></button>
