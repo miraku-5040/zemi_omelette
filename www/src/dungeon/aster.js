@@ -32,7 +32,8 @@ class Aster{
         let i = 0;
         while(this.open_list.length > 0){
             i++
-            if(i > 5000){
+            if(i > 100){
+                console.log('見失っちゃった')
                 break;
             }
             //現在のノードを取得する
@@ -136,7 +137,12 @@ class Aster{
         let end = {x:7, y:9}*/
         /*end = {x: end.y,y:end.x}*/
         let result = this.astar(maze,start,end)
-
-        return result[result.length-2]
+        try{
+            return result[result.length-2]
+        }catch(e){
+            if (e instanceof TypeError) {
+                return "TypeError";
+            }
+        }
     }
 }

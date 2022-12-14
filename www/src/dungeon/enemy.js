@@ -5,17 +5,19 @@ class Enemy{
     static tempEnemyStatusArray; //移動時の一時データ
     static noDataItem;
     static enemyIdArray; //エネミーのidの配列
-    /*{enemyId:1, 
-            enemyName:"スライム", 
-            distinction:2,
-            level: 1,
-            hp: {current: 15,max: 15 , min: 0}, //体力
-            atk: {current: 5,max: 100 , min: 0},//攻撃力
-            def: {current: 2,max: 100 , min: 0},//防御力
+    /*      enemyId:1, //モンスターID
+            enemyName:"スライム",//名前
+            level: 1, //レベル
+            distinction:2,//同モンスターの重複番号
+            hp:{current:10, max:999, min:0}, 
+            atk: {current: 2,max: 200 , min: 0},//攻撃力
+            def: {current: 1,max: 2 , min: 0},//防御力
             cri: {current: 0.05,max: 0.25 , min: 0},//会心率
             avd: {current: 0.01,max: 0.05 , min: 0},//回避率
-            dex: {current: 100,max: 100 , min: 0},//命中率 
-            size:1}*/
+            dex: {current: 1,max: 100 , min: 0.5},//命中率 
+            exp: 2,//基礎経験値
+            size:1//モンスターの使用ます
+    */
 
     /* 初期化 */
     static initialize() {
@@ -39,16 +41,19 @@ class Enemy{
         /* 開発用にデータをセットする */
         //x=5, y=5に敵をセット
         this.enemyStatusArray[5][5] = {
-            enemyId:1, 
-            enemyName:"スライム", 
-            distinction:2, 
+            enemyId:1, //モンスターID
+            enemyName:"スライム",//名前
+            level: 1, //レベル
+            distinction:2,//同モンスターの重複番号
             hp:{current:10, max:999, min:0}, 
             atk: {current: 2,max: 200 , min: 0},//攻撃力
             def: {current: 1,max: 2 , min: 0},//防御力
             cri: {current: 0.05,max: 0.25 , min: 0},//会心率
             avd: {current: 0.01,max: 0.05 , min: 0},//回避率
             dex: {current: 1,max: 100 , min: 0.5},//命中率 
-            size:1};
+            exp: 2,//基礎経験値
+            size:1//モンスターの使用ます
+            };
         this.enemyIdArray.push(1);
         //Imageでenemyの画像を読み込む
         Image.createEnemyImages(this.enemyIdArray);
@@ -91,13 +96,27 @@ class Enemy{
                 if(element === this.noDataItem){
                     return;
                 }
-                const result = Aster.enemyMove
-                (Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
                 let next = {};
                 next.type = 'move';
-                next.x = result.x;
-                next.y = result.y;
-                element.next = next;
+                if(this.checkAround(indexX,indexY)){
+                    next.x = indexX;
+                    next.y = indexY;
+                    element.next = next;
+                    return;
+                }
+                const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
+                if(result == "TypeError"){
+                    next.x = indexX;
+                    next.y = indexY;
+                    element.next = next;
+                    return;
+                }else{
+                    next.x = result.x;
+                    next.y = result.y;
+                    element.next = next;
+                    return;
+                }
+                    
             });
         });
         /* end */
@@ -157,6 +176,21 @@ class Enemy{
         return true;
     }
 
+    static checkAround(enemyX,enemyY){
+        let playerPosition = Player.getPlayerNowPosition()
+        //周り８マスを確認する
+        for(let x = -1; x <= 1; x++){
+            for(let y = -1; y <= 1; y++){
+                if(playerPosition.x == enemyX + x && playerPosition.y == enemyY + y){
+                    //プレイヤーがいない
+                    return true
+                }
+            }
+        }
+        //いる
+        return false
+    }
+
     /*座標に応じた敵のレベル取得*/
     static getEnemyLevel(x,y){
         return this.enemyStatusArray[x][y].level
@@ -192,7 +226,7 @@ class Enemy{
     }
 
     /*座標に応じた敵の現在の防御能力取得*/
-    static getEnemyAttackStatus(x,y){
+    static getEnemyDefenceStatus(x,y){
         let enemyStatus = {};
         if(this.enemyStatusArray[x][y].def.current > this.enemyStatusArray.def.max){
             enemyStatus.def = this.enemyStatusArray.def.max
@@ -218,6 +252,6 @@ class Enemy{
         for(let s in status){
             this.enemyStatusArray[x][y][s].current += status.s
         }
-}
+    }
 
 }

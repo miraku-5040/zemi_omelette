@@ -10,6 +10,10 @@ class Control{
             left: 0,
             up: 0,
             down: 0,
+            leftup: 0,
+            rightup: 0,
+            rightdown: 0,
+            leftdown: 0,
             attack: 0,
             defence: 0,
             skill: 0,
@@ -21,28 +25,40 @@ class Control{
             // TODO 長押し判定の処理を追加する
             // キーボードが押された場合
             switch(e.key) {
-                case "ArrowLeft": // 左向きキー
+                case "4": // 左向きキー
                     this.pressedKeyStatus.left += 1;
                     e.preventDefault(); return false;
-                case "ArrowUp": // 上向きキー
+                case "8": // 上向きキー
                     this.pressedKeyStatus.up += 1;
                     e.preventDefault(); return false;
-                case "ArrowRight": // 右向きキー
+                case "6": // 右向きキー
                     this.pressedKeyStatus.right += 1;
                     e.preventDefault(); return false;
-                case "ArrowDown": // 下向きキー
+                case "2": // 下向きキー
                     this.pressedKeyStatus.down += 1;
                     e.preventDefault(); return false;
-                case "1": // 攻撃キー
+                case "7": // 左上向きキー
+                    this.pressedKeyStatus.leftup += 1;
+                    e.preventDefault(); return false;
+                case "9": // 右上向きキー
+                    this.pressedKeyStatus.rightup += 1;
+                    e.preventDefault(); return false;
+                case "3": // 右下向きキー
+                    this.pressedKeyStatus.rightdown += 1;
+                    e.preventDefault(); return false;
+                case "1": // 左下向きキー
+                    this.pressedKeyStatus.leftdown += 1;
+                    e.preventDefault(); return false;
+                case "q": // 攻撃キー
                     this.pressedKeyStatus.attack += 1;
                     e.preventDefault(); return false;
-                case "2": // 防御キー
+                case "w": // 防御キー
                     this.pressedKeyStatus.defence += 1;
                     e.preventDefault(); return false;
-                case "3": // スキルキー
+                case "e": // スキルキー
                     this.pressedKeyStatus.skill += 1;
                     e.preventDefault(); return false;
-                case "4": // 道具キー
+                case "r": // 道具キー
                     this.pressedKeyStatus.item += 1;
                     e.preventDefault(); return false;
             }
@@ -50,28 +66,40 @@ class Control{
         document.addEventListener('keyup', (e) => {
             // キーボードが離された場合
             switch(e.key) {
-                case "ArrowLeft": // 左向きキー
+                case "4": // 左向きキー
                     this.pressedKeyStatus.left = 0;
                     e.preventDefault(); return false;
-                case "ArrowUp": // 上向きキー
+                case "8": // 上向きキー
                     this.pressedKeyStatus.up = 0;
                     e.preventDefault(); return false;
-                case "ArrowRight": // 右向きキー
+                case "6": // 右向きキー
                     this.pressedKeyStatus.right = 0;
                     e.preventDefault(); return false;
-                case "ArrowDown": // 下向きキー
+                case "2": // 下向きキー
                     this.pressedKeyStatus.down = 0;
                     e.preventDefault(); return false;
-                case "1": // 攻撃キー
+                case "7": // 左上向きキー
+                    this.pressedKeyStatus.leftup = 0;
+                    e.preventDefault(); return false;
+                case "9": // 右上向きキー
+                    this.pressedKeyStatus.rightup = 0;
+                    e.preventDefault(); return false;
+                case "3": // 右下向きキー
+                    this.pressedKeyStatus.rightdown = 0;
+                    e.preventDefault(); return false;
+                case "1": // 左下向きキー
+                    this.pressedKeyStatus.leftdown = 0;
+                    e.preventDefault(); return false;
+                case "q": // 攻撃キー
                     this.pressedKeyStatus.attack = 0;
                     e.preventDefault(); return false;
-                case "2": // 防御キー
+                case "w": // 防御キー
                     this.pressedKeyStatus.defence = 0;
                     e.preventDefault(); return false;
-                case "3": // スキルキー
+                case "e": // スキルキー
                     this.pressedKeyStatus.skill = 0;
                     e.preventDefault(); return false;
-                case "4": // 道具キー
+                case "r": // 道具キー
                     this.pressedKeyStatus.item = 0;
                     e.preventDefault(); return false;
             }
@@ -109,6 +137,38 @@ class Control{
             return 'left';
         }else if (this.pressedKeyStatus.left <= Config.keyPressedCount && this.pressedKeyStatus.left > 0){
             return 'leftDirection';
+        }else{
+        }
+
+        if(this.pressedKeyStatus.leftup > Config.keyPressedCount) {
+            this.pressedKeyStatus.leftup = 0;
+            return 'leftup';
+        }else if (this.pressedKeyStatus.leftup <= Config.keyPressedCount && this.pressedKeyStatus.leftup > 0){
+            return 'leftupDirection';
+        }else{
+        }
+
+        if(this.pressedKeyStatus.rightup > Config.keyPressedCount) {
+            this.pressedKeyStatus.rightup = 0;
+            return 'rightup';
+        }else if (this.pressedKeyStatus.rightup <= Config.keyPressedCount && this.pressedKeyStatus.rightup > 0){
+            return 'rightupDirection';
+        }else{
+        }
+
+        if(this.pressedKeyStatus.rightdown > Config.keyPressedCount) {
+            this.pressedKeyStatus.rightdown = 0;
+            return 'rightdown';
+        }else if (this.pressedKeyStatus.rightdown <= Config.keyPressedCount && this.pressedKeyStatus.rightdown > 0){
+            return 'rightdownDirection';
+        }else{
+        }
+
+        if(this.pressedKeyStatus.leftdown > Config.keyPressedCount) {
+            this.pressedKeyStatus.leftdown = 0;
+            return 'leftdown';
+        }else if (this.pressedKeyStatus.leftdown <= Config.keyPressedCount && this.pressedKeyStatus.leftdown > 0){
+            return 'leftdownDirection';
         }else{
         }
 

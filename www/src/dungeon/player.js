@@ -13,6 +13,7 @@ class Player{
             cri: {current: 0.05,max: 0.25 , min: 0},//会心率
             avd: {current: 0.01,max: 0.05 , min: 0},//回避率
             dex: {current: 100,max: 100 , min: 0},//命中率
+            exp: 0,//これまでの経験値
             now:  {x:9, y:6},
             next: {x:9, y:6},
             direction: 'down'
@@ -43,6 +44,22 @@ class Player{
         case 'left':
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             return 'move';
+        case 'leftup':
+            this.playerStatus.next.y = this.playerStatus.now.y - 1;
+            this.playerStatus.next.x = this.playerStatus.now.x - 1;
+            return 'move';
+        case 'rightup':
+            this.playerStatus.next.y = this.playerStatus.now.y - 1;
+            this.playerStatus.next.x = this.playerStatus.now.x + 1;
+            return 'move';
+        case 'rightdown':
+            this.playerStatus.next.x = this.playerStatus.now.x + 1;
+            this.playerStatus.next.y = this.playerStatus.now.y + 1;
+            return 'move';
+        case 'leftdown':
+            this.playerStatus.next.x = this.playerStatus.now.x - 1;
+            this.playerStatus.next.y = this.playerStatus.now.y + 1;
+            return 'move';
         case 'upDirection':
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.direction ='up';
@@ -59,6 +76,28 @@ class Player{
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.direction ='left';
             return 'stay';
+        case 'leftupDirection':
+            this.playerStatus.next.x = this.playerStatus.now.x - 1;
+            this.playerStatus.next.y = this.playerStatus.now.y - 1;
+            this.playerStatus.direction ='leftup';
+            return 'stay';
+        case 'rightupDirection':
+            this.playerStatus.next.y = this.playerStatus.now.x + 1;
+            this.playerStatus.next.y = this.playerStatus.now.y - 1;
+            this.playerStatus.direction ='rightup';
+            return 'stay';
+        case 'rightdownDirection':
+            this.playerStatus.next.x = this.playerStatus.now.x + 1;
+            this.playerStatus.next.y = this.playerStatus.now.y + 1;
+            this.playerStatus.direction ='rightdown';
+            return 'stay';
+        case 'leftdownDirection':
+            this.playerStatus.next.x = this.playerStatus.now.x - 1;
+            this.playerStatus.next.y = this.playerStatus.now.y + 1;
+            this.playerStatus.direction ='leftdown';
+            return 'stay';
+        case 'attack':
+
         default:
             return 'player';
         }
@@ -82,14 +121,24 @@ class Player{
     static moving(){
         //床判定
         if(Stage.checkStage(this.playerStatus.next.x, this.playerStatus.next.y)){
-            //キャラの座標更新
-            this.setCharacterPosition();
-            //ステージの位置更新
-            Stage.moveStage(this.playerStatus.now.x, this.playerStatus.now.y);
-            return 'enemy';
+            this.steyCharacterPosition();
+            return 'player';
         }
-        this.steyCharacterPosition();
-        return 'player';
+        //キャラの座標更新
+        this.setCharacterPosition();
+        //ステージの位置更新
+        Stage.moveStage(this.playerStatus.now.x, this.playerStatus.now.y);
+        if(true){
+            return 'enemy';
+        }else{
+            return 'field'
+        }
+          
+    }
+
+    /* キャラの攻撃に関する*/
+    static attack(){
+        
     }
 
     /**
