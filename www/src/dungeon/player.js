@@ -132,6 +132,115 @@ class Player{
         return this.playerStatus.now
     }
 
+    /**
+     * 座標に応じたプレイヤーの存在チェック
+     */
+    static isPlayerExistence(x,y) {
+        const nowCoordinate = this.playerStatus.now;
+        if(nowCoordinate.x === x && nowCoordinate.y === y){
+            //存在する
+            return true;
+        }
+        return false;
+    }
 
+    /**
+     * 座標に応じたプレイヤーのplayerIdを取得
+     * 座標にプレイヤーが存在しない場合はNullを返す
+     */
+    static getPlayerId(x, y) {
+        const nowCoordinate = this.playerStatus.now;
+        if(nowCoordinate.x === x && nowCoordinate.y === y){
+            //存在する
+            return this.playerStatus.playerId;
+        }
+        return null;
+    }
+
+    /**
+     * playerIdに応じたレベルの数値を取得する
+     * playerIdが存在しない場合はNullを返す
+     */
+    static getPlayerLevel(playerId) {
+        if(this.playerStatus.playerId !== playerId){
+            //playerIdが存在しない
+            return null;
+        }      
+        return this.playerStatus.level;
+    }
+    
+    /**
+     * playerIdに応じたプレイヤーの現在の攻撃能力取得
+     * playerIdが存在しない場合はNullを返す
+     */
+    static getPlayerAttackStatus(playerId){
+        if(this.playerStatus.playerId !== playerId){
+            //playerIdが存在しない
+            return null;
+        }
+        const matchPlayerStatus = this.playerStatus;
+        const playerAttackStatus = {};
+        if(matchPlayerStatus.atk.current > matchPlayerStatus.atk.max){
+            playerAttackStatus.atk = matchPlayerStatus.atk.max;
+        }else if(matchPlayerStatus.atk.current < matchPlayerStatus.atk.min){
+            playerAttackStatus.atk = matchPlayerStatus.atk.min
+        }else{
+            playerAttackStatus.atk = matchPlayerStatus.atk.current;
+        }
+
+        if(matchPlayerStatus.cri.current > matchPlayerStatus.cri.max){
+            playerAttackStatus.cri = matchPlayerStatus.cri.max;
+        }else if(matchPlayerStatus.cri.current < matchPlayerStatus.cri.min){
+            playerAttackStatus.cri = matchPlayerStatus.cri.min;
+        }else{
+            playerAttackStatus.cri = matchPlayerStatus.cri.current;
+        }
+
+        if(matchPlayerStatus.dex.current > matchPlayerStatus.dex.max){
+            playerAttackStatus.dex = matchPlayerStatus.dex.max;
+        }else if(matchPlayerStatus.dex.current > matchPlayerStatus.dex.min){
+            playerAttackStatus.dex = matchPlayerStatus.dex.min;
+        }else{
+            playerAttackStatus.dex = matchPlayerStatus.dex.current;
+        }
+
+        return playerAttackStatus;
+    }
+
+    /**
+     * playerIdに応じたプレイヤーの現在の防御能力取得
+     */
+    static getPlayerDefenseStatus(playerId){
+        if(this.playerStatus.playerId !== playerId){
+            //playerIdが存在しない
+            return null;
+        }
+        const matchPlayerStatus = this.playerStatus;
+        const playerDefenseStatus = {};
+        if(matchPlayerStatus.def.current > matchPlayerStatus.def.max){
+            playerDefenseStatus.def = matchPlayerStatus.def.max;
+        }else if(matchPlayerStatus.def.current < matchPlayerStatus.def.min){
+            playerDefenseStatus.def = matchPlayerStatus.def.min;
+        }else{
+            playerDefenseStatus.def = matchPlayerStatus.def.current;
+        }
+
+        if(matchPlayerStatus.avd.current > matchPlayerStatus.avd.max){
+            playerDefenseStatus.avd = matchPlayerStatus.avd.max;
+        }else if(matchPlayerStatus.avd.current < matchPlayerStatus.avd.min){
+            playerDefenseStatus.avd = matchPlayerStatus.avd.min;
+        }else{
+            playerDefenseStatus.avd = matchPlayerStatus.avd.current;
+        }
+
+        return playerDefenseStatus;
+    }
+
+    /**
+     * playerIdに応じたプレイヤーのステータス変動
+     */
+    static playerStatusFluctuation(playerId,status){
+        // TODO ステータスを更新する
+    }
 }
 
