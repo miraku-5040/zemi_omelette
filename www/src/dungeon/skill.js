@@ -1,6 +1,7 @@
 /* スキルの処理を行う */
 class Skill{
 
+// test
     static skillDataMap; //スキル内容を保存するMap (skilld : {内容})
     // スキル使用キャラの座標
 
