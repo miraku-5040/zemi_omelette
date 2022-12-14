@@ -1,6 +1,10 @@
 /* スキルの処理を行う */
 class Skill{
 
+    //playerから呼び出し
+    //スキル確認
+    //スキル実行
+
     static skillDataMap; //スキル内容を保存するMap (skilld : {内容})
     // スキル内容の形式 {scope:「範囲のデータ」, effect:「効果のデータ」}
 
@@ -10,6 +14,27 @@ class Skill{
 
     }
 
+    /* playerから通常攻撃を呼び出し */
+    static playerUseNormalAttack() {
+        // TODO
+    }
+
+    /* playerからスキル呼び出し */
+    static playerUseSkill(){
+        // TODO
+    }
+
+    /* gameからスキル情報確認とcontrolの操作を取得 */
+    static skillOperation(){
+        // TODO
+    }
+
+    /* スキル使用 */
+    static skillExe(){
+        // TODO
+    }
+
+// private
     /* スキル使用(player) */
     static playerUseSkill(skillId, playerId, nowX, nowY, direction){
         const skillUserData = {};
@@ -19,12 +44,27 @@ class Skill{
         skillUserData.nowX = nowX;
         skillUserData.nowY = nowY;
         skillUserData.direction = direction;
-            // TODO レベル、攻撃系のステータスをPlayerから取得する
+        skillUserData.level = Player.getPlayerLevel(playerId);
+        const playerAttackStatus = Player.getPlayerAttackStatus;
+        for(let key in playerAttackStatus){
+            skillUserData[key] = playerAttackStatus[key];
+        }
         this.useSkill(skillUserData); //共通のスキル処理
     }
     /* スキル使用(enemy) */
     static enemyUseSkill(skillId, nowX, nowY, direction){
-        // TODO
+        const skillUserData = {};
+        skillUserData.type = "enemy";
+        skillUserData.skillId = skillId;
+        skillUserData.nowX = nowX;
+        skillUserData.nowY = nowY;
+        skillUserData.direction = direction;
+        skillUserData.level = Enemy.getEnemyLevel(nowX, nowY);
+        const enemyAttackStatus = Enemy.getEnemyAttackStatus(nowX, nowY);
+        for(let key in enemyAttackStatus){
+            skillUserData[key] = playerAttackStatus[key];
+        }
+        this.useSkill(skillUserData); //共通のスキル処理
     }
     /* スキル使用(trap) */
     static trapUseSkill(skillId, nowX, nowY){
@@ -133,20 +173,43 @@ class Skill{
         const skillTakeData = []; //スキルを受けるキャラクターのステータス 存在しない場合はからの配列を返す
         switch(target){
             case "all":
-                // TODO プレイヤーとエネミーをチェック
+                const x = attackCoordinate.x;
+                const y = attackCoordinate.y;
+                if(Enemy.checkEnemy(x, y)){ //エネミーが存在する場合はステータス取得処理を行う
+                    // TODO エネミーのステータスを取得
+                }
+                const playerId = Player.getPlayerId(x, y);
+                if(playerId !== null){ //playerIdが存在する場合はステータス取得処理を行う
+                    const playerDefenseStatus = Player.getPlayerDefenseStatus(playerId);
+                    playerDefenseStatus.playerId = playerId;
+                    playerDefenseStatus.x = x;
+                    playerDefenseStatus.y = y;
+                    skillTakeData.push(playerDefenseStatus);
+                }
                 // item {type ,x ,y ,def ...}
                 break;
             case "player":
-                // TODO
+                const x = attackCoordinate.x;
+                const y = attackCoordinate.y;
+                const playerId = Player.getPlayerId(x, y);
+                if(playerId !== null){ //playerIdが存在する場合はステータス取得処理を行う
+                    const playerDefenseStatus = Player.getPlayerDefenseStatus(playerId);
+                    playerDefenseStatus.playerId = playerId;
+                    playerDefenseStatus.x = x;
+                    playerDefenseStatus.y = y;
+                    skillTakeData.push(playerDefenseStatus);
+                }
                 break;
             case "enemy":
-                // TODO
+                const x = attackCoordinate.x;
+                const y = attackCoordinate.y;
+                if(Enemy.checkEnemy(x, y)){ //エネミーが存在する場合はステータス取得処理を行う
+                    // TODO エネミーのステータスを取得
+                }
                 break;
             default:
                 break;
         }
-        // TODO 座標のプレイヤーの存在チェック
-        // TODO 防御系のステータスを取得
         return skillTakeData;
     }
 
