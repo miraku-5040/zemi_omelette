@@ -22,6 +22,31 @@
     font-weight: bold;
 }
 
+/* ホーム画面へ遷移するボタン */
+.cansel_button {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #eeeeee;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #eeeeee;
+    border-radius: 0;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    position: absolute;
+    top: 300px;
+    left: 10px;
+    width: 119px;
+    height: 38px;
+}
+
 /* パスワード変更画面へ遷移するボタン */
 .password_button {
     background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);

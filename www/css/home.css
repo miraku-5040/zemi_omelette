@@ -44,12 +44,17 @@
 
 /* サウンドアイコン */
 .sound_button {
-    background-color: rgb(177, 177, 177);
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #e6e6e6;
+    border-radius: 0;
     position: relative;
     transform: translateY(-90px);
     left: 225px;
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
 }
 
 .sound_icon {
@@ -156,7 +161,7 @@
 
 .notice_button {
     background-color: #F4F4E8;
-    border: solid 2px #e2e2d4;
+    border: solid 2px #c4c4b8;
     color: black;
     width: 450px;
     height: 70px;
@@ -172,7 +177,7 @@
     position: relative;
     left: 175px;
     background-color: #F4F4E8;
-    border: solid 2px #e2e2d4;
+    border: solid 2px #c4c4b8;
     color: black;
     width: 100px;
     height: 30px;
@@ -181,7 +186,7 @@
 /* プレゼントのみのCSS */
 .present_box {
     background-color: #F4F4E8;
-    border: solid 2px #e2e2d4;
+    border: solid 2px #c4c4b8;
     color: black;
     width: 420px;
     height: 60px;
@@ -206,6 +211,7 @@
 
 .present_button {
     background-color: #e2e2d4;
+    border: ;border: solid 2px #c2c2b5;
     color: black;
     position: relative;
     transform: translateY(-102px);
