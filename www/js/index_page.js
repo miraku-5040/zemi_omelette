@@ -10,8 +10,6 @@ function toSelectDanjyon() {
     go_sound();
     // ダンジョン選択画面へ遷移
     setTimeout('window.location.href = "html/danjyonSelect.html"', 600);
-    // 情報取得
-    getDanjyonData();
 }
 
 function toGatya() {
@@ -67,11 +65,22 @@ function voice_fire() {
     audio.play();
 }
 
+// プレゼント画面の受け取るボタンの見た目変更＆活性/不活性変更
+function presentReceive() {
+    // 音声再生
+    audio = new Audio("sound/succsess.m4a");
+    audio.play();
+    // ボタン変更
+    const presentButton = document.getElementById('present_button');
+    presentButton.style.backgroundColor = '#D9D9D9';
+    presentButton.disabled = true;
+}
+
 // お知らせ用モーダルウィンドウ用js
 //モーダルウィンドウを開く
 function noticeModalOpen() {
     // 音声再生
-    audio = new Audio("../sound/menu_open.m4a");
+    audio = new Audio("sound/menu_open.m4a");
     audio.play();
     // モーダルウィンドウを開く
     const modal = document.getElementById('noticeModal');
@@ -80,7 +89,7 @@ function noticeModalOpen() {
 
 function noticeModalClose() {
     // 音声再生
-    audio = new Audio("../sound/cansel.m4a");
+    audio = new Audio("sound/cansel.m4a");
     audio.play();
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('noticeModal');
@@ -91,7 +100,7 @@ function noticeModalClose() {
 //モーダルウィンドウを開く
 function presentModalOpen() {
     // 音声再生
-    audio = new Audio("../sound/menu_open.m4a");
+    audio = new Audio("sound/menu_open.m4a");
     audio.play();
     // モーダルウィンドウを開く
     const modal = document.getElementById('presentModal');
@@ -100,7 +109,7 @@ function presentModalOpen() {
 
 function presentModalClose() {
     // 音声再生
-    audio = new Audio("../sound/cansel.m4a");
+    audio = new Audio("sound/cansel.m4a");
     audio.play();
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('presentModal');

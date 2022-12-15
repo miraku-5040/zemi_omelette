@@ -10,8 +10,6 @@ function toSelectDanjyon() {
     go_sound();
     // ダンジョン選択画面へ遷移
     setTimeout('window.location.href = "danjyonSelect.html"', 600);
-    // 情報取得
-    getDanjyonData();
 }
 
 function toGameImage() {

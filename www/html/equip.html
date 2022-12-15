@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../css/equip.css">
 </head>
 
-<body>
+<body onload="getSoadData()">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
         <img class="player_image" src="../image/player.png">
@@ -65,16 +65,12 @@
 
         <!-- 武器リスト表示 -->
         <div class="item_list" id="items">
-            <div class="item_border" onclick="changeSoad()">
-                <img class="list_material" id="weapon" src="../image/soad/soad-provisional.png">
-                <p class="item_text_position">Lv1</p>
-            </div>
         </div>
 
         <div class="weapon_type_buttons">
-            <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this)">剣</button>
-            <button class="weapon_shield_button" id="shieldcolumn" onclick="weaponColumn(this)">盾</button>
-            <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this)">宝石</button>
+            <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this);getSoadData()">剣</button>
+            <button class="weapon_shield_button" id="shieldcolumn" onclick="weaponColumn(this);getShieldData()">盾</button>
+            <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this);getDecoraionData()">宝石</button>
         </div>
 
         <!-- 各画面への遷移ボタン -->

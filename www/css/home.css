@@ -170,7 +170,7 @@
 
 .modal-fotter {
     position: relative;
-    top: 55px;
+    top: 65px;
 }
 
 .modal_close_button {
@@ -210,8 +210,8 @@
 }
 
 .present_button {
-    background-color: #e2e2d4;
-    border: ;border: solid 2px #c2c2b5;
+    background-color: #f0f0b2;
+    border: solid 2px #c2c2b5;
     color: black;
     position: relative;
     transform: translateY(-102px);

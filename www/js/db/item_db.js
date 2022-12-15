@@ -33,3 +33,32 @@ function getItemData() {
         }
     }
 }
+
+// アイテム残数更新
+function updateItemSum(remaining) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    Item.set("sum", remaining)
+        .update()
+        .then(function (results) {
+            console.log(results);
+            setItemImage(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // アイテムの画像(仮)と残数をHTMLに埋め込む
+    function setItemImage(results) {
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            var item = results[i];
+            // 新しいHTML要素を作成
+            var itemHtml = '<div class="item_border" onclick="item_detail()"><img class="list_material" id="weapon" src="../image/item/item-provisional.png"><p class="item_text_position">×' + item.sum + '</p></div>';
+            // 作成した要素を追加
+            window.onload = function () {
+                document.getElementById("items").insertAdjacentHTML('beforeend', itemHtml)
+            }
+        }
+    }
+}
