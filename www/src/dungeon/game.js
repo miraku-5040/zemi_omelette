@@ -18,6 +18,8 @@ function initialize() {
     Player.initialize();
     //エネミーの準備
     Enemy.initialize();
+    //アイテムの準備
+    Item.initialize();
     //コントローラを準備する
     Control.initialize();
     // 開始フラグ
@@ -38,6 +40,7 @@ function loop() {
         case 'player':
             // プレイヤーのターン
             //ボタン入力待ち
+            //player,stay,move,attack,skillReady,itemSelect,menu
             mode = Player.playing()
             break;
         case 'stay':
@@ -57,26 +60,33 @@ function loop() {
             break;
         case 'skillReady':
             // スキルの前準備に関するとこ
-            Skill.skillReady();
-            mode = 'skillGo';
+            //skillGo or player or skillReady
+            mode = Skill.skillReady();
             break;
         case 'skillGo':
-            // スキルの前準備に関するとこ
+            // スキルの使用
             Skill.skillGo();
             mode = 'enemy';
             break;
-        case 'item':
-            // 道具に関するとこ
+        case 'itemSelect':
+            //アイテム選択
+            //'itemUse or player or itemSelect
+            mode = Item.itemSelect();
+            break;
+        case 'itemUse':
+            // アイテムの使用
             mode = 'enemy';
             break;
         case 'menu':
             // メニュー
+            mode = 'player';
+            break;
+        case 'trap':
             mode = 'enemy';
             break;
-        case 'field':
-            //トラップ
-            //落ちてるアイテム
-            // 階段なら mode = 'nextfloor'
+        case 'itemPick':
+            //Item.itemPick();
+            mode = 'enemy';
             break;
         case 'enemy':
             // 敵のターン

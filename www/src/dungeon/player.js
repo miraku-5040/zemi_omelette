@@ -2,8 +2,8 @@ class Player{
 
      static initialize () {
         this.playerStatus = {
-            playerId: 1,
-            playerName: 1,
+            playerId: 'P0',
+            playerName: '勇者',
             level: 1,
             //ここより下開発用データ
             hp: {current: 15,max: 15 , min: 0}, //体力
@@ -16,6 +16,7 @@ class Player{
             exp: 0,//これまでの経験値
             weapon:{skill: 1},
             job:{skill: 2},
+            items:[],
             now:  {x:9, y:6},
             next: {x:9, y:6},
             direction: 'down'
@@ -138,11 +139,13 @@ class Player{
         //ステージの位置更新
         Stage.moveStage(this.playerStatus.now.x, this.playerStatus.now.y);
         //足元チェック
-        if(true){
-            return 'enemy';
-        }else{
-            return 'field'
-        }
+        /*if(Item.checkItem(this.playerStatus.now.x, this.playerStatus.now.y)){
+            //アイテムがある
+            return 'itemPick'
+        }*/
+        return 'enemy'
+            
+    
           
     }
 
@@ -151,13 +154,12 @@ class Player{
         Player.playerUseNormalAttack(this.playerStatus.playerId);
     }
 
+    /* キャラスキル発火 */
     static skill(){
         Player.playerUseNormalAttack(this.playerStatus.playerId);
     }
 
-    /**
-     * キャラクターを画面の真ん中に配置する
-     * **/
+    /* キャラクターを画面の真ん中に配置する */
     static setCharacterImage() {
         // 画像を作成し配置する
         const characterImage = Image.getCharacterImage(1);
@@ -166,24 +168,18 @@ class Player{
         this.characterElement.appendChild(characterImage);
     }
 
-    /**
-     * 新しい座標をセットする
-     * **/
+    /* 新しい座標をセットする */
     static setCharacterPosition(){
         this.playerStatus.now.x = this.playerStatus.next.x
         this.playerStatus.now.y = this.playerStatus.next.y
     }
-    /**
-     * 現状維持の座標をセットする
-     * **/
+    /* 現状維持の座標をセットする */
     static steyCharacterPosition(){
         this.playerStatus.next.x = this.playerStatus.now.x
         this.playerStatus.next.y = this.playerStatus.now.y
     }
 
-    /**
-     * ターンによる満腹度の減少
-     * **/
+    /* ターンによる満腹度の減少 */
     static spDecrease(turn){
         if(turn%10 == 0){
             this.playerStatus.sp.current-=1;
@@ -191,13 +187,12 @@ class Player{
         }
     }
 
+    /* プレイヤーの今の座標を取得 */
     static getPlayerNowPosition(){
         return this.playerStatus.now
     }
 
-    /**
-     * 座標に応じたプレイヤーの存在チェック
-     */
+    /* 座標に応じたプレイヤーの存在チェック */
     static isPlayerExistence(x,y) {
         const nowCoordinate = this.playerStatus.now;
         if(nowCoordinate.x === x && nowCoordinate.y === y){
@@ -207,10 +202,8 @@ class Player{
         return false;
     }
 
-    /**
-     * 座標に応じたプレイヤーのplayerIdを取得
-     * 座標にプレイヤーが存在しない場合はNullを返す
-     */
+    /* 座標に応じたプレイヤーのplayerIdを取得
+     * 座標にプレイヤーが存在しない場合はNullを返す */
     static getPlayerId(x, y) {
         const nowCoordinate = this.playerStatus.now;
         if(nowCoordinate.x === x && nowCoordinate.y === y){
@@ -297,6 +290,10 @@ class Player{
         }
 
         return playerDefenseStatus;
+    }
+
+    static getPlayerItems(){
+        return Player.playerStatus.items;
     }
 
     /**

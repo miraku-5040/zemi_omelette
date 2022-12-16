@@ -3,18 +3,14 @@ class Image {
     static playerImages; //playerのimgElementのMap
     static enemyImages; //enemyのimgElementのMap
 
-    /**
-     * 画像の生成
-     * elementを持つ
-     * **/
+    /* 画像の生成, elementを持つ */
     static initialize() {
         this.createStageImages();
         this.createPlayerImages();
+        this.createItemImages();
     }
-    /**
-     *  画像の要素を作成
-     *  サンプル： <img src="img/stage_1.png" id="stage1">
-     * **/
+    /* 画像の要素を作成
+     *  サンプル： <img src="img/stage_1.png" id="stage1"> */
     static createElement(name,i){
         // 要素を作成
         var elem = document.createElement(`img`);
@@ -25,9 +21,7 @@ class Image {
         return elem;
     }
 
-    /**
-     * stageImagesに床、無、壁上右下左、角上右下左、道角上右下左の14個の画像が入る
-     * **/
+    /* stageImagesに床、無、壁上右下左、角上右下左、道角上右下左の14個の画像が入る */
     static createStageImages(){
         this.stageImages = [];
         for(let i=0; i < Config.stageImageTotal; i++){
@@ -43,9 +37,7 @@ class Image {
         }
     }
 
-    /**
-     * 回転させて挿入する処理
-     * **/
+    /* 回転させて挿入する処理 */
     static quadrupleDirection(image){
         for(let i=1; i < 4 ; i++){
         const newImage = image.cloneNode(false);
@@ -54,9 +46,7 @@ class Image {
         }
     }
 
-    /**
-     * playerImagesにプレイキャラクターの画像が入る
-     * **/
+    /* playerImagesにプレイキャラクターの画像が入る */
     static createPlayerImages(){
         const errorIndex = 0;
         const name = "player";
@@ -79,10 +69,8 @@ class Image {
         }
     }
 
-    /**
-     * enemyImagesにエネミーキャラクターの画像が入る
-     * 引数のArrayで指定したenemyIdの画像をセットする
-     */
+    /* enemyImagesにエネミーキャラクターの画像が入る
+     * 引数のArrayで指定したenemyIdの画像をセットする */
     static createEnemyImages(enemyIdArray = []){
         const errorIndex = 0;
         const name = "enemy";
@@ -107,27 +95,31 @@ class Image {
         });
     }
 
-    /**
-     * stageImagesの要素を取得
-     * **/
+    /* itemImagesにフィールド上に落ちているアイテムの画像を格納 */
+    static createItemImages(){
+        this.itemImages = [];
+        const image = this.createElement('item',1);
+        image.removeAttribute('id');
+        image.width = Config.stageImgWidth;
+        image.height = Config.stageImgHeight;
+        image.style.position = 'absolute';
+        this.itemImages.push(image);
+    }
+
+    /* stageImagesの要素を取得 */
      static getStageImage(index) {
         const image = this.stageImages[index - 1].cloneNode(true);
         return image;
     }
 
-    /**
-     * playerのimgをcharacterImagesの要素を取得
-     * 
-     * getPlayerImageに変更する
-     * **/
+    /* playerのimgをcharacterImagesの要素を取得
+     * getPlayerImageに変更する */
      static getCharacterImage(index) { 
         const matchImage = this.playerImages.get(index);
         return matchImage.cloneNode();
     }
 
-    /**
-     * playerImagesの要素を取得
-     */
+    /* playerImagesの要素を取得 */
     static getPlayerImage(playerId){
         const errorIndex = 0;
         const matchItem = this.playerImages.get(playerId);
@@ -139,9 +131,7 @@ class Image {
         return image;
     }
 
-    /**
-     * enemyImagesの要素を取得
-     */
+    /* enemyImagesの要素を取得 */
     static getEnamyImage(enemyId){
         const errorIndex = 0;
         const matchItem = this.enemyImages.get(enemyId);
@@ -151,6 +141,12 @@ class Image {
         }
         const image = matchItem.cloneNode();
         return image;
+    }
+
+    /* itemImagesの要素を取得 */
+    static getItemImage(index){
+        const image = this.itemImages[index].cloneNode(true)
+        return image
     }
 }
 

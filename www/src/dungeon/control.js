@@ -6,18 +6,18 @@ class Control{
     static initialize () {
         // キーボードの入力を確認する
         this.pressedKeyStatus = {
-            right: 0,
-            left: 0,
-            up: 0,
-            down: 0,
-            leftup: 0,
-            rightup: 0,
-            rightdown: 0,
-            leftdown: 0,
-            attack: 0,
-            defence: 0,
-            skill: 0,
-            item: 0
+            right: 0,       //右
+            left: 0,        //左
+            up: 0,          //上
+            down: 0,        //下
+            leftup: 0,      //左上
+            rightup: 0,     //右上
+            rightdown: 0,   //右下
+            leftdown: 0,    //左下
+            attack: 0,      //通常攻撃
+            defence: 0,     //ぼうぎょ
+            skill: 0,       //スキル攻撃
+            item: 0         //道具
 
         };
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
