@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="../css/danjyonSelect.css">
 </head>
 
-<body>
+<body onload="getDanjyonData()">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
         <img class="player_image" src="../image/player.png">
@@ -54,10 +54,7 @@
     <!-- ダンジョン情報表示 -->
     <div class="content_position">
         <div class="note" id="note">
-            <div>
-            <img class="note_button_image" src="../image/danjyonSelectButton.png" onclick="modalOpen()">
-            <p class="note_button_text">ダンジョン<br>の名前</p>
-            </div>
+            
         </div>
 
         <!-- 各画面への遷移ボタン -->
@@ -89,7 +86,7 @@
             </div>
             <div class="modal-body">
                 <img class="modal_image" src="../image/danjyon.jpeg">
-                <div class="modal_text">
+                <div class="modal_text" id="modal_text">
                     <p class="modal_title">ダンジョンの名前</p>
                     <p class="modal_note">ダンジョンの説明</p>
                 </div>
