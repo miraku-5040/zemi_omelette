@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../css/item.css">
 </head>
 
-<body>
+<body onload="getItemData()">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
         <img class="player_image" src="../image/player.png">
@@ -57,21 +57,14 @@
     <div class="content_position">
         <!-- アイテムリスト表示 -->
         <div class="item_list" id="items">
-            <div class="item_border" onclick="item_detail()">
-                <img class="list_material" id="weapon" src="../image/item/item-provisional.png">
-                <p class="item_text_position">×30</p>
-            </div>
-            <div class="item_border" onclick="item_detail()">
-                <img class="list_material" id="weapon" src="../image/item/item-provisional.png">
-                <p class="item_text_position">×30</p>
-            </div>
+
         </div>
 
         <div class="weapon_type_buttons">
-            <button class="weapon_other_button" id="othercolumn" onclick="itemColumn(this)">アイテム</button>
-            <button class="weapon_soad_button" id="soadcolumn" onclick="itemColumn(this)">剣</button>
-            <button class="weapon_shield_button" id="shieldcolumn" onclick="itemColumn(this)">盾</button>
-            <button class="weapon_decoration_button" id="decorationcolumn" onclick="itemColumn(this)">宝石</button>
+            <button class="weapon_other_button" id="othercolumn" onclick="itemColumn(this);getItemData()">アイテム</button>
+            <button class="weapon_soad_button" id="soadcolumn" onclick="itemColumn(this);getSoadData()">剣</button>
+            <button class="weapon_shield_button" id="shieldcolumn" onclick="itemColumn(this);getShieldData()">盾</button>
+            <button class="weapon_decoration_button" id="decorationcolumn" onclick="itemColumn(this);getDecoraionData()">宝石</button>
         </div>
 
         <!-- 各画面への遷移ボタン -->

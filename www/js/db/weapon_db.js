@@ -127,3 +127,48 @@ function updateWeaponData() {
         }
     }
 }
+
+// ガチャロジック
+function gatyaPull(gatyaNum) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    // 武器の全データ取得
+    Weapon.fetchAll()
+        .then(function (results) {
+            setTimeout(setGatyaResult(results, gatyaNum), 5000);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    function setGatyaResult(results, gatyaNum) {
+        // 初期化
+        document.getElementById("results").innerHTML = '';
+        for (var i = 1; i <= gatyaNum; i++) {
+            // 乱数発生(0から10)
+            var random = Math.floor(Math.random() * 11);
+            // 発生結果によって分岐してhtml追加
+            if (random == 0) {
+                raritySelect(results, "SSR", "gold");
+            } else if (1 <= random && random <= 5) {
+                raritySelect(results, "SR", "rgb(214, 0, 214)");
+            } else {
+                raritySelect(results, "R", "blue");
+            }
+        }
+    }
+
+    // レアリティ別に武器を選ぶ
+    function raritySelect(results, rarity, color) {
+        for (var i = 0; i <= results.length - 1; i++) {
+            var weapon = results[i];
+            if (weapon.weapon_rarity == rarity) {
+                // 背景色変更
+                var weaponHtml = '<img class="result_image" style="background-color: ' + color + '" src="../image/soad/soad-provisional.png">';
+                // 作成した要素を追加
+                document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+                break;
+            }
+        }
+    }
+}

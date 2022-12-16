@@ -12,6 +12,7 @@
     <script src="js/db/danjyon_db.js"></script>
     <script src="js/db/item_db.js"></script>
     <script src="js/db/weapon_db.js"></script>
+    <script src="js/db/other_db.js"></script>
     <!-- pageJS -->
     <script src="js/index_page.js"></script>
     <!-- CSS -->
@@ -53,7 +54,7 @@
     </div>
     <!-- その他のボタン -->
     <div class="other_icons">
-        <img class="icon" src="image/notice.png" onclick="noticeModalOpen()">
+        <img class="icon" src="image/notice.png" onclick="getNoticeData();noticeModalOpen()">
         <img class="icon" src="image/present.png" onclick="presentModalOpen()">
     </div>
     <!-- ユーザ情報表示 -->
@@ -107,9 +108,8 @@
             <div class="modal-header">
                 <h2>お知らせ</h2>
             </div>
-            <div class="modal-body">
-                <button class="notice_button"><h2>メンテナンスのお知らせ</h2>
-                <p>2022年12月23日にメンテナンスを行います。</p></button>
+            <div class="modal-body" id="notice_body">
+                
             </div>
             <div class="modal-fotter">
                 <button class="modal_close_button" onclick="noticeModalClose()">閉じる</button>
