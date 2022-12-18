@@ -9,6 +9,7 @@ class Enemy{
             enemyName:"スライム",//名前
             level: 1, //レベル
             distinction:2,//同モンスターの重複番号
+            direction :"down" //方向
             hp:{current:10, max:999, min:0}, 
             atk: {current: 2,max: 200 , min: 0},//攻撃力
             def: {current: 1,max: 2 , min: 0},//防御力
@@ -45,6 +46,7 @@ class Enemy{
             enemyName:"スライム",//名前
             level: 1, //レベル
             distinction:2,//同モンスターの重複番号
+            direction:"down",
             hp:{current:10, max:999, min:0}, 
             atk: {current: 2,max: 200 , min: 0},//攻撃力
             def: {current: 1,max: 2 , min: 0},//防御力
@@ -84,10 +86,6 @@ class Enemy{
         enemyLayerElement.appendChild(imgElement);
     }
 
-    /* ステータス変化 */
-    static updateStatus() {
-    }
-
     /* 移動先設定 */
     static updateNextMove() {
         /* 開発用に上下に動くようにする */
@@ -97,25 +95,31 @@ class Enemy{
                     return;
                 }
                 let next = {};
-                next.type = 'move';
-                if(this.checkAround(indexX,indexY)){
-                    next.x = indexX;
-                    next.y = indexY;
-                    element.next = next;
-                    return;
-                }
-                const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
-                if(result == "TypeError"){
-                    next.x = indexX;
-                    next.y = indexY;
-                    element.next = next;
-                    return;
-                }else{
-                    next.x = result.x;
-                    next.y = result.y;
-                    element.next = next;
-                    return;
-                }
+                /* move */
+                // next.type = 'move';
+                // if(this.checkAround(indexX,indexY)){
+                //     next.x = indexX;
+                //     next.y = indexY;
+                //     element.next = next;
+                //     return;
+                // }
+                // const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
+                // if(result == "TypeError"){
+                //     next.x = indexX;
+                //     next.y = indexY;
+                //     element.next = next;
+                //     return;
+                // }else{
+                //     next.x = result.x;
+                //     next.y = result.y;
+                //     element.next = next;
+                //     return;
+                // }
+
+                /* attack */
+                next.type = "attack";
+                element.next = next;
+                // TODO 処理を追加する
                     
             });
         });
@@ -133,6 +137,12 @@ class Enemy{
                 switch(element.next.type){
                     case "move": //移動の場合
                         this.moving(indexX, indexY);
+                        break;
+                    case "attack": //攻撃の場合
+                        console.log("enemy_attack_test"); //test
+                        Skill.enemyUseNormalAttack(indexX, indexY);
+                        Skill.skillReady();
+                        Skill.skillGo();
                         break;
                     default:
                         break;
@@ -196,61 +206,67 @@ class Enemy{
         return this.enemyStatusArray[x][y].level
     }
 
+    /* 座標に応じた敵の方向取得 */
+    static getDirection(x,y){
+        return this.enemyStatusArray[x][y].direction;
+    }
+
     /*座標に応じた敵の現在の攻撃能力取得*/
     static getEnemyAttackStatus(x,y){
         let enemyStatus = {};
-        if(this.enemyStatusArray[x][y].atk.current > this.enemyStatusArray.atk.max){
-            enemyStatus.atk = this.enemyStatusArray.atk.max
-        }else if(this.enemyStatusArray[x][y].atk.current < this.enemyStatusArray.atk.min){
-            enemyStatus.atk = this.enemyStatusArray.atk.min
+        if(this.enemyStatusArray[y][x].atk.current > this.enemyStatusArray[y][x].atk.max){
+            enemyStatus.atk = this.enemyStatusArray[y][x].atk.max
+        }else if(this.enemyStatusArray[y][x].atk.current < this.enemyStatusArray[y][x].atk.min){
+            enemyStatus.atk = this.enemyStatusArray[y][x].atk.min
         }else{
-            enemyStatus.atk = this.enemyStatusArray.atk.current
+            enemyStatus.atk = this.enemyStatusArray[y][x].atk.current
         }
 
-        if(this.enemyStatusArray[x][y].cri.current > this.enemyStatusArray.cri.max){
-            enemyStatus.cri = this.enemyStatusArray.cri.max
-        }else if(this.enemyStatusArray[x][y].cri.current < this.enemyStatusArray.cri.min){
-            enemyStatus.cri = this.enemyStatusArray.cri.min
+        if(this.enemyStatusArray[y][x].cri.current > this.enemyStatusArray[y][x].cri.max){
+            enemyStatus.cri = this.enemyStatusArray[y][x].cri.max
+        }else if(this.enemyStatusArray[y][x].cri.current < this.enemyStatusArray[y][x].cri.min){
+            enemyStatus.cri = this.enemyStatusArray[y][x].cri.min
         }else{
-            enemyStatus.cri = this.enemyStatusArray.cri.current
+            enemyStatus.cri = this.enemyStatusArray[y][x].cri.current
         }
 
-        if(this.enemyStatusArray[x][y].dex.current > this.enemyStatusArray.dex.max){
-            enemyStatus.dex = this.enemyStatusArray.dex.max
-        }else if(this.enemyStatusArray[x][y].dex.current < this.enemyStatusArray.dex.min){
-            enemyStatus.dex = this.enemyStatusArray.dex.min
+        if(this.enemyStatusArray[y][x].dex.current > this.enemyStatusArray[y][x].dex.max){
+            enemyStatus.dex = this.enemyStatusArray[y][x].dex.max
+        }else if(this.enemyStatusArray[y][x].dex.current < this.enemyStatusArray[y][x].dex.min){
+            enemyStatus.dex = this.enemyStatusArray[y][x].dex.min
         }else{
-            enemyStatus.dex = this.enemyStatusArray.dex.current
+            enemyStatus.dex = this.enemyStatusArray[y][x].dex.current
         }
         return  enemyStatus;
     }
 
     /*座標に応じた敵の現在の防御能力取得*/
     static getEnemyDefenceStatus(x,y){
-        let enemyStatus = {};
-        if(this.enemyStatusArray[x][y].def.current > this.enemyStatusArray.def.max){
-            enemyStatus.def = this.enemyStatusArray.def.max
-        }else if(this.enemyStatusArray[x][y].def.current < this.enemyStatusArray.def.min){
-            enemyStatus.def = this.enemyStatusArray.def.min
+        const enemyStatus = this.enemyStatusArray[y][x];
+        const enemyDefenceStatus = {};
+        if(enemyStatus.def.current > enemyStatus.def.max){
+            enemyDefenceStatus.def = enemyStatus.def.max
+        }else if(enemyStatus.def.current < enemyStatus.def.min){
+            enemyDefenceStatus.def = enemyStatus.def.min
         }else{
-            enemyStatus.def = this.enemyStatusArray.def.current
+            enemyDefenceStatus.def = enemyStatus.def.current
         }
 
-        if(this.enemyStatusArray[x][y].avd.current > this.enemyStatusArray.adv.max){
-            enemyStatus.adv = this.enemyStatusArray.adv.max
-        }else if(this.enemyStatusArray[x][y].adv.current < this.enemyStatusArray.adv.min){
-            enemyStatus.adv = this.enemyStatusArray.adv.min
+        if(enemyStatus.avd.current > enemyStatus.avd.max){
+            enemyDefenceStatus.avd = enemyStatus.avd.max
+        }else if(enemyStatus.avd.current < enemyStatus.avd.min){
+            enemyDefenceStatus.avd = enemyStatus.avd.min
         }else{
-            enemyStatus.adv = this.enemyStatusArray.adv.current
+            enemyDefenceStatus.avd = enemyStatus.avd.current
         }
-
-        return enemyStatus;
+        return enemyDefenceStatus;
     }
-
+    /* ステータス変化 */
     static enemyStatusFluctuation(x,y,status){
         //TODO
+        console.log("enemyステータス変化:"+status); //test
         for(let s in status){
-            this.enemyStatusArray[x][y][s].current += status.s
+            this.enemyStatusArray[y][x][s].current += status.s
         }
     }
 
