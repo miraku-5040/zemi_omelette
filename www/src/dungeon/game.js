@@ -20,6 +20,8 @@ function initialize() {
     Enemy.initialize();
     //アイテムの準備
     Item.initialize();
+    //
+    Skill.initialize();
     //コントローラを準備する
     Control.initialize();
     // 開始フラグ
