@@ -1,24 +1,117 @@
-/* 強化用アイテム一覧の枠 */
-.item_frame {
+/* アイテム一覧 */
+.item_list {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     flex-wrap: wrap;
     overflow: scroll;
-    border: inset 8px black;
+    border-top: 9px solid #e6e6e6;
+    border-right: 9px solid #adadad;
+    border-bottom: 9px solid #999999;
+    border-left: 9px solid #e6e6e6;
     background-color: white;
     padding: 10px 10px;
-    position: absolute;
-    top: 55px;
-    left: 70px;
-    width: 490px;
-    height: 185px;
+    position: relative;
+    top: 50px;
+    left: 50px;
+    width: 500px;
+    height: 165px;
 }
 
-/* 強化用アイテムの画像 */
-.weapon {
-    border: solid black;
+/* アイテムリスト内のアイテム */
+.item_border {
+    border: 2px solid black;
+    width: 44px;
+    height: 60px;
+}
+
+.list_material {
+    background-color: rgb(214, 0, 214);
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 10px solid white;
+    border-left: 2px solid white;
     width: 40px;
     height: 40px;
+}
+
+.item_text_position {
+    position: relative;
+    transform: translateY(-30px);
+    left: 8px;
+    font-weight: bold;
+}
+
+/* 種別ボタン */
+.weapon_type_buttons {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    position: relative;
+    transform: translateY(-150px);
+    left: 590px;
+}
+
+.weapon_soad_button {
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+    border-top: 4px solid rgb(252, 232, 121);
+    border-right: 4px solid rgb(192, 163, 0);
+    border-bottom: 4px solid rgb(192, 163, 0);
+    border-left: 4px solid rgb(252, 232, 121);
+    border-radius: 0px 20px 20px 0px;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    width: 50px;
+    height: 50px;
+}
+
+.weapon_shield_button {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #e6e6e6;
+    border-radius: 0px 20px 20px 0px;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    width: 50px;
+    height: 50px;
+}
+
+.weapon_decoration_button {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    border-top: 4px solid #e6e6e6;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #e6e6e6;
+    border-radius: 0px 20px 20px 0px;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
+     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
+     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
+    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
+    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
+    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
+    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    width: 50px;
+    height: 50px;
 }
 
 /* 意思決定ボタン達 */
