@@ -9,7 +9,7 @@ class Skill{
     // スキル内容の形式 {scope:「範囲のデータ」, effect:「効果のデータ」}
     static skillUserData; //スキル使用者のデータ
     static skillData; //Mapから取得したスキルデータ
-    static scopeArray;
+    static targetCoordinateArray; //スキル効果先座標のリスト
     static scopeLayerElement;
 
 // public
@@ -20,13 +20,13 @@ class Skill{
         this.skillDataMap = new Map();
         this.skillUserData = {};
         this.skillData = {};
-        this.scopeArray = [];
+        this.targetCoordinateArray = [];
         this.scopeLayerElement = document.getElementById("scope_layer");
         const scopeElement = document.createElement("div");
         scopeElement.style.position = "absolute";
         scopeElement.style.display = "block";
         scopeElement.style.margin = 0;
-        scopeElement.style.height = Config.stageImgWidth;
+        scopeElement.style.height = Config.stageImgHeight;
         scopeElement.style.width = Config.stageImgWidth; 
         scopeElement.style.backgroundColor = "red";
         scopeElement.style.opacity = 0.5;
@@ -43,22 +43,24 @@ class Skill{
 
     /**
      * playerからスキル呼び出し
-     * TODO playerにgetterを作成する
      */
     static playerUseSkill(skillId,playerId){
+        //スキル使用者のデータをセット
         const skillUserData = {};
         skillUserData.type = "player";
-        skillUserData.skillId = skillId;
         skillUserData.playerId = playerId;
-        //skillUserData.nowX = nowX; // TODO get
-        //skillUserData.nowY = nowY; // TODO get
-        //skillUserData.direction = direction; // TODO get
+        const playerNowPosition = Player.getPlayerNowPosition(playerId);
+        skillUserData.nowX = playerNowPosition.x;
+        skillUserData.nowY = playerNowPosition.y;
+        skillUserData.direction = Player.getPlayerDirection(playerId);
         skillUserData.level = Player.getPlayerLevel(playerId);
         const playerAttackStatus = Player.getPlayerAttackStatus;
-        for(let key in playerAttackStatus){
-            skillUserData[key] = playerAttackStatus[key];
-        }
+        skillUserData.attackStatus = playerAttackStatus;
         this.skillUserData = skillUserData;
+        //スキルデータをセットする
+        this.skillData = this.#setSkillData(skillId);
+        //スキル対象相対座標のリストをセットする
+        this.targetCoordinateArray = this.#createTargetCoordinateArray(this.skillData);
     }
 
     /**
@@ -77,12 +79,10 @@ class Skill{
         skillUserData.skillId = skillId;
         skillUserData.nowX = nowX;
         skillUserData.nowY = nowY;
-        //skillUserData.direction = direction; // TODO get
+        skillUserData.direction = Enemy.getDirection(nowX, nowY);
         skillUserData.level = Enemy.getEnemyLevel(nowX, nowY);
         const enemyAttackStatus = Enemy.getEnemyAttackStatus(nowX, nowY);
-        for(let key in enemyAttackStatus){
-            skillUserData[key] = playerAttackStatus[key];
-        }
+        skillUserData.attackStatus = enemyAttackStatus;
         this.skillUserData = skillUserData;
     }
 
@@ -106,21 +106,54 @@ class Skill{
      * スキル準備
      */
     static skillReady(){
-        /* スキルデータ取得 */
-        const skillId = skillUserData.skillId;
-        // Map存在チェック
-        if(!this.skillDataMap.has(skillId)){
-            // 指定したスキルidのデータがMapにない
-            this.#addSkillDataMap([skillId]);
-            skillData = this.skillDataMap.get(skillId);
+        if(this.skillData.skillId === this.normalAttackId){ //通常攻撃の場合は準備をスキップする
+            return;
         }
-        const skillData = Object.assign({}, this.skillDataMap.get(skillId)); //連想配列をディープコピー
-        const skillUserData = this.skillUserData;
+        /* 範囲を表示 */
+        // TODO
+        //this.#screenRenderingScope(this.targetCoordinateArray); //スキル範囲表示
+        
+        /* controlから操作を取得 */
+        // TODO 操作別の分岐を取得
 
-        /* 効果先を設定 */
+        /* 準備終了処理 */
+        //this.#deleteScreenRenderingScope(); //範囲表示の描画を削除
+    }
+
+    /**
+     * スキル使用
+     */
+    static skillGo(){
+        const skillData = this.skillData;
+        const targetCoordinateArray = this.targetCoordinateArray;
+        /* スキル効果実行 */
+        this.#effectTypeBranch(skillData, targetCoordinateArray)
+
+        /* スキル終了処理 */
+        this.#skillEndInitialize();
+    }
+
+// private
+    /* スキル終了の初期化 */
+    static #skillEndInitialize(){
+        this.skillUserData = {};
+        this.skillData = {};
+        this.scopeArray = [];
+    }
+
+    /* スキルデータをセットする */
+    static #setSkillData(skillId){
+        //Mapからスキルデータを取得する
+        if(!this.skillDataMap.has(skillId)){
+            // 指定したスキルidのデータがMapにない場合は取得して設定する
+            this.#addSkillDataMap([skillId]);
+        }
+        const skillData = JSON.parse(JSON.stringify(this.skillDataMap.get(skillId))); //ディープコピー
+        skillData.skillId = skillId;
+        //skillDataのtargetを絶対targetにする
         switch(skillData.effect.target){
             case "hostility": //スキル使用者から見た敵
-                switch(skillUserData.type){
+                switch(this.skillUserData.type){
                     case "player":
                         skillData.effect.target = "enemy";
                         break;
@@ -130,7 +163,7 @@ class Skill{
                 }
                 break;
             case "ally": //スキル使用者から見た味方
-                switch(skillUserData.type){
+                switch(this.skillUserData.type){
                     case "player":
                         skillData.effect.target = "Player";
                         break;
@@ -143,16 +176,21 @@ class Skill{
                 // "all", "player", "enemy"は加工しない
                 break;
         }
+        return skillData;
+    }
 
-        /* 範囲作成 */
-        const scopeArray = this.#scopeTypeBranch(skillData.scope); //対象座標の配列を作成
-        if(skillId === this.normalAttackId){ //通常攻撃の場合は準備を終了
-            this.skillData = skillData;
-            this.scopeArray = scopeArray;
-            return;
-        }
+    /* スキル対象相対座標のリストを作成する */
+    static #createTargetCoordinateArray(skillData){
+        const defaultDirection = "up";
+        /* リスト作成 */
+        const targetCoordinateArray = this.#scopeTypeBranch(skillData.scope);
+        /* 回転 */
+        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray(targetCoordinateArray, defaultDirection, this.skillUserData.direction);
+        return rotatedTargetCoordinateArray;
+    }
 
-        /* 範囲描画 */
+    /* スキル範囲を描画 */
+    static #screenRenderingScope(scopeArray){
         scopeArray.forEach((relativeCoordinate, index) => {
             let scopeElement = document.getElementById("scope_" + index);
             if(scopeElement === null){
@@ -165,59 +203,26 @@ class Skill{
             scopeElement.style.left = Config.stageImgWidth * attackCoordinate.y;
             this.scopeLayerElement.appendChild(scopeElement);
         });
+    }
 
-        /* controlから操作を取得 */
-        // TODO
-
-        /* 範囲描画削除 */
+    /* スキル範囲の描画を削除 */
+    static #deleteScreenRenderingScope(){
         while(true){
-            const scopeElement = this.scopeLayerElement.firstChild();
+            const scopeElement = this.scopeLayerElement.firstChild;
             if(scopeElement === null){
                 //子要素が存在しない場合削除処理を終了する
                 break;
             }
             scopeElement.remove()
         }
-
-        this.skillData = skillData;
-        this.scopeArray = scopeArray;
-        return;
     }
 
-    /**
-     * スキル使用
-     */
-    static skillGo(){
-        const skillData = this.skillData;
-        const scopeArray = this.scopeArray;
-        /* スキル効果実行 */
-        for(let scopeIndex in scopeArray){
-            let isSkillEnd = false;
-            const attackCoordinate = scopeArray[scopeIndex];
-            const skillTakeDataArray = this.#skillTakeCheckFindData(attackCoordinate, skillData.effect.target);
-            for(let takeDataIndex in skillTakeDataArray){ 
-                const skillTakeData = skillTakeDataArray[takeDataIndex];
-                isSkillEnd = this.#effectTypeBranch(skillData.effect, skillTakeData);
-                if(isSkillEnd){
-                    break;
-                }
-            }
-            if(isSkillEnd){
-                break;
-            }
-        }
-
-        /* スキル終了処理 */
-        // TODO
-    }
-
-// private
     /* スキル情報をDBから取得してskillDataMapにセットする (DB接続の修正を行う) */
     static #addSkillDataMap(skillIdArray = []){
         /* 開発用にデータをセット 指定したスキルidに一つ上のマスの敵に攻撃するスキルを設定*/
         skillIdArray.forEach((element) => {
-        skillData = {scope:{type:"one", x:0, y:-1}, effect:{type:"normal", target:"hostility"}};
-        this.skillDataMap.set(Number(element), skillData);
+            const skillData = {scope:{type:"one", x:0, y:-1}, effect:{type:"normal", target:"hostility"}};
+            this.skillDataMap.set(element, skillData);
         });
         /* end */
         // skillIdArray.forEach((skillId) => {
@@ -228,41 +233,38 @@ class Skill{
 
     /* スキル使用者を原点とする相対座標からステージの絶対座標に変換する */
     static #convertRelativeToAbsolute(relativeX, relativeY) {
-        const absoluteX = this.skillUserNowX + absoluteDifferenceX;
-        const absoluteY = this.skillUserNowY + absoluteDifferenceY;
+        const absoluteX = this.skillUserData.nowX + relativeX;
+        const absoluteY = this.skillUserData.nowY + relativeY;
         return {x:absoluteX, y:absoluteY}
     }
 
-    /* scopeType別に、スキル範囲座標のリストを作成する */
+    /* scopeType別に、スキル範囲相対座標のリストを作成する */
     static #scopeTypeBranch(skillScopeData){
-        const scopeArray = [];
+        let targetCoordinateArray = [];
         switch(skillScopeData.type){
             case "one":
-                scopeArray = scopeArray.concat(this.#scopeTypeOne(skillScopeData));
+                targetCoordinateArray = this.#scopeTypeOne(skillScopeData);
                 break;
             // TODO 範囲タイプを追加する
             default:
                 break;
         }
-        return scopeArray;
+        return targetCoordinateArray;
     }
 
     /* scopeType別の処理メソッド (one) */
     static #scopeTypeOne(skillScopeData){
         // 方向が上の状態のスキル範囲座標の配列を作成する
-        const scopeArray = [];
-        const nowDirection = "up";
-        const scopeArrayItem = {};
-        scopeArrayItem.x = this.skillUserData.x + skillScopeData.x;
-        scopeArrayItem.y = this.skillUserData.y + skillScopeData.y;
-        scopeArray.push(scopeArrayItem);
-        // スキル範囲座標の配列をスキルユーザの方向に回転する
-        const rotatedScopeArray = this.#rotateScopeArray(scopeArray, nowDirection, this.skillUserData.direction);
-        return rotatedScopeArray;
+        const targetCoordinateArray = [];
+        const targetCoordinateArrayItem = {};
+        targetCoordinateArrayItem.x = skillScopeData.x;
+        targetCoordinateArrayItem.y = skillScopeData.y;
+        targetCoordinateArray.push(targetCoordinateArrayItem);
+        return targetCoordinateArray;
     }
 
-    /* 相対座標を回転する */
-    static #rotateScopeArray(scopeArray, nowDirection, nextDirection){
+    /* スキル対象相対座標のリストを方向に回転する */
+    static #rotatetargetCoordinateArray(targetCoordinateArray, nowDirection, nextDirection){
         // 方向を数字(0~360)に変換する
         let nowAngle = 0;
         switch(nowDirection){
@@ -325,29 +327,27 @@ class Skill{
                 break;
         }
         // (45°, 90°, 180°)回転メソッドを呼び出して回転する
-        while(nowAngle === nextAngle){
-            let rotateAngle = Math.abs(nextAngle - nowAngle);
+        let rotatedTargetCoordinateArray = JSON.parse(JSON.stringify(targetCoordinateArray)); //ディープコピー
+        let rotateAngle = Math.abs(nextAngle - nowAngle);
+        while(rotateAngle > 0){
             if(rotateAngle >= 180){
-                scopeArray = this.#rotateOneHalf(scopeArray);// 180°回転
-                nowAngle +=180;
+                 rotatedTargetCoordinateArray = this.#rotateOneHalf(rotatedTargetCoordinateArray);// 180°回転
+                rotateAngle -=180;
             }else if(rotateAngle >= 90){
-                scopeArray = this.#rotateOneQuarter(scopeArray);// 90°回転
-                nowAngle += 90;
+                rotatedTargetCoordinateArray = this.#rotateOneQuarter(rotatedTargetCoordinateArray);// 90°回転
+                rotateAngle -= 90;
             }else{
-                scopeArray = this.#rotateOneEighth(scopeArray);// 45°回転
-                nowAngle += 45;
-            }
-            if(nowAngle >= 360){
-                nowAngle -= 360;
+                rotatedTargetCoordinateArray = this.#rotateOneEighth(rotatedTargetCoordinateArray);// 45°回転
+                rotateAngle -= 45;
             }
         }
-        return scopeArray;
+        return rotatedTargetCoordinateArray;
     }
 
     /* スキル範囲を右に45°回転する */
-    static #rotateOneEighth(scopeArray){
-        const rotatedScopeArray = [];
-        scopeArray.forEach((relativeCoordinate) => {
+    static #rotateOneEighth(targetCoordinateArray){
+        const rotatedTargetCoordinateArray = [];
+        targetCoordinateArray.forEach((relativeCoordinate) => {
             let nowX = relativeCoordinate.x;
             let nowY = relativeCoordinate.y;
             const range = Math.max(Math.abs(nowX), Math.abs(nowY));
@@ -373,85 +373,106 @@ class Skill{
                         break;
                 }
             }
-            const scopeArrayItem = {};
-            scopeArrayItem.x = nowX;
-            scopeArrayItem.y = nowY;
-            rotatedScopeArray.push(scopeArrayItem);
+            const targetCoordinateArrayItem = {};
+            targetCoordinateArrayItem.x = nowX;
+            targetCoordinateArrayItem.y = nowY;
+            rotatedTargetCoordinateArray.push(targetCoordinateArrayItem);
         });
-        return rotatedScopeArray;
+        return rotatedTargetCoordinateArray;
     }
 
     /* スキル範囲を右に90°回転する */
-    static #rotateOneQuarter(scopeArray){
-        scopeArray.forEach((relativeCoordinate) => {
-            const nowX = relativeCoordinate.x;
-            const nowY = relativeCoordinate.y;
-            relativeCoordinate.x = -nowY;
-            relativeCoordinate.y = nowX
+    static #rotateOneQuarter(targetCoordinateArray){
+        const rotatedTargetCoordinateArray = [];
+        targetCoordinateArray.forEach((relativeCoordinate) => {
+            const rotatedTargetCoordinateArrayItem = {};
+            rotatedTargetCoordinateArrayItem.x = -relativeCoordinate.y;
+            rotatedTargetCoordinateArrayItem.y = relativeCoordinate.x;
+            rotatedTargetCoordinateArray.push(rotatedTargetCoordinateArrayItem);
         });
-        return scopeArray;
+        return rotatedTargetCoordinateArray;
     }
 
     /* スキル範囲を右に180°回転する */
-    static #rotateOneHalf(scopeArray){
-        scopeArray.forEach((relativeCoordinate) => {
-            const nowX = relativeCoordinate.x;
-            const nowY = relativeCoordinate.y;
-            relativeCoordinate.x = -nowX;
-            relativeCoordinate.y = -nowY;
+    static #rotateOneHalf(targetCoordinateArray){
+        const rotatedTargetCoordinateArray = [];
+        targetCoordinateArray.forEach((relativeCoordinate) => {
+            const rotatedTargetCoordinateArrayItem = {};
+            rotatedTargetCoordinateArrayItem.x = -relativeCoordinate.x;
+            rotatedTargetCoordinateArrayItem.y = -relativeCoordinate.y;
+            rotatedTargetCoordinateArray.push(rotatedTargetCoordinateArrayItem);
         });
-        return scopeArray;
+        return rotatedTargetCoordinateArray;
     }
 
     /* 効果type別に分岐 */
-    static #effectTypeBranch(skillEffectData, skillTakeData) {
-        let isSkillStop = false;
+    static #effectTypeBranch(skillData, targetCoordinateArray) {
         // 効果内容の分岐
-        switch(skillEffectData.type){
+        switch(skillData.effect.type){
             case "normal":
-                isSkillStop = this.#effectTypeNormal(skillEffectData, skillTakeData);
+                this.#effectTypeNormal(skillData, targetCoordinateArray);
                 break;
             // TODO 追加する
             default:
                 break;
         }
-        return isSkillStop;
     }
 
     /* 効果type別の処理 (normal)*/
-    static #effectTypeNormal(skillEffectData, skillTakeData){
-        let isSkillStop = false
-        console.log("effectTypeNormal"); //test
-        // TODO スキルの処理
-        return isSkillStop;
+    static #effectTypeNormal(skillData, targetCoordinateArray){
+        // 修正する
+        for(let targetCoordinateArrayIndex in targetCoordinateArray){
+            let isSkillEnd = false;
+            const relativeTargetCoordinate = targetCoordinateArray[targetCoordinateArrayIndex];
+            const targetCoordinate = this.#convertRelativeToAbsolute(relativeTargetCoordinate.x, relativeTargetCoordinate.y);
+            const skillTakeDataArray = this.#skillTakeCheckFindData(targetCoordinate, skillData.effect.target);
+            for(let takeDataIndex in skillTakeDataArray){ 
+                const skillTakeData = skillTakeDataArray[takeDataIndex];
+                let damage = this.#normalDmaageCalc(this.skillUserData.attackStatus, skillTakeData);
+                const status = {};
+                status.hp = -damage;
+                if(skillTakeData.type === "player"){
+                    // 対象がplayer
+                    Player.playerStatusFluctuation(skillTakeData.playerId, status);
+                }else if(skillTakeData.type === "enemy"){
+                    //対象がenemy
+                    // TODO
+                }
+                if(isSkillEnd){
+                    break;
+                }
+            }
+            if(isSkillEnd){
+                break;
+            }
+        }
     }
 
     /* 対象の存在チェックとplayerの防御系ステータスを取得 */
     static #skillTakeCheckFindData(attackCoordinate, target){
         const skillTakeData = []; //スキルを受けるキャラクターのステータス 存在しない場合はからの配列を返す
+        const x = attackCoordinate.x;
+        const y = attackCoordinate.y;
         switch(target){
             case "all":
-                const x = attackCoordinate.x;
-                const y = attackCoordinate.y;
                 if(Enemy.checkEnemy(x, y)){ //エネミーが存在する場合はステータス取得処理を行う
                     // TODO エネミーのステータスを取得
                 }
-                const playerId = Player.getPlayerId(x, y);
-                if(playerId !== null){ //playerIdが存在する場合はステータス取得処理を行う
-                    const playerDefenseStatus = Player.getPlayerDefenseStatus(playerId);
-                    playerDefenseStatus.playerId = playerId;
+                const allPlayerId = Player.getPlayerId(x, y);
+                if(allPlayerId !== null){ //playerIdが存在する場合はステータス取得処理を行う
+                    const playerDefenseStatus = Player.getPlayerDefenseStatus(allPlayerId);
+                    playerDefenseStatus.type = "player";
+                    playerDefenseStatus.playerId = allPlayerId;
                     playerDefenseStatus.x = x;
                     playerDefenseStatus.y = y;
                     skillTakeData.push(playerDefenseStatus);
                 }
-                // item {type ,x ,y ,def ...}
                 break;
             case "player":
-                const x = attackCoordinate.x;
-                const y = attackCoordinate.y;
                 const playerId = Player.getPlayerId(x, y);
                 if(playerId !== null){ //playerIdが存在する場合はステータス取得処理を行う
                     const playerDefenseStatus = Player.getPlayerDefenseStatus(playerId);
+                    playerDefenseStatus.type = "player";
                     playerDefenseStatus.playerId = playerId;
                     playerDefenseStatus.x = x;
                     playerDefenseStatus.y = y;
@@ -459,8 +480,6 @@ class Skill{
                 }
                 break;
             case "enemy":
-                const x = attackCoordinate.x;
-                const y = attackCoordinate.y;
                 if(Enemy.checkEnemy(x, y)){ //エネミーが存在する場合はステータス取得処理を行う
                     // TODO エネミーのステータスを取得
                 }
@@ -472,8 +491,11 @@ class Skill{
     }
 
     /*  ダメージ計算 (normal)*/
-    static #normalDmaageCalc(){
-        // TODO
+    static #normalDmaageCalc(attackStatus, defenseStatus){
+        //攻撃力(*補助系)/２ー守備力(*補助系)/４
+        const damage = attackStatus.atk / 2 - defenseStatus.def / 4;
+        // TODO 修正する
+        return damage;
     }
     /* ダメージ計算 (magic) */
     static #magicDmaageCalc(){

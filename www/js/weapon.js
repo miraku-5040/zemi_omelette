@@ -21,7 +21,7 @@ function countUp() {
 
 function countUpMore() {
     let element = document.getElementById('counter');
-    element.value = 100;
+    element.value = element.max;
 }
 
 // 武器選択js

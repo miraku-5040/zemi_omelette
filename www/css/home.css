@@ -49,10 +49,10 @@
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
     border-left: 4px solid #e6e6e6;
-    border-radius: 0;
+    border-radius: 0px 20px 0px 0px;
     position: relative;
-    transform: translateY(-90px);
-    left: 225px;
+    transform: translateY(-96px);
+    left: 233px;
     width: 34px;
     height: 34px;
 }
