@@ -32,6 +32,7 @@ class Skill{
         scopeElement.style.opacity = 0.5;
         this. scopeElement = scopeElement;
         this.normalAttackId = "SA0000"; //通常攻撃のスキルid
+        this.defaultDirection = "up";
     }
 
     /**
@@ -76,7 +77,6 @@ class Skill{
     static enemyUseSkill(skillId, nowX, nowY){
         const skillUserData = {};
         skillUserData.type = "enemy";
-        skillUserData.skillId = skillId;
         skillUserData.nowX = nowX;
         skillUserData.nowY = nowY;
         skillUserData.direction = Enemy.getDirection(nowX, nowY);
@@ -84,21 +84,51 @@ class Skill{
         const enemyAttackStatus = Enemy.getEnemyAttackStatus(nowX, nowY);
         skillUserData.attackStatus = enemyAttackStatus;
         this.skillUserData = skillUserData;
+        //スキルデータをセットする
+        this.skillData = this.#setSkillData(skillId);
+        //スキル対象相対座標のリストをセットする
+        this.targetCoordinateArray = this.#createTargetCoordinateArray(this.skillData);
     }
 
     /**
      * trapからスキル呼び出し
-     * TODO 引数を考える
+     * スキル使用者のデータをセットする
      */
-    static trapUseSkill(skillId){
-        // TODO
+    static trapUseSkill(skillId, nowX, nowY){
+        const skillUserData =  {};
+        skillUserData.type = "trap";
+        skillUserData.nowX = nowX;
+        skillUserData.nowY = nowY;
+        skillUserData.direction = Trap.getDirection(nowX, nowY); //処理用に設定
+        skillUserData.level = Trap.getLevel(nowX, nowY); //Trapから取得するように変更する
+        //attackStatus
+        this.skillUserData = skillUserData;
+        //スキルデータをセットする
+        this.skillData = this.#setSkillData(skillId);
+        //スキル対象相対座標のリストをセットする
+        this.targetCoordinateArray = this.#createTargetCoordinateArray(this.skillData);
     }
 
     /**
      * itemからスキル呼び出し
-     * TODO 引数を考える
+     * アイテムを使用するplayerIdで設定する
      */
-    static itemUseSkill(skillId){
+    static itemUseSkill(skillId,playerId){
+        const skillUserData = {};
+        skillUserData.type = "item";
+        skillUserData.playerId = playerId;
+        const playerNowPosition = Player.getPlayerNowPosition(playerId);
+        skillUserData.nowX = playerNowPosition.x;
+        skillUserData.nowY = playerNowPosition.y;
+        skillUserData.direction = Player.getPlayerDirection(playerId);
+        skillUserData.level = Player.getPlayerLevel(playerId);
+        const playerAttackStatus = Player.getPlayerAttackStatus;
+        skillUserData.attackStatus = playerAttackStatus;
+        this.skillUserData = skillUserData;
+        //スキルデータをセットする
+        this.skillData = this.#setSkillData(skillId);
+        //スキル対象相対座標のリストをセットする
+        this.targetCoordinateArray = this.#createTargetCoordinateArray(this.skillData);
         // TODO
     }
 
@@ -181,11 +211,10 @@ class Skill{
 
     /* スキル対象相対座標のリストを作成する */
     static #createTargetCoordinateArray(skillData){
-        const defaultDirection = "up";
         /* リスト作成 */
         const targetCoordinateArray = this.#scopeTypeBranch(skillData.scope);
         /* 回転 */
-        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray(targetCoordinateArray, defaultDirection, this.skillUserData.direction);
+        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray(targetCoordinateArray, this.defaultDirection, this.skillUserData.direction);
         return rotatedTargetCoordinateArray;
     }
 
