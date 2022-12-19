@@ -19,15 +19,18 @@ class Item{
         this.itemArray[5][4] = {
             itemId: 'IW000',//アイテムID
             itemName: 'ひのきのぼう',
-            skill:'SA001'
+            skill:'SA001',
+            usageLimit: 0
             }
         this.itemArray[3][6] = {
             itemId: 'IS000',//アイテムID
-            itemName: '木の盾'
+            itemName: '木の盾',
+            usageLimit: 0
             }
         this.itemArray[10][10] = {
             itemId: 'IT000',//アイテムID
-            itemName: '薬草'
+            itemName: '薬草',
+            usageLimit: 1
             }
          this.screenRenderingAll();
     }
@@ -53,7 +56,8 @@ class Item{
 
     /*moveのアイテムが足元にあるか判定*/
     static checkItem(x,y){
-        if(this.itemArray[x][y] === this.noDataItem){
+        console.log(this.itemArray[y][x])
+        if(this.itemArray[y][x] === this.noDataItem){
             return false
         }
         return true
@@ -61,21 +65,50 @@ class Item{
 
     /* gameで呼ばれる,コントローラ待ち*/
     static itemSelect(){
-        /*switch(){
-        default:
-            return 'player';
+        this.itemSelectIndex = Control.getItemListIndex()
+        switch(true){
+            case 40 > Number(this.itemSelectIndex) && 0 < Number(this.itemSelectIndex):
+                return 'itemUse'
+            case 'cansel' == this.itemSelectIndex:
+                console.log('キャンセル')
+                return 'player'
+            default:
+                return  'itemSelect'
+        }
+    }
+
+        /* アイテムを使う */
+    static itemUse(){
+        const useItem = Player.getPlayerItems[this.itemSelectIndex]
+        //useItem.skill
+        console.log("アイテムを使った:"+useItem)
+        
+        /*switch(Player.getPlayerItems[this.itemSelectIndex].usageLimit){
+             //一回しか使えない場合
+            //複数回使用
+            //使用制限なし
+            case 0:
+            default :
+                Player.getPlayerItems[this.itemSelectIndex].usageLimit -= 1
         }*/
+
+       
+
     }
 
     /*アイテムを拾う*/
-    static itemPick(x,y){
-        if(this.getPlayerItems().length > Config.playerItemTotal){
+    static itemPick(){
+        let position = Player.getPlayerNowPosition()
+        if(Player.getPlayerItems().length > Config.playerItemTotal){
                 //持てない
-                return ''
+                console.log('アイテムを拾えなかった')
+                return 'enemy'
             }
         //持てる
-        Player.getPlayerItems.push(this.itemArray[x][y])
-        this.itemArray[x][y] = this.noDataItem
+        Player.getPlayerItems.push(this.itemArray[position.y][position.x])
+        this.itemArray[position.y][position.x] = this.noDataItem
+        console.log('アイテムを拾った')
+        return 'enemy'
     }
 
     /*アイテムを置くまたは交換する*/
@@ -83,14 +116,6 @@ class Item{
         Player.getPlayerItems.splice(index);
     }
 
-    /* アイテムを使う */
-    static itemUse(index){
-        //一回しか使えない場合
-        Player.getPlayerItems.splice(index);
-        //複数回使用
-        //使用制限なし
-        
-    }
-
 }
+
 

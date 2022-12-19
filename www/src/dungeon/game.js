@@ -75,7 +75,7 @@ function loop() {
             break;
         case 'itemUse':
             // アイテムの使用
-            mode = 'enemy';
+            mode = Item.itemUse();
             break;
         case 'menu':
             // メニュー
@@ -85,7 +85,7 @@ function loop() {
             mode = 'enemy';
             break;
         case 'itemPick':
-            //Item.itemPick();
+            Item.itemPick();
             mode = 'enemy';
             break;
         case 'enemy':

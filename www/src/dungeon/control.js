@@ -18,11 +18,14 @@ class Control{
             defence: 0,     //ぼうぎょ
             skill: 0,       //スキル攻撃
             item: 0         //道具
-
         };
+
+        this.itemListIndex;
+
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
             // キーボードが押された場合
+            console.log(e.key)
             switch(e.key) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left += 1;
@@ -104,6 +107,8 @@ class Control{
             }
         });
     }
+
+
     /* pressedKeyStatus取得 */
     static getPressedKeyStatus(){
         //どのキーがtrueか確認
@@ -184,5 +189,18 @@ class Control{
             return 'item';
         }
         return false;
+    }
+
+    
+    /* 画面のタップ内容を取得 */
+    static itemSelect(id){
+        this.itemListIndex = id;
+    }
+    static getItemListIndex(){
+        if(this.itemListIndex === undefined){
+            return  null
+        }else{
+            return this.itemListIndex.split('_')[3]
+        }
     }
 }
