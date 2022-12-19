@@ -49,6 +49,7 @@ class Item{
     static screenRenderingOne(indexX, indexY) {
         const itemLayerElement = document.getElementById("item_layer");
         const imgElement = Image.getItemImage(0);
+        imgElement.id = indexX+"_"+indexY;
         imgElement.style.top = indexY * Config.stageImgHeight + "px";
         imgElement.style.left = indexX * Config.stageImgWidth + "px";
         itemLayerElement.appendChild(imgElement);
@@ -56,7 +57,6 @@ class Item{
 
     /*moveのアイテムが足元にあるか判定*/
     static checkItem(x,y){
-        console.log(this.itemArray[y][x])
         if(this.itemArray[y][x] === this.noDataItem){
             return false
         }
@@ -91,30 +91,35 @@ class Item{
             default :
                 Player.getPlayerItems[this.itemSelectIndex].usageLimit -= 1
         }*/
-
-       
-
-    }
-
-    /*アイテムを拾う*/
-    static itemPick(){
-        let position = Player.getPlayerNowPosition()
-        if(Player.getPlayerItems().length > Config.playerItemTotal){
-                //持てない
-                console.log('アイテムを拾えなかった')
-                return 'enemy'
-            }
-        //持てる
-        Player.getPlayerItems.push(this.itemArray[position.y][position.x])
-        this.itemArray[position.y][position.x] = this.noDataItem
-        console.log('アイテムを拾った')
-        return 'enemy'
     }
 
     /*アイテムを置くまたは交換する*/
     static itemPut(index){
         Player.getPlayerItems.splice(index);
     }
+
+
+    /*アイテムを拾う*/
+    static itemPick(){
+        let position = Player.getPlayerNowPosition()
+        let playerItems = Player.getPlayerItems()
+        if(playerItems.length > Config.playerItemTotal){
+                //持てない
+                console.log('アイテムを拾えなかった')
+                return 'enemy'
+            }
+        //持てる
+        Player.addPlayerItems(this.itemArray[position.y][position.x])
+        this.itemArray[position.y][position.x] = this.noDataItem;
+        this.itemImageRemove(position.x,position.y)
+        return 'enemy'
+    }
+
+    static itemImageRemove(x,y){
+        console.log(x+"_"+y)
+        document.getElementById(x+"_"+y).remove();
+    }
+
 
 }
 

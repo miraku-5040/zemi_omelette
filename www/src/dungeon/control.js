@@ -25,7 +25,7 @@ class Control{
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
             // キーボードが押された場合
-            console.log(e.key)
+            //console.log(e.key)
             switch(e.key) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left += 1;

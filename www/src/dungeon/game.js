@@ -20,7 +20,7 @@ function initialize() {
     Enemy.initialize();
     //アイテムの準備
     Item.initialize();
-    //
+    //スキルの準備
     Skill.initialize();
     //コントローラを準備する
     Control.initialize();

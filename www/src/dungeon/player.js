@@ -144,10 +144,10 @@ class Player{
         //ステージの位置更新
         Stage.moveStage(this.playerStatus.now.x, this.playerStatus.now.y);
         //足元チェック
-        /*if(Item.checkItem(this.playerStatus.now.x, this.playerStatus.now.y)){
+        if(Item.checkItem(this.playerStatus.now.x, this.playerStatus.now.y)){
             //アイテムがある
             return 'itemPick'
-        }*/
+        }
         return 'enemy'
             
     
@@ -322,7 +322,12 @@ class Player{
     }
 
     static getPlayerItems(){
-        return Player.playerStatus.items;
+        return Tool.deepCopy(Player.playerStatus.items);
+    }
+
+    static addPlayerItems(item){
+        this.playerStatus.items.push(item)
+        console.log(this.playerStatus.items)
     }
 
     /**

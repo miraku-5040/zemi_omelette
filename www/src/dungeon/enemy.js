@@ -192,12 +192,12 @@ class Enemy{
             for(let y = -1; y <= 1; y++){
                 if(Player.isPlayerExistence(enemyX + x, enemyY + y)){
                     //プレイヤーがいる
-                    return false
+                    return true;
                 }
             }
         }
         //いない
-        return true
+        return false;
     }
 
     /*座標に応じた敵のレベル取得*/
