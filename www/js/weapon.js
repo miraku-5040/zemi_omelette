@@ -50,6 +50,26 @@ function changeSoad() {
     document.getElementById('weapon').src = soad;
 }
 
+function changeShield() {
+    audio = new Audio("../sound/change.m4a");
+    audio.play();
+    // 装備を入れ替える
+    const soad = document.getElementById('soad').src;
+    const selectWeapon = document.getElementById('weapon').src;
+    document.getElementById('soad').src = selectWeapon;
+    document.getElementById('weapon').src = soad;
+}
+
+function changeDecoration() {
+    audio = new Audio("../sound/change.m4a");
+    audio.play();
+    // 装備を入れ替える
+    const soad = document.getElementById('soad').src;
+    const selectWeapon = document.getElementById('weapon').src;
+    document.getElementById('soad').src = selectWeapon;
+    document.getElementById('weapon').src = soad;
+}
+
 // 装備js
 function equip() {
     audio = new Audio("../sound/equip.m4a");

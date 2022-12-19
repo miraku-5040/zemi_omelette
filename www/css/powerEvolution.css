@@ -135,6 +135,7 @@
 /* モーダルウィンドウの中身 */
 .modal-content {
   background-color: #f4f4f4;
+  border: inset 7px black;
   margin: 60px 110px;
   width: 450px;
   height: 250px;

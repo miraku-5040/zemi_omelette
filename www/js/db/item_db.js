@@ -45,7 +45,7 @@ function getItemSum() {
             console.log(err);
         });
 
-    // アイテムの画像(仮)と残数をHTMLに埋め込む
+    // アイテムの残数をHTMLに埋め込む
     function setItemImage(results) {
         var item = results[0];
         // 残数を埋め込む
@@ -60,26 +60,21 @@ function updateItemSum() {
     var Item = ncmb.DataStore(this.ITEM_DB);
     let element = document.getElementById('counter');
     var remaining = Number(element.max) - Number(element.value);
+    console.log(remaining);
     Item.setIncrement("level", remaining)
         .update()
         .then(function (results) {
-            console.log(results[0].sum);
+            getItemSum();
         })
         .catch(function (err) {
             console.log(err);
         });
 
-    // アイテムの画像(仮)と残数をHTMLに埋め込む
-    function setItemImage(results) {
-        // 情報取得
-        for (var i = 0; i <= results.length - 1; i++) {
-            var item = results[i];
-            // 新しいHTML要素を作成
-            var itemHtml = '<div class="item_border" onclick="item_detail()"><img class="list_material" id="weapon" src="../image/item/item-provisional.png"><p class="item_text_position">×' + item.sum + '</p></div>';
-            // 作成した要素を追加
-            window.onload = function () {
-                document.getElementById("items").insertAdjacentHTML('beforeend', itemHtml)
-            }
-        }
+    // アイテムの残数をHTMLに埋め込む
+    function setItemSum(results) {
+        var item = results[0];
+        // 残数を埋め込む
+        let element = document.getElementById('counter');
+        element.max = item.sum;
     }
 }

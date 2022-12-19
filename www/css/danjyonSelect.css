@@ -14,7 +14,10 @@
     gap: 10px;
     flex-wrap: wrap;
     overflow: scroll;
-    border: inset 10px black;
+    border-top: 7px solid #e6e6e6;
+    border-right: 7px solid #adadad;
+    border-bottom: 7px solid #999999;
+    border-left: 7px solid #e6e6e6;
     padding: 13px;
     position: absolute;
     top: 75px;
@@ -67,6 +70,7 @@
 /* モーダルウィンドウの中身 */
 .modal-content {
   background-color: #f4f4f4;
+  border: inset 7px black;
   margin: 60px 110px;
   width: 450px;
   height: 250px;

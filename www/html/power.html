@@ -13,6 +13,7 @@
     <script src="../js/db/danjyon_db.js"></script>
     <script src="../js/db/item_db.js"></script>
     <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/other_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
     <!-- CSS -->
@@ -23,28 +24,28 @@
     <link rel="stylesheet" href="../css/power.css">
 </head>
 
-<body>
+<body onload="getShorteCharacterData()">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
         <img class="player_image" src="../image/player.png">
         <meter class="exp_ber" max="100" value="50"></meter>
-        <p class="rank_text">ランク<br>100</p>
+        <p class="rank_text" id="rank_text"></p>
         <div class="other">
             <div class="bers">
                 <div class="ber_position">
                     <p class="hp_ber_title">HP</p>
-                    <meter class="hp_ber" max="100" value="50"></meter>
-                    <p class="hp_ber_amount">50/100</p>
+                    <meter class="hp_ber" id="hp_ber" max="100" value="0"></meter>
+                    <p class="hp_ber_amount" id="hp_ber_amount"></p>
                 </div>
                 <div class="ber_position">
                     <p class="mp_ber_title">MP</p>
-                    <meter class="mp_ber" max="100" value="90">90%</meter>
-                    <p class="mp_ber_amount">90/100</p>
+                    <meter class="mp_ber" id="mp_ber" max="100" value="0"></meter>
+                    <p class="mp_ber_amount" id="mp_ber_amount"></p>
                 </div>
             </div>
             <div class="exp_content">
-                <p class="exp_text">Exp：10000/20000</p>
-                <meter class="exp_ber" max="100" value="50"></meter>
+                <p class="exp_text" id="exp_text"></p>
+                <meter class="exp_ber" id="exp_ber" max="10000" value="0"></meter>
             </div>
         </div>
     </div>
@@ -55,11 +56,11 @@
 
     <!-- 強化方法選択 -->
     <div class="power_method_buttons">
-        <button class="power_button" onclick="toPowerStrengthen()">
+        <button class="power_button" onclick="toWeaponPower()">
                 <img class="power_icon" src="../image/power_icon/power.png">
                 <p class="power_method_button_text">強化</p></button>
 
-        <button class="power_button" onclick="toPowerEvolution()">
+        <button class="power_button" onclick="toWeaponEvo()">
                 <img class="power_icon" src="../image/power_icon/morepower.png">
                 <p class="power_method_button_text">進化</p></button>
     </div>
