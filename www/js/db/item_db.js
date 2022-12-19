@@ -61,20 +61,30 @@ function updateItemSum() {
     let element = document.getElementById('counter');
     var remaining = Number(element.max) - Number(element.value);
     console.log(remaining);
-    Item.setIncrement("level", remaining)
-        .update()
+    Item.equalTo("item_id", 1)
+        .fetch()
         .then(function (results) {
-            getItemSum();
+            console.log(results);
+            results.set("sum", Number(remaining));
+            results.update();
         })
         .catch(function (err) {
             console.log(err);
         });
 
-    // アイテムの残数をHTMLに埋め込む
-    function setItemSum(results) {
-        var item = results[0];
-        // 残数を埋め込む
-        let element = document.getElementById('counter');
-        element.max = item.sum;
-    }
+    Item.equalTo("item_id", 1)
+        .fetchAll()
+        .then(function (results) {
+            setItemSum(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+// アイテムの残数をHTMLに埋め込む
+function setItemSum(results) {
+    var item = results[0];
+    // 残数を埋め込む
+    let element = document.getElementById('counter');
+    element.max = item.sum;
 }
