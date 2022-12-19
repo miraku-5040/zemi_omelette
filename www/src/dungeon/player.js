@@ -192,9 +192,21 @@ class Player{
         }
     }
 
-    /* プレイヤーの今の座標を取得 */
-    static getPlayerNowPosition(){
-        return this.playerStatus.now
+    /**
+     * playerIdからプレイヤーの現在座標を取得する
+     * playerIdが存在しない場合はNullを返す
+     * 引数なしの場合は最初のプレイヤーの現在座標を返す
+     */
+    static getPlayerNowPosition(playerId){
+        if(playerId === undefined){
+            //引数なしの場合
+            return this.playerStatus.now;
+        }
+        if(this.playerStatus.playerId !== playerId){
+            //playerIdが存在しない
+            return null;
+        }
+        return this.playerStatus.now;
     }
 
     /* 座標に応じたプレイヤーの存在チェック */
@@ -228,6 +240,18 @@ class Player{
             return null;
         }      
         return this.playerStatus.level;
+    }
+
+    /**
+     * playerIdからプレイヤーの方向を取得する
+     * playerIdが存在しない場合はNullを返す
+     */
+    static getPlayerDirection(playerId){
+        if(this.playerStatus.playerId !== playerId){
+            //playerIdが存在しない
+            return null;
+        }
+        return this.playerStatus.direction;
     }
     
     /**
