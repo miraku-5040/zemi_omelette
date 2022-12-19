@@ -12,6 +12,7 @@
     <script src="../js/db/danjyon_db.js"></script>
     <script src="../js/db/item_db.js"></script>
     <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/other_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
     <!-- CSS -->
@@ -22,28 +23,28 @@
     <link rel="stylesheet" href="../css/danjyonSelect.css">
 </head>
 
-<body onload="getDanjyonData()">
+<body onload="getShorteCharacterData();getDanjyonData()">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
         <img class="player_image" src="../image/player.png">
         <meter class="exp_ber" max="100" value="50"></meter>
-        <p class="rank_text">ランク<br>100</p>
+        <p class="rank_text" id="rank_text"></p>
         <div class="other">
             <div class="bers">
                 <div class="ber_position">
                     <p class="hp_ber_title">HP</p>
-                    <meter class="hp_ber" max="100" value="50"></meter>
-                    <p class="hp_ber_amount">50/100</p>
+                    <meter class="hp_ber" id="hp_ber" max="100" value="0"></meter>
+                    <p class="hp_ber_amount" id="hp_ber_amount"></p>
                 </div>
                 <div class="ber_position">
                     <p class="mp_ber_title">MP</p>
-                    <meter class="mp_ber" max="100" value="90">90%</meter>
-                    <p class="mp_ber_amount">90/100</p>
+                    <meter class="mp_ber" id="mp_ber" max="100" value="0"></meter>
+                    <p class="mp_ber_amount" id="mp_ber_amount"></p>
                 </div>
             </div>
             <div class="exp_content">
-                <p class="exp_text">Exp：10000/20000</p>
-                <meter class="exp_ber" max="100" value="50"></meter>
+                <p class="exp_text" id="exp_text"></p>
+                <meter class="exp_ber" id="exp_ber" max="10000" value="0"></meter>
             </div>
         </div>
     </div>
@@ -54,7 +55,9 @@
     <!-- ダンジョン情報表示 -->
     <div class="content_position">
         <div class="note" id="note">
-            
+            <div><img class="note_button_image" id="1" src="../image/danjyonSelectButton.png" onclick="modalOpen();searchDanjyonData(this)" value="1">
+                <p class="note_button_text">炎のダンジョン</p>
+            </div>
         </div>
 
         <!-- 各画面への遷移ボタン -->
@@ -97,6 +100,33 @@
             </div>
         </div>
     </div>
+    <script>
+        // ダンジョン情報詳細取得
+        function searchDanjyonData(element) {
+            var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+            var Danjyon = ncmb.DataStore(this.DANJYON_DB);
+            var danjyonId = document.getElementById(element.id);
+            Danjyon.equalTo("danjyon_id", danjyonId)
+                .fetchAll()
+                .then(function(results) {
+                    setDanjyonDetail(results);
+                })
+                .catch(function(err) {
+                    console.log("ng" + err);
+                });
+
+            // ダンジョンの説明をHTMLに埋め込む
+            function setDanjyonDetail(results) {
+                // 初期化
+                document.getElementById("modal_text").innerHTML = '';
+                // 情報取得
+                // 新しいHTML要素を作成
+                var danjyonHtml = '<p class="modal_title" >' + results.danjyon_name + '</p><p class="modal_note">' + results.danjyon_detail + '</p>';
+                // 作成した要素を追加
+                document.getElementById("modal_text").insertAdjacentHTML('beforeend', danjyonHtml);
+            }
+        }
+    </script>
 </body>
 
 </html>

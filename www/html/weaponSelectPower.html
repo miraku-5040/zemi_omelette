@@ -8,9 +8,9 @@
     <script src="../components/loader.js">
     </script>
     <!-- DBJS -->
-    <script src="js/db/danjyon_db.js"></script>
-    <script src="js/db/item_db.js"></script>
-    <script src="js/db/weapon_db.js"></script>
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
     <!-- CSS -->
@@ -20,13 +20,19 @@
     <!-- 進化画面のCSS -->
     <link rel="stylesheet" href="../css/weaponSelect.css">
 </head>
-<body>
+<body onload="getPowerSoadData()">
     <!-- 強化対象アイテム一覧 -->
-    <div class="item_frame">
-        <img class="weapon" src="../image/item/item-provisional.png" onclick="toPowerStrengthen()">
+    <div class="item_list" id="items">
+        <div class="item_border" onclick="toPowerEvolution()"><img class="list_material" id="weapon" src="../image/item/item-provisional.png"><p class="item_text_position">Lv10</p></div>
+    </div>
+
+    <div class="weapon_type_buttons">
+        <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this);getPowerSoadData()">剣</button>
+        <button class="weapon_shield_button" id="shieldcolumn" onclick="weaponColumn(this);getPowerShieldData()">盾</button>
+        <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this);getPowerDecoraionData()">宝石</button>
     </div>
     <div class="decition_buttons">
-        <button class="cansel" onclick="toPowerStrengthen()">キャンセル</button>
+        <button class="cansel" onclick="toPowerEvolution()">キャンセル</button>
     </div>
 </body>
 </html>

@@ -10,7 +10,10 @@
 /* アイテム単品 */
 .material {
     background-color: white;
-    border: inset 4px black;
+    border-top: 4px solid #e6e6e6;
+    border-right: 4px solid #adadad;
+    border-bottom: 4px solid #999999;
+    border-left: 4px solid #e6e6e6;
     width: 30px;
     height: 30px;
 }
@@ -46,7 +49,10 @@
     gap: 10px;
     flex-wrap: wrap;
     overflow: scroll;
-    border: inset 9px black;
+    border-top: 9px solid #e6e6e6;
+    border-right: 9px solid #adadad;
+    border-bottom: 9px solid #999999;
+    border-left: 9px solid #e6e6e6;
     background-color: white;
     padding: 10px 10px;
     position: absolute;
