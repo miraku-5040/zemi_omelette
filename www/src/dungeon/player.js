@@ -108,6 +108,11 @@ class Player{
         case 'skill2':
             Skill.playerUseSkill(this.playerStatus.job.skill,this.playerStatus.playerId);
             return 'skillReady'
+        case 'item':
+            console.log('item')
+            const elem = document.getElementById('itemList');
+            elem.style.display = "inline";
+            return 'itemSelect'
         default:
             return 'player';
         }
