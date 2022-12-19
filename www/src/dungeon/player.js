@@ -200,13 +200,13 @@ class Player{
     static getPlayerNowPosition(playerId){
         if(playerId === undefined){
             //引数なしの場合
-            return this.playerStatus.now;
+            return Object.assign({}, this.playerStatus.now); //シャローコピー
         }
         if(this.playerStatus.playerId !== playerId){
             //playerIdが存在しない
             return null;
         }
-        return this.playerStatus.now;
+        return Object.assign({}, this.playerStatus.now); //シャローコピー
     }
 
     /* 座標に応じたプレイヤーの存在チェック */
