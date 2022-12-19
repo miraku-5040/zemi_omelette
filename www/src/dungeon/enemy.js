@@ -212,31 +212,32 @@ class Enemy{
 
     /*座標に応じた敵の現在の攻撃能力取得*/
     static getEnemyAttackStatus(x,y){
-        let enemyStatus = {};
-        if(this.enemyStatusArray[y][x].atk.current > this.enemyStatusArray[y][x].atk.max){
-            enemyStatus.atk = this.enemyStatusArray[y][x].atk.max
-        }else if(this.enemyStatusArray[y][x].atk.current < this.enemyStatusArray[y][x].atk.min){
-            enemyStatus.atk = this.enemyStatusArray[y][x].atk.min
+        const enemyStatus = this.enemyStatusArray[y][x];
+        const enemyAttackStatus = {};
+        if(enemyStatus.atk.current > enemyStatus.atk.max){
+            enemyAttackStatus.atk = enemyStatus.atk.max
+        }else if(enemyStatus.atk.current < enemyStatus.atk.min){
+            enemyAttackStatus.atk = enemyStatus.atk.min
         }else{
-            enemyStatus.atk = this.enemyStatusArray[y][x].atk.current
+            enemyAttackStatus.atk = enemyStatus.current
         }
 
-        if(this.enemyStatusArray[y][x].cri.current > this.enemyStatusArray[y][x].cri.max){
-            enemyStatus.cri = this.enemyStatusArray[y][x].cri.max
-        }else if(this.enemyStatusArray[y][x].cri.current < this.enemyStatusArray[y][x].cri.min){
-            enemyStatus.cri = this.enemyStatusArray[y][x].cri.min
+        if(enemyStatus.cri.current > enemyStatus.cri.max){
+            enemyAttackStatus.cri = enemyStatus.cri.max
+        }else if(enemyStatus.cri.current < enemyStatus.cri.min){
+            enemyAttackStatus.cri = enemyStatus.cri.min
         }else{
-            enemyStatus.cri = this.enemyStatusArray[y][x].cri.current
+            enemyAttackStatus.cri = enemyStatus.cri.current
         }
 
-        if(this.enemyStatusArray[y][x].dex.current > this.enemyStatusArray[y][x].dex.max){
-            enemyStatus.dex = this.enemyStatusArray[y][x].dex.max
-        }else if(this.enemyStatusArray[y][x].dex.current < this.enemyStatusArray[y][x].dex.min){
-            enemyStatus.dex = this.enemyStatusArray[y][x].dex.min
+        if(enemyStatus.dex.current > enemyStatus.dex.max){
+            enemyAttackStatus.dex = enemyStatus.dex.max
+        }else if(enemyStatus.dex.current < enemyStatus.dex.min){
+            enemyAttackStatus.dex = enemyStatus.dex.min
         }else{
-            enemyStatus.dex = this.enemyStatusArray[y][x].dex.current
+            enemyAttackStatus.dex = enemyStatus.dex.current
         }
-        return  enemyStatus;
+        return  enemyAttackStatus;
     }
 
     /*座標に応じた敵の現在の防御能力取得*/
