@@ -96,29 +96,29 @@ class Enemy{
                 }
                 let next = {};
                 /* move */
-                // next.type = 'move';
-                // if(this.checkAround(indexX,indexY)){
-                //     next.x = indexX;
-                //     next.y = indexY;
-                //     element.next = next;
-                //     return;
-                // }
-                // const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
-                // if(result == "TypeError"){
-                //     next.x = indexX;
-                //     next.y = indexY;
-                //     element.next = next;
-                //     return;
-                // }else{
-                //     next.x = result.x;
-                //     next.y = result.y;
-                //     element.next = next;
-                //     return;
-                // }
+                next.type = 'move';
+                if(this.checkAround(indexX,indexY)){
+                    next.x = indexX;
+                    next.y = indexY;
+                    element.next = next;
+                    return;
+                }
+                const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
+                if(result == "TypeError"){
+                    next.x = indexX;
+                    next.y = indexY;
+                    element.next = next;
+                    return;
+                }else{
+                    next.x = result.x;
+                    next.y = result.y;
+                    element.next = next;
+                    return;
+                }
 
                 /* attack */
-                next.type = "attack";
-                element.next = next;
+                //next.type = "attack";
+                //element.next = next;
                 // TODO 処理を追加する
                     
             });
@@ -187,18 +187,17 @@ class Enemy{
     }
 
     static checkAround(enemyX,enemyY){
-        let playerPosition = Player.getPlayerNowPosition()
         //周り８マスを確認する
         for(let x = -1; x <= 1; x++){
             for(let y = -1; y <= 1; y++){
-                if(playerPosition.x == enemyX + x && playerPosition.y == enemyY + y){
-                    //プレイヤーがいない
-                    return true
+                if(Player.isPlayerExistence(enemyX + x, enemyY + y)){
+                    //プレイヤーがいる
+                    return false
                 }
             }
         }
-        //いる
-        return false
+        //いない
+        return true
     }
 
     /*座標に応じた敵のレベル取得*/
