@@ -11,7 +11,7 @@
     <!-- DBJS -->
     <script src="../js/db/danjyon_db.js"></script>
     <script src="../js/db/item_db.js"></script>
-    <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/equip_weapon_db.js"></script>
     <script src="../js/db/other_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../css/equip.css">
 </head>
 
-<body onload="getShorteCharacterData();getEquipSoadData()">
+<body onload="getShorteCharacterData();getEquipWeaponData();getEquipSoadData()">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
         <img class="player_image" src="../image/player.png">
@@ -58,11 +58,9 @@
     <div class="content_position">
         <!-- 装備情報表示 -->
         <div class="equipment" id="equipment">
-            <img class="material" id="soad" src="../image/soad/soad-provisional.png" value="1">
-            <img class="material" id="shield" src="../image/shield/shield-provisional.png" value="2">
-            <img class="material" id="decoration" src="../image/decoration/juel-provisional.png" value="3">
+           
         </div>
-        <button class="equipment_button" onclick="equip()">装備する</button>
+        <button class="equipment_button" onclick="updateEquipWeaponData();equip()">装備する</button>
 
         <!-- 武器リスト表示 -->
         <div class="item_list" id="items">

@@ -17,4 +17,6 @@ Config.characterImageTotal = 1;//
 Config.keyPressedCount = 5;//長押し判定のフレーム数
 
 Config.playerItemTotal = 40;//持てる持ち物の上限
+Config.itemListImageHeight = 50;
+Config.itemListImageWidth = 50;
 

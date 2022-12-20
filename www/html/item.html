@@ -11,7 +11,7 @@
     <!-- DBJS -->
     <script src="../js/db/danjyon_db.js"></script>
     <script src="../js/db/item_db.js"></script>
-    <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/item_weapon_db.js"></script>
     <script src="../js/db/other_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
@@ -63,9 +63,9 @@
 
         <div class="weapon_type_buttons">
             <button class="weapon_other_button" id="othercolumn" onclick="itemColumn(this);getItemData()">アイテム</button>
-            <button class="weapon_soad_button" id="soadcolumn" onclick="itemColumn(this);getSoadData()">剣</button>
-            <button class="weapon_shield_button" id="shieldcolumn" onclick="itemColumn(this);getShieldData()">盾</button>
-            <button class="weapon_decoration_button" id="decorationcolumn" onclick="itemColumn(this);getDecoraionData()">宝石</button>
+            <button class="weapon_soad_button" id="soadcolumn" onclick="itemColumn(this);getItemSoadData()">剣</button>
+            <button class="weapon_shield_button" id="shieldcolumn" onclick="itemColumn(this);getItemShieldData()">盾</button>
+            <button class="weapon_decoration_button" id="decorationcolumn" onclick="itemColumn(this);getItemDecoraionData()">宝石</button>
         </div>
 
         <!-- 各画面への遷移ボタン -->

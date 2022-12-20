@@ -20,7 +20,7 @@ class Control{
             item: 0         //道具
         };
 
-        this.itemListIndex;
+        this.itemListIndex = 99;
 
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
@@ -200,7 +200,7 @@ class Control{
         if(this.itemListIndex === undefined){
             return  null
         }else{
-            return this.itemListIndex.split('_')[3]
+            return this.itemListIndex
         }
     }
 }

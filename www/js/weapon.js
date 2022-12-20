@@ -1,26 +1,77 @@
 //カウントダウンjs
-function countDown() {
-    let element = document.getElementById('counter');
+function countDown1() {
+    let element = document.getElementById('counter1');
     let countNumber = Number(element.value);
     if (countNumber > 0) {
         element.value = countNumber - 1;
     }
 }
 
-function countDownMore() {
-    let element = document.getElementById('counter');
+function countDownMore1() {
+    let element = document.getElementById('counter1');
     element.value = 0;
 }
 
 // カウントアップjs
-function countUp() {
-    let element = document.getElementById('counter');
+function countUp1() {
+    let element = document.getElementById('counter1');
     let countNumber = Number(element.value);
     element.value = countNumber + 1;
 }
 
-function countUpMore() {
-    let element = document.getElementById('counter');
+function countUpMore1() {
+    let element = document.getElementById('counter1');
+    element.value = element.max;
+}
+
+//カウントダウンjs
+function countDown2() {
+    let element = document.getElementById('counter2');
+    let countNumber = Number(element.value);
+    if (countNumber > 0) {
+        element.value = countNumber - 1;
+    }
+}
+
+function countDownMore2() {
+    let element = document.getElementById('counter2');
+    element.value = 0;
+}
+
+// カウントアップjs
+function countUp2() {
+    let element = document.getElementById('counter2');
+    let countNumber = Number(element.value);
+    element.value = countNumber + 1;
+}
+
+function countUpMore2() {
+    let element = document.getElementById('counter2');
+    element.value = element.max;
+}
+//カウントダウンjs
+function countDown3() {
+    let element = document.getElementById('counter3');
+    let countNumber = Number(element.value);
+    if (countNumber > 0) {
+        element.value = countNumber - 1;
+    }
+}
+
+function countDownMore3() {
+    let element = document.getElementById('counter3');
+    element.value = 0;
+}
+
+// カウントアップjs
+function countUp3() {
+    let element = document.getElementById('counter3');
+    let countNumber = Number(element.value);
+    element.value = countNumber + 1;
+}
+
+function countUpMore3() {
+    let element = document.getElementById('counter3');
     element.value = element.max;
 }
 
@@ -46,6 +97,8 @@ function changeSoad() {
     // 装備を入れ替える
     const soad = document.getElementById('soad').src;
     const selectWeapon = document.getElementById('weapon').src;
+    console.log(document.getElementById('weapon'));
+    console.log(selectWeapon);
     document.getElementById('soad').src = selectWeapon;
     document.getElementById('weapon').src = soad;
 }
@@ -54,20 +107,20 @@ function changeShield() {
     audio = new Audio("../sound/change.m4a");
     audio.play();
     // 装備を入れ替える
-    const soad = document.getElementById('soad').src;
+    const shield = document.getElementById('shield').src;
     const selectWeapon = document.getElementById('weapon').src;
-    document.getElementById('soad').src = selectWeapon;
-    document.getElementById('weapon').src = soad;
+    document.getElementById('shield').src = selectWeapon;
+    document.getElementById('weapon').src = shield;
 }
 
 function changeDecoration() {
     audio = new Audio("../sound/change.m4a");
     audio.play();
     // 装備を入れ替える
-    const soad = document.getElementById('soad').src;
+    const decoration = document.getElementById('decoration').src;
     const selectWeapon = document.getElementById('weapon').src;
-    document.getElementById('soad').src = selectWeapon;
-    document.getElementById('weapon').src = soad;
+    document.getElementById('decoration').src = selectWeapon;
+    document.getElementById('weapon').src = decoration;
 }
 
 // 装備js
