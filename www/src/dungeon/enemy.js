@@ -261,12 +261,21 @@ class Enemy{
         }
         return enemyDefenceStatus;
     }
-    /* ステータス変化 */
-    static enemyStatusFluctuation(x,y,status){
-        //TODO
-        console.log("enemyステータス変化:"+status); //test
-        for(let s in status){
-            this.enemyStatusArray[y][x][s].current += status.s
+
+    /* hp変化 */
+    static enemyHpFluctuation(x, y, incrementValue){
+        const enemyStatus = this.enemyStatusArray[y][x]
+        if(enemyStatus === this.noDataItem){
+            //存在しない場合終了
+            return;
+        }
+        const updateValue = enemyStatus.hp.current + incrementValue;
+        if(enemyStatus.hp.min <= updateValue && updateValue <= enemyStatus.hp.max){ //hpの範囲内
+            enemyStatus.hp.current = updateValue;
+        }else if(updateValue < enemyStatus.hp.min){ //hpの最小値より小さい
+            enemyStatus.hp.current = enemyStatus.hp.min;
+        }else{ //hpの最大値より大きい
+            enemyStatus.hp.current = enemyStatus.hp.max;
         }
     }
 
