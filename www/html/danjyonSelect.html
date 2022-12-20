@@ -55,9 +55,7 @@
     <!-- ダンジョン情報表示 -->
     <div class="content_position">
         <div class="note" id="note">
-            <div><img class="note_button_image" id="1" src="../image/danjyonSelectButton.png" onclick="modalOpen();searchDanjyonData(this)" value="1">
-                <p class="note_button_text">炎のダンジョン</p>
-            </div>
+
         </div>
 
         <!-- 各画面への遷移ボタン -->
@@ -100,33 +98,6 @@
             </div>
         </div>
     </div>
-    <script>
-        // ダンジョン情報詳細取得
-        function searchDanjyonData(element) {
-            var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-            var Danjyon = ncmb.DataStore(this.DANJYON_DB);
-            var danjyonId = document.getElementById(element.id);
-            Danjyon.equalTo("danjyon_id", danjyonId)
-                .fetchAll()
-                .then(function(results) {
-                    setDanjyonDetail(results);
-                })
-                .catch(function(err) {
-                    console.log("ng" + err);
-                });
-
-            // ダンジョンの説明をHTMLに埋め込む
-            function setDanjyonDetail(results) {
-                // 初期化
-                document.getElementById("modal_text").innerHTML = '';
-                // 情報取得
-                // 新しいHTML要素を作成
-                var danjyonHtml = '<p class="modal_title" >' + results.danjyon_name + '</p><p class="modal_note">' + results.danjyon_detail + '</p>';
-                // 作成した要素を追加
-                document.getElementById("modal_text").insertAdjacentHTML('beforeend', danjyonHtml);
-            }
-        }
-    </script>
 </body>
 
 </html>
