@@ -23,14 +23,14 @@
     <link rel="stylesheet" href="../css/powerStrengthen.css">
 </head>
 
-<body onload="getItemSum()">
+<body onload="getItemSum();getSoloWeaponData()">
     <!-- 装備画面の表示 -->
     <!-- 強化対象装備 -->
     <img class="power_item" src="../image/soad/soad-provisional.png" onclick="toWeaponPower()">
     <div class="power_target_text">
-        <h3>&lt;ソード&gt;</h3>
-        <p>レベル：50/100</p>
-        <p>総合力：10000</p>
+        <h3 id="weaponName">&lt;ソード&gt;</h3>
+        <p id="weaponLevel">レベル：50/100</p>
+        <p id="weaponAttack">総合力：10</p>
     </div>
     <div class="decition_buttons">
         <button class="cansel" onclick="toPower()">キャンセル</button>
@@ -38,19 +38,19 @@
     </div>
 
     <!-- 強化用アイテム一覧 -->
-    <div class="item_frame">
+    <div class="item_frame" id="item_frame">
         <div class="power_for_item">
             <img class="power_for_item_image" src="../image/item/item-provisional.png">
             <p class="power_for_item_text">SR強化用アイテム</p>
             <div class="power_for_item_count">
-                <button class="power_for_item_count_minus" onclick="countDownMore()">
+                <button class="power_for_item_count_minus" onclick="countDownMore1()">
                     <p class="count_button_text">&lt;&lt;</p></button>
-                <button class="power_for_item_count_minus" onclick="countDown()">
+                <button class="power_for_item_count_minus" onclick="countDown1()">
                     <p class="count_button_text">－</p></button>
-                <input class="power_for_item_count_number" id="counter" value="0" max="0">
-                <button class="power_for_item_count_plus" onclick="countUp()">
+                <input class="power_for_item_count_number" id="counter1" value="0" max="0">
+                <button class="power_for_item_count_plus" onclick="countUp1()">
                     <p class="count_button_text">＋</p></button>
-                <button class="power_for_item_count_plus" onclick="countUpMore()">
+                <button class="power_for_item_count_plus" onclick="countUpMore1()">
                     <p class="count_button_text">&gt;&gt;</p></button>
             </div>
         </div>

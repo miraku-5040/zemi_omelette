@@ -24,7 +24,7 @@
     height: 60px;
 }
 
-.list_material {
+.list_material1 {
     background-color: rgb(214, 0, 214);
     border-top: 2px solid white;
     border-right: 2px solid white;
@@ -34,11 +34,41 @@
     height: 40px;
 }
 
-.item_text_position {
+.item_text_position1 {
     position: relative;
     transform: translateY(-30px);
     text-align: center;
     font-weight: bold;
+}
+
+.list_material2 {
+    background-color: rgb(214, 0, 214);
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 10px solid white;
+    border-left: 2px solid white;
+    width: 40px;
+    height: 40px;
+    transform: translateY(-50px);
+}
+
+.item_text_position2 {
+    position: relative;
+    transform: translateY(-80px);
+    text-align: center;
+    font-weight: bold;
+}
+
+.overlap_color {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    width: 18px;
+    height: 18px;
+    position: relative;
+    transform: translateY(-15px);
+    left: 1px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1;
 }
 
 /* 種別ボタン */

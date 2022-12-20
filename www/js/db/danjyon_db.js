@@ -20,7 +20,8 @@ function getDanjyonData() {
 
     // ダンジョン名をHTMLに埋め込む
     function setDanjyonName(results) {
-        // 初期化 document.getElementById("note").innerHTML = '';
+        // 初期化
+        document.getElementById("note").innerHTML = '';
         // 情報取得
         for (var i = 0; i <= results.length - 1; i++) {
             var danjyon = results[i];

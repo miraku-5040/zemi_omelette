@@ -6,127 +6,197 @@ var DANJYON_DB = "danjyon";
 var ITEM_DB = "item";
 var WEAPON_DB = "weapon";
 var EQUIP_DB = "equipment";
+var LOAD_WEAPON = "loadWeapon";
+var MAX_EXP = "max_exp";
 
-// 1件分の武器情報取得(強化)
-function getSoloWeaponData(element) {
+// 1件分の武器情報取得のためのid保存
+function getSoloWeaponId(element) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    var weaponId = document.getElementById(element.id).value;
-    Weapon.equalTo("weapon_id", weaponId)
+    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
+    console.log(element.id);
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
         .then(function (results) {
-            setDecorationImage(results);
+            console.log(results);
+            results.set("weapon_id", element.id);
+            results.update();
         })
         .catch(function (err) {
             console.log(err);
         });
-
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
-    function setDecorationImage(results) {
-        // 初期化
-        document.getElementById("items").innerHTML = '';
-        // 情報取得
-        for (var i = 0; i <= results.length - 1; i++) {
-            var weapon = results[i];
-            // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="toWeaponPower()"><img class="list_material" id="weapon" src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
-            // 作成した要素を追加
-            document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
-        }
-    }
 }
 
-// 1件分の武器情報取得(進化)
-function getSoloWeaponData(element) {
+// 1件分の武器情報取得
+function getSoloWeaponData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    var weaponId = document.getElementById(element.id).value;
-    Weapon.equalTo("weapon_id", weaponId)
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
         .then(function (results) {
-            setDecorationImage(results);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
-    function setDecorationImage(results) {
-        // 初期化
-        document.getElementById("items").innerHTML = '';
-        // 情報取得
-        for (var i = 0; i <= results.length - 1; i++) {
-            var weapon = results[i];
-            // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="toWeaponEvo()"><img class="list_material" id="weapon" src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
-            // 作成した要素を追加
-            document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
-        }
-    }
-}
-
-// 装備品変更
-function updateWeaponData() {
-    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.EQUIP_DB);
-    var soad = document.getElementById("soad").value;
-    var shield = document.getElementById("shield").value;
-    var decoration = document.getElementById("decoration").value;
-    Weapon.set("soad", soad)
-        .set("shield", shield)
-        .set("decoration", decoration)
-        .update()
-        .then(function (Weapon) {
-            Weapon.fetchAll()
+            weaponId = results[0];
+            Weapon.equalTo("weapon_id", weaponId.weapon_id)
+                .fetchAll()
                 .then(function (results) {
-                    console.log(results);
-                    setEquipmentImage(results);
+                    setDecorationImage(results);
                 })
                 .catch(function (err) {
                     console.log(err);
                 });
         })
         .catch(function (err) {
-            // エラー処理
+            console.log(err);
         });
 
-    // 装備品の画像(仮)をHTMLに埋め込む
-    function setEquipmentImage(results) {
-        // 情報取得
-        var weapon = results;
-        // 新しいHTML要素を作成
-        var weaponHtml = '<img class="material" id="soad" src="' + weapon.soad + '"><img class="material" id="shield" src="' + weapon.shield + '"><img class="material" id="decoration" src="' + weapon.decoration + '">';
-        // 作成した要素を追加
-        window.onload = function () {
-            document.getElementById("equipment").innerHTML = weaponHtml;
-        }
+    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    function setDecorationImage(results) {
+        var weapon = results[0];
+        document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
+        document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
+        document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
     }
 }
 
-// 装備品取得(仮)
-function getEquipWeaponData() {
+// 非進化武器の検査
+function getEvolutionWeaponData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.EQUIP_DB);
-    Weapon.fetchAll()
+    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
+    var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
+        .fetchAll()
         .then(function (results) {
-            setEquipWeapoImage(results);
+            weaponId = results[0];
+            Weapon.equalTo("weapon_id", weaponId.weapon_id)
+                .fetchAll()
+                .then(function (results) {
+                    weaponId = results[0];
+                    Weapon.equalTo("weapon_name", weaponId.weapon_name)
+                        .fetchAll()
+                        .then(function (results) {
+                            setWeaponImage(results);
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         })
         .catch(function (err) {
             console.log(err);
         });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setEquipWeapoImage(results) {
-    // 初期化
-    document.getElementById("equipment").innerHTML = '';
-    // 情報取得
-    var weapon = results[i];
-    // 新しいHTML要素を作成
-    var weaponHtml = '<img class="material" id="soad" src="../image/soad/soad-provisional.png"value="1"><img class="material" id="shield" src="../image/shield/shield-provisional.png" value="2"><img class="material" id="decoration" src="../image/decoration/juel-provisional.png" value="3">';
-    // 作成した要素を追加
-    document.getElementById("equipment").insertAdjacentHTML('beforeend', weaponHtml);
+
+    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    function setWeaponImage(results) {
+        // 初期化
+        document.getElementById("item_frame").innerHTML = '';
+        for (var i = 1; i <= results.length - 1; i++) {
+            var weapon = results[i];
+            // 新しいHTML要素を作成
+            var weaponHtml = '<div class="item_border" id="weapon1" onclick="toWeaponEvo(this)"><img class="power_for_item_image" src="../image/item/item-provisional.png"><p class="level_text">Lv' + weapon.weapon_level + '</p></div>';
+            // 作成した要素を追加
+            document.getElementById("item_frame").insertAdjacentHTML('beforeend', weaponHtml);
+        }
+    }
 }
 
+//武器強化
+function updateWeaponPowerUp() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    var getExp = 0;
+    //強化素材の使用個数を取得
+    var usedItem = [10, 5, 1];
+    //アイテムidを検索して取得経験値を計算
+    for (var i = 1; i <= 3; i++) {
+        Item.equalTo("item_id", i)
+            .fetchAll()
+            .then(function (results) {
+                console.log(results);
+                console.log(usedItem[Number(i - 1)]);
+                getExp = getExp + results[0].plus_exp * usedItem[i - 1];
+                console.log(getExp);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }
+    Weapon.equalTo("weapon_id", 1)
+        .fetchAll()
+        .then(function (results) {
+            getExp = getExp + results[0].weapon_exp;
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    //結果に応じて、レベルと経験値を上昇
+    Weapon.equalTo("weapon_id", 1)
+        .fetchAll()
+        .then(function (results) {
+            results.set("weapon_level", getExp / 500);
+            results.set("weapon_exp", getExp % 500);
+            results.update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // アイテム残数変更
+    updateItemSum();
+
+    // 画面を再起動
+    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
+    console.log(element.id);
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
+        .fetchAll()
+        .then(function (results) {
+            console.log(results);
+            results.set("weapon_id", element.id);
+            results.update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    window.location.href = "powerStrengthen.html";
+}
+
+// 武器進化
+function updateWeaponEvolution() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    // 進化のアイテム数取得
+    var usedWeapon = 2;
+    // 武器の重ね合わせ数変更
+    Weapon.equalTo("weapon_id", 1)
+        .fetchAll()
+        .then(function (results) {
+            results.set("overlap", usedWeapon);
+            results.update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // 画面を再起動
+    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
+    console.log(element.id);
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
+        .fetchAll()
+        .then(function (results) {
+            console.log(results);
+            results.set("weapon_id", element.id);
+            results.update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    window.location.href = "powerEvolution.html";
+}
 
 // ガチャロジック
 function gatyaPull(gatyaNum) {
@@ -188,12 +258,13 @@ function getPowerSoadData() {
 
     // 武器の画像(仮)とレベルをHTMLに埋め込む
     function setSoadImage(results) {
-        // 初期化 document.getElementById("items").innerHTML = '';
+        // 初期化
+        document.getElementById("items").innerHTML = '';
         // 情報取得
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="toPowerStrengthen()" id="weapon" value="' + weapon.weapon_id + '"><img class="list_material" src="../image/soad/soad-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="getSoloWeaponId(this);toPowerStrengthen()" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="../image/soad/soad-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -221,7 +292,7 @@ function getPowerShieldData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="toPowerStrengthen()" id="weapon" value="' + weapon.weapon_id + '"><img class="list_material" src="../image/shield/shield-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="getSoloWeaponId(this);toPowerStrengthen()" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="../image/shield/shield-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -250,7 +321,7 @@ function getPowerDecoraionData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" id="weapon" onclick="toPowerStrengthen()" value="' + weapon.weapon_id + '"><img class="list_material"  src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="getSoloWeaponId(this);toPowerStrengthen()" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -279,7 +350,7 @@ function getEvoSoadData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="toPowerEvolution()" id="weapon" value="' + weapon.weapon_id + '"><img class="list_material" src="../image/soad/soad-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="getSoloWeaponId(this);toPowerEvolution()" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="../image/soad/soad-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -308,7 +379,7 @@ function getEvoShieldData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="toPowerEvolution()" id="weapon" value="' + weapon.weapon_id + '"><img class="list_material" src="../image/shield/shield-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="getSoloWeaponId(this);toPowerEvolution()" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="../image/shield/shield-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -337,182 +408,9 @@ function getEvoDecoraionData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" id="weapon" onclick="toPowerEvolution()" value="' + weapon.weapon_id + '"><img class="list_material"  src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="getSoloWeaponId(this);toPowerEvolution()" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
-    }
-}
-
-
-// 装備画面情報取得用
-// 武器情報(剣)取得
-function getEquipSoadData() {
-    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    Weapon.equalTo("weapon_type", "soad")
-        .fetchAll()
-        .then(function (results) {
-            setSoadImage(results);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
-    function setSoadImage(results) {
-        // 初期化
-        document.getElementById("items").innerHTML = '';
-        // 情報取得
-        for (var i = 0; i <= results.length - 1; i++) {
-            var weapon = results[i];
-            // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="changeSoad()" id="weapon" value="' + weapon.weapon_id + '"><img class="list_material" src="../image/soad/soad-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
-            // 作成した要素を追加
-            document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
-        }
-    }
-}
-
-
-// 武器情報(盾)取得
-function getEquipShieldData() {
-    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    Weapon.equalTo("weapon_type", "shield")
-        .fetchAll()
-        .then(function (results) {
-            setShieldImage(results);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
-    function setShieldImage(results) {
-        // 初期化
-        document.getElementById("items").innerHTML = '';
-        // 情報取得
-        for (var i = 0; i <= results.length - 1; i++) {
-            var weapon = results[i];
-            // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="changeShield()" id="weapon" value="' + weapon.weapon_id + '"><img class="list_material" src="../image/shield/shield-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
-            // 作成した要素を追加
-            document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
-        }
-    }
-}
-
-
-// 武器情報(装飾品)取得
-function getEquipDecoraionData() {
-    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    Weapon.equalTo("weapon_type", "decoration")
-        .fetchAll()
-        .then(function (results) {
-            setDecorationImage(results);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
-    function setDecorationImage(results) {
-        // 初期化
-        document.getElementById("items").innerHTML = '';
-        // 情報取得
-        for (var i = 0; i <= results.length - 1; i++) {
-            var weapon = results[i];
-            // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" id="weapon" onclick="changeDecoration()" value="' + weapon.weapon_id + '"><img class="list_material"  src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
-            // 作成した要素を追加
-            document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
-        }
-    }
-}
-
-
-// 持ち物画面情報取得用
-// 武器情報(剣)取得
-function getItemSoadData() {
-    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    Weapon.equalTo("weapon_type", "soad")
-        .fetchAll()
-        .then(function (results) {
-            setSoadImage(results);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setSoadImage(results) {
-    // 初期化
-    document.getElementById("items").innerHTML = '';
-    // 情報取得
-    for (var i = 0; i <= results.length - 1; i++) {
-        var weapon = results[i];
-        // 新しいHTML要素を作成
-        var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '"><img class="list_material" src="../image/soad/soad-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
-        // 作成した要素を追加
-        document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
-    }
-}
-
-
-// 武器情報(盾)取得
-function getItemShieldData() {
-    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    Weapon.equalTo("weapon_type", "shield")
-        .fetchAll()
-        .then(function (results) {
-            setShieldImage(results);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setShieldImage(results) {
-    // 初期化
-    document.getElementById("items").innerHTML = '';
-    // 情報取得
-    for (var i = 0; i <= results.length - 1; i++) {
-        var weapon = results[i];
-        // 新しいHTML要素を作成
-        var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '"><img class="list_material" src="../image/shield/shield-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
-        // 作成した要素を追加
-        document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
-    }
-}
-
-
-// 武器情報(装飾品)取得
-function getItemDecoraionData() {
-    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    Weapon.equalTo("weapon_type", "decoration")
-        .fetchAll()
-        .then(function (results) {
-            setDecorationImage(results);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setDecorationImage(results) {
-    // 初期化
-    document.getElementById("items").innerHTML = '';
-    // 情報取得
-    for (var i = 0; i <= results.length - 1; i++) {
-        var weapon = results[i];
-        // 新しいHTML要素を作成
-        var weaponHtml = '<div class="item_border" id="weapon" onclick="" value="' + weapon.weapon_id + '"><img class="list_material"  src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
-        // 作成した要素を追加
-        document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
     }
 }
