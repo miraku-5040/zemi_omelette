@@ -55,6 +55,21 @@ class Item{
         itemLayerElement.appendChild(imgElement);
     }
 
+    static itemDisplay(){
+        const elem = document.getElementById('itemList');
+        elem.style.display = "inline";
+        Player.getPlayerItems().forEach((item,i) => {
+            const itemImage = Image.createItemElement(item.itemId, i);
+            itemImage.style.position = 'absolute';
+            itemImage.style.left = Config.itemListImageWidth * i + "px";
+            itemImage.width = Config.itemListImageWidth;
+            itemImage.height = Config.itemListImageHeight;
+            itemImage.setAttribute('onclick', `Control.itemSelect(${i})`);
+            elem.appendChild(itemImage);
+        });
+        
+    }
+
     /*moveのアイテムが足元にあるか判定*/
     static checkItem(x,y){
         if(this.itemArray[y][x] === this.noDataItem){
@@ -67,10 +82,11 @@ class Item{
     static itemSelect(){
         this.itemSelectIndex = Control.getItemListIndex()
         switch(true){
-            case 40 > Number(this.itemSelectIndex) && 0 < Number(this.itemSelectIndex):
+            case 40 > Number(this.itemSelectIndex) && 0 <= Number(this.itemSelectIndex):
+                //メッセージ 選択した
                 return 'itemUse'
             case 'cansel' == this.itemSelectIndex:
-                console.log('キャンセル')
+                //メッセージ キャンセルした
                 return 'player'
             default:
                 return  'itemSelect'
@@ -79,9 +95,9 @@ class Item{
 
         /* アイテムを使う */
     static itemUse(){
-        const useItem = Player.getPlayerItems[this.itemSelectIndex]
+        const useItem = Player.getPlayerItems()[this.itemSelectIndex]
         //useItem.skill
-        console.log("アイテムを使った:"+useItem)
+        Message.itemUseMessage(useItem.itemName, true)
         
         /*switch(Player.getPlayerItems[this.itemSelectIndex].usageLimit){
              //一回しか使えない場合
@@ -91,6 +107,9 @@ class Item{
             default :
                 Player.getPlayerItems[this.itemSelectIndex].usageLimit -= 1
         }*/
+        const elem = document.getElementById('itemList');
+        elem.style.display = "none";
+
     }
 
     /*アイテムを置くまたは交換する*/
@@ -104,10 +123,12 @@ class Item{
         let position = Player.getPlayerNowPosition()
         let playerItems = Player.getPlayerItems()
         if(playerItems.length > Config.playerItemTotal){
-                //持てない
-                console.log('アイテムを拾えなかった')
+                //メッセージ アイテムを拾えなかった
+                Message.itemPickMessage(this.itemArray[position.y][position.x].itemName,false)
                 return 'enemy'
             }
+        //メッセージ アイテムを拾った
+        Message.itemPickMessage(this.itemArray[position.y][position.x].itemName,true)
         //持てる
         Player.addPlayerItems(this.itemArray[position.y][position.x])
         this.itemArray[position.y][position.x] = this.noDataItem;

@@ -9,6 +9,7 @@
 
     <script src="components/loader.js"></script>
     <script src="src/common/tool.js"></script>
+    <script src="src/dungeon/message.js"></script>
     <script src="src/dungeon/skill.js"></script>
     <script src="src/dungeon/player.js"></script>
     <script src="src/dungeon/aster.js"></script>
@@ -56,10 +57,11 @@
             </div>
             <div id="infomation_layer" style="position:absolute; margin:0; top:0; left:0; height:100%; width:100%;">
                 <div id="infomation" style="position:absolute; background-color: #FFFFFF; left: 10px; top: 10px; width:125px; height:50px; margin: 0;">
-                    <div id="hp" >15</div>
-                    <div id="sp" >100</div>
-                    <div id="direction" style="background-color: #FFFFFF"></div>
+                    <div id="hp" style="position:absolute;  left: 5px;width 50px; height: 25px;">15</div>
+                    <div id="sp" style="position:absolute;  left: 75px;width 50px; height: 25px;">100</div>
+                    <div id="direction" style="position:absolute;  top: 25px;  left: 5px;height: 25px;"></div>
                 </div>
+                 <div id="message" style="position:absolute; background-color: #CCCCCC; padding: 5px; top: 10px; left: calc(50% - 150px); width: 290px; height: 40px;">攻撃した</div>
             </div>
             <div id="control_layer" style="position:absolute; margin:0; top:0; left:0; height:100vh; width:100%;">
                 <div id="directionKey" onclick="" style="position:absolute; left: 50px; top: 275px;width:80px; height:80px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
@@ -73,8 +75,6 @@
 
                 <div id="itemList" onclick="" style="position: absolute; top: calc(100% - 75px); left: calc(50% - 150px); width:300px; height:50px; background-color: #FFFFFF; opacity: 0.5; margin: 0;overflow: scroll; display: none;">
                     <!--アイテムのアイコン -->
-                    <img id="item_list_index_1" onclick="Control.itemSelect(id)" src="img/weapon_1.png" style="position: absolute; left:0px; width: 50px; height: 50px;">
-                    <img onclick="" src="img/shield_1.png" style="position: absolute; left:500px; width: 50px; height: 50px;">
                 </div>
 
             </div>

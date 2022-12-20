@@ -11,13 +11,24 @@ class Image {
     }
     /* 画像の要素を作成
      *  サンプル： <img src="img/stage_1.png" id="stage1"> */
-    static createElement(name,i){
+    static createElement(name, i){
         // 要素を作成
         var elem = document.createElement(`img`);
         // id
         elem.id = `${name}${i}`;
         //src
          elem.src = `img/${name}_${i}.png`;
+
+        return elem;
+    }
+
+    static createItemElement(name, i){
+        // 要素を作成
+        var elem = document.createElement(`img`);
+        // id
+        elem.id = `item_list_index_${i}`;
+        //src
+         elem.src = `img/${name}.png`;
         return elem;
     }
 
