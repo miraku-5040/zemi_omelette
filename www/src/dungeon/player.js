@@ -333,11 +333,28 @@ class Player{
         this.playerStatus.items.splice(index, 1)
     }
 
-    /**
-     * playerIdに応じたプレイヤーのステータス変動
-     */
-    static playerStatusFluctuation(playerId,status){
-        // TODO ステータスを更新する
+    /* hp変化 */
+    static playerHpFluctuation(playerId, incrementValue){
+        if(this.playerStatus.playerId !== playerId){
+            //存在しない場合終了
+            return;
+        }
+        const updateValue = this.playerStatus.hp.current + incrementValue;
+        if(this.playerStatus.hp.min <= updateValue && updateValue <= this.playerStatus.hp.max){ //hpの範囲内
+            this.playerStatus.hp.current = updateValue;
+        }else if(updateValue < this.playerStatus.hp.min){ //hpの最小値より小さい
+            this.playerStatus.hp.current = this.playerStatus.hp.min;
+        }else{ //hpの最大値より大きい
+            this.playerStatus.hp.current = this.playerStatus.hp.max;
+        }
+        //メッセージ
+        if(incrementValue <= 0){
+            //ダメージ
+            Message.playerHpDecreaseMessage(this.playerStatus.playerName, incrementValue);
+        }else{
+            //回復
+            // TODO
+        }
     }
 }
 

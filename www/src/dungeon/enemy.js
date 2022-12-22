@@ -277,6 +277,14 @@ class Enemy{
         }else{ //hpの最大値より大きい
             enemyStatus.hp.current = enemyStatus.hp.max;
         }
+        //メッセージ
+        if(incrementValue <= 0){
+            //ダメージ
+            Message.enemyHpDecreaseMessage(enemyStatus.enemyName+enemyStatus.distinction, -incrementValue);
+        }else{
+            //回復
+            // TODO
+        }
     }
 
 }
