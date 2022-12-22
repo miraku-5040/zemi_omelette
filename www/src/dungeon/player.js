@@ -109,7 +109,8 @@ class Player{
             Skill.playerUseSkill(this.playerStatus.job.skill,this.playerStatus.playerId);
             return 'skillReady'
         case 'item':
-            Item.itemDisplay()
+            Control.itemDisplay()
+            Item.itemUserData = this.playerStatus.playerId
             return 'itemSelect'
         default:
             return 'player';
@@ -319,13 +320,17 @@ class Player{
         return playerDefenseStatus;
     }
 
-    static getPlayerItems(){
+    static getPlayerItems(playerId){
+
         return Tool.deepCopy(Player.playerStatus.items);
     }
 
-    static addPlayerItems(item){
+    static addPlayerItem(item){
         this.playerStatus.items.push(item)
-        console.log(this.playerStatus.items)
+    }
+
+    static splicePlayerItem(index){
+        this.playerStatus.items.splice(index, 1)
     }
 
     /**

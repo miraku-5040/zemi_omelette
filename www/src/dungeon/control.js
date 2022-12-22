@@ -176,31 +176,114 @@ class Control{
         }else{
         }
 
-        if(this.pressedKeyStatus.attack) {
+        if(this.pressedKeyStatus.attack > Config.keyPressedCount) {
+            this.pressedKeyStatus.attack = 0
             return 'attack';
         }
-        if(this.pressedKeyStatus.defence) {
+        if(this.pressedKeyStatus.defence > Config.keyPressedCount) {
+            this.pressedKeyStatus.defence = 0
             return 'defence';
         }
-        if(this.pressedKeyStatus.skill) {
+        if(this.pressedKeyStatus.skill > Config.keyPressedCount) {
+            this.pressedKeyStatus.skill = 0
             return 'skill';
         }
-        if(this.pressedKeyStatus.item) {
+        if(this.pressedKeyStatus.item > Config.keyPressedCount) {
+            this.pressedKeyStatus.item = 0
             return 'item';
         }
         return false;
     }
 
+        /* アイテムリストの表示 */
+    static itemDisplay(playerId){
+        const elem = document.getElementById('itemList');
+        elem.style.display = "inline";
+        //アイテムリストの表示
+        Image.createItemList(playerId, elem)
+    }
+
+    static deleteAllIitemElement(itemArray){
+        console.log(itemArray)
+        itemArray.forEach((item,index) => {
+            document.getElementById(`item_list_index_${index}`).remove();
+        });
+    }
     
-    /* 画面のタップ内容を取得 */
-    static itemSelect(id){
-        this.itemListIndex = id;
+    /* アイテムリストのタップ内容を取得 */
+    static itemSelect(index){
+        this.itemListIndex = index;
     }
     static getItemListIndex(){
+        console.log(this.pressedKeyStatus.item)
         if(this.itemListIndex === undefined){
             return  null
+        }else if(this.pressedKeyStatus.item > Config.keyPressedCount){
+            this.pressedKeyStatus.item = 0
+            const elem = document.getElementById('itemList');
+            elem.style.display = "none";
+            return  'cancel'
         }else{
             return this.itemListIndex
         }
     }
+
+    static choiceDisplay(id){
+        const elem = document.getElementById('choice');
+        elem.style.display = "inline";
+        id = id.slice(0,2)
+                
+        this.createChoiceElement('use', 0)
+        this.createChoiceElement('equip', 1)
+        this.createChoiceElement('put', 2)
+        this.createChoiceElement('cancel', 3)
+    }
+
+    static deleteChoice(){
+        const elem = document.getElementById('choice');
+        var clone = elem.cloneNode( false );
+        elem.parentNode.replaceChild( clone , elem);
+    }
+
+    static createChoiceElement(action,num){
+        const choice = document.getElementById('choice');
+        const choiceArray = {use: '使う',equip: '装備',put: '捨てる',cancel: '戻る'}
+        var elem = document.createElement(`div`);
+            elem.id = `choice_action_${action}`;
+            elem.innerHTML = choiceArray[action];
+            elem.style.position = 'absolute';
+            elem.style.top = 25 * num + "px";
+            elem.width = 50;
+            elem.height = 25;
+            elem.setAttribute('onclick', `Control.itemChoiceAction('${action}')`);
+            choice.appendChild(elem);
+    }
+
+    /* アイテムの動作のタップ内容を取得 */
+    static itemChoiceAction(action){
+        this.itemAction = action;
+    }
+
+    static getItemAction(){
+        if(this.itemAction === undefined){
+            return  null
+        }else{
+            return this.itemAction
+        }
+    }
+
+    static elementNone(){
+        const elem1 = document.getElementById('itemList');
+        elem1.style.display = "none";
+        const elem2 = document.getElementById('choice');
+        elem2.style.display = "none";
+
+        Item.itemSelectIndex = 99;
+        this.itemListIndex = 99;
+        this.itemAction = null
+    }
+
+
+
+
 }

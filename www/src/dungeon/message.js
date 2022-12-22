@@ -16,6 +16,14 @@ class Message{
         }
     }
 
+    static itemEquipMessage(itemName){
+            document.getElementById("message").innerHTML =  itemName+"を装備した";
+    }
+
+    static itemPutMessage(itemName){
+            document.getElementById("message").innerHTML =  itemName+"を捨てた";
+    }
+
     static itemPickMessage(itemName,isSuccess){
         if(isSuccess){
             document.getElementById("message").innerHTML =  itemName+"を拾った";

@@ -71,9 +71,13 @@ function loop() {
             mode = 'enemy';
             break;
         case 'itemSelect':
-            //アイテム選択
+            //アイテムリストからの選択
             //'itemUse or player or itemSelect
             mode = Item.itemSelect();
+            break;
+        case 'itemChoice':
+            //選択したアイテムに対する動作の選択
+            mode = Item.itemChoiceAction()
             break;
         case 'itemUse':
             // アイテムの使用

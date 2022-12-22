@@ -1,6 +1,8 @@
 // アイテム優先
 class Item{
 
+    
+
     static initialize() {
         /* itemArrayの準備 */
         this.noDataItem = 0;
@@ -12,6 +14,7 @@ class Item{
         }
         this.itemArray = JSON.parse(JSON.stringify(row));
 
+        this.itemIdArray = [];
         this.startFloor();
     }
 
@@ -20,19 +23,22 @@ class Item{
             itemId: 'IW000',//アイテムID
             itemName: 'ひのきのぼう',
             skill:'SA001',
-            usageLimit: 0
+            usageLimit: null
             }
         this.itemArray[3][6] = {
             itemId: 'IS000',//アイテムID
             itemName: '木の盾',
-            usageLimit: 0
+            usageLimit: null
             }
         this.itemArray[10][10] = {
             itemId: 'IT000',//アイテムID
             itemName: '薬草',
+            skillId:0,
             usageLimit: 1
             }
-         this.screenRenderingAll();
+        this.itemIdArray.push();
+        Image.createItemImages(this.itemIdArray);
+        this.screenRenderingAll();
     }
 
     static screenRenderingAll() {
@@ -48,29 +54,14 @@ class Item{
 
     static screenRenderingOne(indexX, indexY) {
         const itemLayerElement = document.getElementById("item_layer");
-        const imgElement = Image.getItemImage(0);
+        const imgElement = Image.getDropItemImage(0);
         imgElement.id = indexX+"_"+indexY;
         imgElement.style.top = indexY * Config.stageImgHeight + "px";
         imgElement.style.left = indexX * Config.stageImgWidth + "px";
         itemLayerElement.appendChild(imgElement);
     }
 
-    static itemDisplay(){
-        const elem = document.getElementById('itemList');
-        elem.style.display = "inline";
-        Player.getPlayerItems().forEach((item,i) => {
-            const itemImage = Image.createItemElement(item.itemId, i);
-            itemImage.style.position = 'absolute';
-            itemImage.style.left = Config.itemListImageWidth * i + "px";
-            itemImage.width = Config.itemListImageWidth;
-            itemImage.height = Config.itemListImageHeight;
-            itemImage.setAttribute('onclick', `Control.itemSelect(${i})`);
-            elem.appendChild(itemImage);
-        });
-        
-    }
-
-    /*moveのアイテムが足元にあるか判定*/
+    /* moveのアイテムが足元にあるか判定 */
     static checkItem(x,y){
         if(this.itemArray[y][x] === this.noDataItem){
             return false
@@ -78,14 +69,14 @@ class Item{
         return true
     }
 
-    /* gameで呼ばれる,コントローラ待ち*/
+    /* アイテムリストの選択まち */
     static itemSelect(){
         this.itemSelectIndex = Control.getItemListIndex()
         switch(true){
             case 40 > Number(this.itemSelectIndex) && 0 <= Number(this.itemSelectIndex):
-                //メッセージ 選択した
-                return 'itemUse'
-            case 'cansel' == this.itemSelectIndex:
+                Control.choiceDisplay(Player.getPlayerItems()[this.itemSelectIndex].itemId);
+                return 'itemChoice'
+            case 'cancel' == this.itemSelectIndex:
                 //メッセージ キャンセルした
                 return 'player'
             default:
@@ -93,28 +84,72 @@ class Item{
         }
     }
 
-        /* アイテムを使う */
+    /* 選択したアイテムに対して行う動作まち */
+    static itemChoiceAction(){
+        switch(Control.getItemAction()){
+            case 'use':
+                Control.deleteChoice()
+                return 'itemUse'
+            case 'put':
+                this.itemPut(this.itemSelectIndex)
+                Control.deleteChoice()
+                return 'player'
+            case 'cancel':
+                Control.elementNone()
+                Control.deleteChoice()
+                return 'player'
+            case 'equip':
+                this.itemEquip(this.itemSelectIndex)
+                Control.deleteChoice()
+                return 'player'
+            default:
+                return  'itemChoice'
+        }
+    }
+
+    /* アイテムを使う */
     static itemUse(){
         const useItem = Player.getPlayerItems()[this.itemSelectIndex]
-        //useItem.skill
+        Skill.itemUseSkill(useItem.skillId, this.itemUserData)
         Message.itemUseMessage(useItem.itemName, true)
         
-        /*switch(Player.getPlayerItems[this.itemSelectIndex].usageLimit){
-             //一回しか使えない場合
-            //複数回使用
-            //使用制限なし
-            case 0:
+        switch(useItem.usageLimit){
+            case null:
+                break
             default :
-                Player.getPlayerItems[this.itemSelectIndex].usageLimit -= 1
-        }*/
-        const elem = document.getElementById('itemList');
-        elem.style.display = "none";
+                useItem.usageLimit -= 1
+                if(useItem.usageLimit == 0){
+                    Control.deleteAllIitemElement(Player.getPlayerItems())
+                    Player.splicePlayerItem(this.itemSelectIndex)
+                    Control.elementNone()
+                }
+        }
+        /*選択したアイテムの初期化*/
+       
+        Control.elementNone()
+        return 'enemy'
 
+    }
+
+    /* 装備 */
+    static itemEquip(index){
+        const equipItem = Player.getPlayerItems()[index]
+        Control.deleteAllIitemElement(Player.getPlayerItems())
+        Player.splicePlayerItem(index)
+        Message.itemEquipMessage(equipItem.itemName)
+        Control.elementNone()
     }
 
     /*アイテムを置くまたは交換する*/
     static itemPut(index){
-        Player.getPlayerItems.splice(index);
+        let position = Player.getPlayerNowPosition()
+        this.itemArray[position.y][position.x] = Player.getPlayerItems()[index]
+        this.screenRenderingOne(position.x, position.y)
+
+        Message.itemPutMessage(Player.getPlayerItems()[index].itemName)
+        Control.deleteAllIitemElement(Player.getPlayerItems())
+        Player.splicePlayerItem(index)
+        Control.elementNone()
     }
 
 
@@ -130,14 +165,14 @@ class Item{
         //メッセージ アイテムを拾った
         Message.itemPickMessage(this.itemArray[position.y][position.x].itemName,true)
         //持てる
-        Player.addPlayerItems(this.itemArray[position.y][position.x])
+        Player.addPlayerItem(this.itemArray[position.y][position.x])
         this.itemArray[position.y][position.x] = this.noDataItem;
         this.itemImageRemove(position.x,position.y)
         return 'enemy'
     }
 
+    /* アイテムの画像をフィールドから消す */
     static itemImageRemove(x,y){
-        console.log(x+"_"+y)
         document.getElementById(x+"_"+y).remove();
     }
 
