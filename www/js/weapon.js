@@ -4,24 +4,56 @@ function countDown1() {
     let countNumber = Number(element.value);
     if (countNumber > 0) {
         element.value = countNumber - 1;
+        element = document.getElementById('power_ber');
+        let expNumber = Number(element.value);
+        element.value = expNumber - 50;
+        // 経験値が0以下ならレベルを下げる
+        if (element.value <= 0) {
+            element.value = Number(element.value) + Number(element.max)
+        }
+        document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
 }
 
 function countDownMore1() {
     let element = document.getElementById('counter1');
+    let ber = document.getElementById('power_ber');
+    ber.value = ber.value - (element.value * 50);
     element.value = 0;
+    document.getElementById("exp_text").innerHTML = ber.value + "/1000";
 }
 
 // カウントアップjs
 function countUp1() {
     let element = document.getElementById('counter1');
     let countNumber = Number(element.value);
-    element.value = countNumber + 1;
+    if (countNumber < element.max) {
+        element.value = countNumber + 1;
+        element = document.getElementById('power_ber');
+        let expNumber = Number(element.value);
+        let beforeNuber = Number(element.value);
+        element.value = expNumber + 50;
+        if (Number(element.value) >= Number(element.max)) {
+            element.value = (beforeNuber + 50) - Number(element.max);
+            console.log(element.value);
+            // ↓ここが取れていないっぽい
+            var str = document.getElementById('weaponLevel');
+            var result = String(str).slice(4, 6);
+            result = Number(result) + 1;
+            document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            document.getElementById("exp_text").innerHTML = element.value + "/1000";
+        }
+        document.getElementById("exp_text").innerHTML = element.value + "/1000";
+    }
 }
 
 function countUpMore1() {
-    let element = document.getElementById('counter1');
-    element.value = element.max;
+    let element1 = document.getElementById('counter1');
+    element1.value = element1.max;
+    let element2 = document.getElementById('power_ber');
+    let expNumber = Number(element2.value);
+    element2.value = expNumber + (element1.max * 50);
+    document.getElementById("exp_text").innerHTML = element2.value + "/1000";
 }
 
 //カウントダウンjs
@@ -30,24 +62,49 @@ function countDown2() {
     let countNumber = Number(element.value);
     if (countNumber > 0) {
         element.value = countNumber - 1;
+        element = document.getElementById('power_ber');
+        let expNumber = Number(element.value);
+        element.value = expNumber - 100;
+        // 経験値が0以下ならレベルを下げる
+        if (element.value <= 0) {
+            element.value = Number(element.value) + Number(element.max)
+        }
+        document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
 }
 
 function countDownMore2() {
     let element = document.getElementById('counter2');
+    let ber = document.getElementById('power_ber');
+    ber.value = ber.value - (element.value * 100);
     element.value = 0;
+    document.getElementById("exp_text").innerHTML = ber.value + "/1000";
 }
 
 // カウントアップjs
 function countUp2() {
     let element = document.getElementById('counter2');
     let countNumber = Number(element.value);
-    element.value = countNumber + 1;
+    if (countNumber < element.max) {
+        element.value = countNumber + 1;
+        element = document.getElementById('power_ber');
+        let expNumber = Number(element.value);
+        let beforeNuber = Number(element.value);
+        element.value = expNumber + 100;
+        if (Number(element.value) >= Number(element.max)) {
+            element.value = (beforeNuber + 100) - Number(element.max);
+        }
+        document.getElementById("exp_text").innerHTML = element.value + "/1000";
+    }
 }
 
 function countUpMore2() {
-    let element = document.getElementById('counter2');
-    element.value = element.max;
+    let element1 = document.getElementById('counter1');
+    element1.value = element1.max;
+    let element2 = document.getElementById('power_ber');
+    let expNumber = Number(element2.value);
+    element2.value = expNumber + (element1.max * 100);
+    document.getElementById("exp_text").innerHTML = element2.value + "/1000";
 }
 //カウントダウンjs
 function countDown3() {
@@ -55,38 +112,68 @@ function countDown3() {
     let countNumber = Number(element.value);
     if (countNumber > 0) {
         element.value = countNumber - 1;
+        element = document.getElementById('power_ber');
+        let expNumber = Number(element.value);
+        element.value = expNumber - 500;
+        // 経験値が0以下ならレベルを下げる
+        if (element.value <= 0) {
+            element.value = Number(element.value) + Number(element.max)
+        }
+        document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
 }
 
 function countDownMore3() {
     let element = document.getElementById('counter3');
+    let ber = document.getElementById('power_ber');
+    ber.value = ber.value - (element.value * 500);
     element.value = 0;
+    document.getElementById("exp_text").innerHTML = ber.value + "/1000";
 }
 
 // カウントアップjs
 function countUp3() {
     let element = document.getElementById('counter3');
     let countNumber = Number(element.value);
-    element.value = countNumber + 1;
+    if (countNumber < element.max) {
+        element.value = countNumber + 1;
+        element = document.getElementById('power_ber');
+        let expNumber = Number(element.value);
+        let beforeNuber = Number(element.value);
+        element.value = expNumber + 500;
+        if (Number(element.value) >= Number(element.max)) {
+            element.value = (beforeNuber + 500) - Number(element.max);
+            console.log(element.value);
+        }
+        document.getElementById("exp_text").innerHTML = element.value + "/1000";
+    }
 }
 
 function countUpMore3() {
-    let element = document.getElementById('counter3');
-    element.value = element.max;
+    let element1 = document.getElementById('counter1');
+    element1.value = element1.max;
+    let element2 = document.getElementById('power_ber');
+    let expNumber = Number(element2.value);
+    element2.value = expNumber + (element1.max * 500);
+    document.getElementById("exp_text").innerHTML = element2.value + "/1000";
 }
 
 // 武器選択js
 function selected(element) {
     // 枠の色を変更する
     const weaponFrame = document.getElementById(element.id);
-    if (weaponFrame.style.border == 'solid gold') {
+    if (weaponFrame.style.border == 'solid gold' && document.getElementById("power_ber").value > document.getElementById("power_ber").min) {
         audio = new Audio("../sound/select_cansel.m4a");
         audio.play();
         weaponFrame.style.border = 'solid black';
-    } else {
+        document.getElementById("power_ber").value = document.getElementById("power_ber").value - 1;
+        document.getElementById("overlap_text").innerHTML = document.getElementById("power_ber").value + "/5";
+    } else if (document.getElementById("power_ber").value <= document.getElementById("power_ber").max) {
         audio = new Audio("../sound/item_select.m4a");
         audio.play();
         weaponFrame.style.border = 'solid gold';
+        document.getElementById("power_ber").value = document.getElementById("power_ber").value + 1;
+        document.getElementById("overlap_text").innerHTML = document.getElementById("power_ber").value + "/5";
     }
 }
 
@@ -96,6 +183,7 @@ function changeSoad() {
     audio.play();
     // 装備を入れ替える
     const soad = document.getElementById('soad').src;
+    // ここが取れていない
     const selectWeapon = document.getElementById('weapon').src;
     console.log(document.getElementById('weapon'));
     console.log(selectWeapon);

@@ -25,6 +25,7 @@ function updateEquipWeaponData() {
             results.set("shield", shield);
             results.set("decoration", decoration);
             results.update();
+            // ↓ここが出ていない
             console.log("ok");
         })
         .catch(function (err) {

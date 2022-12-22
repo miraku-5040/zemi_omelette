@@ -17,17 +17,20 @@ function getSoloWeaponId(element) {
     LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
         .then(function (results) {
+            // ↓ここまでは出ている
             console.log(results);
-            results.set("weapon_id", element.id);
+            results.set("weapon_id", Number(element.id));
             results.update();
+            // ↓ここは出ていない
+            console.log("ok");
         })
         .catch(function (err) {
             console.log(err);
         });
 }
 
-// 1件分の武器情報取得
-function getSoloWeaponData() {
+// 1件分の武器情報取得(強化)
+function getSoloPowerWeaponData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
@@ -54,6 +57,46 @@ function getSoloWeaponData() {
         document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
         document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
         document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
+        document.getElementById("power_ber").value = weapon.weapon_exp;
+        document.getElementById("power_ber").low = weapon.weapon_exp;
+        document.getElementById("exp_text").innerHTML = weapon.weapon_exp + "/1000";
+    }
+}
+
+// 1件分の武器情報取得(進化)
+function getSoloEvoWeaponData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
+    var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
+        .fetchAll()
+        .then(function (results) {
+            weaponId = results[0];
+            Weapon.equalTo("weapon_id", weaponId.weapon_id)
+                .fetchAll()
+                .then(function (results) {
+                    setDecorationImage(results);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    function setDecorationImage(results) {
+        console.log(results);
+        var weapon = results[0];
+        document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
+        document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
+        document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
+        document.getElementById("power_ber").value = weapon.overlap;
+        document.getElementById("power_ber").low = weapon.overlap;
+        document.getElementById("power_ber").max = 5 - Number(weapon.overlap);
+        document.getElementById("overlap_text").innerHTML = weapon.overlap + "/5";
+
     }
 }
 
@@ -94,7 +137,7 @@ function getEvolutionWeaponData() {
         for (var i = 1; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" id="weapon1" onclick="toWeaponEvo(this)"><img class="power_for_item_image" src="../image/item/item-provisional.png"><p class="level_text">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" id="weapon1" onclick="selected(this)"><img class="power_for_item_image" src="../image/item/item-provisional.png"><p class="level_text">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("item_frame").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -107,6 +150,10 @@ function updateWeaponPowerUp() {
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
     var getExp = 0;
+    // ↓後でusedItemに入れる
+    var ritem = document.getElementById("counter1").value
+    var sritem = document.getElementById("counter2").value
+    var ssritem = document.getElementById("counter3").value
     //強化素材の使用個数を取得
     var usedItem = [10, 5, 1];
     //アイテムidを検索して取得経験値を計算
@@ -115,6 +162,7 @@ function updateWeaponPowerUp() {
             .fetchAll()
             .then(function (results) {
                 console.log(results);
+                // ↓ここから先が出ていない
                 console.log(usedItem[Number(i - 1)]);
                 getExp = getExp + results[0].plus_exp * usedItem[i - 1];
                 console.log(getExp);
@@ -123,22 +171,36 @@ function updateWeaponPowerUp() {
                 console.log(err);
             });
     }
-    Weapon.equalTo("weapon_id", 1)
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
         .then(function (results) {
-            getExp = getExp + results[0].weapon_exp;
+            Weapon.equalTo("weapon_id", 1)
+                .fetchAll()
+                .then(function (results) {
+                    getExp = getExp + results[0].weapon_exp;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         })
         .catch(function (err) {
             console.log(err);
         });
 
-    //結果に応じて、レベルと経験値を上昇
-    Weapon.equalTo("weapon_id", 1)
+    // 獲得経験値に応じて、レベルと経験値を上昇
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
         .then(function (results) {
-            results.set("weapon_level", getExp / 500);
-            results.set("weapon_exp", getExp % 500);
-            results.update();
+            Weapon.equalTo("weapon_id", 1)
+                .fetchAll()
+                .then(function (results) {
+                    results.set("weapon_level", getExp / 500);
+                    results.set("weapon_exp", getExp % 500);
+                    results.update();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         })
         .catch(function (err) {
             console.log(err);
@@ -168,28 +230,40 @@ function updateWeaponPowerUp() {
 function updateWeaponEvolution() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     // 進化のアイテム数取得
-    var usedWeapon = 2;
-    // 武器の重ね合わせ数変更
-    Weapon.equalTo("weapon_id", 1)
+    var usedWeapon = document.getElementById("power_ber").value;
+    // 進化対象の武器を取得
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
         .then(function (results) {
-            results.set("overlap", usedWeapon);
-            results.update();
+            console.log(results[0].weapon_id);
+            // 武器の重ね合わせ数変更
+            Weapon.equalTo("weapon_id", results[0].weapon_id)
+                .fetchAll()
+                .then(function (results) {
+                    var weapon = results[0];
+                    console.log(weapon.overlap);
+                    console.log(Number(weapon.overlap) + Number(usedWeapon));
+                    results.set("overlap", Number(weapon.overlap) + Number(usedWeapon));
+                    results.update();
+                    console.log("ok");
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         })
         .catch(function (err) {
             console.log(err);
         });
 
-    // 画面を再起動
-    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
-    console.log(element.id);
-    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
+    // 使用した武器を削除
+    Weapon.equalTo("weapon_id", results[0].weapon_id)
+        .limit(usedWeapon)
+        .order("weapon_id", true)
         .fetchAll()
         .then(function (results) {
-            console.log(results);
-            results.set("weapon_id", element.id);
-            results.update();
+            results.delete();
         })
         .catch(function (err) {
             console.log(err);

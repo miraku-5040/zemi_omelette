@@ -87,6 +87,10 @@
 /* モーダルウィンドウの中身 */
 .modal-content {
   background-color: #f4f4f4;
+  border-top: 9px solid rgb(252, 232, 121);
+  border-right: 9px solid rgb(192, 163, 0);
+  border-bottom: 9px solid rgb(192, 163, 0);
+  border-left: 9px solid rgb(252, 232, 121);
   margin: 60px 110px;
   width: 450px;
   height: 250px;
@@ -97,7 +101,7 @@
 
 .modal-body {
     position: relative;
-    top: 20px;
+    top: 0px;
     left: 30px;
 }
 

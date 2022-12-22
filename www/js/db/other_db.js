@@ -5,6 +5,66 @@ var CLIENT_KEY = "f83827ab1b5914e21026733a26c5a92ef53b415b17ec3a2a90512179430297
 var CHARACTER_DB = "character";
 var NOTICE_DB = "notice";
 var PRESENT_DB = "present";
+var ITEM_DB = "item";
+
+// プレゼントデータ取得
+function getPresentData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Present = ncmb.DataStore(this.PRESENT_DB);
+    Present.fetchAll()
+        .then(function (results) {
+            setPresentData(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    function setPresentData(results) {
+        // 初期化
+        document.getElementById("modal-body").innerHTML = '';
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            var present = results[i];
+            // 新しいHTML要素を作成
+            var presentHtml = '<div class="present_box"><h4 class="present_title">' + present.present_title + '</h4><p class="present_text">' + present.present_content + '</p><button class="present_button" id="present_button" onclick="getSoloPresentData("' + present.objectId + '");presentReceive()">受け取る</button></div>';
+            // 作成した要素を追加
+            document.getElementById("modal-body").insertAdjacentHTML('beforeend', presentHtml);
+        }
+    }
+}
+
+// プレゼントデータ1件取得→アイテムに追加
+function getSoloPresentData(element) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    var Present = ncmb.DataStore(this.PRESENT_DB);
+    var item_count = "";
+    console.log(element);
+    // アイテムidからプレゼント個数を割り出す
+    Present.equalTo("item_id", element)
+        .fetchAll()
+        .then(function (results) {
+            var present = results[0];
+            console.log(present);
+            item_count = present.present_count;
+            // アイテム移動
+            Item.equalTo("item_id", present.present_item)
+                .fetchAll()
+                .then(function (results) {
+                    var item = results[0];
+                    console.log(item);
+                    results.set("sum", Number(item.sum) + Number(item_count));
+                    results.update();
+                    console.log("ok");
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
 
 // キャラクター情報取得
 function getCharacterData() {
