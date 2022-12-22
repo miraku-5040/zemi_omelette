@@ -32,6 +32,15 @@ class Message{
         }
     }
 
-        
+    /* playerのhp減少(ダメージ) */
+    static playerHpDecreaseMessage(playerName, decrease){
+        document.getElementById("message").innerHTML =  playerName+"に"+decrease+"のダメージ";
+    }
+
+    /* enemyのhp減少(ダメージ) */
+    static enemyHpDecreaseMessage(enemyName, decrease){
+        document.getElementById("message").innerHTML =  enemyName+"に"+decrease+"のダメージ";
+    }
+
 }
 
