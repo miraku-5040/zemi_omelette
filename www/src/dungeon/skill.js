@@ -127,11 +127,18 @@ class Skill{
      */
     static skillReady(){
         // skillDataを設定
-        this.skillData = this.#setSkillData(skillId);
+        const skillData = this.#setSkillData(this.skillUserData.skillId);
+        // scope.typeで分岐する関数を設定
+        const scopeTypeUseFunctionMap = this.#scopeTypeBranch(skillData.scope.type);
+        const createTargetCoordinateArray = scopeTypeUseFunctionMap.get("createTargetCoordinateArray");
+        this.scopeExtensionFunction = scopeTypeUseFunctionMap.get("scopeExtension");
         // targetCoordinateArray作成
-        this.targetCoordinateArray = this.#createTargetCoordinateArray(this.skillData);
+        const targetCoordinateArray = createTargetCoordinateArray(skillData.scope);
         // スキル座標を設定する
-        if(this.skillData.skillId === this.normalAttackId){ //通常攻撃の場合は準備をスキップする
+        if(skillData.skillId === this.normalAttackId){ //通常攻撃の場合は準備をスキップする
+            // skillGoに渡すデータをクラス変数に設定する
+            this.skillData = skillData;
+            this.targetCoordinateArray = targetCoordinateArray;
             return;
         }
         /* 範囲を表示 */
@@ -143,36 +150,103 @@ class Skill{
 
         /* 準備終了処理 */
         //this.#deleteScreenRenderingScope(); //範囲表示の描画を削除
+
+        /* skillGoに渡すデータをクラス変数に設定する */
+        this.skillData = skillData;
+        this.targetCoordinateArray = targetCoordinateArray;
     }
 
     /**
      * スキル使用
      */
     static skillGo(){
-        /* 実行関数の設定 */
+        /* skillReadyからのデータ取得と初期化 */
         const skillData = this.skillData;
-        this.#effectTypeBranch(skillData.effect.type);
-        this.#effectTargetBranch(skillData.effect.target);
-        const getPlayerTargetData = this.useFunctionMap.get("getPlayerTargetData");
-        const getEnemyTargetData = this.useFunctionMap.get("getEnemyTargetData");
-        const statusFluctuationCalc = this.useFunctionMap.get("statusFluctuationCalc");
-        const statusFluctuationExecute = this.useFunctionMap.get("statusFluctuationExecute");
-        const scopeExtension = this.useFunctionMap.get("scopeExtension");
-
         const targetCoordinateArray = this.targetCoordinateArray;
-        let skillHitRemainingNumber= NaN; //スキルの残りヒット数(制限しない場合はNaN)
+        const scopeExtensionFunction = this.scopeExtensionFunction;
+        this.skillData = {}; //new
+        this.targetCoordinateArray = []; //new
+        this.scopeExtensionFunction = () => {}; //new
+        /* effect.type, effect.targetで分岐する関数の設定 */
+        const statusFluctuationCalcFunctionArray = [];
+        const getPlayerDefenseStatusFunctionArray = [];
+        const getEnemyDefenseStatusFunctionArray = [];
+        const playerStatusFluctuationExecuteFunctionArray = [];
+        const enemyStatusFluctuationExecuteFunctionArray = [];
+        const checkEffectTargetCharacterFunctionArray = [];
+        skillData.effect.forEach((effectData) => {
+            const effectTypeUseFunctionMap = this.#effectTypeBranch(effectData.type);
+            statusFluctuationCalcFunctionArray.push(effectTypeUseFunctionMap.get("statusFluctuationCalc")); //計算関数
+            getPlayerDefenseStatusFunctionArray.push(effectTypeUseFunctionMap.get("getPlayerDefenseStatus")); //プレイヤー防御ステータス取得関数
+            getEnemyDefenseStatusFunctionArray.push(effectTypeUseFunctionMap.get("getEnemyDefenseStatus")); //エネミー防御ステータス取得関数
+            playerStatusFluctuationExecuteFunctionArray.push(effectTypeUseFunctionMap.get("playerStatusFluctuationExecute"));//プレイヤーステータス変動関数
+            enemyStatusFluctuationExecuteFunctionArray.push(effectTypeUseFunctionMap.get("enemyStatusFluctuationExecute"));//エネミーステータス変動関数
+            const effectTargetUseFunctionMap = this.#effectTargetBranch(effectData.target);
+            checkEffectTargetCharacterFunctionArray.push(effectTargetUseFunctionMap.get("checkEffectTargetCharacter")); //効果対象のターゲットの存在チェック関数
+            
+        });
+
         /* スキル効果実行 */
+        let isSkillEnd = false;
         for(const relativeTargetCoordinate of targetCoordinateArray){ //対象座標1マスずつ実行する
             const targetCoordinate = this.#convertRelativeToAbsolute(relativeTargetCoordinate.x, relativeTargetCoordinate.y);
-            const targetDataMap = new Map();
-            targetDataMap.set("player", getPlayerTargetData(targetCoordinate));
-            targetDataMap.set("enemy", getEnemyTargetData(targetCoordinate));
-            skillHitRemainingNumber = statusFluctuationExecute(targetDataMap, statusFluctuationCalc, skillHitRemainingNumber);
-            if(skillHitRemainingNumber <= 0){
+            const x = targetCoordinate.x;
+            const y = targetCoordinate.y;
+            if(!this.#isInCoordinateRange(x, y)){
+                //座標がステージの範囲外の場合はスキップ
+                continue;
+            }
+            /* targetの存在チェック */
+            let existenceChecked;
+            if(Player.isPlayerExistence(x. y)){
+                //プレイヤーが存在する
+                existenceChecked = "player";
+            }else if(Enemy.checkEnemy(x, y)){
+                //エネミーが存在する
+                existenceChecked = "enemy";
+            }else{
+                //targetが存在しない
+                continue;
+            }
+            /* 効果の処理 */
+            let hitsSkipCount = 0;
+            skillData.effect.forEach((effectData, index) => {
+                if(effectData.hits <= 0){ //ヒット数チェック
+                    // 残りヒット数が0以下はスキップ
+                    hitsSkipCount += 1;
+                    return;
+                }
+                const targetMode = checkEffectTargetCharacterFunctionArray[index](existenceChecked);
+                switch(targetMode){
+                    case "no": //存在なし
+                        // スキップ
+                        return;
+                    case "player": //プレイヤー
+                        const playerDefenseStatus = getPlayerDefenseStatusFunctionArray[index](x, y);
+                        const playerStatusFluctuation = statusFluctuationCalcFunctionArray[index](playerDefenseStatus);
+                        playerStatusFluctuationExecuteFunctionArray[index](playerStatusFluctuation);
+                        break;
+                    case "enemy": //エネミー
+                        const enemyDefenceStatus = getEnemyDefenseStatusFunctionArray[index](x, y);
+                        const enemyStatusFluctuation = statusFluctuationCalcFunctionArray[index](enemyDefenceStatus);
+                        enemyStatusFluctuationExecuteFunctionArray[index](x, y, enemyStatusFluctuation);
+                        break;
+                    default: //エラー
+                        return;
+                }
+                effectData.hits = effectData.hits -1;
+
+            });
+
+            if(hitsSkipCount === skillData.effect.length){
                 //スキル終了
+                isSkillEnd = true;
                 break;
             }
         }
+
+        // TODO スキル範囲拡張処理
+        // TODO リンクスキル処理
         
         /* スキル終了処理 */
         this.#skillEndInitialize();
@@ -187,41 +261,46 @@ class Skill{
         this.scopeArray = [];
     }
 
-    /* スキルデータをセットする */
+   /* スキルデータをセットする */
     static #setSkillData(skillId){
         //Mapからスキルデータを取得する
         if(!this.skillDataMap.has(skillId)){
             // 指定したスキルidのデータがMapにない場合は取得して設定する
             this.#addSkillDataMap([skillId]);
         }
-        const skillData = JSON.parse(JSON.stringify(this.skillDataMap.get(skillId))); //ディープコピー
+        const skillData = Tool.deepCopy(this.skillDataMap.get(skillId));
         skillData.skillId = skillId;
-        //skillDataのtargetを絶対targetにする
-        switch(skillData.effect.target){
+        //スキルデータを加工する
+        skillData.effect.forEach((effectData) => {
+            //skillData.effectのtargetを絶対targetにする
+            switch(effectData.target){
             case "hostility": //スキル使用者から見た敵
                 switch(this.skillUserData.type){
                     case "player":
-                        skillData.effect.target = "enemy";
+                        effectData.target = "enemy";
                         break;
                     case "enemy":
-                        skillData.effect.target = "player";
+                        effectData.target = "player";
                         break;
                 }
                 break;
             case "ally": //スキル使用者から見た味方
                 switch(this.skillUserData.type){
                     case "player":
-                        skillData.effect.target = "Player";
+                        effectData.target = "Player";
                         break;
                     case "enemy":
-                        skillData.effect.target = "enemy";
+                        effectData.target = "enemy";
                         break;
                 }
                 break;
             default:
                 // "all", "player", "enemy"は加工しない
                 break;
-        }
+            }
+            //skillData.effectのhitsを数字に直す
+            effectData.hits = Number(effectData.hits);
+        });
         return skillData;
     }
 
@@ -266,7 +345,7 @@ class Skill{
     static #addSkillDataMap(skillIdArray = []){
         /* 開発用にデータをセット 指定したスキルidに一つ上のマスの敵に攻撃するスキルを設定*/
         skillIdArray.forEach((element) => {
-            const skillData = {scope:{type:"one", x:0, y:-1}, effect:{type:"normal", target:"hostility"}};
+            const skillData = {scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}], link:[]};
             this.skillDataMap.set(element, skillData);
         });
         /* end */
@@ -283,33 +362,43 @@ class Skill{
         return {x:absoluteX, y:absoluteY}
     }
 
-    /* scopeType別に、スキル範囲相対座標のリストを作成する */
-    static #scopeTypeBranch(skillScopeData){
-        let targetCoordinateArray = [];
-        switch(skillScopeData.type){
-            case "one":
-                //スキル範囲座標の配列を作成
-                targetCoordinateArray = this.#scopeTypeOne(skillScopeData);
+    /* 座標の範囲をチェックする */
+    static #isInCoordinateRange(x, y){
+        if(x === null || y ===null){
+            //nullの場合
+            return false;
+        }
+        if(0 < x < Config.stageRows && 0 < y < Config.stageCols){
+            //範囲内の場合
+            return true;
+        }
+        return false;
+    }
 
-                // スキル範囲座標拡張用の関数(拡張なし)
-                this.useFunctionMap.set("scopeExtension", () => {return{};});
+    /* scopeType別に、スキル範囲相対座標のリストを作成する */
+    // return Map(["createTargetCoordinateArray":Function, "scopeExtension":Function]);
+    static #scopeTypeBranch(scopeType){
+        const useFunctionMap = new Map();
+        switch(scopeType){
+            case "one":
+                //スキル範囲座標の配列を作成する関数
+                const createTargetCoordinateOne = (scopeData) => {
+                    const targetCoordinateArray = [];
+                    const targetCoordinateArrayItem = {};
+                    targetCoordinateArrayItem.x = scopeData.x;
+                    targetCoordinateArrayItem.y = scopeData.y;
+                    targetCoordinateArray.push(targetCoordinateArrayItem);
+                    return targetCoordinateArray;
+                }
+                useFunctionMap.set("createTargetCoordinateArray", createTargetCoordinateOne);
+                //スキル範囲拡張用の関数を設定する (拡張なし)
+                useFunctionMap.set("scopeExtension", () => {return{};});
                 break;
             // TODO 範囲タイプを追加する
             default:
                 break;
         }
-        return targetCoordinateArray;
-    }
-
-    /* scopeType別の処理メソッド (one) */
-    static #scopeTypeOne(skillScopeData){
-        // 方向が上の状態のスキル範囲座標の配列を作成する
-        const targetCoordinateArray = [];
-        const targetCoordinateArrayItem = {};
-        targetCoordinateArrayItem.x = skillScopeData.x;
-        targetCoordinateArrayItem.y = skillScopeData.y;
-        targetCoordinateArray.push(targetCoordinateArrayItem);
-        return targetCoordinateArray;
+        return useFunctionMap;
     }
 
     /* スキル対象相対座標のリストを方向に回転する */
@@ -455,126 +544,180 @@ class Skill{
     }
 
     /* 効果タイプで分岐する関数を設定する */
+    //return Map(["statusFluctuationCalc":Function, "getPlayerDefenseStatus":Function, "getEnemyDefenseStatus":Function, "playerStatusFluctuationExecute":Function, "enemyStatusFluctuationExecute":Function]);
     static #effectTypeBranch(effectType){
+        const useFunctionMap = new Map();
         switch(effectType){
             case "normal": //通常攻撃
-                //プレイヤーターゲットデータ取得
-                const  getNormalPlayerTargetData = (targetCoordinate) => {
-                    const targetData = {};
-                    const x = targetCoordinate.x;
-                    const y = targetCoordinate.y;
-                    const playerId = Player.getPlayerId(x, y);
-                    if(playerId === null){
-                        //プレイヤーが存在しない
-                        return null;
-                    }
-                    targetData.x = x;
-                    targetData.y = y;
-                    targetData.playerId = playerId;
-                    targetData.status = Player.getPlayerDefenseStatus;
-                    return targetData;
-                }
-                this.useFunctionMap.set("getPlayerTargetData", getNormalPlayerTargetData);
-
-                //エネミーターゲットデータ取得
-                const getNormaEnemyTargetData = (targetCoordinate) => {
-                    const targetData = {};
-                    const x = targetCoordinate.x;
-                    const y = targetCoordinate.y;
-                    if(!Enemy.checkEnemy(x, y)){
-                        //エネミーが存在しない
-                        return null;
-                    }
-                    targetData.x = x;
-                    targetData.y = y;
-                    targetData.status = Enemy.getEnemyDefenceStatus(x, y);
-                    return targetData;
-                }
-                this.useFunctionMap.set("getEnemyTargetData", getNormaEnemyTargetData);
-
-                //ステータス変化計算
-                const normalDmaageCalc = (attackStatus, defenseStatus) => {
+                //ステータス変化計算関数
+                const normalCalc = (defenseStatus) => {
+                    const attackStatus = {};
+                    Object.assign(attackStatus, this.skillUserData.attackStatus);
+                    const statusFluctuation = {};
                     const damage = this.#normalDmaageCalc(attackStatus, defenseStatus);
-                    return damage;
+                    statusFluctuation.hp = -damage;
+                    return statusFluctuation;
                 }
-                this.useFunctionMap.set("statusFluctuationCalc", normalDmaageCalc);
+                useFunctionMap.set("statusFluctuationCalc", normalCalc);
+
+                //プレイヤーの防御系ステータス取得関数
+                //取得失敗の場合はnullを返す
+                const getNormalPlayerDefenseStatus = (x, y) => {
+                    const playerId = Player.getPlayerId(x, y);
+                    const defenseStatus = Player.getPlayerDefenseStatus(playerId); 
+                    defenseStatus.playerId = playerId;
+                    return defenseStatus;
+                };
+                useFunctionMap.set("getPlayerDefenseStatus", getNormalPlayerDefenseStatus);
+
+                //エネミーの防御系ステータス取得関数
+                //取得失敗の場合はnullを返す
+                const getNormalEnemyDefenceStatus = (x, y) => {
+                    const defenseStatus = Enemy.getEnemyDefenceStatus(x, y);
+                     return defenseStatus;
+                };
+                useFunctionMap.set("getEnemyDefenseStatus", getNormalEnemyDefenceStatus);
+
+                //プレイヤーのステータス更新関数
+                const playerNormalStatusFluctuationExecute = (playerId, statusFluctuation) => {
+                    Player.playerHpFluctuation(playerId, statusFluctuation.hp);
+                }
+                useFunctionMap.set("playerStatusFluctuationExecute", playerNormalStatusFluctuationExecute);
+
+                //エネミーのステータス更新関数
+                const enemyNormalStatusFluctuationExecute = (x, y, statusFluctuation) => {
+                    Enemy.enemyHpFluctuation(x, y, statusFluctuation.hp);
+                }
+                useFunctionMap.set("enemyStatusFluctuationExecute", enemyNormalStatusFluctuationExecute);
+
                 break;
             case "attack": //物理攻撃
-                //プレイヤーターゲットデータ取得
-                const  getAttackPlayerTargetData = (targetCoordinate) => {
-                    const targetData = {};
-                    // TODO
-                    return targetData;
-                }
-                this.useFunctionMap.set("getPlayerTargetData", getAttackPlayerTargetData);
-
-                //エネミーターゲットデータ取得
-                const getAttackEnemyTargetData = (targetCoordinate) => {
-                    const targetData = {};
-                    // TODO
-                    return targetData;
-                }
-                this.useFunctionMap.set("getEnemyTargetData", getAttackEnemyTargetData);
-
                 //ステータス変化計算
-                const attackDmaageCalc = (attackStatus, defenseStatus) => {
+                const attackCalc = (defenseStatus) => {
+                    const attackStatus = {};
+                    Object.assign(attackStatus, this.skillUserData.status);
                     const statusFluctuation = {};
                     // TODO
                     return statusFluctuation;
                 }
-                this.useFunctionMap.set("statusFluctuationCalc", attackDmaageCalc);
+                useFunctionMap.set("statusFluctuationCalc", attackCalc);
+
+                //プレイヤーの防御系ステータス取得関数
+                const getAttackPlayerDefenseStatus = (x, y) => {
+                    const defenseStatus = {};
+                    // TODO
+                    return defenseStatus;
+                };
+                useFunctionMap.set("getPlayerDefenseStatus", getAttackPlayerDefenseStatus);
+
+                //エネミーの防御系ステータス取得関数
+                const getAttackEnemyDefenceStatus = (x, y) => {
+                    const defenseStatus = {};
+                    // TODO
+                     return defenseStatus;
+                };
+                useFunctionMap.set("getEnemyDefenseStatus", getAttackEnemyDefenceStatus);
+
+                //プレイヤーのステータス更新関数
+                const playerAttackStatusFluctuationExecute = (playerId, statusFluctuation) => {
+                    // TODO
+                    Player.playerHpFluctuation(playerId, statusFluctuation.hp);
+                }
+                useFunctionMap.set("playerStatusFluctuationExecute", playerAttackStatusFluctuationExecute);
+
+                //エネミーのステータス更新関数
+                const enemyAttackStatusFluctuationExecute = (x, y, statusFluctuation) => {
+                    // TODO
+                    Enemy.enemyHpFluctuation(x, y, statusFluctuation.hp);
+                }
+                useFunctionMap.set("enemyStatusFluctuationExecute", enemyAttackStatusFluctuationExecute);
+
                 break;
             case "magic": //魔法攻撃
-                //プレイヤーターゲットデータ取得
-                const  getMagicPlayerTargetData = (targetCoordinate) => {
-                    const targetData = {};
-                    // TODO
-                    return targetData;
-                }
-                this.useFunctionMap.set("getPlayerTargetData", getMagicPlayerTargetData);
-
-                //エネミーターゲットデータ取得
-                const getMagicEnemyTargetData = (targetCoordinate) => {
-                    const targetData = {};
-                    // TODO
-                    return targetData;
-                }
-                this.useFunctionMap.set("getEnemyTargetData", getMagicEnemyTargetData);
-
                 //ステータス変化計算
-                const magicDmaageCalc = (attackStatus, defenseStatus) =>{
+                const magicCalc = (defenseStatus) =>{
+                    const attackStatus = {};
+                    Object.assign(attackStatus, this.skillUserData.status);
                     const statusFluctuation = {};
                     // TODO
                     return statusFluctuation;
                 }
-                this.useFunctionMap.set("statusFluctuationCalc", magicDmaageCalc);
+                useFunctionMap.set("statusFluctuationCalc", magicCalc);
+
+                //プレイヤーの防御系ステータス取得関数
+                const getMagicPlayerDefenseStatus = (x, y) => {
+                    const defenseStatus = {};
+                    // TODO
+                    return defenseStatus;
+                };
+                useFunctionMap.set("getPlayerDefenseStatus", getMagicPlayerDefenseStatus);
+
+                //エネミーの防御系ステータス取得関数
+                const getMagicEnemyDefenceStatus = (x, y) => {
+                    const defenseStatus = {};
+                    // TODO
+                     return defenseStatus;
+                };
+                useFunctionMap.set("getEnemyDefenseStatus", getMagicEnemyDefenceStatus);
+
+                //プレイヤーのステータス更新関数
+                const playerMagicStatusFluctuationExecute = (playerId, statusFluctuation) => {
+                    // TODO
+                    Player.playerHpFluctuation(playerId, statusFluctuation.hp);
+                }
+                useFunctionMap.set("playerStatusFluctuationExecute", playerMagicStatusFluctuationExecute);
+
+                //エネミーのステータス更新関数
+                const enemyMagicStatusFluctuationExecute = (x, y, statusFluctuation) => {
+                    // TODO
+                    Enemy.enemyHpFluctuation(x, y, statusFluctuation.hp);
+                }
+                useFunctionMap.set("enemyStatusFluctuationExecute", enemyMagicStatusFluctuationExecute);
+                
                 break;
             // TODO 種類を追加する
             default: //エラー
                 return null;
         }
+        return useFunctionMap;
     }
 
     /* 効果対象で分岐する関数を設定する */
+    //return Map(["statusFluctuationExecute":Function, "checkEffectTargetCharacter":Function]);
      static #effectTargetBranch(effectTarget){
+         const useFunctionMap = new Map();
          switch(effectTarget){
              case "player": //プレイヤー
-                //使用しないターゲットデータ取得関数を空の関数に置き換える
-                this.useFunctionMap.set("getEnemyTargetData", (targetCoordinate) => {return null;}); //空の関数
+                //効果対象チェック関数
+                const checkEffectTargetPlayer = (existenceChecked) => {
+                    if(existenceChecked === "player"){
+                        //プレイヤーが存在する
+                        return "Player";
+                    }
+                    return "no"
+                }
+                useFunctionMap.set("checkEffectTargetCharacter", checkEffectTargetPlayer);
 
-                //ステータス変動実行
+                //ステータス変動実行関数
                 const playerStatusFluctuationExecute = (targetDataMap, statusFluctuationCalcFunction, skillHitRemainingNumber) => {
                     let isSkillEnd = false;
                     // TODO
                     return isSkillEnd;
                 }
-                this.useFunctionMap.set("statusFluctuationExecute", playerStatusFluctuationExecute);
+                useFunctionMap.set("statusFluctuationExecute", playerStatusFluctuationExecute);
                 break;
             case "enemy": //エネミー
-                //使用しないターゲットデータ取得関数を空の関数に置き換える
-                this.useFunctionMap.set("getPlayerTargetData", (targetCoordinate) => {return null;}); //空の関数
+                //効果対象チェック関数
+                const checkEffectTargetEnemy = (existenceChecked) => {
+                    if(existenceChecked === "enemy"){
+                        //エネミーが存在する
+                        return "enemy";
+                    }
+                    return "no"
+                }
+                useFunctionMap.set("checkEffectTargetCharacter", checkEffectTargetEnemy);
 
-                // ステータス変動実行
+                // ステータス変動実行関数
                 const enemyStatusFluctuationExecute = (targetDataMap, statusFluctuationCalcFunction, skillHitRemainingNumber) => {
                     const enemyTargetData = targetDataMap.get("enemy");
                     if(enemyTargetData === null){
@@ -588,63 +731,35 @@ class Skill{
                     Enemy.enemyHpFluctuation(enemyTargetData.x, enemyTargetData.y, -damage);
                     return skillHitRemainingNumber;
                 }
-                this.useFunctionMap.set("statusFluctuationExecute", enemyStatusFluctuationExecute);
+                useFunctionMap.set("statusFluctuationExecute", enemyStatusFluctuationExecute);
                 break;
             case "all": //プレイヤーとエネミー
+                //効果対象チェック関数
+                const checkEffectTargetAll = (existenceChecked) => {
+                    if(existenceChecked === "enemy"){
+                        //エネミーが存在する
+                        return "enemy";
+                    }else if(existenceChecked === "player"){
+                        //プレイヤーが存在する
+                        return "player";
+                    }
+                    return "no"
+                }
+                useFunctionMap.set("checkEffectTargetCharacter", checkEffectTargetAll);
+
                 // ステータス変動実行
                 const allStatusFluctuationExecute = (targetDataMap, statusFluctuationCalcFunction, skillHitRemainingNumber) => {
                     let isSkillEnd = false;
                     // TODO
                     return isSkillEnd;
                 }
-                this.useFunctionMap.set("statusFluctuationExecute", allStatusFluctuationExecute);
+                useFunctionMap.set("statusFluctuationExecute", allStatusFluctuationExecute);
                 break;
             default: //エラー
                 return null;
          }
+         return useFunctionMap;
      }
-
-    /* 対象の存在チェックとplayerの防御系ステータスを取得 */
-    static #skillTakeCheckFindData(attackCoordinate, target){
-        const skillTakeData = []; //スキルを受けるキャラクターのステータス 存在しない場合はからの配列を返す
-        const x = attackCoordinate.x;
-        const y = attackCoordinate.y;
-        switch(target){
-            case "all":
-                if(Enemy.checkEnemy(x, y)){ //エネミーが存在する場合はステータス取得処理を行う
-                    // TODO エネミーのステータスを取得
-                }
-                const allPlayerId = Player.getPlayerId(x, y);
-                if(allPlayerId !== null){ //playerIdが存在する場合はステータス取得処理を行う
-                    const playerDefenseStatus = Player.getPlayerDefenseStatus(allPlayerId);
-                    playerDefenseStatus.type = "player";
-                    playerDefenseStatus.playerId = allPlayerId;
-                    playerDefenseStatus.x = x;
-                    playerDefenseStatus.y = y;
-                    skillTakeData.push(playerDefenseStatus);
-                }
-                break;
-            case "player":
-                const playerId = Player.getPlayerId(x, y);
-                if(playerId !== null){ //playerIdが存在する場合はステータス取得処理を行う
-                    const playerDefenseStatus = Player.getPlayerDefenseStatus(playerId);
-                    playerDefenseStatus.type = "player";
-                    playerDefenseStatus.playerId = playerId;
-                    playerDefenseStatus.x = x;
-                    playerDefenseStatus.y = y;
-                    skillTakeData.push(playerDefenseStatus);
-                }
-                break;
-            case "enemy":
-                if(Enemy.checkEnemy(x, y)){ //エネミーが存在する場合はステータス取得処理を行う
-                    // TODO エネミーのステータスを取得
-                }
-                break;
-            default:
-                break;
-        }
-        return skillTakeData;
-    }
 
     /*  ダメージ計算 (normal)*/
     static #normalDmaageCalc(attackStatus, defenseStatus){
