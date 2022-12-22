@@ -56,7 +56,7 @@ function go_sound() {
 
 // キャラクターのボイス再生
 function voice_fire() {
-    var random = Math.floor( Math.random() * 11 );
+    var random = Math.floor(Math.random() * 11);
     if (random > 5) {
         audio = new Audio("sound/hello.m4a");
     } else {
@@ -114,4 +114,12 @@ function presentModalClose() {
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('presentModal');
     modal.style.display = 'none';
+}
+
+function soundBGM() {
+    // BGM再生
+    audio = new Audio("sound/BGM.m4a");
+    audio.loop = true;
+    audio.volume = 0.1;
+    audio.play();
 }

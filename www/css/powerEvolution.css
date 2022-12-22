@@ -82,12 +82,25 @@
     border-left: 2px solid white;
     width: 40px;
     height: 40px;
+    transform: translateY(-50px);
+}
+
+.overlap_color {
+    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    width: 18px;
+    height: 18px;
+    position: relative;
+    transform: translateY(-15px);
+    left: 1px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1;
 }
 
 /* レベル表示 */
 .level_text {
     position: relative;
-    transform: translateY(-30px);
+    transform: translateY(-80px);
     left: 5px;
     font-weight: bold;
 }
