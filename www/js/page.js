@@ -254,3 +254,11 @@ function ColumnButtonInitializationPlus() {
     document.getElementById('othercolumn').style.borderBottom = '4px solid #999999';
     document.getElementById('othercolumn').style.borderLeft = '4px solid #e6e6e6';
 }
+
+function soundBGM() {
+    // BGM再生
+    audio = new Audio("../sound/BGM.m4a");
+    audio.loop = true;
+    audio.volume = 0.1;
+    audio.play();
+}

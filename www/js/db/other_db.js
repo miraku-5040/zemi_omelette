@@ -26,7 +26,7 @@ function getPresentData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var present = results[i];
             // 新しいHTML要素を作成
-            var presentHtml = '<div class="present_box"><h4 class="present_title">' + present.present_title + '</h4><p class="present_text">' + present.present_content + '</p><button class="present_button" id="present_button" value="' + present.objectId + '" onclick="getSoloPresentData();presentReceive()">受け取る</button></div>';
+            var presentHtml = '<div class="present_box"><h4 class="present_title">' + present.present_title + '</h4><p class="present_text">' + present.present_content + '</p><button class="present_button" id="present_button" value="' + present.objectId + '" onclick="getSoloPresentData()">受け取る</button></div>';
             // 作成した要素を追加
             document.getElementById("modal-body").insertAdjacentHTML('beforeend', presentHtml);
         }
@@ -39,7 +39,7 @@ function getSoloPresentData() {
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Present = ncmb.DataStore(this.PRESENT_DB);
     var item_count = "";
-    var objectId = document.getElementById("present_button").value;
+    var objectId = String(document.getElementById("present_button").value);
     // アイテムidからプレゼント個数を割り出す
     Present.equalTo("objectId", objectId)
         .fetchAll()
@@ -52,11 +52,12 @@ function getSoloPresentData() {
                 .fetchAll()
                 .then(function (results) {
                     var item = results[0];
-                    console.log(item);
+                    console.log(Number(item.sum) + Number(item_count));
                     // ↓更新が出来ない
                     results.set("sum", Number(item.sum) + Number(item_count))
                            .update();
                     console.log("ok");
+                    presentReceive();
                 })
                 .catch(function (err) {
                     console.log(err);
