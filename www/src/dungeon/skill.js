@@ -52,7 +52,8 @@ class Skill{
         const skillUserData = {};
         skillUserData.type = "player";
         skillUserData.playerId = playerId;
-        skillUserData.skillId = skillId;
+        skillUserData.skillId = skillId; //使用スキル
+        this.skillId = skillId; //スキルデータ取得用
         const playerNowPosition = Player.getPlayerNowPosition(playerId);
         skillUserData.nowX = playerNowPosition.x;
         skillUserData.nowY = playerNowPosition.y;
@@ -76,7 +77,8 @@ class Skill{
     static enemyUseSkill(skillId, nowX, nowY){
         const skillUserData = {};
         skillUserData.type = "enemy";
-        skillUserData.skillId = skillId;
+        skillUserData.skillId = skillId; //使用スキル
+        this.skillId = skillId; //スキルデータ取得用
         skillUserData.nowX = nowX;
         skillUserData.nowY = nowY;
         skillUserData.direction = Enemy.getDirection(nowX, nowY);
@@ -93,7 +95,8 @@ class Skill{
     static trapUseSkill(skillId, nowX, nowY){
         const skillUserData =  {};
         skillUserData.type = "trap";
-        skillUserData.skillId = skillId;
+        skillUserData.skillId = skillId; //使用スキル
+        this.skillId = skillId; //スキルデータ取得用
         skillUserData.nowX = nowX;
         skillUserData.nowY = nowY;
         skillUserData.direction = Trap.getDirection(nowX, nowY); //処理用に設定
@@ -110,7 +113,8 @@ class Skill{
         const skillUserData = {};
         skillUserData.type = "item";
         skillUserData.playerId = playerId;
-        skillUserData.skillId = skillId;
+        skillUserData.skillId = skillId; //使用スキル
+        this.skillId = skillId; //スキルデータ取得用
         const playerNowPosition = Player.getPlayerNowPosition(playerId);
         skillUserData.nowX = playerNowPosition.x;
         skillUserData.nowY = playerNowPosition.y;
@@ -126,8 +130,11 @@ class Skill{
      * スキル準備
      */
     static skillReady(){
+        // class変数からデータ取得と初期化
+        const skillId = this.skillId;
+        this.skillId = 0; //初期化
         // skillDataを設定
-        const skillData = this.#setSkillData(this.skillUserData.skillId);
+        const skillData = this.#setSkillData(skillId);
         // scope.typeで分岐する関数を設定
         const scopeTypeUseFunctionMap = this.#scopeTypeBranch(skillData.scope.type);
         const createTargetCoordinateArray = scopeTypeUseFunctionMap.get("createTargetCoordinateArray");
