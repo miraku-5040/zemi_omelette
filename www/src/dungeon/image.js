@@ -13,10 +13,12 @@ class Image {
      *  サンプル： <img src="img/stage_1.png" id="stage1"> */
     static createElement(id = '00000'){
         // 要素を作成
-        var elem = document.createElement(`img`);
+        const elem = document.createElement(`img`);
         //src
-         elem.src = `img/${id}.png`;
-
+        elem.src = `img/${id}.png`;
+        elem.width = Config.stageImgWidth;
+        elem.height = Config.stageImgHeight;
+        elem.style.position = 'absolute';
         return elem;
     }
 
@@ -41,9 +43,6 @@ class Image {
         this.stageImages = [];
         for(let i=1; i <= Config.stageImageTotal; i++){
             const image = this.createElement(`F000${i}`);
-            image.width = Config.stageImgWidth;
-            image.height = Config.stageImgHeight;
-            image.style.position = 'absolute';
             this.stageImages.push(image);
             if(i > 2){
                 this.quadrupleDirection(image);
@@ -63,23 +62,13 @@ class Image {
     /* playerImagesにプレイキャラクターの画像が入る */
     static createPlayerImages(){
         const errorIndex = 0;
-        const name = "P000";
         this.playerImages = new Map();
         //エラー用の画像をセット
         const errorImage = this.createElement();
-        errorImage.removeAttribute('id');
-        errorImage.width = Config.stageImgWidth;
-        errorImage.height = Config.stageImgHeight;
-        errorImage.style.position = 'absolute';
         this.playerImages.set(errorIndex, errorImage);
-
         for(let i=0; i < Config.characterImageTotal; i++){
             const image = this.createElement(`P000${i}`);
-            image.removeAttribute('id');
-            image.width = Config.stageImgWidth;
-            image.height = Config.stageImgHeight;
-            image.style.position = 'absolute';
-            this.playerImages.set(i+1, image);
+            this.playerImages.set(`P000${i}`, image);
         }
     }
 
@@ -87,48 +76,26 @@ class Image {
      * 引数のArrayで指定したenemyIdの画像をセットする */
     static createEnemyImages(enemyIdArray = []){
         const errorIndex = 0;
-        const stageImgHeight = Config.stageImgHeight;
-        const stageImgWidth = Config.stageImgWidth;
         this.enemyImages = new Map();
         //エラー用の画像をセット
         const errorImage = this.createElement();
-        errorImage.removeAttribute('id');
-        errorImage.width = stageImgWidth;
-        errorImage.height = stageImgHeight;
-        errorImage.style.position = 'absolute';
         this.enemyImages.set(errorIndex, errorImage);
 
         enemyIdArray.forEach((element) => {
-            console.log(element)
             const image = this.createElement(element);
-            image.removeAttribute('id');
-            image.width = stageImgWidth;
-            image.height = stageImgHeight;
-            image.style.position = 'absolute';
             this.enemyImages.set(element, image);
         });
     }
 
     static createTrapImages(trapIdArray = []){
         const errorIndex = 0;
-        const name = "T000";
-        const stageImgHeight = Config.stageImgHeight;
-        const stageImgWidth = Config.stageImgWidth;
         this.trapImages = new Map();
         //エラー用の画像をセット
         const errorImage = this.createElement();
-        errorImage.removeAttribute('id');
-        errorImage.width = stageImgWidth;
-        errorImage.height = stageImgHeight;
-        errorImage.style.position = 'absolute';
         this.trapImages.set(errorIndex, errorImage);
 
         trapIdArray.forEach((element) => {
-            const image = this.createElement(name, element);
-            image.removeAttribute('id');
-            image.width = stageImgWidth;
-            image.height = stageImgHeight;
-            image.style.position = 'absolute';
+            const image = this.createElement(element);
             this.trapImages.set(element, image);
         });
     }
@@ -138,18 +105,10 @@ class Image {
         this.itemImages = new Map();
         //エラー用の画像をセット
         const errorImage = this.createElement();
-        errorImage.removeAttribute('id');
-        errorImage.width = Config.stageImgWidth;
-        errorImage.height = Config.stageImgHeight;
-        errorImage.style.position = 'absolute';
         this.enemyImages.set(errorIndex, errorImage);
 
         itemIdArray.forEach((element) => {
             const image = this.createElement(element);
-            image.removeAttribute('id');
-            image.width = Config.stageImgWidth;
-            image.height = Config.stageImgHeight;
-            image.style.position = 'absolute';
             this.enemyImages.set(element, image);
         });
      }
@@ -157,10 +116,7 @@ class Image {
     /* itemImagesにフィールド上に落ちているアイテムの画像を格納 */
     static createDropItemImages(){
         this.dropItemImages = [];
-        const image = this.createElement('I0000');
-        image.width = Config.stageImgWidth;
-        image.height = Config.stageImgHeight;
-        image.style.position = 'absolute';
+        const image = this.createElement('ID000');
         this.dropItemImages.push(image);
     }
 
@@ -170,34 +126,49 @@ class Image {
         return image;
     }
 
-    /* playerのimgをcharacterImagesの要素を取得
-     * getPlayerImageに変更する */
-     static getCharacterImage(index) { 
-        const matchImage = this.playerImages.get(index);
-        return matchImage.cloneNode();
-    }
+
 
     /* playerImagesの要素を取得 */
     static getPlayerImage(playerId){
         const errorIndex = 0;
-        const matchItem = this.playerImages.get(playerId);
-        if(matchItem === undefined){
+        const matchObject = this.playerImages.get(playerId);
+        if(matchObject === undefined){
             //存在しない場合
             return this.playerImages.get(errorIndex).cloneNode();
         }
-        const image = matchItem.element.cloneNode();
+        const image = matchObject.cloneNode();
         return image;
     }
 
     /* enemyImagesの要素を取得 */
     static getEnamyImage(enemyId){
         const errorIndex = 0;
-        const matchItem = this.enemyImages.get(enemyId);
-        if(matchItem === undefined){
+        const matchObject = this.enemyImages.get(enemyId);
+        if(matchObject === undefined){
             //存在しない場合
             return this.enemyImages.get(errorIndex).cloneNode();
         }
-        const image = matchItem.cloneNode();
+        const image = matchObject.cloneNode();
+        return image;
+    }
+
+    static getItemImage(itemId){
+        const errorIndex = 0;
+        const matchObject = this.itemImages.get(itemId);
+        if(matchObject === undefined){
+            return this.itemImages.get(errorIndex).cloneNode();
+        }
+        const image = matchObject.cloneNode();
+        return image;
+    }
+
+    static getTrapImage(trapId){
+        const errorIndex = 0;
+        const matchObject = this.trapImages.get(trapId);
+        if(matchObject === undefined){
+            return this.trapImages.get(errorIndex).cloneNode();
+        }
+        const image = matchObject.cloneNode();
         return image;
     }
 
