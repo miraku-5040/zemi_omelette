@@ -15,9 +15,6 @@ function updateEquipWeaponData() {
     var soad = document.getElementById("soad").src;
     var shield = document.getElementById("shield").src;
     var decoration = document.getElementById("decoration").src;
-    console.log(soad);
-    console.log(shield);
-    console.log(decoration);
     Equip.equalTo("equipment_id", "1").fetch()
     .then(function (results) {
         console.log(results);
@@ -26,7 +23,7 @@ function updateEquipWeaponData() {
                 .set("decoration", decoration)
                 .update()
                 .then(function (results) {
-                    console.log(results);
+                    console.log("updateEquipWeaponData:ok");
                 })
         .catch(function(err){
             console.log("outsideng");
