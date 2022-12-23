@@ -135,6 +135,9 @@ class Skill{
      * スキル準備
      */
     static skillReady(){
+        //useSkillからデータ受け取りと初期化
+        const skillData = this.skillData;
+        this.skillData = {}; //new
         // scope.typeで分岐する関数を設定
         const scopeTypeUseFunctionMap = this.#scopeTypeBranch(skillData.scope.type);
         const createTargetCoordinateArray = scopeTypeUseFunctionMap.get("createTargetCoordinateArray");
@@ -145,6 +148,7 @@ class Skill{
         if(this.skillData.skillId === this.normalAttackId){ //通常攻撃の場合は準備をスキップする
             // skillGoに渡すデータをクラス変数に設定する
             this.targetCoordinateArray = targetCoordinateArray;
+            this.skillData = skillData;
             return;
         }
         /* 範囲を表示 */
@@ -159,6 +163,7 @@ class Skill{
 
         /* skillGoに渡すデータをクラス変数に設定する */
         this.targetCoordinateArray = targetCoordinateArray;
+        this.skillData = skillData;
     }
 
     /**
