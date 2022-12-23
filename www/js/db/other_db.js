@@ -39,14 +39,13 @@ function getSoloPresentData() {
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Present = ncmb.DataStore(this.PRESENT_DB);
     var item_count = "";
-    var itemId = document.getElementById("present_button").value;
+    var objectId = document.getElementById("present_button").value;
     // アイテムidからプレゼント個数を割り出す
-    Present.equalTo("item_id", itemId)
+    Present.equalTo("objectId", objectId)
         .fetchAll()
         .then(function (results) {
             var present = results[0];
             // ↓ここが出ていない
-            console.log(present);
             item_count = present.present_count;
             // アイテム移動
             Item.equalTo("item_id", present.present_item)
@@ -54,8 +53,9 @@ function getSoloPresentData() {
                 .then(function (results) {
                     var item = results[0];
                     console.log(item);
-                    results.set("sum", Number(item.sum) + Number(item_count));
-                    results.update();
+                    // ↓更新が出来ない
+                    results.set("sum", Number(item.sum) + Number(item_count))
+                           .update();
                     console.log("ok");
                 })
                 .catch(function (err) {
