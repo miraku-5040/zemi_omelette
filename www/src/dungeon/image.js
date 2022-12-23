@@ -15,15 +15,27 @@ class Image {
         // 要素を作成
         var elem = document.createElement(`img`);
         //src
-         elem.src = `img/${name}_${i}.png`;
+         elem.src = `img/${name}${i}.png`;
 
         return elem;
     }
+    /*
+    static createErement(id = '00000'){
+        // 要素を作成
+        var elem = document.createElement(`img`);
+        //src
+         elem.src = `img/${id}.png`;
+
+        return elem;
+    }
+    */
+
 
     static createItemList(playerId, itemList){
         Player.getPlayerItems(playerId).forEach((item,i) => {
             var elem = document.createElement(`img`);
             elem.id = `item_list_index_${i}`;
+            //getItemImageする
             elem.src = `img/${item.itemId}.png`;
             elem.style.position = 'absolute';
             elem.style.left = Config.itemListImageWidth * i + "px";
@@ -38,7 +50,7 @@ class Image {
     static createStageImages(){
         this.stageImages = [];
         for(let i=0; i < Config.stageImageTotal; i++){
-            const image = this.createElement('stage',i+1);
+            const image = this.createElement('F000',i+1);
             image.width = Config.stageImgWidth;
             image.height = Config.stageImgHeight;
             image.style.position = 'absolute';
@@ -61,10 +73,10 @@ class Image {
     /* playerImagesにプレイキャラクターの画像が入る */
     static createPlayerImages(){
         const errorIndex = 0;
-        const name = "player";
+        const name = "P000";
         this.playerImages = new Map();
         //エラー用の画像をセット
-        const errorImage = this.createElement("null", 0);
+        const errorImage = this.createElement("0000", 0);
         errorImage.removeAttribute('id');
         errorImage.width = Config.stageImgWidth;
         errorImage.height = Config.stageImgHeight;
@@ -72,7 +84,7 @@ class Image {
         this.playerImages.set(errorIndex, errorImage);
 
         for(let i=0; i < Config.characterImageTotal; i++){
-            const image = this.createElement(name, i+1);
+            const image = this.createElement(name, i);
             image.removeAttribute('id');
             image.width = Config.stageImgWidth;
             image.height = Config.stageImgHeight;
@@ -85,12 +97,12 @@ class Image {
      * 引数のArrayで指定したenemyIdの画像をセットする */
     static createEnemyImages(enemyIdArray = []){
         const errorIndex = 0;
-        const name = "enemy";
+        const name = "E000";
         const stageImgHeight = Config.stageImgHeight;
         const stageImgWidth = Config.stageImgWidth;
         this.enemyImages = new Map();
         //エラー用の画像をセット
-        const errorImage = this.createElement("null", 0);
+        const errorImage = this.createElement("0000", 0);
         errorImage.removeAttribute('id');
         errorImage.width = stageImgWidth;
         errorImage.height = stageImgHeight;
@@ -107,12 +119,36 @@ class Image {
         });
     }
 
+    static createTrapImages(trapIdArrayb = []){
+        const errorIndex = 0;
+        const name = "T000";
+        const stageImgHeight = Config.stageImgHeight;
+        const stageImgWidth = Config.stageImgWidth;
+        this.trapImages = new Map();
+        //エラー用の画像をセット
+        const errorImage = this.createElement("0000", 0);
+        errorImage.removeAttribute('id');
+        errorImage.width = stageImgWidth;
+        errorImage.height = stageImgHeight;
+        errorImage.style.position = 'absolute';
+        this.trapImages.set(errorIndex, errorImage);
+
+        enemyIdArray.forEach((element) => {
+            const image = this.createElement(name, element);
+            image.removeAttribute('id');
+            image.width = stageImgWidth;
+            image.height = stageImgHeight;
+            image.style.position = 'absolute';
+            this.trapImages.set(Number(element), image);
+        });
+    }
+
      static createItemImages(itemIdArray = []){
         const errorIndex = 0;
         const name =''
         this.itemImages = new Map();
         //エラー用の画像をセット
-        const errorImage = this.createElement("null", 0);
+        const errorImage = this.createElement("0000", 0);
         errorImage.removeAttribute('id');
         errorImage.width = Config.stageImgWidth;
         errorImage.height = Config.stageImgHeight;
@@ -132,7 +168,7 @@ class Image {
     /* itemImagesにフィールド上に落ちているアイテムの画像を格納 */
     static createDropItemImages(){
         this.dropItemImages = [];
-        const image = this.createElement('item',1);
+        const image = this.createElement('I000',0);
         image.width = Config.stageImgWidth;
         image.height = Config.stageImgHeight;
         image.style.position = 'absolute';

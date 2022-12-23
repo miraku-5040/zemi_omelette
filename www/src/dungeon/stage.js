@@ -133,6 +133,31 @@ class Stage {
         return false;   
     }
 
+    static checkStageCorner(direction, x, y){
+        switch(direction){
+        case 'leftup':
+            if(this.board[y][x - 1] == 12 || this.board[y - 1][x] == 14){
+                return false
+            }
+            return true;
+        case 'rightup':
+            if(this.board[y][x + 1] == 11 || this.board[y - 1][x] == 13){
+                return false
+            }
+            return true;
+        case 'rightdown':
+            if(this.board[y][x + 1] == 14 || this.board[y + 1][x] == 12){
+                return false
+            }
+            return true;
+        case 'leftdown':
+            if(this.board[y][x - 1] == 13 || this.board[y + 1][x] == 11){
+                return false
+            }
+            return true;
+        }
+    }
+
     static getStageBoard(){
         return this.board
     }
