@@ -48,12 +48,10 @@ class Skill{
      * playerからスキル呼び出し
      */
     static playerUseSkill(skillId,playerId){
-        //スキル使用者のデータをセット
+        //skillUserDataをセット
         const skillUserData = {};
         skillUserData.type = "player";
         skillUserData.playerId = playerId;
-        skillUserData.skillId = skillId; //使用スキル
-        this.skillId = skillId; //スキルデータ取得用
         const playerNowPosition = Player.getPlayerNowPosition(playerId);
         skillUserData.nowX = playerNowPosition.x;
         skillUserData.nowY = playerNowPosition.y;
@@ -62,6 +60,9 @@ class Skill{
         const playerAttackStatus = Player.getPlayerAttackStatus(playerId);
         skillUserData.attackStatus = playerAttackStatus;
         this.skillUserData = skillUserData;
+        // skillDataをセット
+        const skillData = this.#setSkillData(skillId);
+        this.skillData = skillData;
     }
 
     /**
@@ -75,10 +76,9 @@ class Skill{
      * enemyからスキル呼び出し
      */
     static enemyUseSkill(skillId, nowX, nowY){
+        //skillUserDataをセット
         const skillUserData = {};
         skillUserData.type = "enemy";
-        skillUserData.skillId = skillId; //使用スキル
-        this.skillId = skillId; //スキルデータ取得用
         skillUserData.nowX = nowX;
         skillUserData.nowY = nowY;
         skillUserData.direction = Enemy.getDirection(nowX, nowY);
@@ -86,6 +86,9 @@ class Skill{
         const enemyAttackStatus = Enemy.getEnemyAttackStatus(nowX, nowY);
         skillUserData.attackStatus = enemyAttackStatus;
         this.skillUserData = skillUserData;
+        // skillDataをセット
+        const skillData = this.#setSkillData(skillId);
+        this.skillData = skillData;
     }
 
     /**
@@ -93,16 +96,17 @@ class Skill{
      * スキル使用者のデータをセットする
      */
     static trapUseSkill(skillId, nowX, nowY){
+        //skillUserDataをセット
         const skillUserData =  {};
         skillUserData.type = "trap";
-        skillUserData.skillId = skillId; //使用スキル
-        this.skillId = skillId; //スキルデータ取得用
         skillUserData.nowX = nowX;
         skillUserData.nowY = nowY;
-        skillUserData.direction = Trap.getDirection(nowX, nowY); //処理用に設定
-        skillUserData.level = Trap.getLevel(nowX, nowY); //Trapから取得するように変更する
-        //attackStatus
+        skillUserData.direction = Trap.getDirection(nowX, nowY);
+        skillUserData.level = Trap.getLevel(nowX, nowY);
         this.skillUserData = skillUserData;
+        // skillDataをセット
+        const skillData = this.#setSkillData(skillId);
+        this.skillData = skillData;
     }
 
     /**
@@ -110,11 +114,10 @@ class Skill{
      * アイテムを使用するplayerIdで設定する
      */
     static itemUseSkill(skillId,playerId){
+        //skillUserDataをセット
         const skillUserData = {};
         skillUserData.type = "item";
         skillUserData.playerId = playerId;
-        skillUserData.skillId = skillId; //使用スキル
-        this.skillId = skillId; //スキルデータ取得用
         const playerNowPosition = Player.getPlayerNowPosition(playerId);
         skillUserData.nowX = playerNowPosition.x;
         skillUserData.nowY = playerNowPosition.y;
@@ -123,18 +126,15 @@ class Skill{
         const playerAttackStatus = Player.getPlayerAttackStatus;
         skillUserData.attackStatus = playerAttackStatus;
         this.skillUserData = skillUserData;
-        // TODO
+        // skillDataをセット
+        const skillData = this.#setSkillData(skillId);
+        this.skillData = skillData; //skillGoで使用
     }
 
     /**
      * スキル準備
      */
     static skillReady(){
-        // class変数からデータ取得と初期化
-        const skillId = this.skillId;
-        this.skillId = 0; //初期化
-        // skillDataを設定
-        const skillData = this.#setSkillData(skillId);
         // scope.typeで分岐する関数を設定
         const scopeTypeUseFunctionMap = this.#scopeTypeBranch(skillData.scope.type);
         const createTargetCoordinateArray = scopeTypeUseFunctionMap.get("createTargetCoordinateArray");
@@ -142,9 +142,8 @@ class Skill{
         // targetCoordinateArray作成
         const targetCoordinateArray = createTargetCoordinateArray(skillData.scope);
         // スキル座標を設定する
-        if(skillData.skillId === this.normalAttackId){ //通常攻撃の場合は準備をスキップする
+        if(this.skillData.skillId === this.normalAttackId){ //通常攻撃の場合は準備をスキップする
             // skillGoに渡すデータをクラス変数に設定する
-            this.skillData = skillData;
             this.targetCoordinateArray = targetCoordinateArray;
             return;
         }
@@ -159,7 +158,6 @@ class Skill{
         //this.#deleteScreenRenderingScope(); //範囲表示の描画を削除
 
         /* skillGoに渡すデータをクラス変数に設定する */
-        this.skillData = skillData;
         this.targetCoordinateArray = targetCoordinateArray;
     }
 
@@ -167,7 +165,7 @@ class Skill{
      * スキル使用
      */
     static skillGo(){
-        /* skillReadyからのデータ取得と初期化 */
+        /* useSkill, skillReadyからのデータ取得と初期化 */
         const skillData = this.skillData;
         const targetCoordinateArray = this.targetCoordinateArray;
         const scopeExtensionFunction = this.scopeExtensionFunction;
