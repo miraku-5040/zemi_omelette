@@ -8,34 +8,28 @@ var WEAPON_DB = "weapon";
 var EQUIP_DB = "equipment";
 var LOAD_WEAPON = "loadWeapon";
 
-// 1件分の武器情報取得(説明表示用)
-function getSoloWeaponData() {
+// 武器情報取得(1件)
+function getSoloExplainWeaponData(element) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
+    console.log(element.id);
+    Weapon.equalTo("weapon_id", Number(element.id))
         .fetchAll()
         .then(function (results) {
-            weaponId = results[0];
-            Weapon.equalTo("weapon_id", weaponId.weapon_id)
-                .fetchAll()
-                .then(function (results) {
-                    setDecorationImage(results);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
+            console.log(results);
+            setItemImage(results);
         })
         .catch(function (err) {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
-    function setDecorationImage(results) {
+    // 武器の画像(仮)と残数をHTMLに埋め込む
+    function setItemImage(results) {
+        // 情報取得
         var weapon = results[0];
-        document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
-        document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
-        document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
+        // 新しいHTML要素を作成
+        document.getElementById("item_modal_title").innerHTML = weapon.weapon_explain;
+        document.getElementById("item_modal_note").innerHTML = weapon.weapon_name;
     }
 }
 
@@ -52,18 +46,19 @@ function getItemSoadData() {
         .catch(function (err) {
             console.log(err);
         });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setSoadImage(results) {
-    // 初期化
-    document.getElementById("items").innerHTML = '';
-    // 情報取得
-    for (var i = 0; i <= results.length - 1; i++) {
-        var weapon = results[i];
-        // 新しいHTML要素を作成
-        var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap +'</p><img class="list_material2" src="../image/soad/soad-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
-        // 作成した要素を追加
-        document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
+
+    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    function setSoadImage(results) {
+        // 初期化
+        document.getElementById("items").innerHTML = '';
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            var weapon = results[i];
+            // 新しいHTML要素を作成
+            var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '" onclick="item_detail();getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2" src="../image/soad/soad-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
+            // 作成した要素を追加
+            document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
+        }
     }
 }
 
@@ -80,18 +75,19 @@ function getItemShieldData() {
         .catch(function (err) {
             console.log(err);
         });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setShieldImage(results) {
-    // 初期化
-    document.getElementById("items").innerHTML = '';
-    // 情報取得
-    for (var i = 0; i <= results.length - 1; i++) {
-        var weapon = results[i];
-        // 新しいHTML要素を作成
-        var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap +'</p><img class="list_material2" src="../image/shield/shield-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
-        // 作成した要素を追加
-        document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
+
+    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    function setShieldImage(results) {
+        // 初期化
+        document.getElementById("items").innerHTML = '';
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            var weapon = results[i];
+            // 新しいHTML要素を作成
+            var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '" onclick="item_detail();getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2" src="../image/shield/shield-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
+            // 作成した要素を追加
+            document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
+        }
     }
 }
 
@@ -108,17 +104,18 @@ function getItemDecoraionData() {
         .catch(function (err) {
             console.log(err);
         });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setDecorationImage(results) {
-    // 初期化
-    document.getElementById("items").innerHTML = '';
-    // 情報取得
-    for (var i = 0; i <= results.length - 1; i++) {
-        var weapon = results[i];
-        // 新しいHTML要素を作成
-        var weaponHtml = '<div class="item_border" id="weapon" onclick="" value="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap +'</p><img class="list_material2"  src="../image/decoration/juel-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
-        // 作成した要素を追加
-        document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
+
+    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    function setDecorationImage(results) {
+        // 初期化
+        document.getElementById("items").innerHTML = '';
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            var weapon = results[i];
+            // 新しいHTML要素を作成
+            var weaponHtml = '<div class="item_border" id="weapon" onclick="" value="' + weapon.weapon_id + '" onclick="item_detail();getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2"  src="../image/decoration/juel-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
+            // 作成した要素を追加
+            document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
+        }
     }
 }

@@ -2,7 +2,7 @@ class Player{
 
      static initialize () {
         this.playerStatus = {
-            playerId: 'P0',
+            playerId: 'P0000',
             playerName: '勇者',
             level: 1,
             //ここより下開発用データ
@@ -166,7 +166,7 @@ class Player{
     /* キャラクターを画面の真ん中に配置する */
     static setCharacterImage() {
         // 画像を作成し配置する
-        const characterImage = Image.getCharacterImage(1);
+        const characterImage = Image.getPlayerImage('P0000')
         characterImage.style.left = 7 * Config.stageImgWidth + "px";
         characterImage.style.top = 3 * Config.stageImgHeight + "px";
         this.characterElement.appendChild(characterImage);
@@ -253,6 +253,16 @@ class Player{
         return this.playerStatus.direction;
     }
     
+    static checkLimitValue(matchPlayerStatus, status){
+        if(matchPlayerStatus[status].current > matchPlayerStatus[status].max){
+            return matchPlayerStatus[status].max;
+        }else if(matchPlayerStatus[status].current < matchPlayerStatus[status].min){
+            return matchPlayerStatus[status].min
+        }else{
+            return matchPlayerStatus[status].current;
+        }
+    }
+
     /**
      * playerIdに応じたプレイヤーの現在の攻撃能力取得
      * playerIdが存在しない場合はNullを返す
@@ -264,29 +274,9 @@ class Player{
         }
         const matchPlayerStatus = this.playerStatus;
         const playerAttackStatus = {};
-        if(matchPlayerStatus.atk.current > matchPlayerStatus.atk.max){
-            playerAttackStatus.atk = matchPlayerStatus.atk.max;
-        }else if(matchPlayerStatus.atk.current < matchPlayerStatus.atk.min){
-            playerAttackStatus.atk = matchPlayerStatus.atk.min
-        }else{
-            playerAttackStatus.atk = matchPlayerStatus.atk.current;
-        }
-
-        if(matchPlayerStatus.cri.current > matchPlayerStatus.cri.max){
-            playerAttackStatus.cri = matchPlayerStatus.cri.max;
-        }else if(matchPlayerStatus.cri.current < matchPlayerStatus.cri.min){
-            playerAttackStatus.cri = matchPlayerStatus.cri.min;
-        }else{
-            playerAttackStatus.cri = matchPlayerStatus.cri.current;
-        }
-
-        if(matchPlayerStatus.dex.current > matchPlayerStatus.dex.max){
-            playerAttackStatus.dex = matchPlayerStatus.dex.max;
-        }else if(matchPlayerStatus.dex.current > matchPlayerStatus.dex.min){
-            playerAttackStatus.dex = matchPlayerStatus.dex.min;
-        }else{
-            playerAttackStatus.dex = matchPlayerStatus.dex.current;
-        }
+        playerAttackStatus.atk = this.checkLimitValue(matchPlayerStatus,'atk')
+        playerAttackStatus.cri = this.checkLimitValue(matchPlayerStatus,'cri')
+        playerAttackStatus.dex = this.checkLimitValue(matchPlayerStatus,'dex')
 
         return playerAttackStatus;
     }
@@ -301,27 +291,13 @@ class Player{
         }
         const matchPlayerStatus = this.playerStatus;
         const playerDefenseStatus = {};
-        if(matchPlayerStatus.def.current > matchPlayerStatus.def.max){
-            playerDefenseStatus.def = matchPlayerStatus.def.max;
-        }else if(matchPlayerStatus.def.current < matchPlayerStatus.def.min){
-            playerDefenseStatus.def = matchPlayerStatus.def.min;
-        }else{
-            playerDefenseStatus.def = matchPlayerStatus.def.current;
-        }
-
-        if(matchPlayerStatus.avd.current > matchPlayerStatus.avd.max){
-            playerDefenseStatus.avd = matchPlayerStatus.avd.max;
-        }else if(matchPlayerStatus.avd.current < matchPlayerStatus.avd.min){
-            playerDefenseStatus.avd = matchPlayerStatus.avd.min;
-        }else{
-            playerDefenseStatus.avd = matchPlayerStatus.avd.current;
-        }
+        playerAttackStatus.def = this.checkLimitValue(matchPlayerStatus,'def')
+        playerAttackStatus.avd = this.checkLimitValue(matchPlayerStatus,'avd')
 
         return playerDefenseStatus;
     }
 
     static getPlayerItems(playerId){
-
         return Tool.deepCopy(Player.playerStatus.items);
     }
 
