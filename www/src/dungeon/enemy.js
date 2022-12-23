@@ -42,7 +42,7 @@ class Enemy{
         /* 開発用にデータをセットする */
         //x=5, y=5に敵をセット
         this.enemyStatusArray[5][5] = {
-            enemyId:1, //モンスターID
+            enemyId:'E0001', //モンスターID
             enemyName:"スライム",//名前
             level: 1, //レベル
             distinction:2,//同モンスターの重複番号
@@ -56,7 +56,7 @@ class Enemy{
             exp: 2,//基礎経験値
             size:1//モンスターの使用ます
             };
-        this.enemyIdArray.push(1);
+        this.enemyIdArray.push('E0001');
         //Imageでenemyの画像を読み込む
         Image.createEnemyImages(this.enemyIdArray);
         /* end */
