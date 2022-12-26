@@ -1,23 +1,20 @@
 /* 強化方法選択ボタン */
 .power_method_buttons {
     display: flex;
-    gap: 50px;
+    gap: 30px;
     position: absolute;
     top: 50px;
-    left: 85px;
+    left: 13px;
 }
 
 .power_button {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
+    background: rgb(231, 231, 231);
+    border: 2px solid rgb(189, 160, 0);
     border-radius: 0;
     position: relative;
     top: 38px;
     left: 30px;
-    width: 200px;
+    width: 174px;
     height: 200px;
 }
 
@@ -48,15 +45,11 @@
     display: flex;
     gap: 0px;
     position: absolute;
-    top: 308px;
+    top: 318px;
     left: 40px;
 }
 
 .power {
-    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
-    border-top: 4px solid rgb(255, 225, 52);
-    border-right: 4px solid rgb(197, 168, 0);
-    border-bottom: 4px solid rgb(197, 168, 0);
-    border-left: 4px solid rgb(255, 225, 52);
+    background: rgb(219, 186, 0);
     border-radius: 0;
 }

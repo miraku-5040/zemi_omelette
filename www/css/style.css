@@ -12,7 +12,7 @@ body {
     border-radius: 30px;
     position: absolute;
     top: 12px;
-    left: 15px;
+    left: 45px;
 }
 
 /* プレイヤー情報の画像 */
@@ -114,26 +114,23 @@ body {
 /* 設定アイコン */
 /* 設定アイコンの枠 */
 .setting {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
+    background: rgb(231, 231, 231);
     border-radius: 10px;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
+    border: 2px solid rgb(189, 160, 0,0.8);
     position: absolute;
     top: 12px;
-    right: 15px;
+    right: 35px;
 }
 
 /* 設定アイコンの画像 */
 .setting_image{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 7px;
+    right: 7px;
 }
 
 /* その他のアイコン */
@@ -142,18 +139,15 @@ body {
     gap: 15px;
     position: absolute;
     top: 20px;
-    right: 80px;
+    right: 97px;
 }
 
 .icon {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
+    background: rgb(231, 231, 231);
+    border: 2px solid rgb(189, 160, 0);
     border-radius: 0;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 }
 
 /* ホームボタン */
@@ -175,39 +169,57 @@ body {
     display: flex;
     gap: 0px;
     position: absolute;
-    top: 300px;
+    top: 310px;
     transform: translate(-40px, 0px);
 }
 
 /* アイコン */
 .homepage_icon {
     position: relative;
-    top: 0px;
+    transform: translateY(-7px);
     left: 3px;
+    width: 50px;
+    height: 50px;
+}
+
+.homepage_icon_danjyon {
+    position: relative;
+    left: 3px;
+    width: 50px;
+    height: 40px;
+}
+
+.homepage_icon_gatya {
+    position: relative;
+    transform: translateY(-3px);
+    left: 3px;
+    width: 55px;
+    height: 45px;
 }
 
 /* ボタンのテキスト */
 .small_button_text {
     position: relative;
-    transform: translateY(-15px);
+    transform: translateY(-30px);
     left: 3px;
     font-size: smaller;
 }
 
 .button_text {
     position: relative;
-    transform: translateY(-20px);
+    transform: translateY(-35px);
+    left: 3px;
+}
+
+.button_text_gatya {
+    position: relative;
+    transform: translateY(-28px);
     left: 3px;
 }
 
 /* ホームボタンの設定 */
 .mypage {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
-    border-radius: 0;
+    background: rgb(231, 231, 231);
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -222,14 +234,15 @@ body {
     height: 55px;
 }
 
+.home_button_text {
+    position: relative;
+    transform: translateY(-24px);
+    left: 3px;
+}
+
 /* ダンジョン選択ボタンの設定 */
 .danjyon {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
-    border-radius: 0;
+    background: rgb(231, 231, 231);
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -252,12 +265,7 @@ body {
 
 /* 装備ボタンの設定 */
 .equip {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
-    border-radius: 0;
+    background: rgb(231, 231, 231);
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -274,12 +282,7 @@ body {
 
 /* 持ち物ボタンの設定 */
 .item {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
-    border-radius: 0;
+    background: rgb(231, 231, 231);
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -296,12 +299,7 @@ body {
 
 /* 強化ボタンの設定 */
 .power {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
-    border-radius: 0;
+    background: rgb(231, 231, 231);
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -324,12 +322,7 @@ body {
 
 /* ガチャボタンの設定 */
 .gatya {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
-    border-radius: 0;
+    background: rgb(231, 231, 231);
     color: black;
     font-size: 15px;
     font-weight: bold;
