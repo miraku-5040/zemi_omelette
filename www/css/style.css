@@ -150,6 +150,13 @@ body {
     height: 30px;
 }
 
+.icon_image {
+  position: relative;
+  transform: translateY(-3px);
+    width: 30px;
+    height: 33px;
+}
+
 /* ホームボタン */
 .go_home {
     background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);

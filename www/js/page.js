@@ -78,6 +78,13 @@ function toPowerEvolution() {
     setTimeout('window.location.href = "powerEvolution.html"', 600);
 }
 
+function toSkill() {
+    // 音声再生
+    go_sound();
+    // 進化画面へ遷移
+    setTimeout('window.location.href = "skill.html"', 600);
+}
+
 function toWeaponPower() {
     // 音声再生
     go_sound();
