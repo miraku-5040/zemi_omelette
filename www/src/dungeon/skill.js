@@ -35,6 +35,9 @@ class Skill{
         this.normalAttackId = "SA0000"; //通常攻撃のスキルid
         this.defaultDirection = "up"; //方向の初期値
         this.defaultScopeLength = 20; //スキル範囲作成時の標準最大長
+        /* 開発用スキルid */
+        this.testSkillId1 = "SA001";
+        this.testSkillId2 = "SA002";
     }
 
     /**
@@ -256,7 +259,13 @@ class Skill{
         }
 
         // TODO スキル範囲拡張処理
+        if(!isSkillEnd){
+            //スキル継続
+        }
         // TODO リンクスキル処理
+        skillData.link.forEach((skillId) => {
+            this.#linkExecute(skillId);
+        });
         
         /* スキル終了処理 */
         this.#skillEndInitialize();
@@ -354,9 +363,23 @@ class Skill{
     /* スキル情報をDBから取得してskillDataMapにセットする (DB接続の修正を行う) */
     static #addSkillDataMap(skillIdArray = []){
         /* 開発用にデータをセット 指定したスキルidに一つ上のマスの敵に攻撃するスキルを設定*/
-        skillIdArray.forEach((element) => {
-            const skillData = {scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}], link:[]};
-            this.skillDataMap.set(element, skillData);
+        skillIdArray.forEach((skillId) => {
+            let skillData;
+            switch(skillId){
+                case this.testSkillId1:
+                    //テストスキル1
+                    skillData = {scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}], link:[this.testSkillId2]};
+                    break;
+                case this.testSkillId2:
+                    //テストスキル2
+                    skillData = {scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}], link:[this.defaultSkillId]};
+                    break;
+                default:
+                    //テスト用の通常攻撃
+                    skillData = {scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}], link:[]};
+                    break;
+            }
+            this.skillDataMap.set(skillId, skillData);
         });
         /* end */
         // skillIdArray.forEach((skillId) => {
@@ -383,6 +406,17 @@ class Skill{
             return true;
         }
         return false;
+    }
+
+    /* リンクスキルを実行する */
+    static #linkExecute(skillId){
+        //skillData取得
+        const skillData = this.#setSkillData(skillId);
+        //linkを削除
+        skillData.link = [];
+        this.skillData = skillData;
+        this.skillReady();
+        this.skillGo();
     }
 
     /* scopeType別に、スキル範囲相対座標のリストを作成する */
