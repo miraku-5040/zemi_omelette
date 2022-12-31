@@ -2,14 +2,16 @@
 .player_info {
     flex-wrap: wrap;
     overflow: scroll;
-    background-color:rgba(255,255,255,0.8);
+    background-color:rgba(0,0,0,0.3);
+    color: rgb(211, 211, 211);
     padding: 0px 10px 30px 10px;
     position: absolute;
-    top: 80px;
-    right: 37px;
+    top: 70px;
+    right: 20px;
     width: 160px;
-    height: 180px;
+    height: 200px;
     font-weight: bold;
+    line-height: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     border: solid rgb(189, 160, 0);
 }
@@ -19,29 +21,30 @@
     width: 230px;
     height: 230px;
     position: absolute;
-    top: 70px;
+    top: 30px;
     left: 140px;
 }
 
 /* キャラクターの画像以外のフレーム */
 .player_position {
     position: absolute;
-    top: 70px;
-    transform: translateX(-20px);
+    top: 30px;
+    left: 130px;
 }
 
 /* キャラクターのセリフ */
 .talk_box {
     flex-wrap: wrap;
     overflow: scroll;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(0,0,0,0.5);
+    color: rgb(211, 211, 211);
     border: solid 3px rgb(189, 160, 0,0.8);
     border-radius: 20px;
     padding: 7px 15px;
     position: absolute;
-    top: 120px;
-    transform: translateX(-15px);
-    width: 210px;
+    top: 130px;
+    left: 15px;
+    width: 180px;
     height: 60px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
@@ -53,54 +56,31 @@
     border: 2px solid rgb(204, 204, 204);
     border-radius: 0px 20px 0px 0px;
     position: relative;
-    top: 139px;
-    left: 193px;
-    width: 34px;
-    height: 34px;
+    top: 149px;
+    left: 203px;
+    width: 25px;
+    height: 25px;
 }
 
 .sound_icon {
     position: relative;
     top: 3px;
-    transform: translateX(-8px);
-    width: 25px;
-    height: 25px;
+    transform: translateX(-11px);
+    width: 20px;
+    height: 20px;
 }
 
-/* ダンジョン選択画面への遷移ボタン */
-.danjyon_select {
-    background: rgb(231, 231, 231);
-    border: 3px solid rgb(189, 160, 0);
-    border-radius: 50px;
+.event_adv {
     position: absolute;
-    top: 80px;
-    left: 0px;
-    width: 100px;
-    height: 100px;
+    transform: translateX(-50px);
+    width: 200px;
 }
 
-/* ダンジョン選択画面への遷移ボタンのアイコン */
-.danjyon_select_icon {
+.login_adv {
     position: absolute;
-    top: 0px;
-    left: 15px;
-}
-
-/* ダンジョン選択画面への遷移ボタンのテキスト */
-.danjyon_select_text {
-    position: absolute;
-    top: 35px;
-    left: 13px;
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
-    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
-     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
-     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
-    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
-    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
-    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
-    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    top: 100px;
+    transform: translateX(-33px);
+    width: 183px;
 }
 
 /* ホーム画面のボタン */
@@ -111,7 +91,7 @@
 }
 
 .mypage {
-    background: rgb(219, 186, 0);
+    background: #0062ad;
     border-radius: 0;
 }
 
