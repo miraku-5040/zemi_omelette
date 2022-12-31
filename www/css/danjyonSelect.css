@@ -14,17 +14,14 @@
     gap: 10px;
     flex-wrap: wrap;
     overflow: scroll;
-    border-top: 7px solid #e6e6e6;
-    border-right: 7px solid #adadad;
-    border-bottom: 7px solid #999999;
-    border-left: 7px solid #e6e6e6;
+    border: solid rgb(189, 160, 0);
     padding: 13px;
     position: absolute;
-    top: 75px;
+    top: 35px;
     transform: translateX(-10px);
     width: 486px;
     height: 160px;
-    background-color: white;
+    background-color: rgba(0,0,0,0.3);
 }
 
 /* ダンジョン選択のボタン */
@@ -45,7 +42,7 @@
 
 /* ダンジョン選択画面のボタン */
 .danjyon {
-    background: rgb(219, 186, 0);
+    background: #0062ad;
     border-radius: 0;
 }
 

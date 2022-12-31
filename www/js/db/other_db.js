@@ -55,7 +55,7 @@ function getSoloPresentData() {
                     console.log(Number(item.sum) + Number(item_count));
                     // ↓更新が出来ない
                     results.set("sum", Number(item.sum) + Number(item_count))
-                           .update();
+                        .update();
                     console.log("ok");
                     presentReceive();
                 })
@@ -84,7 +84,9 @@ function getCharacterData() {
     function setCharacterData(results) {
         var character = results[0];
         // ランク入れ替え
-        document.getElementById("rank_text").innerHTML = 'ランク<br>' + character.character_rank;
+        document.getElementById("rank_text").innerHTML = 'ランク：' + character.character_rank;
+        // プレイヤー名入れ替え
+        document.getElementById("player_name").innerHTML = character.character_name;
         // HP入れ替え
         document.getElementById("hp_ber").value = character.character_hp;
         document.getElementById("hp_ber_amount").innerHTML = character.character_hp + '/100';
@@ -92,10 +94,8 @@ function getCharacterData() {
         document.getElementById("mp_ber").value = character.character_mp;
         document.getElementById("mp_ber_amount").innerHTML = character.character_mp + '/100';
         // Exp入れ替え
-        document.getElementById("exp_text").innerHTML = 'Exp：' + character.character_exp + '/10000';
+        document.getElementById("exp_text").innerHTML = character.character_exp + '/1000';
         document.getElementById("exp_ber").value = character.character_exp;
-        // プレイヤー名入れ替え
-        document.getElementById("player_name").innerHTML = 'プレイヤー名：' + character.character_name;
         // 攻撃力入れ替え
         document.getElementById("attack").innerHTML = '攻撃力：' + character.character_attack;
         // 回避率入れ替え
@@ -125,7 +125,9 @@ function getShorteCharacterData() {
     function setCharacterData(results) {
         var character = results[0];
         // ランク入れ替え
-        document.getElementById("rank_text").innerHTML = 'ランク<br>' + character.character_rank;
+        document.getElementById("rank_text").innerHTML = 'ランク' + character.character_rank;
+        // プレイヤー名入れ替え
+        document.getElementById("player_name").innerHTML = character.character_name;
         // HP入れ替え
         document.getElementById("hp_ber").value = character.character_hp;
         document.getElementById("hp_ber_amount").innerHTML = character.character_hp + '/100';
@@ -133,7 +135,7 @@ function getShorteCharacterData() {
         document.getElementById("mp_ber").value = character.character_mp;
         document.getElementById("mp_ber_amount").innerHTML = character.character_mp + '/100';
         // Exp入れ替え
-        document.getElementById("exp_text").innerHTML = 'Exp：' + character.character_exp + '/10000';
+        document.getElementById("exp_text").innerHTML = character.character_exp + '/1000';
         document.getElementById("exp_ber").value = character.character_exp;
     }
 }

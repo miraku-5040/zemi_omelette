@@ -127,11 +127,8 @@ function weaponColumn(element) {
     ColumnButtonInitialization();
     // ボタンを金色にする
     const weaponColumn = document.getElementById(element.id);
-    weaponColumn.style.background = 'linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%)';
-    weaponColumn.style.borderTop = '4px solid rgb(252, 232, 121)';
-    weaponColumn.style.borderRight = '4px solid rgb(192, 163, 0)';
-    weaponColumn.style.borderBottom = '4px solid rgb(192, 163, 0)';
-    weaponColumn.style.borderLeft = '4px solid rgb(252, 232, 121)';
+    weaponColumn.style.background = 'black';
+    weaponColumn.style.color = 'white';
 }
 
 // 項目ボタンの切り替え
@@ -217,23 +214,14 @@ function go_sound() {
 
 // 項目ボタンのCSS初期化
 function ColumnButtonInitialization() {
-    document.getElementById('soadcolumn').style.background = 'linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%)';
-    document.getElementById('soadcolumn').style.borderTop = '4px solid #e6e6e6';
-    document.getElementById('soadcolumn').style.borderRight = '4px solid #adadad';
-    document.getElementById('soadcolumn').style.borderBottom = '4px solid #999999';
-    document.getElementById('soadcolumn').style.borderLeft = '4px solid #e6e6e6';
+    document.getElementById('soadcolumn').style.background = 'white';
+    document.getElementById('soadcolumn').style.color = 'black';
 
-    document.getElementById('shieldcolumn').style.background = 'linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%)';
-    document.getElementById('shieldcolumn').style.borderTop = '4px solid #e6e6e6';
-    document.getElementById('shieldcolumn').style.borderRight = '4px solid #adadad';
-    document.getElementById('shieldcolumn').style.borderBottom = '4px solid #999999';
-    document.getElementById('shieldcolumn').style.borderLeft = '4px solid #e6e6e6';
+    document.getElementById('shieldcolumn').style.background = 'white';
+    document.getElementById('shieldcolumn').style.color = 'black';
 
-    document.getElementById('decorationcolumn').style.background = 'linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%)';
-    document.getElementById('decorationcolumn').style.borderTop = '4px solid #e6e6e6';
-    document.getElementById('decorationcolumn').style.borderRight = '4px solid #adadad';
-    document.getElementById('decorationcolumn').style.borderBottom = '4px solid #999999';
-    document.getElementById('decorationcolumn').style.borderLeft = '4px solid #e6e6e6';
+    document.getElementById('decorationcolumn').style.background = 'white';
+    document.getElementById('decorationcolumn').style.color = 'black';
 }
 
 function ColumnButtonInitializationPlus() {

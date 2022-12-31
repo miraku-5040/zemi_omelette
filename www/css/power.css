@@ -42,14 +42,15 @@
 
 /* 強化画面のボタン */
 .power_buttons {
-    display: flex;
-    gap: 0px;
+    background-color: #003761;
     position: absolute;
-    top: 318px;
-    left: 40px;
+    top: 330px;
+    transform: translateX(-10px);
+    width: 670px;
+    height: 45px;
 }
 
 .power {
-    background: rgb(219, 186, 0);
+    background: #0062ad;
     border-radius: 0;
 }

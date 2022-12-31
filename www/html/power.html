@@ -27,9 +27,9 @@
 <body onload="soundBGM();getShorteCharacterData()">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
-        <img class="player_image" src="../image/player.png">
-        <meter class="exp_ber" max="100" value="50"></meter>
+        <img class="player_image" src="../image/player_icon.png">
         <p class="rank_text" id="rank_text"></p>
+        <p class="name_text2" id="player_name"></p>
         <div class="other">
             <div class="bers">
                 <div class="ber_position">
@@ -42,10 +42,11 @@
                     <meter class="mp_ber" id="mp_ber" max="100" value="0"></meter>
                     <p class="mp_ber_amount" id="mp_ber_amount"></p>
                 </div>
-            </div>
-            <div class="exp_content">
-                <p class="exp_text" id="exp_text"></p>
-                <meter class="exp_ber" id="exp_ber" max="10000" value="0"></meter>
+                <div class="exp_content">
+                    <p class="exp_ber_title">EXP</p>
+                    <meter class="exp_ber" id="exp_ber" max="1000" value="0"></meter>
+                    <p class="exp_ber_amount" id="exp_text"></p>
+                </div>
             </div>
         </div>
     </div>
@@ -71,23 +72,25 @@
 
     <!-- 各画面への遷移ボタン -->
     <div class="power_buttons">
-        <button class="mypage" onclick="toHome()">
+        <div class="buttons_position">
+            <button class="mypage" onclick="toHome()">
                 <img class="homepage_icon_danjyon" src="../image/home_icon/home.png"><p class="home_button_text">ホーム</p></button>
-        <button class="danjyon" onclick="toSelectDanjyon()">
+            <button class="danjyon" onclick="toSelectDanjyon()">
                 <img class="homepage_icon" src="../image/home_icon/danjyon.png">
                 <p class="small_button_text">ダンジョン</p></button>
-        <button class="equip" onclick="toEquip()">
+            <button class="equip" onclick="toEquip()">
                 <img class="homepage_icon" src="../image/home_icon/equip.png">
                 <p class="button_text">装備</p></button>
-        <button class="item" onclick="toItem()">
+            <button class="item" onclick="toItem()">
                 <img class="homepage_icon" src="../image/home_icon/item.png">
                 <p class="button_text">持ち物</p></button>
-        <button class="power" onclick="toPower()">
+            <button class="power" onclick="toPower()">
                 <img class="homepage_icon" src="../image/home_icon/power.png">
                 <p class="button_text">強化</p></button>
-        <button class="gatya" onclick="toGatya()">
+            <button class="gatya" onclick="toGatya()">
                 <img class="homepage_icon_gatya" src="../image/home_icon/gatya.png">
                 <p class="button_text_gatya">ガチャ</p></button>
+        </div>
     </div>
 </body>
 

@@ -10,11 +10,9 @@
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
-    background-color: white;
-    border-top: 5px solid #e6e6e6;
-    border-right: 5px solid #adadad;
-    border-bottom: 5px solid #999999;
-    border-left: 5px solid #e6e6e6;
+    color: white;
+    border: solid rgb(189, 160, 0);
+    background-color: rgba(0,0,0,0.3);
     padding: 0px 12px;
 }
 

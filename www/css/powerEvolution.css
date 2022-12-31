@@ -1,9 +1,6 @@
 /* 強化する装備 */
 .power_item {
-    border-top: 5px solid rgb(252, 232, 121);
-    border-right: 5px solid rgb(192, 163, 0);
-    border-bottom: 5px solid rgb(192, 163, 0);
-    border-left: 5px solid rgb(252, 232, 121);
+    border: solid rgb(189, 160, 0);
     background-color: white;
     position: absolute;
     top: 70px;
@@ -13,10 +10,7 @@
 }
 
 .power_ber {
-    border-top: 3px solid rgb(252, 232, 121);
-    border-right: 3px solid rgb(192, 163, 0);
-    border-bottom: 3px solid rgb(192, 163, 0);
-    border-left: 3px solid rgb(252, 232, 121);
+    border: solid rgb(189, 160, 0);
     background-color: white;
     position: relative;
     top: 183px;
@@ -34,11 +28,12 @@
 
 .power_target_text {
     border: solid rgb(189, 160, 0);
+    color: white;
     padding-left: 10px;
     line-height: 10px;
     flex-wrap: wrap;
     overflow: scroll;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(0,0,0,0.3);
     position: absolute;
     top: 220px;
     left: 40px;
@@ -53,11 +48,8 @@
     gap: 10px;
     flex-wrap: wrap;
     overflow: scroll;
-    border-top: 8px solid #e6e6e6;
-    border-right: 8px solid #adadad;
-    border-bottom: 8px solid #999999;
-    border-left: 8px solid #e6e6e6;
-    background-color: white;
+    border: solid rgb(189, 160, 0);
+    background-color: rgba(0,0,0,0.3);
     padding: 10px 10px;
     position: absolute;
     top: 55px;
@@ -70,7 +62,7 @@
 .item_border {
     border: 2px solid black;
     width: 44px;
-    height: 60px;
+    height: 63px;
 }
 
 /* 強化用アイテムの画像 */
@@ -78,7 +70,7 @@
     background-color: rgb(214, 0, 214);
     border-top: 2px solid white;
     border-right: 2px solid white;
-    border-bottom: 10px solid white;
+    border-bottom: 20px solid white;
     border-left: 2px solid white;
     width: 40px;
     height: 40px;
@@ -100,7 +92,7 @@
 /* レベル表示 */
 .level_text {
     position: relative;
-    transform: translateY(-80px);
+    transform: translateY(-90px);
     left: 5px;
     font-weight: bold;
 }
