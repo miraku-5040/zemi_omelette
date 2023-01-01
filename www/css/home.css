@@ -111,11 +111,9 @@
 
 /* モーダルウィンドウの中身 */
 .modal-content {
-  background-color: #f4f4f4;
-  border-top: 7px solid rgb(252, 232, 121);
-  border-right: 7px solid rgb(192, 163, 0);
-  border-bottom: 7px solid rgb(192, 163, 0);
-  border-left: 7px solid rgb(252, 232, 121);
+  background-color: #01508d;
+  border: 5px solid rgb(189, 160, 0);
+  color: gold;
   margin: 60px 90px;
   padding: 1px 20px;
   width: 450px;
@@ -190,7 +188,7 @@
 }
 
 .present_button {
-    background-color: #f0f0b2;
+    background-color: #f8f8a7;
     border: solid 2px #c2c2b5;
     color: black;
     position: relative;

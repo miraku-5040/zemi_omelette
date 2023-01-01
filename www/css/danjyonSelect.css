@@ -62,8 +62,9 @@
 
 /* モーダルウィンドウの中身 */
 .modal-content {
-  background-color: #f4f4f4;
-  border: inset 7px black;
+  background-color: #01508d;
+  border: 5px solid rgb(189, 160, 0);
+  color: gold;
   margin: 60px 110px;
   width: 450px;
   height: 250px;
@@ -103,28 +104,32 @@
     position: absolute;
     top: 255px;
     left: 330px;
+    display: flex;
+    gap: 10px;
 }
 
 .calsel_button {
-    background-color: white;
-    border-top: 4px solid white;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid white;
+    background: rgb(231, 231, 231);
+    border-top: 4px solid rgb(255, 255, 255);
+    border-right: 4px solid rgb(199, 199, 199);
+    border-bottom: 4px solid rgb(177, 177, 177);
+    border-left: 4px solid rgb(255, 255, 255);
     border-radius: 0;
     color: black;
+    font-weight: bold;
     width: 100px;
     height: 30px;
 }
 
 .decision_button {
-    background: linear-gradient(45deg, green 0%, rgb(0, 194, 0) 45%, rgb(34, 255, 34) 70%, rgb(0, 194, 0) 85%, green 90% 100%);
-    border-top: 4px solid rgb(0, 196, 0);
-    border-right: 4px solid rgb(0, 160, 0);
-    border-bottom: 4px solid green;
-    border-left: 4px solid rgb(0, 196, 0);
+    background: gold;
+    border-top: 4px solid rgb(255, 225, 52);
+    border-right: 4px solid rgb(238, 202, 0);
+    border-bottom: 4px solid rgb(207, 177, 3);
+    border-left: 4px solid rgb(255, 225, 52);
     border-radius: 0;
-    color: white;
+    color: black;
+    font-weight: bold;
     width: 100px;
     height: 30px;
 }

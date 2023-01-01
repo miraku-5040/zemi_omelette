@@ -26,8 +26,24 @@
         
     </div>
     <div class="result_buttons">
-        <button class="result_button" onclick="resultTen()">もう一度</button>
         <button class="result_button" onclick="toGatya()">ガチャ画面へ</button>
+        <button class="result_button2" onclick="modalOpen10()">もう一度</button>
+    </div>
+
+    <!-- ガチャ確認用のモーダルウィンドウ -->
+    <div id="gatyaTenModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                <p class="modal_title">ガチャを引きますか？</p>
+                <p>使用した素材は削除されます。</p>
+                <div class="modal_buttons">
+                    <button class="calsel_button" onclick="modalClose10()">キャンセル</button>
+                    <button class="decision_button" onclick="resultTen()">OK</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

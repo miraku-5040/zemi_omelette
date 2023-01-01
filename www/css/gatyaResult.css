@@ -10,8 +10,8 @@
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
-    border: solid black;
-    background-color: white;
+    border: solid rgb(189, 160, 0);
+    background-color: rgba(0,0,0,0.3);
     padding: 20px 30px;
     position: absolute;
     top: 90px;
@@ -38,22 +38,116 @@
 
 /* ガチャ後の選択ボタン */
 .result_button {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #eeeeee;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #eeeeee;
+    background: rgb(231, 231, 231);
+    border-top: 4px solid rgb(255, 255, 255);
+    border-right: 4px solid rgb(199, 199, 199);
+    border-bottom: 4px solid rgb(177, 177, 177);
+    border-left: 4px solid rgb(255, 255, 255);
     border-radius: 0;
     color: black;
     font-size: 13px;
     font-weight: bold;
-    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
-     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
-     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
-    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
-    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
-    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
-    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
     width: 110px;
+    height: 30px;
+}
+
+.result_button2 {
+    background: gold;
+    border-top: 4px solid rgb(255, 225, 52);
+    border-right: 4px solid rgb(238, 202, 0);
+    border-bottom: 4px solid rgb(207, 177, 3);
+    border-left: 4px solid rgb(255, 225, 52);
+    border-radius: 0;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    width: 110px;
+    height: 30px;
+}
+
+/* モーダルウィンドウの設定 */
+/* モーダルウィンドウの背景 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* モーダルウィンドウの中身 */
+.modal-content {
+  background-color: #01508d;
+  border: 5px solid rgb(189, 160, 0);
+  color: gold;
+  margin: 60px 110px;
+  width: 450px;
+  height: 250px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+
+.modal-body {
+    position: relative;
+    top: 0px;
+    left: 30px;
+}
+
+/* モーダルウィンドウの文章 */
+.modal_text {
+    position: absolute;
+    top: 60px;
+    left: 335px;
+}
+
+.modal_title {
+    font-weight: bold;
+    font-size: 22px
+}
+
+.modal_note {
+    font-size: 12px;
+    position: absolute;
+    top: 55px;
+    left: 5px;
+}
+
+/* モーダルウィンドウのボタン */
+.modal_buttons {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    top: 80px;
+    left: 190px;
+}
+
+.calsel_button {
+    background: rgb(231, 231, 231);
+    border-top: 4px solid rgb(255, 255, 255);
+    border-right: 4px solid rgb(199, 199, 199);
+    border-bottom: 4px solid rgb(177, 177, 177);
+    border-left: 4px solid rgb(255, 255, 255);
+    border-radius: 0;
+    color: black;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+}
+
+.decision_button {
+    background: gold;
+    border-top: 4px solid rgb(255, 225, 52);
+    border-right: 4px solid rgb(238, 202, 0);
+    border-bottom: 4px solid rgb(207, 177, 3);
+    border-left: 4px solid rgb(255, 225, 52);
+    border-radius: 0;
+    color: black;
+    font-weight: bold;
+    width: 100px;
     height: 30px;
 }
