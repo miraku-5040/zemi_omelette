@@ -78,7 +78,7 @@
 }
 
 .overlap_color {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    background: white;
     width: 18px;
     height: 18px;
     position: relative;

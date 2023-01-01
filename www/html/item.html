@@ -63,10 +63,14 @@
         </div>
 
         <div class="weapon_type_buttons">
-            <button class="weapon_other_button" id="othercolumn" onclick="itemColumn(this);getItemData()">アイテム</button>
-            <button class="weapon_soad_button" id="soadcolumn" onclick="itemColumn(this);getItemSoadData()">剣</button>
-            <button class="weapon_shield_button" id="shieldcolumn" onclick="itemColumn(this);getItemShieldData()">盾</button>
-            <button class="weapon_decoration_button" id="decorationcolumn" onclick="itemColumn(this);getItemDecoraionData()">宝石</button>
+            <button class="weapon_other_button" id="othercolumn" onclick="itemColumn(this);getItemData()">
+                <p class="weapon_other_text">アイテム</p><div class="weapon_type_frame"></div></button>
+            <button class="weapon_soad_button" id="soadcolumn" onclick="itemColumn(this);getItemSoadData()">
+                <p class="weapon_other_text">剣</p><div class="weapon_type_frame2"></div></button>
+            <button class="weapon_shield_button" id="shieldcolumn" onclick="itemColumn(this);getItemShieldData()">
+                <p  class="weapon_other_text">盾</p><div class="weapon_type_frame2"></div></button>
+            <button class="weapon_decoration_button" id="decorationcolumn" onclick="itemColumn(this);getItemDecoraionData()">
+                <p  class="weapon_other_text2">宝石</p><div class="weapon_type_frame3"></div></button>
         </div>
 
         <!-- 各画面への遷移ボタン -->

@@ -57,7 +57,7 @@
 }
 
 .overlap_color {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    background: white;
     width: 18px;
     height: 18px;
     position: relative;
@@ -78,9 +78,38 @@
     left: 492px;
 }
 
+.weapon_type_frame {
+    border: solid rgb(189, 160, 0);
+    border-radius: 0px 20px 20px 0px;
+    width: 49px;
+    height: 37px;
+    position: relative;
+    transform: translate(-12px, -46px);
+}
+
+.weapon_type_frame2 {
+    border: solid rgb(189, 160, 0);
+    border-radius: 0px 20px 20px 0px;
+    width: 49px;
+    height: 37px;
+    position: relative;
+    transform: translate(-15px, -45px);
+}
+
+.weapon_type_frame3 {
+    border: solid rgb(189, 160, 0);
+    border-radius: 0px 20px 20px 0px;
+    width: 49px;
+    height: 37px;
+    position: relative;
+    transform: translate(-15px, -62px);
+}
+
 .weapon_other_button {
     background: black;
-    border: solid rgb(189, 160, 0);
+    border: black;
+    border-right: 5px solid rgb(85, 85, 85);
+    border-bottom: 5px solid rgb(99, 99, 99);
     border-radius: 0px 20px 20px 0px;
     color: white;
     font-size: 10px;
@@ -89,9 +118,16 @@
     height: 40px;
 }
 
+.weapon_other_text {
+    position: relative;
+    transform: translate(-3px, -3px);
+}
+
 .weapon_soad_button {
-    background: white;
-    border: solid rgb(189, 160, 0);
+    background: rgb(231, 231, 231);
+    border: rgb(231, 231, 231);
+    border-right: 5px solid rgb(241, 241, 241);
+    border-bottom: 5px solid white;
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 13px;
@@ -101,8 +137,10 @@
 }
 
 .weapon_shield_button {
-    background: white;
-    border: solid rgb(189, 160, 0);
+    background: rgb(231, 231, 231);
+    border: rgb(231, 231, 231);
+    border-right: 5px solid rgb(241, 241, 241);
+    border-bottom: 5px solid white;
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 13px;
@@ -112,14 +150,21 @@
 }
 
 .weapon_decoration_button {
-    background: white;
-    border: solid rgb(189, 160, 0);
+    background: rgb(231, 231, 231);
+    border: rgb(231, 231, 231);
+    border-right: 5px solid rgb(241, 241, 241);
+    border-bottom: 5px solid white;
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 13px;
     font-weight: bold;
     width: 50px;
     height: 40px;
+}
+
+.weapon_other_text2 {
+    position: relative;
+    transform: translate(-3px, -11px);
 }
 
 /* アイテム画面のボタン */

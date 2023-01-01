@@ -70,9 +70,12 @@
         </div>
 
         <div class="weapon_type_buttons">
-            <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this);getEquipSoadData()">剣</button>
-            <button class="weapon_shield_button" id="shieldcolumn" onclick="weaponColumn(this);getEquipShieldData()">盾</button>
-            <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this);getEquipDecoraionData()">宝石</button>
+            <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this);getEquipSoadData()">
+                <p>剣</p><div class="weapon_type_frame"></div></button>
+            <button class="weapon_shield_button" id="shieldcolumn" onclick="weaponColumn(this);getEquipShieldData()">
+                <p>盾</p><div class="weapon_type_frame"></div></button>
+            <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this);getEquipDecoraionData()">
+                <p class="weapon_decoration_text">宝石</p><div class="weapon_type_frame2"></div></button>
         </div>
 
         <!-- 各画面への遷移ボタン -->

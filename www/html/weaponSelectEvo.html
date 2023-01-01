@@ -25,13 +25,16 @@
 <body onload="soundBGM();getEvoSoadData()">
     <!-- 強化対象アイテム一覧 -->
     <div class="item_list" id="items">
-        
+
     </div>
 
     <div class="weapon_type_buttons">
-        <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this);getEvoSoadData()">剣</button>
-        <button class="weapon_shield_button" id="shieldcolumn" onclick="weaponColumn(this);getEvoShieldData()">盾</button>
-        <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this);getEvoDecoraionData()">宝石</button>
+        <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this);getEvoSoadData()">
+            <p>剣</p><div class="weapon_type_frame"></div></button>
+        <button class="weapon_shield_button" id="shieldcolumn" onclick="weaponColumn(this);getEvoShieldData()">
+            <p>盾</p><div class="weapon_type_frame"></div></button>
+        <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this);getEvoDecoraionData()">
+            <p class="weapon_type_text">宝石</p><div class="weapon_type_frame2"></div></button>
     </div>
     <div class="decition_buttons">
         <div class="cansel_frame"></div>

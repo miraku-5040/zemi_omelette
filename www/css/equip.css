@@ -84,7 +84,7 @@
 }
 
 .overlap_color {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
+    background: white;
     width: 18px;
     height: 18px;
     position: relative;
@@ -102,14 +102,37 @@
     gap: 10px;
     position: relative;
     top: 30px;
-    left: 492px;
+    left: 495px;
+}
+
+.weapon_type_frame {
+    border: solid rgb(189, 160, 0);
+    border-radius: 0px 20px 20px 0px;
+    width: 49px;
+    height: 47px;
+    position: relative;
+    transform: translate(-18px, -49px);
+}
+
+.weapon_type_frame2 {
+    border: solid rgb(189, 160, 0);
+    border-radius: 0px 20px 20px 0px;
+    width: 49px;
+    height: 47px;
+    position: relative;
+    transform: translate(-18px, -70px);
+}
+
+.weapon_decoration_text {
+    position: relative;
+    transform: translateY(-10px);
 }
 
 .weapon_soad_button {
     background: black;
     border: black;
-    border-right: 5px solid rgb(80, 80, 80);
-    border-bottom: 5px solid rgb(97, 97, 97);
+    border-right: 5px solid rgb(85, 85, 85);
+    border-bottom: 5px solid rgb(99, 99, 99);
     border-radius: 0px 20px 20px 0px;
     color: white;
     font-size: 15px;
@@ -119,8 +142,10 @@
 }
 
 .weapon_shield_button {
-    background: white;
-    border: solid rgb(189, 160, 0);
+    background: rgb(231, 231, 231);
+    border: rgb(231, 231, 231);
+    border-right: 5px solid rgb(241, 241, 241);
+    border-bottom: 5px solid white;
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 15px;
@@ -130,8 +155,10 @@
 }
 
 .weapon_decoration_button {
-    background: white;
-    border: solid rgb(189, 160, 0);
+    background: rgb(231, 231, 231);
+    border: rgb(231, 231, 231);
+    border-right: 5px solid rgb(243, 243, 243);
+    border-bottom: 5px solid white;
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 15px;
