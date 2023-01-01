@@ -7,9 +7,39 @@
     left: 13px;
 }
 
+.power_button_frame1 {
+    border: 5px solid rgb(189, 160, 0);
+    position: absolute;
+    top: 33px;
+    left: 25px;
+    width: 174px;
+    height: 200px;
+}
+
+.power_button_frame2 {
+    border: 5px solid rgb(189, 160, 0);
+    position: absolute;
+    top: 33px;
+    left: 229px;
+    width: 174px;
+    height: 200px;
+}
+
+.power_button_frame3 {
+    border: 5px solid rgb(189, 160, 0);
+    position: absolute;
+    top: 33px;
+    left: 433px;
+    width: 174px;
+    height: 200px;
+}
+
 .power_button {
     background: rgb(231, 231, 231);
-    border: 2px solid rgb(189, 160, 0);
+    border-top: 12px solid rgb(255, 255, 255);
+    border-right: 12px solid rgb(199, 199, 199);
+    border-bottom: 12px solid rgb(177, 177, 177);
+    border-left: 12px solid rgb(255, 255, 255);
     border-radius: 0;
     position: relative;
     top: 38px;
@@ -20,7 +50,7 @@
 
 .power_icon {
     position: relative;
-    top: 20px;
+    top: 15px;
     width: 110px;
     height: 110px;
 }
@@ -29,14 +59,8 @@
     color: black;
     font-size: 25px;
     font-weight: bold;
-    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
-     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
-     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
-    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
-    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
-    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
-    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
     position: relative;
+    transform: translateY(-5px);
     left: 0px;
 }
 

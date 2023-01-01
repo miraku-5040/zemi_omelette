@@ -107,7 +107,9 @@
 
 .weapon_soad_button {
     background: black;
-    border: solid rgb(189, 160, 0);
+    border: black;
+    border-right: 5px solid rgb(80, 80, 80);
+    border-bottom: 5px solid rgb(97, 97, 97);
     border-radius: 0px 20px 20px 0px;
     color: white;
     font-size: 15px;

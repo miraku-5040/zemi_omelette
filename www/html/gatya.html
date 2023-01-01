@@ -27,7 +27,7 @@
 
 <body onload="soundBGM();getShorteCharacterData()">
     <!-- プレイヤー情報表示 -->
-     <div class="flame">
+    <div class="flame">
         <img class="player_image" src="../image/player_icon.png">
         <p class="rank_text" id="rank_text"></p>
         <p class="name_text2" id="player_name"></p>
@@ -55,14 +55,29 @@
     <div class="setting">
         <img class="setting_image" src="../image/gear.png" onclick="toSet()">
     </div>
+    <!-- ダイヤの残量 -->
+    <div class="least_dia">
+        <img class="least_dia_image" src="../image/diamond.png">
+        <p class="least_dia_text">2000</p>
+    </div>
     <!-- ガチャ画面の表示 -->
     <div data-role="page" id="gatya" data-role="content">
         <img class="gatya_image" src="../image/danjyon.jpeg"><br>
         <p class="gatya_title">武器ガチャ</p>
         <!-- ガチャボタン -->
         <div class="gatya_button">
-            <button class="pull" onclick="modalOpen1()">1連</button>
-            <button class="pull" onclick="modalOpen10()">10連</button>
+            <button class="pull" onclick="modalOpen1()">1連
+                <div class="dia_frame">
+                <img class="dia_frame_image" src="../image/diamond.png">
+                <p class="dia_frame_text">×10</p>
+                </div>
+                </button>
+            <button class="pull" onclick="modalOpen10()">10連
+                <div class="dia_frame">
+                <img class="dia_frame_image" src="../image/diamond.png">
+                <p class="dia_frame_text">×100</p>
+                </div>
+            </button>
         </div>
         <!-- 各画面への遷移ボタン -->
         <div class="gatya_buttons">

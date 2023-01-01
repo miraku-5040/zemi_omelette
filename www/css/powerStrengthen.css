@@ -21,6 +21,7 @@
 
 .exp_text {
     color: white;
+    font-weight: bold;
     position: relative;
     top: 120px;
     left: 230px;
@@ -54,7 +55,7 @@
     position: absolute;
     top: 55px;
     left: 320px;
-    width: 260px;
+    width: 270px;
     height: 175px;
 }
 
@@ -98,40 +99,31 @@
 }
 
 .power_for_item_count_minus {
-    background: gray;
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
+    background: rgb(231, 231, 231);
+    border-top: 4px solid rgb(255, 255, 255);
+    border-right: 4px solid rgb(199, 199, 199);
+    border-bottom: 4px solid rgb(177, 177, 177);
+    border-left: 4px solid rgb(255, 255, 255);
     border-radius: 0;
     color: black;
-    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
-     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
-     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
-    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
-    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
-    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
-    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
     width: 30px;
     height: 30px;
 }
 
 .power_for_item_count_plus {
-    background: gray;
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
+    background: rgb(231, 231, 231);
+    border-top: 4px solid rgb(255, 255, 255);
+    border-right: 4px solid rgb(199, 199, 199);
+    border-bottom: 4px solid rgb(177, 177, 177);
+    border-left: 4px solid rgb(255, 255, 255);
     border-radius: 0;
     color: black;
     font-weight: bold;
-    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
-     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
-     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
-    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
-    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
-    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
-    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
+    font-size: 11px;
+    text-align: center;
     width: 30px;
     height: 30px;
 }
@@ -145,51 +137,50 @@
 .decition_buttons {
     position: absolute;
     top: 287px;
-    left: 375px;
+    left: 355px;
     display: flex;
     gap: 20px;
 }
 
+.decition_button_text{
+    position: relative;
+    transform: translateY(-8px);
+}
+
+.decition_button_frame {
+    border: solid rgb(189, 160, 0);
+    width: 120px;
+    height: 50px;
+    position: relative;
+    transform: translate(-24px, -58px);
+}
+
 /* キャンセルボタン */
 .cansel {
-    background: linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%);
-    border-top: 4px solid #e6e6e6;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid #e6e6e6;
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
     border-radius: 0;
     color: black;
     font-size: 15px;
     font-weight: bold;
-    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
-     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
-     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
-    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
-    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
-    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
-    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
     width: 120px;
     height: 50px;
 }
 /* 強化するボタン */
 .power_up {
-    background: linear-gradient(45deg, green 0%, rgb(0, 194, 0) 45%, rgb(34, 255, 34) 70%, rgb(0, 194, 0) 85%, green 90% 100%);
-    border-top: 4px solid rgb(0, 196, 0);
-    border-right: 4px solid rgb(0, 160, 0);
-    border-bottom: 4px solid green;
-    border-left: 4px solid rgb(0, 196, 0);
+    background: gold;
+    border-top: 6px solid rgb(255, 225, 52);
+    border-right: 6px solid rgb(238, 202, 0);
+    border-bottom: 6px solid rgb(207, 177, 3);
+    border-left: 6px solid rgb(255, 225, 52);
     border-radius: 0;
     color: black;
     font-size: 15px;
     font-weight: bold;
-    text-shadow: rgb(255, 255, 255) 1px 0px 0px,
-     rgb(255, 255, 255) 0.540302px 0.841471px 0px, 
-     rgb(255, 255, 255) -0.416147px 0.909297px 0px,
-    rgb(255, 255, 255) -0.989992px 0.14112px 0px, 
-    rgb(255, 255, 255) -0.653644px -0.756802px 0px, 
-    rgb(255, 255, 255) 0.283662px -0.958924px 0px, 
-    rgb(255, 255, 255) 0.96017px -0.279415px 0px;
-    width: 100px;
+    width: 120px;
     height: 50px;
 }
 

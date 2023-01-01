@@ -139,11 +139,8 @@ function itemColumn(element) {
     ColumnButtonInitializationPlus();
     // ボタンを金色にする
     const itemColumn = document.getElementById(element.id);
-    itemColumn.style.background = 'linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%)';
-    itemColumn.style.borderTop = '4px solid rgb(252, 232, 121)';
-    itemColumn.style.borderRight = '4px solid rgb(192, 163, 0)';
-    itemColumn.style.borderBottom = '4px solid rgb(192, 163, 0)';
-    itemColumn.style.borderLeft = '4px solid rgb(252, 232, 121)';
+    itemColumn.style.background = 'black';
+    itemColumn.style.color = 'white';
 }
 
 // モーダルウィンドウ用js
@@ -225,29 +222,17 @@ function ColumnButtonInitialization() {
 }
 
 function ColumnButtonInitializationPlus() {
-    document.getElementById('soadcolumn').style.background = 'linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%)';
-    document.getElementById('soadcolumn').style.borderTop = '4px solid #e6e6e6';
-    document.getElementById('soadcolumn').style.borderRight = '4px solid #adadad';
-    document.getElementById('soadcolumn').style.borderBottom = '4px solid #999999';
-    document.getElementById('soadcolumn').style.borderLeft = '4px solid #e6e6e6';
+    document.getElementById('othercolumn').style.background = 'white';
+    document.getElementById('othercolumn').style.color = 'black';
 
-    document.getElementById('shieldcolumn').style.background = 'linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%)';
-    document.getElementById('shieldcolumn').style.borderTop = '4px solid #e6e6e6';
-    document.getElementById('shieldcolumn').style.borderRight = '4px solid #adadad';
-    document.getElementById('shieldcolumn').style.borderBottom = '4px solid #999999';
-    document.getElementById('shieldcolumn').style.borderLeft = '4px solid #e6e6e6';
+    document.getElementById('soadcolumn').style.background = 'white';
+    document.getElementById('soadcolumn').style.color = 'black';
 
-    document.getElementById('decorationcolumn').style.background = 'linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%)';
-    document.getElementById('decorationcolumn').style.borderTop = '4px solid #e6e6e6';
-    document.getElementById('decorationcolumn').style.borderRight = '4px solid #adadad';
-    document.getElementById('decorationcolumn').style.borderBottom = '4px solid #999999';
-    document.getElementById('decorationcolumn').style.borderLeft = '4px solid #e6e6e6';
+    document.getElementById('shieldcolumn').style.background = 'white';
+    document.getElementById('shieldcolumn').style.color = 'black';
 
-    document.getElementById('othercolumn').style.background = 'linear-gradient(45deg, #757575 0%, #9E9E9E 45%, #E8E8E8 70%, #9E9E9E 85%, #757575 90% 100%)';
-    document.getElementById('othercolumn').style.borderTop = '4px solid #e6e6e6';
-    document.getElementById('othercolumn').style.borderRight = '4px solid #adadad';
-    document.getElementById('othercolumn').style.borderBottom = '4px solid #999999';
-    document.getElementById('othercolumn').style.borderLeft = '4px solid #e6e6e6';
+    document.getElementById('decorationcolumn').style.background = 'white';
+    document.getElementById('decorationcolumn').style.color = 'black';
 }
 
 function soundBGM() {

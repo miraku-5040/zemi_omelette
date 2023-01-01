@@ -2,60 +2,61 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-  <script src="classic.js"></script>
-  <!-- JS -->
-  <script src="../components/loader.js">
-  </script>
-  <!-- DBJS -->
-  <script src="../js/db/danjyon_db.js"></script>
-  <script src="../js/db/item_db.js"></script>
-  <script src="../js/db/weapon_db.js"></script>
-  <script src="../js/db/other_db.js"></script>
-  <!-- pageJS -->
-  <script src="../js/page.js"></script>
-  <!-- CSS -->
-  <link rel="stylesheet" href="../components/loader.css">
-  <!-- 共通のCSS -->
-  <link rel="stylesheet" href="../css/style.css">
-  <!-- スキル強化画面のCSS -->
-  <link rel="stylesheet" href="../css/skill.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="classic.js"></script>
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/other_db.js"></script>
+    <!-- pageJS -->
+    <script src="../js/page.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- スキル強化画面のCSS -->
+    <link rel="stylesheet" href="../css/skill.css">
 </head>
 
 <body onload="soundBGM()">
-  <div class="skill_frame">
-    <div class="skill_detail">
-      <p class="skill_name">炎のスキル</p>
-      <img class="skill_icon" src="../image/skill/fire_skill_icon.png">
-      <p class="skill_level">Lv.10</p>
-      <button class="skill_power_up">強化</button>
+    <div class="skill_frame">
+        <div class="skill_detail">
+            <p class="skill_name">炎のスキル</p>
+            <img class="skill_icon" src="../image/skill/fire_skill_icon.png">
+            <p class="skill_level">Lv.10</p>
+            <button class="skill_power_up">強化</button>
+        </div>
+
+        <div class="skill_detail">
+            <p class="skill_name">水のスキル</p>
+            <img class="skill_icon" src="../image/skill/water_skill_icon.png">
+            <p class="skill_level">Lv.10</p>
+            <button class="skill_power_up">強化</button>
+        </div>
+
+        <div class="skill_detail">
+            <p class="skill_name">氷のスキル</p>
+            <img class="skill_icon" src="../image/skill/ice_skill_icon.png">
+            <p class="skill_level">Lv.10</p>
+            <button class="skill_power_up">強化</button>
+        </div>
+
+        <div class="skill_detail">
+            <p class="skill_name">雷のスキル</p>
+            <img class="skill_icon" src="../image/skill/thunder_skill_icon.png">
+            <p class="skill_level">Lv.10</p>
+            <button class="skill_power_up">強化</button>
+        </div>
     </div>
 
-    <div class="skill_detail">
-      <p class="skill_name">水のスキル</p>
-      <img class="skill_icon" src="../image/skill/water_skill_icon.png">
-      <p class="skill_level">Lv.10</p>
-      <button class="skill_power_up">強化</button>
-    </div>
-
-    <div class="skill_detail">
-      <p class="skill_name">氷のスキル</p>
-      <img class="skill_icon" src="../image/skill/ice_skill_icon.png">
-      <p class="skill_level">Lv.10</p>
-      <button class="skill_power_up">強化</button>
-    </div>
-
-    <div class="skill_detail">
-      <p class="skill_name">雷のスキル</p>
-      <img class="skill_icon" src="../image/skill/thunder_skill_icon.png">
-      <p class="skill_level">Lv.10</p>
-      <button class="skill_power_up">強化</button>
-    </div>
-  </div>
-
-  <button class="cansel" onclick="toPower()">キャンセル</button>
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toPower()">キャンセル</button>
 </body>
 
 </html>

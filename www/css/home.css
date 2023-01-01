@@ -53,11 +53,11 @@
 /* サウンドアイコン */
 .sound_button {
     background: rgb(218, 218, 218);
-    border: 2px solid rgb(204, 204, 204);
+    border: solid rgb(189, 160, 0,0.8);
     border-radius: 0px 20px 0px 0px;
     position: relative;
-    top: 149px;
-    left: 203px;
+    top: 147px;
+    left: 202px;
     width: 25px;
     height: 25px;
 }
