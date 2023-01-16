@@ -26,7 +26,7 @@ function getPresentData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var present = results[i];
             // 新しいHTML要素を作成
-            var presentHtml = '<div class="present_box"><h4 class="present_title">' + present.present_title + '</h4><p class="present_text">' + present.present_content + '</p><button class="present_button" id="present_button" value="' + present.objectId + '" onclick="getSoloPresentData()">受け取る</button></div>';
+            var presentHtml = '<div class="present_box"><h4 class="present_title">' + present.present_title + '</h4><p class="present_text">' + present.present_content + '</p><button class="present_button" id="present_button" value="' + present.objectId + '" onclick="getSoloPresentData(this)">受け取る</button></div>';
             // 作成した要素を追加
             document.getElementById("modal-body").insertAdjacentHTML('beforeend', presentHtml);
         }
@@ -34,7 +34,7 @@ function getPresentData() {
 }
 
 // プレゼントデータ1件取得→アイテムに追加
-function getSoloPresentData() {
+function getSoloPresentData(element) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Present = ncmb.DataStore(this.PRESENT_DB);
@@ -45,7 +45,6 @@ function getSoloPresentData() {
         .fetchAll()
         .then(function (results) {
             var present = results[0];
-            // ↓ここが出ていない
             item_count = present.present_count;
             // アイテム移動
             Item.equalTo("item_id", present.present_item)
@@ -53,7 +52,7 @@ function getSoloPresentData() {
                 .then(function (results) {
                     var item = results[0];
                     console.log(Number(item.sum) + Number(item_count));
-                    // ↓更新が出来ない
+                    // ↓更新が出来ない(その一)
                     results.set("sum", Number(item.sum) + Number(item_count))
                         .update();
                     console.log("ok");
@@ -84,15 +83,9 @@ function getCharacterData() {
     function setCharacterData(results) {
         var character = results[0];
         // ランク入れ替え
-        document.getElementById("rank_text").innerHTML = 'ランク：' + character.character_rank;
+        document.getElementById("rank_text").innerHTML = 'ランク' + character.character_rank;
         // プレイヤー名入れ替え
         document.getElementById("player_name").innerHTML = character.character_name;
-        // HP入れ替え
-        document.getElementById("hp_ber").value = character.character_hp;
-        document.getElementById("hp_ber_amount").innerHTML = character.character_hp + '/100';
-        // MP入れ替え
-        document.getElementById("mp_ber").value = character.character_mp;
-        document.getElementById("mp_ber_amount").innerHTML = character.character_mp + '/100';
         // Exp入れ替え
         document.getElementById("exp_text").innerHTML = character.character_exp + '/1000';
         document.getElementById("exp_ber").value = character.character_exp;
@@ -128,12 +121,6 @@ function getShorteCharacterData() {
         document.getElementById("rank_text").innerHTML = 'ランク' + character.character_rank;
         // プレイヤー名入れ替え
         document.getElementById("player_name").innerHTML = character.character_name;
-        // HP入れ替え
-        document.getElementById("hp_ber").value = character.character_hp;
-        document.getElementById("hp_ber_amount").innerHTML = character.character_hp + '/100';
-        // MP入れ替え
-        document.getElementById("mp_ber").value = character.character_mp;
-        document.getElementById("mp_ber_amount").innerHTML = character.character_mp + '/100';
         // Exp入れ替え
         document.getElementById("exp_text").innerHTML = character.character_exp + '/1000';
         document.getElementById("exp_ber").value = character.character_exp;
