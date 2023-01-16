@@ -1,4 +1,5 @@
 /* スキルの処理を行う */
+/* test */
 class Skill{
 
     //playerから呼び出し
