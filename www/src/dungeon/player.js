@@ -147,10 +147,12 @@ class Player{
             //アイテムがある
             return 'itemPick'
         }
+        if(Trap.checkTrap(this.playerStatus.now.x, this.playerStatus.now.y)){
+            //アイテムがある
+            return 'trap'
+        }
         return 'enemy'
             
-    
-          
     }
 
     /* キャラの攻撃に関する*/
@@ -182,6 +184,13 @@ class Player{
         this.playerStatus.next.x = this.playerStatus.now.x
         this.playerStatus.next.y = this.playerStatus.now.y
     }
+
+    /*static resetCharacterPosition(){
+        this.playerStatus.now.x = 9
+        this.playerStatus.now.y = 6
+        this.playerStatus.next.x = this.playerStatus.now.x
+        this.playerStatus.next.y = this.playerStatus.now.y
+    }*/
 
     /* ターンによる満腹度の減少 */
     static spDecrease(turn){

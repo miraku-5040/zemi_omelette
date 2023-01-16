@@ -2,6 +2,7 @@ class Trap{
 
     static initialize() {
         /* trapArrayの準備 */
+        this.underTrap = null
         this.noDataItem = 0;
         const col = new Array(Config.stageCols); //横の配列
         col.fill(this.noDataItem); //横の配列を0で埋める
@@ -26,13 +27,14 @@ class Trap{
             trapName: '地雷',
             stepFlg: false
             }
-        this.itemIdArray.push();
+        this.trapIdArray.push('T0000');
+        this.trapIdArray.push('T0001');
         Image.createTrapImages(this.trapIdArray);
         this.screenRenderingAll();
     }
 
     static screenRenderingAll() {
-        this.itemArray.forEach((col, indexY) => {
+        this.trapArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
                 if(element === this.noDataItem){
                     return;
@@ -50,6 +52,22 @@ class Trap{
         imgElement.style.top = indexY * Config.stageImgHeight + "px";
         imgElement.style.left = indexX * Config.stageImgWidth + "px";
         itemLayerElement.appendChild(imgElement);
+    }
+
+    static checkTrap(x,y){
+        if(this.trapArray[y][x] === this.noDataItem){
+            return false
+        }
+        this.underTrap = this.trapArray[y][x]
+        return true
+    }
+
+    static activateTrap(){
+        if(this.underTrap.trapId == 'T0000'){
+            return 'nextfloor'
+        }
+        //その他トラップ発動
+        return 'enemy'
     }
 
 } 
