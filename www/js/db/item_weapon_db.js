@@ -57,7 +57,7 @@ function getItemSoadData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '" onclick="getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2" src="../image/soad/soad-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '" onclick="getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2" src="' + weapon.weapon_image + '"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -86,7 +86,7 @@ function getItemShieldData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '" onclick="item_detail();getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2" src="../image/shield/shield-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="" id="weapon" value="' + weapon.weapon_id + '" onclick="item_detail();getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2" src="' + weapon.weapon_image + '"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -115,7 +115,7 @@ function getItemDecoraionData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" id="weapon" onclick="" value="' + weapon.weapon_id + '" onclick="item_detail();getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2"  src="../image/decoration/juel-provisional.png"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" id="weapon" onclick="" value="' + weapon.weapon_id + '" onclick="item_detail();getSoloExplainWeaponData(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material2"  src="' + weapon.weapon_image + '"><p class="item_text_position2">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }

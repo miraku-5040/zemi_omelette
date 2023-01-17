@@ -1,8 +1,17 @@
+.background_image {
+    position: absolute;
+    transform: translate(-40px, -25px);
+    z-index: -1;
+    width: 700px;
+}
+
 /* スキル画面の枠 */
 .skill_frame {
     display: flex;
     gap: 33px;
     margin: 30px 30px;
+    position: absolute;
+    top: 30px;
 }
 
 /* 個別のスキル */
@@ -50,13 +59,14 @@
     height: 40px;
 }
 
-/* キャンセルボタン */
+/* 戻るボタン */
 .cansel_frame {
     border: solid rgb(189, 160, 0);
     position: absolute;
-    right: 47px;
-    width: 120px;
-    height: 50px;
+    top: 0px;
+    left: 0px;
+    width: 57px;
+    height: 32px;
 }
 
 .cansel {
@@ -70,8 +80,39 @@
     font-size: 15px;
     font-weight: bold;
     position: absolute;
-    top: 313px;
-    right: 50px;
-    width: 120px;
-    height: 50px;
+    top: 0px;
+    left: 0px;
+    width: 60px;
+    height: 35px;
+}
+
+/* 使用できる本の冊数 */
+.least_coin {
+    background-color: #003761;
+    border-top: solid #005291;
+    border-bottom: solid #005291;
+    border-right: solid #005291;
+    border-radius: 10px;
+    width: 83px;
+    height: 23px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.least_coin_image {
+    position: relative;
+    transform: translate(-15px, -3px);
+    width: 25px;
+    height: 30px;
+}
+
+.least_dia_coin {
+    color: rgb(231, 231, 231);
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    transform: translateY(-47px);
+    left: 45px;
+    z-index: 10;
 }
