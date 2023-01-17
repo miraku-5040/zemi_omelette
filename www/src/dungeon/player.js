@@ -237,6 +237,15 @@ class Player{
         return null;
     }
 
+    /* playerIdに応じたプレイヤー名を取得 */
+    static getPlayerName(playerId){
+        if(this.playerStatus.playerId !== playerId){
+            //playerIdが存在しない
+            return null;
+        } 
+        return this.playerStatus.playerName;
+    }
+
     /**
      * playerIdに応じたレベルの数値を取得する
      * playerIdが存在しない場合はNullを返す
