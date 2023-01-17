@@ -10,9 +10,9 @@ class Message{
 
     static itemUseMessage(itemName,isSuccess){
         if(isSuccess){
-            this.updateMessage(itemName+"を使った")
+            this.#updateMessage(itemName+"を使った")
         }else{
-            this.updateMessage(itemName+"が壊れた")
+            this.#updateMessage(itemName+"が壊れた")
         }
     }
 
@@ -26,23 +26,39 @@ class Message{
 
     static itemPickMessage(itemName,isSuccess){
         if(isSuccess){
-            this.updateMessage(itemName+"を拾った")
+            this.#updateMessage(itemName+"を拾った")
         }else{
-            this.updateMessage(itemName+"を拾えなかった")
+            this.#updateMessage(itemName+"を拾えなかった")
         }
     }
 
     /* playerのhp減少(ダメージ) */
     static playerHpDecreaseMessage(playerName, decrease){
-        document.getElementById("message1").innerHTML =  playerName+"に"+decrease+"のダメージ";
+        this.#updateMessage(playerName + "に" + decrease + "のダメージ");
     }
 
     /* enemyのhp減少(ダメージ) */
     static enemyHpDecreaseMessage(enemyName, decrease){
-        document.getElementById("message1").innerHTML =  enemyName+"に"+decrease+"のダメージ";
+        this.#updateMessage(enemyName + "に" + decrease + "のダメージ");
     }
 
-    static updateMessage(message){
+    /* playerのhp増加(回復) */
+    static playerHpIncreaseMessage(playerName, increase){
+        this.#updateMessage(playerName + "のhpが" + increase + "回復");
+    }
+
+    /* enemyのhp増加(回復) */
+    static enemyHpIncreaseMessage(enemyName, increase){
+        this.#updateMessage(enemyName + "のhpが" + increase + "回復");
+    }
+
+    /* スキル使用 */
+    static useSkillMessage(skillUserName, skillName){
+        this.#updateMessage(skillUserName + "が" + skillName + "を発動した");
+    }
+
+    /* メッセージの表示処理 */
+    static #updateMessage(message){
         if(document.getElementById('message1').innerHTML == '' && document.getElementById('message2').innerHTML == ''){
             document.getElementById('message1').innerHTML = message
             return
