@@ -138,6 +138,18 @@ class Stage {
         return false;   
     }
 
+    /**
+     * 引数の座標が床かを判定する
+     * 床の場合はtrueを返す
+     */
+    static isFloor(x, y){
+        if(this.board[y][x].stageImageNumber === 1){
+            // 床の場合
+            return true;
+        }
+        return false;
+    }
+
     static checkStageCorner(direction, x, y){
         switch(direction){
         case 'leftup':

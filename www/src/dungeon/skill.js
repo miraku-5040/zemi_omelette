@@ -302,15 +302,15 @@ class Skill{
             switch(skillId){
                 case this.testSkillId1:
                     //テストスキル1
-                    skillData = [{scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{skillName:"スキル1", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
                 case this.testSkillId2:
                     //テストスキル2
-                    skillData = [{scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{skillName:"スキル2", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
                 default:
                     //テスト用の通常攻撃
-                    skillData = [{scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{skillName:"通常攻撃", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
             }
             this.skillDataMap.set(skillId, skillData);
@@ -329,11 +329,28 @@ class Skill{
         switch(scope.type){
             case "one":
                 const typeOne = (scopeData, direction) => {
+                    // 基準点設定
+                    const baseCoordinate = {};
+                    baseCoordinate.x = scopeData.x;
+                    baseCoordinate.y = scopeData.y;
+                    if(scopeData.rotation){
+                        // 座標回転
+                        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray([baseCoordinate], direction, this.skillUserData.direction);
+                        const relativeCoordinate = this.#convertRelativeToAbsolute(rotatedTargetCoordinateArray[0].x, rotatedTargetCoordinateArray[0].y);
+                        baseCoordinate.x = relativeCoordinate.x;
+                        baseCoordinate.y = relativeCoordinate.y;
+                    }
+                    // 効果先座標作成
                     const targetCoordinateArray = [];
-                    // TODO ステージをチェックする
-                    // TODO 回転する
-                    const coordinate = this.#convertRelativeToAbsolute(scopeData.x, scopeData.y);
-                    targetCoordinateArray.push(coordinate);
+                    if(!this.#isInCoordinateRange(baseCoordinate.x, baseCoordinate.y)){
+                        // 座標がステージ範囲外の場合は除外する
+                        return [];
+                    }
+                    if(!Stage.isFloor(baseCoordinate.x, baseCoordinate.y)){
+                        // 座標が床ではない場合は除外する
+                        return [];
+                    }
+                    targetCoordinateArray.push(baseCoordinate);
                     return targetCoordinateArray;
                 }
                 functionMap.set("createTargetCoordinateArray", typeOne);
@@ -468,6 +485,148 @@ class Skill{
         }
         this.skillReady();
         this.skillGo();
+    }
+
+    /* スキル対象相対座標のリストを方向に回転する */
+    static #rotatetargetCoordinateArray(targetCoordinateArray, nowDirection, nextDirection){
+        // 方向を数字(0~360)に変換する
+        let nowAngle = 0;
+        switch(nowDirection){
+            case "up":
+                nowAngle = 0;
+                break;
+            case "rightup":
+                nowAngle = 45;
+                break;
+            case "right":
+                nowAngle = 90;
+                break;
+            case "rightdown":
+                nowAngle = 135;
+                break;
+            case "down":
+                nowAngle = 180;
+                break;
+            case "leftdown":
+                nowAngle = 225;
+                break;
+            case "left":
+                nowAngle = 270;
+                break;
+            case "leftup":
+                nowAngle = 315;
+                break;
+            default:
+                break;
+
+        }
+        // 変換先の方向を角度(0~360)に変換する
+        let nextAngle = 0;
+        switch(nextDirection){
+            case "up":
+                nextAngle = 0;
+                break;
+            case "rightup":
+                nextAngle = 45;
+                break;
+            case "right":
+                nextAngle = 90;
+                break;
+            case "rightdown":
+                nextAngle = 135;
+                break;
+            case "down":
+                nextAngle = 180;
+                break;
+            case "leftdown":
+                nextAngle = 225;
+                break;
+            case "left":
+                nextAngle = 270;
+                break;
+            case "leftup":
+                nextAngle = 315;
+                break;
+            default:
+                break;
+        }
+        // (45°, 90°, 180°)回転メソッドを呼び出して回転する
+        let rotatedTargetCoordinateArray = JSON.parse(JSON.stringify(targetCoordinateArray)); //ディープコピー
+        let rotateAngle = Math.abs(nextAngle - nowAngle);
+        while(rotateAngle > 0){
+            if(rotateAngle >= 180){
+                 rotatedTargetCoordinateArray = this.#rotateOneHalf(rotatedTargetCoordinateArray);// 180°回転
+                rotateAngle -=180;
+            }else if(rotateAngle >= 90){
+                rotatedTargetCoordinateArray = this.#rotateOneQuarter(rotatedTargetCoordinateArray);// 90°回転
+                rotateAngle -= 90;
+            }else{
+                rotatedTargetCoordinateArray = this.#rotateOneEighth(rotatedTargetCoordinateArray);// 45°回転
+                rotateAngle -= 45;
+            }
+        }
+        return rotatedTargetCoordinateArray;
+    }
+
+    /* スキル範囲を右に45°回転する */
+    static #rotateOneEighth(targetCoordinateArray){
+        const rotatedTargetCoordinateArray = [];
+        targetCoordinateArray.forEach((relativeCoordinate) => {
+            let nowX = relativeCoordinate.x;
+            let nowY = relativeCoordinate.y;
+            const range = Math.max(Math.abs(nowX), Math.abs(nowY));
+            for(let i = 0; i < range; i++){
+                switch(true){
+                    case (-range <= nowX < range && nowY === -range):
+                        // x+方向に移動
+                        nowX += 1;
+                        break;
+                    case (nowX === range && -range <= nowY < range):
+                        // y+方向に移動
+                        nowY += 1;
+                        break;
+                    case (range >= nowX >-range && nowY === range):
+                        // x-方向に移動
+                        nowX -= 1;
+                        break;
+                    case (nowX === -range && range >= nowY > -range):
+                        // y-方向に移動
+                        nowY -= 1;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            const targetCoordinateArrayItem = {};
+            targetCoordinateArrayItem.x = nowX;
+            targetCoordinateArrayItem.y = nowY;
+            rotatedTargetCoordinateArray.push(targetCoordinateArrayItem);
+        });
+        return rotatedTargetCoordinateArray;
+    }
+
+    /* スキル範囲を右に90°回転する */
+    static #rotateOneQuarter(targetCoordinateArray){
+        const rotatedTargetCoordinateArray = [];
+        targetCoordinateArray.forEach((relativeCoordinate) => {
+            const rotatedTargetCoordinateArrayItem = {};
+            rotatedTargetCoordinateArrayItem.x = -relativeCoordinate.y;
+            rotatedTargetCoordinateArrayItem.y = relativeCoordinate.x;
+            rotatedTargetCoordinateArray.push(rotatedTargetCoordinateArrayItem);
+        });
+        return rotatedTargetCoordinateArray;
+    }
+
+    /* スキル範囲を右に180°回転する */
+    static #rotateOneHalf(targetCoordinateArray){
+        const rotatedTargetCoordinateArray = [];
+        targetCoordinateArray.forEach((relativeCoordinate) => {
+            const rotatedTargetCoordinateArrayItem = {};
+            rotatedTargetCoordinateArrayItem.x = -relativeCoordinate.x;
+            rotatedTargetCoordinateArrayItem.y = -relativeCoordinate.y;
+            rotatedTargetCoordinateArray.push(rotatedTargetCoordinateArrayItem);
+        });
+        return rotatedTargetCoordinateArray;
     }
 
     /* スキル使用者を原点とする相対座標からステージの絶対座標に変換する */

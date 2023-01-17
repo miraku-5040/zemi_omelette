@@ -1,6 +1,9 @@
 /* 共通設定 */
-body {
-    background-color: #01508d;
+.background_image {
+    position: absolute;
+    transform: translate(-40px, -9px);
+    z-index: -1;
+    width: 700px;
 }
 
 /* プレイヤー表示 */

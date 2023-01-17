@@ -1,0 +1,71 @@
+body {
+    background-image: url(../image/background/town.png);
+    background-repeat: no-repeat;
+    background-size: 670px 380px;
+}
+
+/* 武器屋の設定 */
+.weapon_shop {
+    position: relative;
+    top: 60px;
+    left: 70px;
+}
+
+.shop_text {
+    position: relative;
+    transform: translateY(-38px);
+    left: 18px;
+    color: rgb(255, 203, 231);
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/* 書店の設定 */
+.skill_shop {
+    position: relative;
+    transform: translateY(-100px);
+    left: 280px;
+}
+
+.skill_shop_image {
+    position: relative;
+    left: 3px;
+    width: 80px;
+}
+
+/* 食料品店の設定 */
+.item_shop {
+    position: relative;
+    transform: translateY(-230px);
+    left: 470px;
+}
+
+.item_shop_image {
+    position: relative;
+    transform: translateY(-10px);
+    left: 30px;
+}
+
+/* 換金場所の設定 */
+.recycle_shop {
+    position: relative;
+    transform: translateY(-220px);
+    left: 165px;
+}
+
+.recycle_shop_image {
+}
+
+/* 洞窟の設定 */
+.cave {
+    position: relative;
+    transform: translateY(-350px);
+    left: 395px;
+}
+
+.cave_image {
+    width: 80px;
+    position: relative;
+    transform: translateY(-8px);
+    left: 0px;
+}

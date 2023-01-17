@@ -24,6 +24,7 @@
 </head>
 
 <body onload="soundBGM();getCharacterData()">
+    <img class="background_image" src="image/background/cave.png">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
         <img class="player_image" src="image/player_icon.png">
@@ -81,6 +82,12 @@
 
         <img class="event_adv" src="image/event.png">
         <img class="login_adv" src="image/login.png">
+
+        <button class="go_town" onclick="goTown()">
+            <img class="town_image" src="image/town/gotown.png">
+            <p class="town_text">街へ</p>
+        </button>
+
         <!-- 各画面への遷移ボタン -->
         <div class="buttons">
             <div class="buttons_position">
