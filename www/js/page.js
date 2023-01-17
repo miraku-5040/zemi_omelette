@@ -109,22 +109,22 @@ function toWeaponEvo() {
 function toShop1() {
     // 音声再生
     go_sound();
-    // ショップ１画面へ遷移
-    setTimeout('window.location.href = "shop1.html"', 600);
+    // 武器屋画面へ遷移
+    setTimeout('window.location.href = "weaponShop.html"', 600);
 }
 
 function toShop2() {
     // 音声再生
     go_sound();
-    // ショップ2画面へ遷移
-    setTimeout('window.location.href = "shop2.html"', 600);
+    // 書店画面へ遷移
+    setTimeout('window.location.href = "skillShop.html"', 600);
 }
 
 function toShop3() {
     // 音声再生
     go_sound();
-    // ショップ3画面へ遷移
-    setTimeout('window.location.href = "shop3.html"', 600);
+    // 市場画面へ遷移
+    setTimeout('window.location.href = "itemShop.html"', 600);
 }
 
 function toDanjyon() {
