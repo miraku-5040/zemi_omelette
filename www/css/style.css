@@ -36,7 +36,7 @@ body {
     color: white;
     position: relative;
     top: 5px;
-    transform: translateX(-52px);
+    transform: translateX(-40px);
 }
 
 .name_text2 {
@@ -46,69 +46,19 @@ body {
     transform: translateX(-42px);
 }
 
-/* 二本のバー */
-/* 位置 */
-.bers {
-    width: 150px;
+.border_colom {
     position: relative;
-    left: 10px;
-    transform: translateY(-25px);
-}
-
-/* HPバー */
-.hp_ber_title {
-    position: absolute;
-    top: 15px;
-    color: rgb(0, 180, 0);
-    font-weight: bold;
-}
-
-.hp_ber {
-    position: absolute;
-    top: 35px;
-    left: 25px;
-    width: 80px;
-    height: 10px;
-    background-color: rgb(0, 180, 0);
-}
-
-.hp_ber_amount {
-    position: absolute;
-    left: 52px;
-    color: rgb(0, 180, 0);
-    font-weight: bold;
-}
-
-/* MPバー */
-.mp_ber_title {
-    position: absolute;
-    top: 15px;
-    left: 123px;
-    color: orange;
-    font-weight: bold;
-}
-
-.mp_ber {
-    position: absolute;
-    top: 35px;
-    left: 150px;
-    width: 80px;
-    height: 10px;
-    background-color: orange;
-}
-
-.mp_ber_amount {
-    position: absolute;
-    left: 180px;
-    color: orange;
-    font-weight: bold;
+    top: 4px;
+    transform: translateX(-10px);
+    border-left: 2px solid white;
+    width: 2px;
+    height: 40px;
 }
 
 /* 経験値 */
 .exp_content {
     position: relative;
-    top: 5px;
-    left: 180px;
+    transform: translate(-60px, -60px);
 }
 
 .exp_ber_title {

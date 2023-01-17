@@ -32,28 +32,17 @@
 /* ガチャの背景 */
 .gatya_image {
     position: absolute;
-    top: 80px;
-    left: 45px;
-    width: 575px;
-    height: 210px;
-    border: solid rgb(189, 160, 0);
-}
-
-/* ガチャのタイトル */
-.gatya_title {
-    color: gold;
-    font-weight: bold;
-    position: relative;
-    transform: translateY(-40px);
-    left: 65px;
-    font-size: 30px;
+    top: 60px;
+    left: 80px;
+    width: 500px;
+    height: 260px;
 }
 
 /* ガチャを引くボタン達 */
 .gatya_button {
     position: absolute;
-    top: 220px;
-    right: 65px;
+    top: 240px;
+    right: 130px;
     display: flex;
     gap: 30px;
 }
