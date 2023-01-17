@@ -1,3 +1,10 @@
+function goTown() {
+    // 音声再生
+    go_sound();
+    // 街画面へ遷移
+    setTimeout('window.location.href = "html/town.html"', 600);
+}
+
 function toHome() {
     // 音声再生
     go_sound();
