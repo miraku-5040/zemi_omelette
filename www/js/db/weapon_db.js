@@ -72,6 +72,7 @@ function getSoloPowerWeaponData() {
 // 武器の画像(仮)とレベルをHTMLに埋め込む
 function setDecorationImage(results) {
     var weapon = results[0];
+    document.getElementById("powerUpWeapon").src = weapon.weapon_image;
     document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
     document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
     document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
@@ -106,6 +107,7 @@ function getSoloEvoWeaponData() {
     function setDecorationImage(results) {
         console.log(results);
         var weapon = results[0];
+        document.getElementById("powerUpWeapon").src = weapon.weapon_image;
         document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
         document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
         document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
@@ -125,7 +127,7 @@ function getEvolutionWeaponData() {
         .fetchAll()
         .then(function (results) {
             weaponId = results[0];
-            Weapon.equalTo("weapon_id", 1)
+            Weapon.equalTo("weapon_id", weaponId.weapon_id)
                 .fetchAll()
                 .then(function (results) {
                     weaponId = results[0];
@@ -153,7 +155,7 @@ function getEvolutionWeaponData() {
         for (var i = 1; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" id="' + weapon.weapon_id + '" onclick="selected(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="power_for_item_image" src="../image/soad/soad-provisional.png"><p class="level_text">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" id="' + weapon.weapon_id + '" onclick="selected(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="power_for_item_image" src="' + weapon.weapon_image + '"><p class="level_text">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("item_frame").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -311,7 +313,7 @@ function getPowerSoadData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="setSoloPowerWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="../image/soad/soad-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="setSoloPowerWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -339,7 +341,7 @@ function getPowerShieldData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="setSoloPowerWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="../image/shield/shield-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="setSoloPowerWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -368,7 +370,7 @@ function getPowerDecoraionData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="setSoloPowerWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="setSoloPowerWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -397,7 +399,7 @@ function getEvoSoadData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="setSoloEvoWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="../image/soad/soad-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="setSoloEvoWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -426,7 +428,7 @@ function getEvoShieldData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="setSoloEvoWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="../image/shield/shield-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="setSoloEvoWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -455,7 +457,7 @@ function getEvoDecoraionData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="setSoloEvoWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="../image/decoration/juel-provisional.png"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" onclick="setSoloEvoWeaponId(' + weapon.weapon_id + ')" id="' + weapon.weapon_id + '"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
