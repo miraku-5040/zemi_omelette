@@ -22,6 +22,8 @@ function initialize() {
     Item.initialize();
     //スキルの準備
     Skill.initialize();
+    //トラップの準備
+    Trap.initialize();
     //コントローラを準備する
     Control.initialize();
     // 開始フラグ
@@ -36,7 +38,6 @@ function loop() {
     switch(mode) {
         case 'start':
             // 開始
-            Stage.createStage();
             mode = 'player';
             break;
         case 'player':
@@ -88,7 +89,7 @@ function loop() {
             mode = 'player';
             break;
         case 'trap':
-            mode = 'enemy';
+            mode = Trap.activateTrap()
             break;
         case 'itemPick':
             Item.itemPick();
@@ -106,7 +107,12 @@ function loop() {
             mode = 'player';
             break;
         case 'nextfloor':
-            //次のフロアの準備及び次々のフロアの作成
+            //ランダム生成
+            //プレイヤーの現在地の更新
+            //アイテム生成
+            //トラップ生成
+            //敵の生成
+            mode = 'player'
             break;
     }
     frame++;

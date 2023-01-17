@@ -126,7 +126,6 @@ class Player{
      * **/
      static guide(){
          //進行方向を表示する　TODO
-         document.getElementById('direction').innerHTML = this.playerStatus.direction;
          this.steyCharacterPosition();
      }
     /**
@@ -147,10 +146,12 @@ class Player{
             //アイテムがある
             return 'itemPick'
         }
+        if(Trap.checkTrap(this.playerStatus.now.x, this.playerStatus.now.y)){
+            //アイテムがある
+            return 'trap'
+        }
         return 'enemy'
             
-    
-          
     }
 
     /* キャラの攻撃に関する*/
@@ -182,6 +183,13 @@ class Player{
         this.playerStatus.next.x = this.playerStatus.now.x
         this.playerStatus.next.y = this.playerStatus.now.y
     }
+
+    /*static resetCharacterPosition(){
+        this.playerStatus.now.x = 9
+        this.playerStatus.now.y = 6
+        this.playerStatus.next.x = this.playerStatus.now.x
+        this.playerStatus.next.y = this.playerStatus.now.y
+    }*/
 
     /* ターンによる満腹度の減少 */
     static spDecrease(turn){
@@ -227,6 +235,15 @@ class Player{
             return this.playerStatus.playerId;
         }
         return null;
+    }
+
+    /* playerIdに応じたプレイヤー名を取得 */
+    static getPlayerName(playerId){
+        if(this.playerStatus.playerId !== playerId){
+            //playerIdが存在しない
+            return null;
+        } 
+        return this.playerStatus.playerName;
     }
 
     /**

@@ -36,7 +36,6 @@ class Item{
             skillId:0,
             usageLimit: 1
             }
-        this.itemIdArray.push();
         Image.createItemImages(this.itemIdArray);
         this.screenRenderingAll();
     }
