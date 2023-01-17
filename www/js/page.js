@@ -5,6 +5,13 @@ function toHome() {
     setTimeout('window.location.href = "../home.html"', 600);
 }
 
+function goTown() {
+    // 音声再生
+    go_sound();
+    // 街画面へ遷移
+    setTimeout('window.location.href = "town.html"', 600);
+}
+
 function toSelectDanjyon() {
     // 音声再生
     go_sound();
@@ -97,6 +104,27 @@ function toWeaponEvo() {
     go_sound();
     // 進化武器選択画面へ遷移
     setTimeout('window.location.href = "weaponSelectEvo.html"', 600);
+}
+
+function toShop1() {
+    // 音声再生
+    go_sound();
+    // 武器屋画面へ遷移
+    setTimeout('window.location.href = "weaponShop.html"', 600);
+}
+
+function toShop2() {
+    // 音声再生
+    go_sound();
+    // 書店画面へ遷移
+    setTimeout('window.location.href = "skillShop.html"', 600);
+}
+
+function toShop3() {
+    // 音声再生
+    go_sound();
+    // 市場画面へ遷移
+    setTimeout('window.location.href = "itemShop.html"', 600);
 }
 
 function toDanjyon() {

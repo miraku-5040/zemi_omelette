@@ -200,6 +200,17 @@ class Enemy{
         return false;
     }
 
+    /* 座標に応じた敵名を取得 */
+    static getEnemyName(x, y){
+        if(this.enemyStatusArray[y][x] === this.noDataItem){
+            // 敵が存在しない
+            return null;
+        }
+        const name = this.enemyStatusArray[y][x].enemyName;
+        const distinction = this.enemyStatusArray[y][x].distinction;
+        return name + distinction;
+    }
+
     /*座標に応じた敵のレベル取得*/
     static getEnemyLevel(x,y){
         return this.enemyStatusArray[x][y].level

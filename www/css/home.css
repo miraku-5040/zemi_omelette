@@ -1,3 +1,4 @@
+/* 残量 */
 .leasts {
     position: relative;
     top: 0px;
@@ -153,10 +154,12 @@
 }
 
 .go_town {
+    background-color: rgb(216, 216, 216);
+    border: 2px solid rgb(189, 160, 0);
     position: absolute;
     top: 130px;
     transform: translateX(-0px);
-    color: rgb(190, 162, 0);
+    color: rgb(255, 229, 82);
     width: 73px;
     height: 70px;
 }
