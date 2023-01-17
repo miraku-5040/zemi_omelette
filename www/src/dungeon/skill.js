@@ -302,15 +302,15 @@ class Skill{
             switch(skillId){
                 case this.testSkillId1:
                     //テストスキル1
-                    skillData = [{scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{skillName:"スキル1", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
                 case this.testSkillId2:
                     //テストスキル2
-                    skillData = [{scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{skillName:"スキル2", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
                 default:
                     //テスト用の通常攻撃
-                    skillData = [{scope:{type:"one", x:0, y:-1}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{skillName:"通常攻撃", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
             }
             this.skillDataMap.set(skillId, skillData);
