@@ -12,6 +12,7 @@ class Skill{
     static initialize(){
         this.skillDataMap = new Map();
         this.#skillEndInitialize(); //初期化
+        this.skillUseMessegeFunction = () => {};
         this.scopeLayerElement = document.getElementById("scope_layer");
         const scopeElement = document.createElement("div");
         scopeElement.style.position = "absolute";
@@ -45,6 +46,7 @@ class Skill{
         const skillUserData = {};
         skillUserData.type = "player";
         skillUserData.playerId = playerId;
+        skillUserData.name = Player.getPlayerName(playerId);
         const playerNowPosition = Player.getPlayerNowPosition(playerId);
         skillUserData.nowX = playerNowPosition.x;
         skillUserData.nowY = playerNowPosition.y;
@@ -56,6 +58,12 @@ class Skill{
         // skillDataをセット
         const skillData = this.#setSkillData(skillId);
         this.skillData = skillData;
+        // メッセージ表示用関数設定
+        this.skillUseMessegeFunction = () => {
+            const skillUserName = this.skillUserData.name;
+            const skillName = this.skillData[this.skillDataIndex].name;
+            Message.useSkillMessage(skillUserName, skillName);
+        };
     }
 
     /**
@@ -74,6 +82,7 @@ class Skill{
         skillUserData.type = "enemy";
         skillUserData.nowX = nowX;
         skillUserData.nowY = nowY;
+        skillUserData.name = Enemy.getEnemyName(nowX, nowY);
         skillUserData.direction = Enemy.getDirection(nowX, nowY);
         skillUserData.level = Enemy.getEnemyLevel(nowX, nowY);
         const enemyAttackStatus = Enemy.getEnemyAttackStatus(nowX, nowY);
@@ -82,6 +91,12 @@ class Skill{
         // skillDataをセット
         const skillData = this.#setSkillData(skillId);
         this.skillData = skillData;
+        // メッセージ表示用関数設定
+        this.skillUseMessegeFunction = () => {
+            const skillUserName = this.skillUserData.name;
+            const skillName = this.skillData[this.skillDataIndex].name;
+            Message.useSkillMessage(skillUserName, skillName);
+        };
     }
 
     /**
@@ -100,6 +115,8 @@ class Skill{
         // skillDataをセット
         const skillData = this.#setSkillData(skillId);
         this.skillData = skillData;
+        // メッセージ表示用関数設定(表示しない)
+        this.skillUseMessegeFunction = () => {};
     }
 
     /**
@@ -121,7 +138,9 @@ class Skill{
         this.skillUserData = skillUserData;
         // skillDataをセット
         const skillData = this.#setSkillData(skillId);
-        this.skillData = skillData; //skillGoで使用
+        this.skillData = skillData;
+        // メッセージ表示用関数設定(表示しない)
+        this.skillUseMessegeFunction = () => {};
     }
 
     /**
@@ -173,6 +192,9 @@ class Skill{
         const targetCoordinateArray = this.targetCoordinateArray;
         this.nowSkillData = []; //new
         this.targetCoordinateArray = []; //new
+        /* スキル使用メッセージ表示 */
+        this.skillUseMessegeFunction();
+        this.skillUseMessegeFunction = () => {}; //2回目以降は表示しない
         /* effectで分岐する関数の設定 */
         const effectUseFunction = this.#effectBranch(nowSkillData.effect);
         const getPlayerDefenceStatusFunction = effectUseFunction.get("getPlayerDefenseStatus");
@@ -271,6 +293,12 @@ class Skill{
                     case "enemy":
                         effectData.target = "player";
                         break;
+                    case "trap":
+                        effectData.target = "player";
+                        break;
+                    case "item":
+                        effectData.target = "enemy";
+                        break;
                 }
                 break;
             case "ally": //スキル使用者から見た味方
@@ -280,6 +308,12 @@ class Skill{
                         break;
                     case "enemy":
                         effectData.target = "enemy";
+                        break;
+                    case "trap":
+                        effectData.target = "enemy";
+                        break;
+                    case "item":
+                        effectData.target = "player";
                         break;
                 }
                 break;
@@ -302,15 +336,15 @@ class Skill{
             switch(skillId){
                 case this.testSkillId1:
                     //テストスキル1
-                    skillData = [{skillName:"スキル1", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{name:"スキル1", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
                 case this.testSkillId2:
                     //テストスキル2
-                    skillData = [{skillName:"スキル2", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{name:"スキル2", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
                 default:
                     //テスト用の通常攻撃
-                    skillData = [{skillName:"通常攻撃", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{name:"通常攻撃", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
             }
             this.skillDataMap.set(skillId, skillData);
