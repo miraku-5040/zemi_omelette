@@ -126,7 +126,6 @@ class Player{
      * **/
      static guide(){
          //進行方向を表示する　TODO
-         document.getElementById('direction').innerHTML = this.playerStatus.direction;
          this.steyCharacterPosition();
      }
     /**
