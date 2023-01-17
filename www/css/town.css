@@ -8,7 +8,7 @@ body {
 .weapon_shop {
     position: relative;
     top: 60px;
-    left: 70px;
+    left: 120px;
 }
 
 .shop_text {
@@ -23,8 +23,8 @@ body {
 /* 書店の設定 */
 .skill_shop {
     position: relative;
-    transform: translateY(-100px);
-    left: 280px;
+    top: 70px;
+    left: 130px;
 }
 
 .skill_shop_image {
@@ -36,8 +36,8 @@ body {
 /* 食料品店の設定 */
 .item_shop {
     position: relative;
-    transform: translateY(-230px);
-    left: 470px;
+    transform: translateY(-235px);
+    left: 420px;
 }
 
 .item_shop_image {
@@ -46,21 +46,11 @@ body {
     left: 30px;
 }
 
-/* 換金場所の設定 */
-.recycle_shop {
-    position: relative;
-    transform: translateY(-220px);
-    left: 165px;
-}
-
-.recycle_shop_image {
-}
-
 /* 洞窟の設定 */
 .cave {
     position: relative;
-    transform: translateY(-350px);
-    left: 395px;
+    transform: translateY(-190px);
+    left: 445px;
 }
 
 .cave_image {
@@ -68,4 +58,31 @@ body {
     position: relative;
     transform: translateY(-8px);
     left: 0px;
+}
+
+/* ホームボタン */
+.out_button {
+    position: absolute;
+    top: 335px;
+    left: 505px;
+    background-color: rgb(211, 211, 211);
+    width: 160px;
+    height: 40px;
+}
+
+.out_button_image {
+    position: relative;
+    top: 6px;
+    transform: translateX(-50px);
+    width: 30px;
+    height: 25px;
+}
+
+.out_button_text {
+    position: relative;
+    transform: translateY(-33px);
+    left: 25px;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
 }

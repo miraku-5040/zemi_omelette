@@ -19,31 +19,32 @@
     <link rel="stylesheet" href="../components/loader.css">
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
-    <!-- ダンジョン選択画面のCSS -->
+    <!-- ショップ選択画面のCSS -->
     <link rel="stylesheet" href="../css/town.css">
 </head>
 
 <body>
-    <div class="weapon_shop">
+    <div class="weapon_shop" onclick="toShop1()">
         <img class="weapon_shop_image" src="../image/town/bukiya.png">
         <p class="shop_text">武器屋</p>
     </div>
-    <div class="skill_shop">
+    <div class="skill_shop" onclick="toShop2()">
         <img class="skill_shop_image" src="../image/town/syoten.png">
         <p class="shop_text">書店</p>
     </div>
-    <div class="item_shop">
+    <div class="item_shop" onclick="toShop3()">
         <img class="item_shop_image" src="../image/town/itiba.png">
         <p class="shop_text">食料品店</p>
     </div>
-    <div class="recycle_shop">
-        <img class="recycle_shop_image" src="../image/town/bukiya.png">
-        <p class="shop_text">換金場所</p>
-    </div>
-    <div class="cave">
+    <div class="cave" onclick="toHome()">
         <img class="cave_image" src="../image/home_icon/home.png">
         <p class="shop_text">洞窟</p>
     </div>
+
+    <button class="out_button" onclick="toHome()">
+        <img class="out_button_image" src="../image/home_icon/home.png">
+        <p class="out_button_text">ホームに戻る</p>
+    </button>
 </body>
 
 </html>
