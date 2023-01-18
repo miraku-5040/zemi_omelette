@@ -1,4 +1,4 @@
-class createStage{
+class CreateStage{
     
     static initialize(){
         this.stageArray = []
@@ -69,8 +69,9 @@ class createStage{
     }
 
     static randomStageSelect(){
+        this.initialize()
         const index = Tool.getRandomInt(this.stageArray.length)
-        return this.stageArray[index]
+        return this.stageArray[1]
     }
     
 

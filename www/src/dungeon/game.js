@@ -12,10 +12,10 @@ let turn; // ゲームの現在ターン数
 function initialize() {
     // 画像を準備する
     Image.initialize();
-    // ステージを準備する
-    Stage.initialize();
     //プレイヤーの準備
     Player.initialize();
+    // ステージを準備する
+    Stage.initialize();
     //エネミーの準備
     Enemy.initialize();
     //アイテムの準備

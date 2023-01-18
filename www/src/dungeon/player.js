@@ -180,13 +180,14 @@ class Player{
         this.playerStatus.next.y = this.playerStatus.now.y
     }
 
-    /*static resetCharacterPosition(){
+    static resetCharacterPosition(x,y){
         //最初の地点決定
-        this.playerStatus.now.x = 9
-        this.playerStatus.now.y = 6
+        console.log(x)
+        this.playerStatus.now.x = x
+        this.playerStatus.now.y = y
         this.playerStatus.next.x = this.playerStatus.now.x
         this.playerStatus.next.y = this.playerStatus.now.y
-    }*/
+    }
 
     /* ターンによる満腹度の減少 */
     static spDecrease(turn){

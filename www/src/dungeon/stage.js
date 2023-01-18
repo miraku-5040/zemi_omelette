@@ -14,12 +14,6 @@ class Stage {
         startingPointElement.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
         startingPointElement.style.position = 'absolute';
 
-        const movingLayersElement = document.getElementById(`moving_layers`);
-        movingLayersElement.style.top = -6 * Config.stageImgHeight + "px"; //開発用
-        movingLayersElement.style.left = -9 * Config.stageImgWidth + "px"; //開発用
-        movingLayersElement.style.position = 'absolute';
-        this.movingLayersElement = movingLayersElement;
-
         const stageLayerElement = document.getElementById("stage_layer");
         stageLayerElement.style.width = Config.stageImgWidth * Config.stageCols + 'px';
         stageLayerElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
@@ -27,35 +21,7 @@ class Stage {
         this.stageLayerElement = stageLayerElement; //new
 
 
-                // メモリを準備する
-        this.board =[[9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,10],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [8,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,7]] 
-        
-        
-        for(let y = 0; y < Config.stageRows; y++) {
-            const line = this.board[y] || (this.board[y] = []);
-            for(let x = 0; x < Config.stageCols; x++) {
-                const stageImageNumber = line[x];
-                if(stageImageNumber >= 1  && stageImageNumber < 20) {
-                    this.setStageImage(x, y, stageImageNumber);
-                } else {
-                    line[x] = null;
-                }
-            }
-        }
+        this.createStage()
         
 
     }
@@ -66,6 +32,7 @@ class Stage {
         this.board = CreateStage.randomStageSelect()
         this.board.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
+                this.setStageImage(indexX, indexY, element);
                     if(element != 1){
                         return
                     }
@@ -75,9 +42,21 @@ class Stage {
                     if(this.board[indexY][indexX+1] == 6 && this.board[indexY][indexX-1] == 4){
                         return
                     }
-                    possiblePositions.push(indexY+","+indexX)
+                    
+                    possiblePositions.push({y:indexY,
+                    x:indexX})
             });
         });
+        const selectIndex = Tool.getRandomInt(possiblePositions.length)
+        const selectPosition =possiblePositions[selectIndex]
+        possiblePositions.splice(selectIndex, 1)
+
+        const movingLayersElement = document.getElementById(`moving_layers`);
+        movingLayersElement.style.top = -selectPosition.y * Config.stageImgHeight + "px"; 
+        movingLayersElement.style.left = -selectPosition.x * Config.stageImgWidth + "px"; 
+        movingLayersElement.style.position = 'absolute';
+        this.movingLayersElement = movingLayersElement;
+        Player.resetCharacterPosition(selectPosition.x,selectPosition.y)
     }
     /**
      * ステージ画像や画像番号をステージの2次元配列に格納する
