@@ -6,4 +6,11 @@ class Tool{
         const copyObject = JSON.parse(JSON.stringify(object));
         return copyObject;
     }
+    
+    /**
+     * ランダムな整数を返す
+     */
+    static getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
 }

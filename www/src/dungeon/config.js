@@ -20,3 +20,5 @@ Config.playerItemTotal = 40;//持てる持ち物の上限
 Config.itemListImageHeight = 50;
 Config.itemListImageWidth = 50;
 
+
+
