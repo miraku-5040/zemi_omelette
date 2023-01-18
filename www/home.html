@@ -43,12 +43,12 @@
         <!-- コインの残量 -->
         <div class="least_coin">
             <img class="least_coin_image" src="image/coins.png">
-            <p class="least_dia_coin">20000</p>
+            <p id="money" class="least_dia_coin">0</p>
         </div>
         <!-- ダイヤの残量 -->
         <div class="least_dia">
             <img class="least_dia_image" src="image/diamond.png">
-            <p class="least_dia_text">2000</p>
+            <p id="crystal" class="least_dia_text">0</p>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->
@@ -86,6 +86,11 @@
         <button class="go_town" onclick="goTown()">
             <img class="town_image" src="image/town/gotown.png">
             <p class="town_text">街へ</p>
+        </button>
+
+        <button class="pictoriary" onclick="toPict()">
+            <img class="town_image" src="image/town/gotown.png">
+            <p class="town_text">図鑑</p>
         </button>
 
         <!-- 各画面への遷移ボタン -->

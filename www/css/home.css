@@ -158,7 +158,18 @@
     border: 2px solid rgb(189, 160, 0);
     position: absolute;
     top: 130px;
-    transform: translateX(-0px);
+    transform: translateX(-53px);
+    color: rgb(255, 229, 82);
+    width: 73px;
+    height: 70px;
+}
+
+.pictoriary {
+    background-color: rgb(216, 216, 216);
+    border: 2px solid rgb(189, 160, 0);
+    position: absolute;
+    top: 130px;
+    left: 58px;
     color: rgb(255, 229, 82);
     width: 73px;
     height: 70px;

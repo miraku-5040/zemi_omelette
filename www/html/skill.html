@@ -25,41 +25,65 @@
 </head>
 
 <body onload="soundBGM()">
+    <!-- 背景 -->
     <img class="background_image" src="../image/background/cave.png">
+    <!-- 本の残数 -->
     <div class="least_coin">
         <img class="least_coin_image" src="../image/coins.png">
         <p class="least_dia_coin">2000</p>
     </div>
+
+    <!-- スキル一覧 -->
     <div class="skill_frame">
-        <div class="skill_detail">
+        <div class="skill_detail fire">
             <p class="skill_name">炎のスキル</p>
-            <img class="skill_icon" src="../image/skill/fire_skill_icon.png">
             <p class="skill_level">Lv.10</p>
-            <button class="skill_power_up">強化</button>
+            <button class="skill_power_up"><p class="skill_power_up_text">強化</p></button>
         </div>
 
-        <div class="skill_detail">
+        <div class="skill_detail water">
             <p class="skill_name">水のスキル</p>
-            <img class="skill_icon" src="../image/skill/water_skill_icon.png">
             <p class="skill_level">Lv.10</p>
-            <button class="skill_power_up">強化</button>
+            <button class="skill_power_up"><p class="skill_power_up_text">強化</p></button>
         </div>
 
-        <div class="skill_detail">
+        <div class="skill_detail ice">
             <p class="skill_name">氷のスキル</p>
-            <img class="skill_icon" src="../image/skill/ice_skill_icon.png">
             <p class="skill_level">Lv.10</p>
-            <button class="skill_power_up">強化</button>
+            <button class="skill_power_up"><p class="skill_power_up_text">強化</p></button>
         </div>
 
-        <div class="skill_detail">
-            <p class="skill_name">雷のスキル</p>
-            <img class="skill_icon" src="../image/skill/thunder_skill_icon.png">
+        <div class="skill_detail wind">
+            <p class="skill_name">風のスキル</p>
             <p class="skill_level">Lv.10</p>
-            <button class="skill_power_up">強化</button>
+            <button class="skill_power_up"><p class="skill_power_up_text">強化</p></button>
+        </div>
+
+        <div class="skill_detail thunder">
+            <p class="skill_name">雷のスキル</p>
+            <p class="skill_level">Lv.10</p>
+            <button class="skill_power_up"><p class="skill_power_up_text">強化</p></button>
+        </div>
+
+        <div class="skill_detail light">
+            <p class="skill_name">光のスキル</p>
+            <p class="skill_level">Lv.10</p>
+            <button class="skill_power_up"><p class="skill_power_up_text">強化</p></button>
+        </div>
+
+        <div class="skill_detail dark">
+            <p class="skill_name">闇のスキル</p>
+            <p class="skill_level">Lv.10</p>
+            <button class="skill_power_up"><p class="skill_power_up_text">強化</p></button>
+        </div>
+
+        <div class="skill_detail question">
+            <p class="skill_name">???のスキル</p>
+            <p class="skill_level">未開放</p>
         </div>
     </div>
 
+    <!-- 強化方法選択画面へ戻るボタン -->
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toPower()">←</button>
 </body>
