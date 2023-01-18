@@ -25,7 +25,7 @@
     </script>
 </head>
 
-<body onload="soundBGM();getShorteCharacterData()">
+<body onload="soundBGM();getShorteCharacterData();getCrystalCount()">
     <img class="background_image" src="../image/background/cave.png">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
@@ -48,7 +48,7 @@
     <!-- ダイヤの残量 -->
     <div class="least_dia">
         <img class="least_dia_image" src="../image/diamond.png">
-        <p class="least_dia_text">2000</p>
+        <p id="crystal" class="least_dia_text">0</p>
     </div>
     <!-- ガチャ画面の表示 -->
     <div data-role="page" id="gatya" data-role="content">
@@ -59,14 +59,14 @@
                 <div class="gatya_button_frame"></div>
                 <div class="dia_frame">
                 <img class="dia_frame_image" src="../image/diamond.png">
-                <p class="dia_frame_text">×10</p>
+                <p class="dia_frame_text">×20</p>
                 </div>
                 </button>
             <button class="pull" onclick="modalOpen10()">10連
                 <div class="gatya_button_frame"></div>
                 <div class="dia_frame">
                 <img class="dia_frame_image" src="../image/diamond.png">
-                <p class="dia_frame_text">×100</p>
+                <p class="dia_frame_text">×200</p>
                 </div>
             </button>
         </div>

@@ -7,38 +7,43 @@
 
 /* スキル画面の枠 */
 .skill_frame {
-    display: flex;
-    gap: 33px;
     margin: 30px 30px;
     position: absolute;
     top: 30px;
+    left: 20px;
+    width: 560px;
+    height: 280px;
 }
 
 /* 個別のスキル */
 .skill_detail {
-    text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
+    font-size: 15px;
     color: white;
+    width: 170px;
+    height: 60px;
     border: solid rgb(189, 160, 0);
-    background-color: rgba(0,0,0,0.3);
-    padding: 0px 12px;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .skill_icon {
     position: relative;
     transform: translateY(-10px);
+    width: 50px;
+    height: 50px;
 }
 
 .skill_name {
     position: relative;
-    left: 2px;
+    transform: translateY(-5px);
+    left: 15px;
 }
 
 .skill_level {
     position: relative;
-    transform: translateY(-25px);
-    left: 1px;
+    transform: translateY(-20px);
+    left: 35px;
 }
 
 /* 強化ボタン */
@@ -50,13 +55,75 @@
     border-left: 6px solid rgb(255, 225, 52);
     border-radius: 0;
     color: black;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bold;
     position: relative;
-    transform: translateY(-25px);
-    left: 2px;
-    width: 80px;
+    transform: translateY(-75px);
+    left: 100px;
+    width: 60px;
     height: 40px;
+}
+
+.skill_power_up_text {
+    position: relative;
+    transform: translateY(-6px);
+}
+
+/* 各スキルの位置 */
+.fire {
+    color: red;
+    position: absolute;
+    top: 5px;
+    transform: translateX(-20px);
+}
+
+.water {
+    color: rgb(101, 101, 255);
+    position: absolute;
+    top: 80px;
+    transform: translateX(-20px);
+}
+
+.ice {
+    color: rgb(0, 225, 255);
+    position: absolute;
+    top: 155px;
+    transform: translateX(-20px);
+}
+
+.wind {
+    color: greenyellow;
+    position: absolute;
+    top: 230px;
+    transform: translateX(-20px);
+}
+
+.thunder {
+    color: rgb(212, 0, 212);
+    position: absolute;
+    top: 7px;
+    left: 420px;
+}
+
+.light {
+    color: white;
+    position: absolute;
+    top: 82px;
+    left: 420px;
+}
+
+.dark {
+    color: rgb(108, 108, 108);
+    position: absolute;
+    top: 157px;
+    left: 420px;
+}
+
+.question {
+    color: rgb(194, 194, 194);
+    position: absolute;
+    top: 232px;
+    left: 420px;
 }
 
 /* 戻るボタン */

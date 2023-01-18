@@ -55,10 +55,10 @@ body {
 
 /* 商品の画像 */
 .item {
-    border: 1px solid gold;
+    border: 3px solid gold;
     background-color: white;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
 }
 
 /* 使用するコイン量 */

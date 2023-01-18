@@ -89,6 +89,10 @@ function getCharacterData() {
         // Exp入れ替え
         document.getElementById("exp_text").innerHTML = character.character_exp + '/1000';
         document.getElementById("exp_ber").value = character.character_exp;
+        // コイン入れ替え
+        document.getElementById("money").innerHTML = character.money;
+        // 水晶入れ替え
+        document.getElementById("crystal").innerHTML = character.crystal;
         // 攻撃力入れ替え
         document.getElementById("attack").innerHTML = '攻撃力：' + character.character_attack;
         // 回避率入れ替え
@@ -127,6 +131,44 @@ function getShorteCharacterData() {
     }
 }
 
+// コイン所持数表示
+function getMoneyCount() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            setCharacterData(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // コイン情報をHTMLに埋め込む
+    function setCharacterData(results) {
+        var character = results[0];
+        document.getElementById("money").innerHTML = character.money;
+    }
+}
+
+// 水晶所持数表示
+function getCrystalCount() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            setCharacterData(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // 水晶情報をHTMLに埋め込む
+    function setCharacterData(results) {
+        var character = results[0];
+        document.getElementById("crystal").innerHTML = character.crystal;
+    }
+}
+
 // 通知情報取得
 function getNoticeData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
@@ -152,4 +194,17 @@ function getNoticeData() {
             document.getElementById("notice_body").insertAdjacentHTML('beforeend', noticeHtml);
         }
     }
+}
+
+// スキル機能
+function updateSkillData() {
+    // スキルのレベルを上げる
+    // 書物冊数を減らす
+    // 画面更新
+}
+
+// ショップ(アイテム)機能
+function updateItemData() {
+    // アイテム追加
+    // コイン減少
 }

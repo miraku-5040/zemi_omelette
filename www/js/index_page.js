@@ -5,6 +5,13 @@ function goTown() {
     setTimeout('window.location.href = "html/town.html"', 600);
 }
 
+function toPict() {
+    // 音声再生
+    go_sound();
+    // 図鑑画面へ遷移
+    setTimeout('window.location.href = "html/pictoriary.html"', 600);
+}
+
 function toHome() {
     // 音声再生
     go_sound();
