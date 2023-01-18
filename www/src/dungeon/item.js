@@ -54,7 +54,7 @@ class Item{
     static screenRenderingOne(indexX, indexY) {
         const itemLayerElement = document.getElementById("item_layer");
         const imgElement = Image.getDropItemImage(0);
-        imgElement.id = indexX+"_"+indexY;
+        imgElement.id = 'item_'+indexX+"_"+indexY;
         imgElement.style.top = indexY * Config.stageImgHeight + "px";
         imgElement.style.left = indexX * Config.stageImgWidth + "px";
         itemLayerElement.appendChild(imgElement);
@@ -172,7 +172,7 @@ class Item{
 
     /* アイテムの画像をフィールドから消す */
     static itemImageRemove(x,y){
-        document.getElementById(x+"_"+y).remove();
+        document.getElementById('item_'+x+"_"+y).remove();
     }
 
 

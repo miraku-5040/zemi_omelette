@@ -20,12 +20,12 @@ class Trap{
         this.trapArray[10][14] = {
             trapId: 'T0000',//アイテムID
             trapName: '階段',
-            stepFlg: true
+            hideFlg: false
             }
         this.trapArray[6][10] = {
             trapId: 'T0001',//アイテムID
             trapName: '地雷',
-            stepFlg: false
+            hideFlg: true
             }
         this.trapIdArray.push('T0000');
         this.trapIdArray.push('T0001');
@@ -47,8 +47,10 @@ class Trap{
     static screenRenderingOne(indexX, indexY) {
         const itemLayerElement = document.getElementById("trap_layer");
         const imgElement = Image.getTrapImage(this.trapArray[indexY][indexX].trapId)
-        imgElement.id = indexX+"_"+indexY;
-        imgElement.display = 'none'
+        imgElement.id = 'trap_'+indexX+"_"+indexY;
+        if(this.trapArray[indexY][indexX].hideFlg){
+            imgElement.style.display = 'none';
+        }
         imgElement.style.top = indexY * Config.stageImgHeight + "px";
         imgElement.style.left = indexX * Config.stageImgWidth + "px";
         itemLayerElement.appendChild(imgElement);
@@ -58,6 +60,8 @@ class Trap{
         if(this.trapArray[y][x] === this.noDataItem){
             return false
         }
+        this.trapArray[y][x].hideFlg = false
+        document.getElementById('trap_'+x+"_"+y).style.display = 'inline';
         this.underTrap = this.trapArray[y][x]
         return true
     }
@@ -67,6 +71,7 @@ class Trap{
             return 'nextfloor'
         }
         //その他トラップ発動
+        //TODO
         return 'enemy'
     }
 

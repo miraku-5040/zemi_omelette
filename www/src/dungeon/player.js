@@ -115,10 +115,6 @@ class Player{
         default:
             return 'player';
         }
-        
-        //return 'attack';
-        //return 'item';
-        //return 'menu';
 
     }
     /**
@@ -185,6 +181,7 @@ class Player{
     }
 
     /*static resetCharacterPosition(){
+        //最初の地点決定
         this.playerStatus.now.x = 9
         this.playerStatus.now.y = 6
         this.playerStatus.next.x = this.playerStatus.now.x
