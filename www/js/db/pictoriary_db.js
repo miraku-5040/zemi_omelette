@@ -95,7 +95,6 @@ function getPictorialItemData() {
     var Item = ncmb.DataStore(this.ITEM_DB);
     Item.fetchAll()
         .then(function (results) {
-            console.log(results);
             setItemImage(results);
         })
         .catch(function (err) {

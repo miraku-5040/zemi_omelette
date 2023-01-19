@@ -68,17 +68,18 @@ function getSoloPowerWeaponData() {
         .catch(function (err) {
             console.log(err);
         });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setDecorationImage(results) {
-    var weapon = results[0];
-    document.getElementById("powerUpWeapon").src = weapon.weapon_image;
-    document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
-    document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
-    document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
-    document.getElementById("power_ber").value = weapon.weapon_exp;
-    document.getElementById("power_ber").low = weapon.weapon_exp;
-    document.getElementById("exp_text").innerHTML = weapon.weapon_exp + "/1000";
+
+    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    function setDecorationImage(results) {
+        var weapon = results[0];
+        document.getElementById("powerUpWeapon").src = weapon.weapon_image;
+        document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
+        document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
+        document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
+        document.getElementById("power_ber").value = weapon.weapon_exp;
+        document.getElementById("power_ber").low = weapon.weapon_exp;
+        document.getElementById("exp_text").innerHTML = weapon.weapon_exp + "/1000";
+    }
 }
 
 // 1件分の武器情報取得(進化)
@@ -105,7 +106,6 @@ function getSoloEvoWeaponData() {
 
     // 武器の画像(仮)とレベルをHTMLに埋め込む
     function setDecorationImage(results) {
-        console.log(results);
         var weapon = results[0];
         document.getElementById("powerUpWeapon").src = weapon.weapon_image;
         document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
