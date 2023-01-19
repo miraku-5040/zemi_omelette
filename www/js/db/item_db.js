@@ -58,7 +58,7 @@ function getSoloItemData(element) {
     }
 }
 
-// アイテム残数更新
+// アイテム残数更新(強化)
 function updateItemSum() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -97,6 +97,24 @@ function updateItemSum() {
                 .catch(function (err) {
                     console.log(err);
                 });
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// アイテム残数更新(進化)
+function updateEvoItemSum() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    let element = document.getElementById('counter1');
+    var remaining = Number(element.max) - Number(element.value);
+    Item.equalTo("item_id", 9)
+        .fetch()
+        .then(function (results) {
+            console.log(results);
+            results.set("sum", Number(remaining));
+            results.update();
         })
         .catch(function (err) {
             console.log(err);
@@ -148,7 +166,6 @@ function getEvoItemSum() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     Item.equalTo("item_id", 9)
-        .order("item_id", false)
         .fetchAll()
         .then(function (results) {
             setItemImage(results);
@@ -164,7 +181,7 @@ function getEvoItemSum() {
         // 情報取得
         var item = results[0];
         // 新しいHTML要素を作成
-        var itemHtml = '';
+        var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/ssr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p><div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="evoCountDown()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counterEvo" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus"onclick="evoCountUp()"><p class="count_button_text">＋</p></button> </div></div>';
         // 作成した要素を追加
         document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
     }

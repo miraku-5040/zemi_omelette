@@ -15,6 +15,11 @@ function countDown1() {
             var result = String(str.textContent).slice(4, 6);
             result = Number(result) - 1;
             document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) - 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
@@ -38,6 +43,11 @@ function countDownMore1() {
     // 経験値のテキスト変更
     document.getElementById("exp_text").innerHTML = Number(number % 1000) + "/1000";
     ber.value = Number(number % 1000);
+    // 攻撃力を更新
+    str = document.getElementById('weaponAttack');
+    var attack = String(str.textContent).slice(4);
+    attack = Number(attack) - (10 * result);
+    document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
 }
 
 // カウントアップjs
@@ -58,6 +68,11 @@ function countUp1() {
             var result = String(str.textContent).slice(4, 6);
             result = Number(result) + 1;
             document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) + 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
@@ -98,6 +113,11 @@ function countDown2() {
             var result = String(str.textContent).slice(4, 6);
             result = Number(result) - 1;
             document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) - 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
@@ -140,6 +160,11 @@ function countUp2() {
             var result = String(str.textContent).slice(4, 6);
             result = Number(result) + 1;
             document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) + 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
@@ -179,6 +204,11 @@ function countDown3() {
             var result = String(str.textContent).slice(4, 6);
             result = Number(result) - 1;
             document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) - 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
@@ -221,6 +251,11 @@ function countUp3() {
             var result = String(str.textContent).slice(4, 6);
             result = Number(result) + 1;
             document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) + 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }

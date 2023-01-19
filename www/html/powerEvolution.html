@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../css/powerEvolution.css">
 </head>
 
-<body onload="soundBGM();getSoloEvoWeaponData()">
+<body onload="soundBGM();getSoloEvoWeaponData();getEvoItemSum()">
     <img class="background_image" src="../image/background/cave.png">
     <!-- 装備画面の表示 -->
     <!-- 強化対象装備 -->
@@ -33,7 +33,7 @@
     <div class="power_target_text">
         <h3 id="weaponName">&lt;ソード&gt;</h3>
         <p id="weaponLevel">レベル：50/100</p>
-        <p id="weaponAttack">総合力：10000</p>
+        <p id="weaponAttack">攻撃力：10000</p>
     </div>
 
     <div class="decition_buttons">
@@ -43,11 +43,7 @@
 
     <!-- 進化用アイテム一覧 -->
     <div class="item_frame" id="item_frame">
-        <div class="power_for_item"><img class="power_for_item_image" src="../image/item/ssr_powerItem.png">
-            <p class="power_for_item_text">' + item.item_name + '</p>
-            <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="evoCountDown()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counterEvo" value="0" max="5"><button class="power_for_item_count_plus"
-                    onclick="evoCountUp()"><p class="count_button_text">＋</p></button> </div>
-        </div>
+        
     </div>
 
     <!-- 進化確認用のモーダルウィンドウ -->

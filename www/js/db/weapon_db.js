@@ -75,7 +75,7 @@ function getSoloPowerWeaponData() {
         document.getElementById("powerUpWeapon").src = weapon.weapon_image;
         document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
         document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
-        document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + weapon.weapon_attack;
         document.getElementById("power_ber").value = weapon.weapon_exp;
         document.getElementById("power_ber").low = weapon.weapon_exp;
         document.getElementById("exp_text").innerHTML = weapon.weapon_exp + "/1000";
@@ -110,7 +110,7 @@ function getSoloEvoWeaponData() {
         document.getElementById("powerUpWeapon").src = weapon.weapon_image;
         document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
         document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
-        document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + weapon.weapon_attack;
         document.getElementById("power_ber").value = weapon.overlap;
         document.getElementById("power_ber").low = weapon.overlap;
         document.getElementById("power_ber").max = 5;
@@ -165,7 +165,7 @@ function updateWeaponEvolution() {
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
     var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     // 進化のアイテム数取得
-    var usedWeapon = Number(document.getElementById("power_ber").value) - Number(document.getElementById("power_ber").low);
+    var usedItem = Number(document.getElementById("counterEvo").value);
     // 進化対象の武器を取得
     LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetch()
@@ -177,26 +177,15 @@ function updateWeaponEvolution() {
                     // ↓取れない
                     console.log(weapon.overlap);
                     console.log(Number(weapon.overlap) + Number(usedWeapon));
-                    results.set("overlap", Number(results.overlap) + Number(usedWeapon));
+                    results.set("overlap", Number(results.overlap) + Number(usedItem));
                     results.update();
                     console.log("sinka:ok");
                     EvolutionSuccsess();
+                    updateEvoItemSum();
                 })
                 .catch(function (err) {
                     console.log("sinka:ng");
                 });
-
-            // 使用した武器を削除(冬休み後作成)
-            // Weapon.equalTo("weapon_name", weapon.weapon_name)
-            //     .limit(usedWeapon)
-            //     .order("weapon_id", true)
-            //     .fetchAll()
-            //     .then(function (results) {
-            //         results.delete();
-            //     })
-            //     .catch(function (err) {
-            //         console.log(err);
-            //     });
         })
         .catch(function (err) {
             console.log(err);

@@ -6,6 +6,7 @@ var CHARACTER_DB = "character";
 var NOTICE_DB = "notice";
 var PRESENT_DB = "present";
 var ITEM_DB = "item";
+var SKILL_DB = "skill";
 
 // プレゼントデータ取得
 function getPresentData() {
@@ -197,10 +198,59 @@ function getNoticeData() {
 }
 
 // スキル機能
-function updateSkillData() {
+function updateSkillData(skill) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    var Skill = ncmb.DataStore(this.SKILL_DB);
     // スキルのレベルを上げる
+    Skill.equalTo("skill_name", skill)
+        .fetch()
+        .then(function (results) {
+            console.log(results);
+            var skill_level = results[0];
+            results.set("sum", Number(skill_level.sum) + 1);
+            results.update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
     // 書物冊数を減らす
+    Item.equalTo("item_id", 9)
+        .fetch()
+        .then(function (results) {
+            console.log(results);
+            var item = results[0];
+            results.set("sum", Number(item.sum) - 1);
+            results.update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
     // 画面更新
+    setTimeout('window.location.href = "skill.html"', 600);
+}
+
+function getskillItemData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    Item.equalTo("item_id", 9)
+        .fetchAll()
+        .then(function (results) {
+            setItemText(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // 通知の題名と文章をHTMLに埋め込む
+    function setItemText(results) {
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            var item = results[i];
+            // 作成した要素を追加
+            document.getElementById("skill_item").innerHTML = item.sum;
+        }
+    }
 }
 
 // ショップ(アイテム)機能
