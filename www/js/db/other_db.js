@@ -52,7 +52,7 @@ function getSoloPresentData(element) {
                 .then(function (results) {
                     var item = results[0];
                     console.log(Number(item.sum) + Number(item_count));
-                    // ↓更新が出来ない(その一)
+                    // ↓更新が出来ない
                     results.set("sum", Number(item.sum) + Number(item_count))
                         .update();
                     console.log("ok");
