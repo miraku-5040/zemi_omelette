@@ -10,6 +10,8 @@ let frame; // ゲームの現在フレーム（1/60秒ごとに1追加される�
 let turn; // ゲームの現在ターン数
 
 function initialize() {
+    //DBを準備する
+    Database.initialize();
     // 画像を準備する
     Image.initialize();
     //プレイヤーの準備

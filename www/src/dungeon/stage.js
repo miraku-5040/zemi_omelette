@@ -31,9 +31,9 @@ class Stage {
             maxTrap:5
         };
         //ステージに出現する全オブジェクトを格納する領域を生成する
-        this.popEnemy = []
-        this.popItem = []
-        this.popTrap = []
+        this.popEnemyArray = []
+        this.popItemArray = []
+        this.popTrapArray = []
         //ステージを作成する
         this.createStage()
         
@@ -59,11 +59,12 @@ class Stage {
                     
                     possiblePositions.push({y:indexY,
                     x:indexX})
+                    
             });
         });
-        const selectIndex = Tool.getRandomInt(possiblePositions.length)
+        let selectIndex = Tool.getRandomInt(possiblePositions.length)
         //配置可能座標にキャラクターを配置
-        const selectPosition =possiblePositions[selectIndex]
+        let selectPosition =possiblePositions[selectIndex]
         //座標が重複しないように候補から削除
         possiblePositions.splice(selectIndex, 1)
         //キャラクターの座標に応じたレイヤーの座標を決定
@@ -75,18 +76,18 @@ class Stage {
         //プレイヤーの現在座標をセットする
         Player.resetCharacterPosition(selectPosition.x,selectPosition.y)
 
-
         //敵を最大ポップ数生成
-        for(let i; i < this.stageStatus.maxEnemy; i++){
+        for(let i = 0; i < this.stageStatus.maxEnemy; i++){
             //配置可能座標からランダムに座標を取得
-            selectIndex = Tool.getRandomInt(this.possiblePositions.length)
-            selectPosition = this.possiblePositions[selectIndex]
-            this.possiblePositions.splice(selectIndex, 1)
+            selectIndex = Tool.getRandomInt(possiblePositions.length)
+            selectPosition = possiblePositions[selectIndex]
+            possiblePositions.splice(selectIndex, 1)
             //ランダムにenemiyIDを取得
             const enemyId = this.stageStatus.enemyArray[Tool.getRandomInt(this.stageStatus.enemyArray.length)]
-            const enemyInfo ={enemyId: enemyId, position:selectPosition}
-            this.popEnemy.push(enemyInfo)
+            const enemyInfo ={id: enemyId, position:selectPosition}
+            this.popEnemyArray.push(enemyInfo)
         }
+        
         //アイテム生成
         //トラップ生成
     }
@@ -107,15 +108,15 @@ class Stage {
     }
 
     static popEnemy(){
-        return Tool.deepCopy(this.popEnemy)
+        return Tool.deepCopy(this.popEnemyArray)
     }
 
     static popItem(){
-        return Tool.deepCopy(this.popItem)
+        return Tool.deepCopy(this.popItemArray)
     }
 
     static popTrap(){
-        return Tool.deepCopy(this.popTrap)
+        return Tool.deepCopy(this.popTrapArray)
     }
 
     /**

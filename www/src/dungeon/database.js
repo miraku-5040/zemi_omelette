@@ -8,6 +8,7 @@ class Database{
 
     /* 初期化 */
     static initialize(){
+        this.enemyCount = 0
         //this.ncmb = new NCMB(this.applicationKey, this.clientKey);
     }
 
@@ -30,5 +31,26 @@ class Database{
     static getPlayer(id = NaN){
         let playerData = {};
         return playerData;
+    }
+
+    static getEnemy(id = NaN){
+        this.enemyCount += 1
+        const enemyData = {
+            enemyId:'E0001', //モンスターID
+            enemyName:"スライム",//名前
+            level: 1, //レベル
+            distinction: this.enemyCount,//同モンスターの重複番号
+            direction:"down",
+            hp:{current:10, max:999, min:0}, 
+            atk: {current: 2,max: 200 , min: 0},//攻撃力
+            def: {current: 1,max: 2 , min: 0},//防御力
+            cri: {current: 0.05,max: 0.25 , min: 0},//会心率
+            avd: {current: 0.01,max: 0.05 , min: 0},//回避率
+            dex: {current: 1,max: 100 , min: 0.5},//命中率 
+            exp: 2,//基礎経験値
+            size:1//モンスターの使用ます
+            };
+        
+        return enemyData
     }
 }

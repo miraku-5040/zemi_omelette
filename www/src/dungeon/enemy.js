@@ -39,24 +39,13 @@ class Enemy{
 
     /* 階開始の処理 */
     static startFloor(){
-        /* 開発用にデータをセットする */
-        //x=5, y=5に敵をセット
-        this.enemyStatusArray[5][5] = {
-            enemyId:'E0001', //モンスターID
-            enemyName:"スライム",//名前
-            level: 1, //レベル
-            distinction:2,//同モンスターの重複番号
-            direction:"down",
-            hp:{current:10, max:999, min:0}, 
-            atk: {current: 2,max: 200 , min: 0},//攻撃力
-            def: {current: 1,max: 2 , min: 0},//防御力
-            cri: {current: 0.05,max: 0.25 , min: 0},//会心率
-            avd: {current: 0.01,max: 0.05 , min: 0},//回避率
-            dex: {current: 1,max: 100 , min: 0.5},//命中率 
-            exp: 2,//基礎経験値
-            size:1//モンスターの使用ます
-            };
-        this.enemyIdArray.push('E0001');
+
+        const generateEnemyArray = Stage.popEnemy()
+        generateEnemyArray.forEach((enemy) => {
+            this.enemyStatusArray[enemy.position.y][enemy.position.x] = Database.getEnemy(enemy.id)
+            this.enemyIdArray.push(enemy.id);
+        });
+        
         //Imageでenemyの画像を読み込む
         Image.createEnemyImages(this.enemyIdArray);
         /* end */
@@ -86,46 +75,6 @@ class Enemy{
         enemyLayerElement.appendChild(imgElement);
     }
 
-    /* 移動先設定 */
-    static updateNextMove() {
-        /* 開発用に上下に動くようにする */
-        this.enemyStatusArray.forEach((col, indexY) => {
-            col.forEach((element, indexX) => {
-                if(element === this.noDataItem){
-                    return;
-                }
-                let next = {};
-                /* move */
-                next.type = 'move';
-                if(this.checkAround(indexX,indexY)){
-                    next.x = indexX;
-                    next.y = indexY;
-                    element.next = next;
-                    return;
-                }
-                const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
-                if(result == "TypeError"){
-                    next.x = indexX;
-                    next.y = indexY;
-                    element.next = next;
-                    return;
-                }else{
-                    next.x = result.x;
-                    next.y = result.y;
-                    element.next = next;
-                    return;
-                }
-
-                /* attack */
-                //next.type = "attack";
-                //element.next = next;
-                // TODO 処理を追加する
-                    
-            });
-        });
-        /* end */
-    }
-
     /* 敵行動 */
     static action(){
         this.updateNextMove(); //次の行動(移動先)を設定
@@ -152,6 +101,52 @@ class Enemy{
         this.enemyStatusArray = JSON.parse(JSON.stringify(this.tempEnemyStatusArray)); //ディープコピー
         this.tempEnemyStatusArray.forEach((element) => element.fill(this.noDataItem)); //一時配列を初期化
     }
+
+    /* 移動先設定 */
+    static updateNextMove() {
+        this.enemyStatusArray.forEach((col, indexY) => {
+            col.forEach((element, indexX) => {
+                if(element === this.noDataItem){
+                    return;
+                }
+                let next = {};
+                /* move */
+                next.type = 'move';
+                if(this.checkAround(indexX,indexY)){
+                    next.x = indexX;
+                    next.y = indexY;
+                    element.next = next;
+                    return;
+                }
+                const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
+                if(result == "TypeError"){
+                    next.x = indexX;
+                    next.y = indexY;
+                    element.next = next;
+                    return;
+                }
+                if(this.checkEnemy(result.x,result.y)){
+                    next.x = indexX;
+                    next.y = indexY;
+                    element.next = next;
+                    return;
+                }
+                next.x = result.x;
+                next.y = result.y;
+                element.next = next;
+                return;
+
+                /* attack */
+                //next.type = "attack";
+                //element.next = next;
+                // TODO 処理を追加する
+                    
+            });
+        });
+        /* end */
+    }
+
+    
 
     /* 敵移動 */
     static moving(currentX, currentY){
@@ -194,6 +189,7 @@ class Enemy{
                     //プレイヤーがいる
                     return true;
                 }
+
             }
         }
         //いない
