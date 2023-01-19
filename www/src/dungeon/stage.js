@@ -20,7 +20,7 @@ class Stage {
         this.stageLayerElement = stageLayerElement; //new
 
         //ステージの情報をDBから取得する
-        this.Stage = {
+        this.stageStatus = {
             stageName: '始まりの遺跡',
             bottomFloor: 4,
             enemyArray: ['E0001'],
@@ -30,6 +30,10 @@ class Stage {
             trapArray: ['T0001'],
             maxTrap:5
         };
+        //ステージに出現する全オブジェクトを格納する領域を生成する
+        this.popEnemy = []
+        this.popItem = []
+        this.popTrap = []
         //ステージを作成する
         this.createStage()
         
@@ -70,6 +74,21 @@ class Stage {
         this.movingLayersElement = movingLayersElement;
         //プレイヤーの現在座標をセットする
         Player.resetCharacterPosition(selectPosition.x,selectPosition.y)
+
+
+        //敵を最大ポップ数生成
+        for(let i; i < this.stageStatus.maxEnemy; i++){
+            //配置可能座標からランダムに座標を取得
+            selectIndex = Tool.getRandomInt(this.possiblePositions.length)
+            selectPosition = this.possiblePositions[selectIndex]
+            this.possiblePositions.splice(selectIndex, 1)
+            //ランダムにenemiyIDを取得
+            const enemyId = this.stageStatus.enemyArray[Tool.getRandomInt(this.stageStatus.enemyArray.length)]
+            const enemyInfo ={enemyId: enemyId, position:selectPosition}
+            this.popEnemy.push(enemyInfo)
+        }
+        //アイテム生成
+        //トラップ生成
     }
     /**
      * ステージ画像や画像番号をステージの2次元配列に格納する
@@ -85,6 +104,18 @@ class Stage {
             stageImageNumber: stageImageNumber,
             element: stageImage
         }
+    }
+
+    static popEnemy(){
+        return Tool.deepCopy(this.popEnemy)
+    }
+
+    static popItem(){
+        return Tool.deepCopy(this.popItem)
+    }
+
+    static popTrap(){
+        return Tool.deepCopy(this.popTrap)
     }
 
     /**

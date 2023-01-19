@@ -20,10 +20,10 @@ function initialize() {
     Enemy.initialize();
     //アイテムの準備
     Item.initialize();
+     //トラップの準備
+    Trap.initialize();
     //スキルの準備
     Skill.initialize();
-    //トラップの準備
-    Trap.initialize();
     //コントローラを準備する
     Control.initialize();
     // 開始フラグ
