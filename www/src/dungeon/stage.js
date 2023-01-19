@@ -2,25 +2,35 @@ class Stage {
 
     static movingLayersElement;
     static stageLayerElement;
-
+    /*
+    
+    
+    */
     static initialize() {
-        // HTML からステージの元となる要素を取得し、大きさを設定する
-        //キャラ移動用のステージの座標
-        //ステージクリエイトで変更
-        this.stageStatusTop = 3; //開発用
-        this.stageStatusLeft = 7; //開発用
+        //ステージの基準座標を決める。（キャラクターの位置と同じ
         const startingPointElement = document.getElementById(`starting_point`);
-        startingPointElement.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
-        startingPointElement.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
+        startingPointElement.style.top = Config.playerReferencePointTop * Config.stageImgHeight + "px";
+        startingPointElement.style.left = Config.playerReferencePointLeft * Config.stageImgWidth + "px";
         startingPointElement.style.position = 'absolute';
 
+        //ステージ全体の大きさを作成する
         const stageLayerElement = document.getElementById("stage_layer");
         stageLayerElement.style.width = Config.stageImgWidth * Config.stageCols + 'px';
         stageLayerElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
-        this.stageElement = stageLayerElement; //old
         this.stageLayerElement = stageLayerElement; //new
 
-
+        //ステージの情報をDBから取得する
+        this.Stage = {
+            stageName: '始まりの遺跡',
+            bottomFloor: 4,
+            enemyArray: ['E0001'],
+            maxEnemy: 5,
+            itemArray: ['IW000','IS000','IT000'],
+            maxItem: 3,
+            trapArray: ['T0001'],
+            maxTrap:5
+        };
+        //ステージを作成する
         this.createStage()
         
 
@@ -48,14 +58,17 @@ class Stage {
             });
         });
         const selectIndex = Tool.getRandomInt(possiblePositions.length)
+        //配置可能座標にキャラクターを配置
         const selectPosition =possiblePositions[selectIndex]
+        //座標が重複しないように候補から削除
         possiblePositions.splice(selectIndex, 1)
-
+        //キャラクターの座標に応じたレイヤーの座標を決定
         const movingLayersElement = document.getElementById(`moving_layers`);
         movingLayersElement.style.top = -selectPosition.y * Config.stageImgHeight + "px"; 
         movingLayersElement.style.left = -selectPosition.x * Config.stageImgWidth + "px"; 
         movingLayersElement.style.position = 'absolute';
         this.movingLayersElement = movingLayersElement;
+        //プレイヤーの現在座標をセットする
         Player.resetCharacterPosition(selectPosition.x,selectPosition.y)
     }
     /**

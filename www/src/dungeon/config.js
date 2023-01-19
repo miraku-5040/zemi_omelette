@@ -1,6 +1,10 @@
 // 設定を記載しておくクラス
 class Config {
 }
+
+Config.playerReferencePointTop = 3
+Config.playerReferencePointLeft = 7
+
 Config.stageImgWidth = 53; //横ひとマス
 Config.stageImgHeight = 53;//縦ひとマス
 

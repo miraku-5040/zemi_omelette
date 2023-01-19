@@ -107,8 +107,7 @@ function loop() {
             mode = 'player';
             break;
         case 'nextfloor':
-            //ランダム生成
-            //プレイヤーの現在地の更新
+            Stage.createStage()
             //アイテム生成
             //トラップ生成
             //敵の生成
