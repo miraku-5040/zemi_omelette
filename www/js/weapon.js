@@ -244,6 +244,33 @@ function countUpMore3() {
     ber.value = Number(Math.abs(number) % 1000);
 }
 
+// カウンター(進化)
+// カウントアップ
+function evoCountUp() {
+    let element = document.getElementById('counterEvo');
+    let countNumber = Number(element.value);
+    if (countNumber < element.max) {
+        element.value = countNumber + 1;
+        // 重ね合わせ数増加
+        element = document.getElementById('power_ber');
+        element.value = Number(element.value) + 1;
+        document.getElementById("overlap_text").innerHTML = element.value + "/5";
+    }
+}
+
+// カウントダウン
+function evoCountDown() {
+    let element = document.getElementById('counterEvo');
+    let countNumber = Number(element.value);
+    if (countNumber > 0) {
+        element.value = countNumber - 1;
+        // 重ね合わせ数減少
+        element = document.getElementById('power_ber');
+        element.value = Number(element.value) - 1;
+        document.getElementById("overlap_text").innerHTML = element.value + "/5";
+    }
+}
+
 // 武器選択js
 function selected(element) {
     // 枠の色を変更する

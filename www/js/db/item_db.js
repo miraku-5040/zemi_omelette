@@ -103,7 +103,7 @@ function updateItemSum() {
         });
 }
 
-// アイテム残数取得
+// アイテム残数取得(強化)
 function getItemSum() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -116,6 +116,7 @@ function getItemSum() {
             console.log(err);
         });
 }
+
 // アイテムの残数をHTMLに埋め込む
 function setItemImage(results) {
     // 初期化
@@ -140,5 +141,32 @@ function setItemImage(results) {
     var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/ssr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDownMore3()"><p class="count_button_text">&lt;&lt;</p></button><button class="power_for_item_count_minus" onclick="countDown3()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter3" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp3()"><p class="count_button_text">＋</p></button> <button class="power_for_item_count_plus" onclick="countUpMore3()"><p class="count_button_text">&gt&gt;</p></button></div></div>';
     // 作成した要素を追加
     document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
+}
+
+// アイテム残数取得(進化)
+function getEvoItemSum() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    Item.equalTo("item_id", 9)
+        .order("item_id", false)
+        .fetchAll()
+        .then(function (results) {
+            setItemImage(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // アイテムの残数をHTMLに埋め込む
+    function setItemImage(results) {
+        // 初期化
+        document.getElementById("item_frame").innerHTML = '';
+        // 情報取得
+        var item = results[0];
+        // 新しいHTML要素を作成
+        var itemHtml = '';
+        // 作成した要素を追加
+        document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
+    }
 }
 
