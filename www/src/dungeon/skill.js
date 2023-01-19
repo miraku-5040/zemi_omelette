@@ -154,11 +154,11 @@ class Skill{
             return;
         }
         const nowSkillData = skillData[this.skillDataIndex]; //メインのスキルデータを取得する
-        // TODO scopeで分岐する関数を設定
+        // scopeで分岐する関数を設定
         const scopeUseFunctionMap = this.#scopeBranch(nowSkillData.scope);
         const createTargetCoordinateArrayFunction = scopeUseFunctionMap.get("createTargetCoordinateArray");
         // targetCoordinateArray作成
-        const targetCoordinateArray = createTargetCoordinateArrayFunction(nowSkillData.scope, this.skillUserData.direction);
+        const targetCoordinateArray = createTargetCoordinateArrayFunction(nowSkillData.scope);
         // スキル座標を設定する
         if(skillData.skillId === this.normalAttackId){ //通常攻撃の場合は準備をスキップする
             // skillGoに渡すデータをクラス変数に設定する
@@ -236,12 +236,12 @@ class Skill{
                 switch(true){
                     case (isTargetEnemy):
                         // enemyがターゲットの処理
-                        const enemyStatusFluctuation = calcFunctionFunctionArray[index](this.skillUserData.attackStatus, enemyDefenceStatus);
+                        const enemyStatusFluctuation = calcFunctionFunctionArray[index](effectData, enemyDefenceStatus);
                         enemyStatusFluctuationFunctionArray[index](coordinate, enemyStatusFluctuation);
                         break;
                     case (isTargetPlayer):
                         // playerがターゲットの処理
-                        const playerStatusFluctuation = calcFunctionFunctionArray[index](this.skillUserData.attackStatus, playerDefenceStatus);
+                        const playerStatusFluctuation = calcFunctionFunctionArray[index](effectData, playerDefenceStatus);
                         playerStatusFluctuationFunctionArray[index](playerId, playerStatusFluctuation);
                         break;
                     default:
@@ -369,7 +369,7 @@ class Skill{
                     baseCoordinate.y = scopeData.y;
                     if(scopeData.rotation){
                         // 座標回転
-                        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray([baseCoordinate], direction, this.skillUserData.direction);
+                        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray([baseCoordinate], scopeData.direction, this.skillUserData.direction);
                         const relativeCoordinate = this.#convertRelativeToAbsolute(rotatedTargetCoordinateArray[0].x, rotatedTargetCoordinateArray[0].y);
                         baseCoordinate.x = relativeCoordinate.x;
                         baseCoordinate.y = relativeCoordinate.y;
@@ -390,7 +390,7 @@ class Skill{
                 functionMap.set("createTargetCoordinateArray", typeOne);
                 break;
             case "line":
-                const typeLine = (scopeData, direction) => {
+                const typeLine = (scopeData) => {
                     const targetCoordinateArray = [];
                     // 基準点を設定する
                     const baseCoordinate = {};
@@ -398,7 +398,7 @@ class Skill{
                     baseCoordinate.y = scopeData.y;
                     if(scopeData.direction !== this.defaultDirection){
                         // 基準をデフォルトの方向に回転する
-                        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray([baseCoordinate], direction, this.skillUserData.direction);
+                        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray([baseCoordinate], scopeData.direction, this.skillUserData.direction);
                         const relativeCoordinate = this.#convertRelativeToAbsolute(rotatedTargetCoordinateArray[0].x, rotatedTargetCoordinateArray[0].y);
                         baseCoordinate.x = relativeCoordinate.x;
                         baseCoordinate.y = relativeCoordinate.y;
@@ -593,10 +593,12 @@ class Skill{
         const enemyStatusFluctuationFunctionArray = [];
         effect.forEach((effectElement) => {
             switch(effectElement.type){
-                case "normal":
+                case "normal": // 通常攻撃
                     // 計算関数設定
-                    const normalCalc = (attackStatus, defenseStatus) => {
-                        const damage = this.#normalDmaageCalc(attackStatus, defenseStatus);
+                    const normalCalc = (effectData, defenseStatus) => {
+                        const atk = this.skillUserData.attackStatus.atk;
+                        const def = defenseStatus.def;
+                        const damage = this.#normalDamageCalc(atk, def);
                         return {hp:-damage};
                     };
                     calcFunctionArray.push(normalCalc);
@@ -611,9 +613,47 @@ class Skill{
                     };
                     enemyStatusFluctuationFunctionArray.push(normalEnemyStatusFluctuation);
                     break;
-                 case "attack":
-                    // TODO
+                 case "attack": // 物理攻撃
+                    // TODO 計算関数設定
+                    const attackCalc = (effectData, defenseStatus) => {
+                        const level = this.skillUserData.level;
+                        const magnification = effectData.magnification;
+                        const damage = this.#attackDamageCalc(level, magnification);
+                        return {hp:-damage};
+                    };
+                    calcFunctionArray.push(attackCalc);
+                    // ステータス更新関数設定
+                    const attackPlayerStatusFluctuation = (playerId, statusFluctuation) => {
+                        Player.playerHpFluctuation(playerId, statusFluctuation.hp);
+                    };
+                    playerStatusFluctuationFunctionArray.push(attackPlayerStatusFluctuation);
+                    const attackEnemyStatusFluctuation = (coordinate, statusFluctuation) => {
+                        Enemy.enemyHpFluctuation(coordinate.x, coordinate.y, statusFluctuation.hp);
+                    };
+                    enemyStatusFluctuationFunctionArray.push(attackEnemyStatusFluctuation);
                     break;
+                case "magic": // 魔法攻撃
+                    // 計算関数設定
+                    const magicCalc = (effectData, defenseStatus) => {
+                        const atk = this.skillUserData.attackStatus.atk;
+                        const def = defenseStatus.def;
+                        const normalDamage = this.#normalDamageCalc(atk, def);
+                        const constantValue = effectData.constantValue;
+                        const damage = this.#magicDamageCalc(normalDamage, constantValue);
+                        return {hp:-damage};
+                    };
+                    calcFunctionArray.push(magicCalc);
+                    // ステータス更新関数設定
+                    const magicPlayerStatusFluctuation = (playerId, statusFluctuation) => {
+                        Player.playerHpFluctuation(playerId, statusFluctuation.hp);
+                    };
+                    playerStatusFluctuationFunctionArray.push(magicPlayerStatusFluctuation);
+                    const magicEnemyStatusFluctuation = (coordinate, statusFluctuation) => {
+                        Enemy.enemyHpFluctuation(coordinate.x, coordinate.y, statusFluctuation.hp);
+                    };
+                    enemyStatusFluctuationFunctionArray.push(magicEnemyStatusFluctuation);
+                    break;
+                // TODO 種類を追加する
                 default:
                     //エラー
                     calcFunctionArray.push(() => {});
@@ -846,20 +886,26 @@ class Skill{
     }
 
     /*  ダメージ計算 (normal)*/
-    static #normalDmaageCalc(attackStatus, defenseStatus){
+    static #normalDamageCalc(atk, def){
         //攻撃力(*補助系)/２ー守備力(*補助系)/４
-        const damage = attackStatus.atk / 2 - defenseStatus.def / 4;
+        const damage = atk / 2 - def / 4;
         const integerDamage = Math.round(damage); //四捨五入で整数にする
-        // TODO 修正する
         return integerDamage;
     }
+
     /* ダメージ計算 (magic) */
-    static #magicDmaageCalc(){
-        //TODO
+    static #magicDamageCalc(level, constantValue){
+        // レベル * 固定値
+        const damage = level * constantValue;
+        const integerDamage = Math.round(damage); //四捨五入で整数にする
+        return integerDamage;
     }
 
-    /* ダメージ計算 (physics) */
-    static #attackDmaageCalc(){
-        //TODO
+    /* ダメージ計算 (attack) */
+    static #attackDamageCalc(normalDamage ,magnification){
+        // 通常攻撃 * スキル倍率
+        const damage = normalDamage * magnification;
+        const integerDamage = Math.round(damage); //四捨五入で整数にする
+        return integerDamage;
     }
 }
