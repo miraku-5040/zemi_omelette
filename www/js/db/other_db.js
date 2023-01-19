@@ -254,7 +254,30 @@ function getskillItemData() {
 }
 
 // ショップ(アイテム)機能
-function updateItemData() {
+function buy(item) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
     // アイテム追加
+    Item.equalTo("item_id", Number(item))
+        .fetch()
+        .then(function (results) {
+            var item = results[0];
+            results.set("sum", Number(item.sum) + 1);
+            results.update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
     // コイン減少
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results.set("money", Number(item.money - 2000));
+            results.update();
+            getMoneyCount();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 }

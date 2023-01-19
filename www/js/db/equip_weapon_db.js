@@ -13,8 +13,10 @@ function updateEquipWeaponData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Equip = ncmb.DataStore(this.EQUIP_DB);
     var soad = document.getElementById("soad").src;
+    console.log(document.getElementById("soad"));
     var shield = document.getElementById("shield").src;
     var decoration = document.getElementById("decoration").src;
+    console.log(soad);
     Equip.equalTo("equipment_id", "1").fetch()
     .then(function (results) {
         console.log(results);
@@ -24,6 +26,8 @@ function updateEquipWeaponData() {
                 .update()
                 .then(function (results) {
                     console.log("updateEquipWeaponData:ok");
+                    getEquipWeaponData();
+                    equip();
                 })
         .catch(function(err){
             console.log("outsideng");
