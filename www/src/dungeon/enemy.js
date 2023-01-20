@@ -115,6 +115,7 @@ class Enemy{
                 if(this.checkAround(indexX,indexY)){
                     next.x = indexX;
                     next.y = indexY;
+                    this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
                     element.next = next;
                     return;
                 }
@@ -122,17 +123,27 @@ class Enemy{
                 if(result == "TypeError"){
                     next.x = indexX;
                     next.y = indexY;
+                    this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
                     element.next = next;
                     return;
                 }
                 if(this.checkEnemy(result.x,result.y)){
                     next.x = indexX;
                     next.y = indexY;
+                    this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
+                    element.next = next;
+                    return;
+                }
+                if(this.checkPredictEnemy(result.x,result.y)){
+                    next.x = indexX;
+                    next.y = indexY;
+                    this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
                     element.next = next;
                     return;
                 }
                 next.x = result.x;
                 next.y = result.y;
+                this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
                 element.next = next;
                 return;
 
@@ -156,7 +167,7 @@ class Enemy{
         const imgElement = document.getElementById("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
         imgElement.style.top = nextY * Config.stageImgHeight + "px";
         imgElement.style.left = nextX * Config.stageImgWidth + "px";
-        this.tempEnemyStatusArray[nextY][nextX] = elementItem; //一時配列に次のデータをセットする
+        
     }
 
     /* 敵配置
@@ -174,6 +185,16 @@ class Enemy{
     /* 指定マスに敵の存在チェック */
     static checkEnemy(x, y){
         if(this.enemyStatusArray[y][x] === this.noDataItem){
+            // 敵が存在しない
+            return false;
+        }
+        // 敵が存在する
+        return true;
+    }
+
+    static checkPredictEnemy(x,y){
+        console.log(this.tempEnemyStatusArray[y][x])
+        if(this.tempEnemyStatusArray[y][x] === this.noDataItem){
             // 敵が存在しない
             return false;
         }
