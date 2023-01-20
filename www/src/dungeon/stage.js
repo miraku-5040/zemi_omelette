@@ -76,41 +76,52 @@ class Stage {
         //プレイヤーの現在座標をセットする
         Player.resetCharacterPosition(selectPosition.x,selectPosition.y)
 
+        Stage.createEnemys(possiblePositions)
+        Stage.createItems(possiblePositions)
+        Stage.createTraps(possiblePositions)
+    }
+
+    static createEnemys(possiblePositions){
+        console.log(possiblePositions)
         //敵を最大ポップ数生成
         for(let i = 0; i < this.stageStatus.maxEnemy; i++){
             //配置可能座標からランダムに座標を取得
-            selectIndex = Tool.getRandomInt(possiblePositions.length)
-            selectPosition = possiblePositions[selectIndex]
+            const selectIndex = Tool.getRandomInt(possiblePositions.length)
+            const selectPosition = possiblePositions[selectIndex]
             possiblePositions.splice(selectIndex, 1)
-            //ランダムにenemiyIDを取得
+            //ランダムにenemyIDを取得
             const enemyId = this.stageStatus.enemyArray[Tool.getRandomInt(this.stageStatus.enemyArray.length)]
             const enemyInfo ={id: enemyId, position:selectPosition}
             this.popEnemyArray.push(enemyInfo)
         }
-        
+    }
+
+    static createItems(possiblePositions){
         for(let i = 0; i < this.stageStatus.maxItem; i++){
             //配置可能座標からランダムに座標を取得
-            selectIndex = Tool.getRandomInt(possiblePositions.length)
-            selectPosition = possiblePositions[selectIndex]
+            const selectIndex = Tool.getRandomInt(possiblePositions.length)
+            const selectPosition = possiblePositions[selectIndex]
             possiblePositions.splice(selectIndex, 1)
-            //ランダムにenemiyIDを取得
+            //ランダムにitemIDを取得
             const itemId = this.stageStatus.itemArray[Tool.getRandomInt(this.stageStatus.itemArray.length)]
             const itemInfo ={id: itemId, position:selectPosition}
             this.popItemArray.push(itemInfo)
         }
-        //トラップ生成
+    }
 
+    static createTraps(possiblePositions){
         for(let i = 0; i < this.stageStatus.maxTrap; i++){
             //配置可能座標からランダムに座標を取得
-            selectIndex = Tool.getRandomInt(possiblePositions.length)
-            selectPosition = possiblePositions[selectIndex]
+            const selectIndex = Tool.getRandomInt(possiblePositions.length)
+            const selectPosition = possiblePositions[selectIndex]
             possiblePositions.splice(selectIndex, 1)
-            //ランダムにenemiyIDを取得
+            //ランダムにtrapIDを取得
             const trapId = this.stageStatus.trapArray[Tool.getRandomInt(this.stageStatus.trapArray.length)]
             const trapInfo ={id: trapId, position:selectPosition}
             this.popTrapArray.push(trapInfo)
         }
     }
+
     /**
      * ステージ画像や画像番号をステージの2次元配列に格納する
     **/
