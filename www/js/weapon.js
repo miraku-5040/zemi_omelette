@@ -33,21 +33,24 @@ function countDownMore1() {
     // 値減少
     number = number - (element.value * 50);
     number = Math.abs(number + (Math.ceil(Number(Math.abs(number) / 1000)) * 1000));
-    // レベルを減らす
-    var str = document.getElementById('weaponLevel');
-    var result = String(str.textContent).slice(4, 6);
-    result = Math.ceil(Number(result) - Number(number / 1000));
-    document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+    if (number < 0) {
+        // レベルを減らす
+        var str = document.getElementById('weaponLevel');
+        var result = String(str.textContent).slice(4, 6);
+        result = Math.ceil(Number(result) - Number(number / 1000));
+        document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+        // 攻撃力を更新
+        str = document.getElementById('weaponAttack');
+        var attack = String(str.textContent).slice(4);
+        attack = Number(attack) - (10 * result);
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
+    }
+
     // 強化素材数を0にする
     element.value = 0;
     // 経験値のテキスト変更
     document.getElementById("exp_text").innerHTML = Number(number % 1000) + "/1000";
     ber.value = Number(number % 1000);
-    // 攻撃力を更新
-    str = document.getElementById('weaponAttack');
-    var attack = String(str.textContent).slice(4);
-    attack = Number(attack) - (10 * result);
-    document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
 }
 
 // カウントアップjs
@@ -290,6 +293,11 @@ function evoCountUp() {
         element = document.getElementById('power_ber');
         element.value = Number(element.value) + 1;
         document.getElementById("overlap_text").innerHTML = element.value + "/5";
+        // 攻撃力を更新
+        var str = document.getElementById('weaponAttack');
+        var result = String(str.textContent).slice(4);
+        result = Number(result) + 30;
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
     }
 }
 
@@ -303,6 +311,11 @@ function evoCountDown() {
         element = document.getElementById('power_ber');
         element.value = Number(element.value) - 1;
         document.getElementById("overlap_text").innerHTML = element.value + "/5";
+        // 攻撃力を更新
+        var str = document.getElementById('weaponAttack');
+        var result = String(str.textContent).slice(4);
+        result = Number(result) - 30;
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
     }
 }
 
@@ -331,9 +344,8 @@ function changeSoad() {
     audio.play();
     // 装備を入れ替える
     var soad = document.getElementById('soad').src;
+    // ここが出ていない
     var element = document.getElementById('weapon').value;
-    // ↓ここが取れていない
-    console.log(element);
     document.getElementById('soad').src = element;
     document.getElementById('weapon').src = soad;
 }
