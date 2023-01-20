@@ -27,7 +27,7 @@ class Stage {
             maxEnemy: 5,
             itemArray: ['IW000','IS000','IT000'],
             maxItem: 3,
-            trapArray: ['T0001'],
+            trapArray: ['T0000','T0001'],
             maxTrap:5
         };
         //ステージに出現する全オブジェクトを格納する領域を生成する
@@ -88,8 +88,28 @@ class Stage {
             this.popEnemyArray.push(enemyInfo)
         }
         
-        //アイテム生成
+        for(let i = 0; i < this.stageStatus.maxItem; i++){
+            //配置可能座標からランダムに座標を取得
+            selectIndex = Tool.getRandomInt(possiblePositions.length)
+            selectPosition = possiblePositions[selectIndex]
+            possiblePositions.splice(selectIndex, 1)
+            //ランダムにenemiyIDを取得
+            const itemId = this.stageStatus.itemArray[Tool.getRandomInt(this.stageStatus.itemArray.length)]
+            const itemInfo ={id: itemId, position:selectPosition}
+            this.popItemArray.push(itemInfo)
+        }
         //トラップ生成
+
+        for(let i = 0; i < this.stageStatus.maxTrap; i++){
+            //配置可能座標からランダムに座標を取得
+            selectIndex = Tool.getRandomInt(possiblePositions.length)
+            selectPosition = possiblePositions[selectIndex]
+            possiblePositions.splice(selectIndex, 1)
+            //ランダムにenemiyIDを取得
+            const trapId = this.stageStatus.trapArray[Tool.getRandomInt(this.stageStatus.trapArray.length)]
+            const trapInfo ={id: trapId, position:selectPosition}
+            this.popTrapArray.push(trapInfo)
+        }
     }
     /**
      * ステージ画像や画像番号をステージの2次元配列に格納する

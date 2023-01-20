@@ -193,7 +193,6 @@ class Enemy{
     }
 
     static checkPredictEnemy(x,y){
-        console.log(this.tempEnemyStatusArray[y][x])
         if(this.tempEnemyStatusArray[y][x] === this.noDataItem){
             // 敵が存在しない
             return false;

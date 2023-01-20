@@ -17,18 +17,13 @@ class Trap{
     }
 
     static startFloor(){
-        this.trapArray[10][14] = {
-            trapId: 'T0000',//アイテムID
-            trapName: '階段',
-            hideFlg: false
-            }
-        this.trapArray[6][10] = {
-            trapId: 'T0001',//アイテムID
-            trapName: '地雷',
-            hideFlg: true
-            }
-        this.trapIdArray.push('T0000');
-        this.trapIdArray.push('T0001');
+
+        const generateTrapArray = Stage.popTrap()
+        generateTrapArray.forEach((trap) => {
+            this.trapArray[trap.position.y][trap.position.x]  = Database.getTrap(trap.id)
+            this.trapIdArray.push(trap.id);
+        });
+        
         Image.createTrapImages(this.trapIdArray);
         this.screenRenderingAll();
     }

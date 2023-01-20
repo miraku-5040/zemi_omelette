@@ -19,23 +19,13 @@ class Item{
     }
 
     static startFloor(){
-        this.itemArray[5][4] = {
-            itemId: 'IW000',//アイテムID
-            itemName: 'ひのきのぼう',
-            skill:'SA001',
-            usageLimit: null
-            }
-        this.itemArray[3][6] = {
-            itemId: 'IS000',//アイテムID
-            itemName: '木の盾',
-            usageLimit: null
-            }
-        this.itemArray[10][10] = {
-            itemId: 'IT000',//アイテムID
-            itemName: '薬草',
-            skillId:0,
-            usageLimit: 1
-            }
+
+        const generateItemArray = Stage.popItem()
+        generateItemArray.forEach((item) => {
+            this.itemArray[item.position.y][item.position.x]  = Database.getItem(item.id)
+            this.itemIdArray.push(item.id);
+        });
+
         Image.createItemImages(this.itemIdArray);
         this.screenRenderingAll();
     }

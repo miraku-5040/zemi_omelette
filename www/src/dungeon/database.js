@@ -53,4 +53,48 @@ class Database{
         
         return enemyData
     }
+
+    static getItem(id = NaN){
+        const itemArray = [{
+            itemId: 'IW000',//アイテムID
+            itemName: 'ひのきのぼう',
+            skill:'SA001',
+            usageLimit: null
+            }
+        ,{
+            itemId: 'IS000',//アイテムID
+            itemName: '木の盾',
+            usageLimit: null
+            }
+        ,{
+            itemId: 'IT000',//アイテムID
+            itemName: '薬草',
+            skillId:0,
+            usageLimit: 1
+            }]
+        for(let element of itemArray){
+            if(element.itemId == id){
+                return element
+
+            }
+        }
+    }
+
+    static getTrap(id = NaN){
+        const trapArray = [{
+            trapId: 'T0000',//アイテムID
+            trapName: '階段',
+            hideFlg: false
+            },{
+            trapId: 'T0001',//アイテムID
+            trapName: '地雷',
+            hideFlg: true
+            }]
+        for(let element of trapArray){
+            if(element.trapId == id){
+                return element
+
+            }
+        }
+    }
 }
