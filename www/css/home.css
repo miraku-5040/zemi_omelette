@@ -78,11 +78,68 @@
     top: 70px;
     right: 20px;
     width: 160px;
-    height: 200px;
+    height: 160px;
     font-weight: bold;
     line-height: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     border: solid rgb(189, 160, 0);
+}
+
+/* デイリー目標確認ボタン */
+.dairy {
+    background-color: rgb(205, 205, 205);
+    position: absolute;
+    top: 275px;
+    left: 590px;
+    width: 40px;
+    height: 40px;
+}
+
+.dairy_button_text {
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 290px;
+    left: 590px;
+}
+
+/* 実績目標確認ボタン */
+.achieve {
+    background-color: rgb(205, 205, 205);
+    position: absolute;
+    top: 275px;
+    left: 540px;
+    width: 40px;
+    height: 40px;
+}
+
+.achieve_button_text {
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 290px;
+    left: 550px;
+}
+
+/* ギルド画面遷移ボタン */
+.guild {
+    background-color: rgb(205, 205, 205);
+    position: absolute;
+    top: 275px;
+    left: 490px;
+    width: 40px;
+    height: 40px;
+}
+
+.guild_button_text {
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 290px;
+    left: 495px;
 }
 
 /* キャラクター画像 */
@@ -182,9 +239,24 @@
     height: 60px;
 }
 
+.pict_image {
+    position: relative;
+    top: 5px;
+    width: 50px;
+    height: 50px;
+}
+
 .town_text {
     position: relative;
     transform: translateY(-40px);
+    left: 3px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.pict_text {
+    position: relative;
+    transform: translateY(-30px);
     font-weight: bold;
     font-size: 20px;
 }

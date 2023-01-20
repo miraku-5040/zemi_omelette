@@ -12,6 +12,27 @@ function toPict() {
     setTimeout('window.location.href = "html/pictoriary.html"', 600);
 }
 
+function toGuild() {
+    // 音声再生
+    go_sound();
+    // ギルド画面へ遷移
+    setTimeout('window.location.href = "html/guild.html"', 600);
+}
+
+function toDayLogin() {
+    // 音声再生
+    go_sound();
+    // 毎日ログイン画面へ遷移
+    setTimeout('window.location.href = "html/dayLogin.html"', 600);
+}
+
+function toEvent() {
+    // 音声再生
+    go_sound();
+    // イベント画面へ遷移
+    setTimeout('window.location.href = "html/event.html"', 600);
+}
+
 function toHome() {
     // 音声再生
     go_sound();
@@ -127,6 +148,46 @@ function presentModalClose() {
     audio.play();
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('presentModal');
+    modal.style.display = 'none';
+}
+
+// デイリー用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function openDairy() {
+    // 音声再生
+    audio = new Audio("sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('dairyModal');
+    modal.style.display = 'block';
+}
+
+function closeDairy() {
+    // 音声再生
+    audio = new Audio("sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('dairyModal');
+    modal.style.display = 'none';
+}
+
+// 実績用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function openAchieve() {
+    // 音声再生
+    audio = new Audio("sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('achieveModal');
+    modal.style.display = 'block';
+}
+
+function closeAchieve() {
+    // 音声再生
+    audio = new Audio("sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('achieveModal');
     modal.style.display = 'none';
 }
 
