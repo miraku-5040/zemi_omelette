@@ -236,6 +236,31 @@ function modalClose10() {
     modal.style.display = 'none';
 }
 
+// 辞書の題名変更
+function setSoadTitle() {
+    document.getElementById('pict_title').innerHTML = "剣";
+}
+
+function setShieldTitle() {
+    document.getElementById('pict_title').innerHTML = "盾";
+}
+
+function setDecorationTitle() {
+    document.getElementById('pict_title').innerHTML = "宝石";
+}
+
+function setItemTitle() {
+    document.getElementById('pict_title').innerHTML = "アイテム";
+}
+
+function setEnemyTitle() {
+    document.getElementById('pict_title').innerHTML = "敵";
+}
+
+function setStoryTitle() {
+    document.getElementById('pict_title').innerHTML = "物語";
+}
+
 // 音声再生用のjs
 // 画面遷移用の音声再生
 function go_sound() {

@@ -31,34 +31,37 @@
     <!-- 強化方法選択画面へ戻るボタン -->
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toHome()">←</button>
+    <!-- 辞書の画像 -->
+    <img class="pictoriary_image" src="../image/book.png">
     <!-- 項目切り替えボタン -->
     <div class="type_buttons">
-        <div class="soad_botton" id="othercolumn" onclick="getPictorialSoadData()">
+        <div class="soad_botton" id="othercolumn" onclick="setSoadTitle();getPictorialSoadData()">
             <img class="sticky_image" src="../image/husen.png">
             <p class="type_text">剣</p>
         </div>
-        <div class="shield_button" id="othercolumn" onclick="getPictorialShieldData()">
+        <div class="shield_button" id="othercolumn" onclick="setShieldTitle();getPictorialShieldData()">
             <img class="sticky_image" src="../image/husen.png">
             <p class="type_text">盾</p>
         </div>
-        <div class="deco_button" id="othercolumn" onclick="getPictorialDecorationData()">
+        <div class="deco_button" id="othercolumn" onclick="setDecorationTitle();getPictorialDecorationData()">
             <img class="sticky_image" src="../image/husen.png">
             <p class="deco_text">宝石</p>
         </div>
-        <div class="item_button" id="othercolumn" onclick="getPictorialItemData()">
+        <div class="item_button" id="othercolumn" onclick="setItemTitle();getPictorialItemData()">
             <img class="sticky_image" src="../image/husen.png">
             <p class="item_text">アイテム</p>
         </div>
-        <div class="enemy_button" id="othercolumn" onclick="">
+        <div class="enemy_button" id="othercolumn" onclick="setEnemyTitle();">
             <img class="sticky_image" src="../image/husen.png">
             <p class="type_text">敵</p>
         </div>
-        <div class="story_button" id="othercolumn" onclick="">
+        <div class="story_button" id="othercolumn" onclick="setStoryTitle();">
             <img class="sticky_image" src="../image/husen.png">
             <p class="deco_text">物語</p>
         </div>
     </div>
     <!-- 図鑑内容 -->
+    <p id="pict_title" class="pict_title">剣</p>
     <div id="pictorial" class="pictoriary_content">
         <div class="pictoriary_item">
             <img class="pictoriary_item_image" src="../image/soad/IW0000.png">

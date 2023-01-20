@@ -25,6 +25,15 @@
     height: 35px;
 }
 
+/* 辞書の画像 */
+.pictoriary_image {
+    position: absolute;
+    transform: translateY(-20px);
+    left: 90px;
+    width: 570px;
+    height: 450px;
+}
+
 /* 項目切り替えボタン */
 .type_buttons {
     position: absolute;
@@ -84,6 +93,15 @@
 }
 
 /* 図鑑の内容 */
+.pict_title {
+    color: gold;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    left: 220px;
+    z-index: 100px;
+}
+
 .pictoriary_content {
     display: flex;
     gap: 10px;
@@ -91,11 +109,11 @@
     overflow: scroll;
     background-color: white;
     position: absolute;
-    top: 60px;
+    top: 90px;
     left: 200px;
     width: 200px;
     height: 200px;
-    padding: 30px 20px;
+    padding: 0px 20px;
 }
 
 .pictoriary_item_image {
