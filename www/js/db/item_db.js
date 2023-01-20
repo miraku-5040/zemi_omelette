@@ -142,21 +142,21 @@ function setItemImage(results) {
     // 情報取得
     var item = results[0];
     // 新しいHTML要素を作成
-    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/r_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDownMore1()"><p class="count_button_text">&lt;&lt;</p></button><button class="power_for_item_count_minus" onclick="countDown1()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter1" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp1()"><p class="count_button_text">＋</p></button> <button class="power_for_item_count_plus" onclick="countUpMore1()"><p class="count_button_text">&gt&gt;</p></button></div></div>';
+    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/r_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown1()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter1" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp1()"><p class="count_button_text">＋</p></button></div></div>';
     // 作成した要素を追加
     document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
 
     // 情報取得
     var item = results[1];
     // 新しいHTML要素を作成
-    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/sr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDownMore2()"><p class="count_button_text">&lt;&lt;</p></button><button class="power_for_item_count_minus" onclick="countDown2()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter2" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp2()"><p class="count_button_text">＋</p></button> <button class="power_for_item_count_plus" onclick="countUpMore2()"><p class="count_button_text">&gt&gt;</p></button></div></div>';
+    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/sr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown2()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter2" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp2()"><p class="count_button_text">＋</p></button></div></div>';
     // 作成した要素を追加
     document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
 
     // 情報取得
     var item = results[2];
     // 新しいHTML要素を作成
-    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/ssr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDownMore3()"><p class="count_button_text">&lt;&lt;</p></button><button class="power_for_item_count_minus" onclick="countDown3()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter3" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp3()"><p class="count_button_text">＋</p></button> <button class="power_for_item_count_plus" onclick="countUpMore3()"><p class="count_button_text">&gt&gt;</p></button></div></div>';
+    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/ssr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown3()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter3" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp3()"><p class="count_button_text">＋</p></button></div></div>';
     // 作成した要素を追加
     document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
 }
