@@ -133,6 +133,28 @@ function getShorteCharacterData() {
     }
 }
 
+// キャラクター情報取得(プレイヤー情報版)
+function getPlayerCharacterData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            setCharacterData(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // キャラクター情報をHTMLに埋め込む
+    function setCharacterData(results) {
+        var character = results[0];
+        // プレイヤー名入れ替え
+        document.getElementById("player_name").innerHTML = character.character_name;
+        // ランク入れ替え
+        document.getElementById("rank_text").innerHTML = 'ランク：' + character.character_rank;
+    }
+}
+
 // コイン所持数表示
 function getMoneyCount() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);

@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../css/playerInfo.css">
 </head>
 
-<body>
+<body onload="getPlayerCharacterData()">
     <!-- ホーム画面へ戻るボタン -->
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toHome()">←</button>
@@ -34,8 +34,8 @@
 
     <div class="info_position">
         <img class="player_info_icon" src="../image/player_icon.png">
-        <p class="player_name">name</p>
-        <p class="player_rank">ランク：10</p>
+        <p id="player_name" class="player_name">name</p>
+        <p id="rank_text" class="player_rank">ランク：10</p>
         <p class="player_guild">所属ギルド：omurice</p>
         <p class="player_comment">一言コメント：<br>よろしくお願いします。</p>
     </div>
