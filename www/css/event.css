@@ -1,3 +1,10 @@
+.background_image {
+    position: absolute;
+    transform: translate(-40px, -16px);
+    z-index: -1;
+    width: 700px;
+}
+
 /* 戻るボタン */
 .cansel_frame {
     border: solid rgb(189, 160, 0);
@@ -25,11 +32,95 @@
     height: 35px;
 }
 
+.event_character_position {
+    width: 260px;
+    height: 370px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+}
+
+.event_title {
+    color: gold;
+    font-weight: bold;
+    font-size: 45px;
+    position: absolute;
+    transform: translateY(-10px);
+    left: 320px;
+}
+
 .content_position {
     position: absolute;
+    top: 130px;
+    left: 320px;
+}
+
+.event_point {
+    background-color:rgba(0,0,0,0.3);
+    border: solid rgb(189, 160, 0);
+    color: rgb(211, 211, 211);
+    font-weight: bold;
+    width: 260px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.event_point_count {
+    position: relative;
+    transform: translateY(-20px);
+    left: 10px;
+    font-size: 25px;
+}
+
+.event_point_text {
+    position: relative;
+    transform: translateY(-70px);
+    left: 220px;
+    font-size: 20px;
 }
 
 .event_target {
-    background-color: rgb(216, 216, 216);
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
     color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    top: 15px;
+    width: 100px;
+    height: 50px;
+}
+
+.event_gatya {
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    top: 15px;
+    left: 10px;
+    width: 150px;
+    height: 50px;
+}
+
+.event_story {
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    top: 30px;
+    width: 200px;
+    height: 50px;
 }
