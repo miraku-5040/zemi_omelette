@@ -24,3 +24,12 @@
     width: 60px;
     height: 35px;
 }
+
+.content_position {
+    position: absolute;
+}
+
+.event_target {
+    background-color: rgb(216, 216, 216);
+    color: black;
+}

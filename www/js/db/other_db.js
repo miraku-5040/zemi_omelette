@@ -7,6 +7,7 @@ var NOTICE_DB = "notice";
 var PRESENT_DB = "present";
 var ITEM_DB = "item";
 var SKILL_DB = "skill";
+var DAIRY_DB = "dairy";
 
 // プレゼントデータ取得
 function getPresentData() {
@@ -276,6 +277,79 @@ function buy(item) {
             results.set("money", Number(item.money - 2000));
             results.update();
             getMoneyCount();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// 毎日ログイン機能
+function getNomalLoginData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.DAIRY_DB);
+    Dairy.equalTo("rare", "N")
+        .equalTo("flag", 0)
+        .order("id", false)
+        .fetchAll()
+        .then(function (results) {
+            setLoginText(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    
+    function setLoginText(results) {
+        // 初期化
+        document.getElementById("nomalLogin").innerHTML = '';
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            var login = results[i];
+            // 新しいHTML要素を作成
+            var itemHtml = '<div class="login_dairy" onclick="updateLoginData(' + login.id + ')"><p class="login_dairy_title">' + login.id + '日目</p><img class="login_dairy_image" src="' + login.image + '"><p class="login_dairy_count">×' + login.count + '</p></div>';
+            // 作成した要素を追加
+            document.getElementById("nomalLogin").insertAdjacentHTML('beforeend', itemHtml);
+        }
+    }
+}
+
+function getRareLoginData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.DAIRY_DB);
+    Dairy.equalTo("rare", "R")
+        .equalTo("flag", 0)
+        .order("id", false)
+        .fetchAll()
+        .then(function (results) {
+            setLoginText(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    
+    function setLoginText(results) {
+        // 初期化
+        document.getElementById("rareLogin").innerHTML = '';
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            var login = results[i];
+            // 新しいHTML要素を作成
+            var itemHtml = '<div class="login_dairy" onclick="updateLoginData(' + login.id + ')"><p class="login_dairy_title">' + login.day + '日目</p><img class="login_dairy_image" src="' + login.image + '"><p class="login_dairy_count">×' + login.count + '</p></div>';
+            // 作成した要素を追加
+            document.getElementById("rareLogin").insertAdjacentHTML('beforeend', itemHtml);
+        }
+    }
+}
+
+// 毎日ログイン機能(更新)
+function updateLoginData(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.DAIRY_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            results.set("flag", 1);
+            results.update();
+            getNomalLoginData();
         })
         .catch(function (err) {
             console.log(err);

@@ -45,9 +45,29 @@ body {
     left: 65px;
 }
 
+.login_dairy_division2 {
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 245px;
+    left: 65px;
+}
+
 .nomal {
+    display: flex;
+    gap: 10px;
+    overflow: scroll;
     position: absolute;
     top: 40px;
+    left: 150px;
+}
+
+.rare {
+    display: flex;
+    gap: 10px;
+    overflow: scroll;
+    position: absolute;
+    top: 195px;
     left: 150px;
 }
 

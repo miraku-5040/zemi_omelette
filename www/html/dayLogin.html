@@ -12,6 +12,7 @@
     <script src="../js/db/danjyon_db.js"></script>
     <script src="../js/db/item_db.js"></script>
     <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/other_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
     <script src="../js/weapon.js"></script>
@@ -23,7 +24,7 @@
     <link rel="stylesheet" href="../css/dayLogin.css">
 </head>
 
-<body>
+<body onload="getNomalLoginData();getRareLoginData()">
     <!-- ホーム画面へ戻るボタン -->
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toHome()">←</button>
@@ -31,9 +32,23 @@
     <!-- 毎日ログインの画像 -->
     <img class="login_everyday" src="../image/login_everyday.png">
     <p class="login_dairy_division">通常</p>
-    <div class="nomal">
+    <div class="nomal" id="nomalLogin">
         <div class="login_dairy">
             <p class="login_dairy_title">1日目</p>
+            <img class="login_dairy_image" src="../image/item/IW4000.png">
+            <p class="login_dairy_count">×10</p>
+        </div>
+    </div>
+
+    <p class="login_dairy_division2">レア</p>
+    <div class="rare" id="rareLogin">
+        <div class="login_dairy">
+            <p class="login_dairy_title">1日目</p>
+            <img class="login_dairy_image" src="../image/item/IW4000.png">
+            <p class="login_dairy_count">×10</p>
+        </div>
+        <div class="login_dairy">
+            <p class="login_dairy_title">2日目</p>
             <img class="login_dairy_image" src="../image/item/IW4000.png">
             <p class="login_dairy_count">×10</p>
         </div>
