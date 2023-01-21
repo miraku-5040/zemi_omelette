@@ -187,3 +187,46 @@ function getEvoItemSum() {
     }
 }
 
+// ガチャロジック
+function pullItem1() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    // 乱数発生(1から9)
+    var random = Math.floor(Math.random() * 9) + 1;
+    // 武器の全データ取得
+    Item.equalTo("item_id", Number(random))
+        .fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            // 背景色変更
+            var weaponHtml = '<img class="result_image" src="' + item.item_image +'">';
+            // 作成した要素を追加
+            document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// ガチャロジック
+function pullItem10() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    for (var i = 1; i <= 10; i++) {
+        // 乱数発生(1から9)
+    var random = Math.floor(Math.random() * 9) + 1;
+    // 武器の全データ取得
+    Item.equalTo("item_id", Number(random))
+        .fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            // 背景色変更
+            var weaponHtml = '<img class="result_image" src="' + item.item_image +'">';
+            // 作成した要素を追加
+            document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });        
+    }
+}

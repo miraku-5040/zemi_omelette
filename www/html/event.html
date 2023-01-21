@@ -37,9 +37,35 @@
             <p class="event_point_count">2000</p>
             <p class="event_point_text">pt</p>
         </div>
-        <button class="event_target" onclick="">目標</button>
-        <button class="event_gatya" onclick="">イベントガチャ</button>
-        <button class="event_story" onclick="">イベントストーリー</button>
+        <button class="event_target" onclick="targetOpen()">目標</button>
+        <button class="event_gatya" onclick="toEventGatya()">イベントガチャ</button>
+        <button class="event_story" onclick="toEventStory()">イベントストーリー</button>
+    </div>
+
+    <!-- 目標用のモーダルウィンドウ -->
+    <div id="targetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>イベント目標</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="goal_box">
+                    <p class="goal_box_text">強化を1回完了</p>
+                    <img class="goal_box_image" src="../image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button1">完了</button>
+                </div>
+                <div class="goal_box">
+                    <p  class="goal_box_text">戦闘を1回完了</p>
+                    <img class="goal_box_image" src="../image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button2">移動</button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="present_modal_close_button" onclick="targetClose()">閉じる</button>
+            </div>
+        </div>
     </div>
 </body>
 

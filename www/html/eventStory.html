@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
+    <!-- pageJS -->
+    <script src="../js/page.js"></script>
+    <script src="../js/weapon.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- イベント画面のCSS -->
+    <link rel="stylesheet" href="../css/event.css">
+</head>
+
+<body>
+    <img class="background_image" src="../image/background/event.jpg">
+    <!-- ホーム画面へ戻るボタン -->
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toEvent()">←</button>
+
+    <img class="event_character_position" src="../image/character/yuusya.png">
+
+    <p class="event_title">少年の休日</p>
+    <div class="story_content_position">
+        <div>
+            <img class="story_image" src="../image/background/cave.png">
+            <p class="story_title">第一話</p>
+            <p class="story_text">街へ行こう</p>
+        </div>
+    </div>
+</body>
+
+</html>

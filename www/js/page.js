@@ -50,6 +50,22 @@ function resultTen() {
     setTimeout('window.location.href = "resultTen.html"', 1200);
 }
 
+function toPullItem1() {
+    // 音声再生
+    audio = new Audio("../sound/gatya.m4a");
+    audio.play();
+    // 1回ガチャ結果画面へ遷移
+    setTimeout('window.location.href = "eventResultOne.html"', 1200);
+}
+
+function toPullItem10() {
+    // 音声再生
+    audio = new Audio("../sound/gatya.m4a");
+    audio.play();
+    // 10回ガチャ結果画面へ遷移
+    setTimeout('window.location.href = "eventResultTen.html"', 1200);
+}
+
 function toItem() {
     // 音声再生
     go_sound();
@@ -147,6 +163,27 @@ function toStart() {
     setTimeout('window.location.href = "start.html"', 600);
 }
 
+function toEventGatya() {
+    // 音声再生
+    go_sound();
+    // イベントガチャ画面へ遷移
+    setTimeout('window.location.href = "eventGatya.html"', 600);
+}
+
+function toEventStory() {
+    // 音声再生
+    go_sound();
+    // イベントガチャ画面へ遷移
+    setTimeout('window.location.href = "eventStory.html"', 600);
+}
+
+function toEvent() {
+    // 音声再生
+    go_sound();
+    // イベント画面へ遷移
+    setTimeout('window.location.href = "../html/event.html"', 600);
+}
+
 // 項目ボタンの切り替え
 function weaponColumn(element) {
     // 音声再生
@@ -233,6 +270,25 @@ function modalClose10() {
     audio.play();
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('gatyaTenModal');
+    modal.style.display = 'none';
+}
+
+//モーダルウィンドウを開く
+function targetOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('targetModal');
+    modal.style.display = 'block';
+}
+
+function targetClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('targetModal');
     modal.style.display = 'none';
 }
 
