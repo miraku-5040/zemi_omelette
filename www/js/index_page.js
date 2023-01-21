@@ -12,6 +12,13 @@ function toPict() {
     setTimeout('window.location.href = "html/pictoriary.html"', 600);
 }
 
+function toInfo() {
+    // 音声再生
+    go_sound();
+    // プレイヤー情報画面へ遷移
+    setTimeout('window.location.href = "html/playerInfo.html"', 600);
+}
+
 function toGuild() {
     // 音声再生
     go_sound();

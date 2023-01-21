@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -21,14 +22,23 @@
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- 図鑑画面のCSS -->
-    <link rel="stylesheet" href="../css/pictoriary.css">
+    <link rel="stylesheet" href="../css/playerInfo.css">
 </head>
+
 <body>
-    <p>プレイヤー情報</p>
-    <img class="player_image" src="image/player_icon.png">
-    <p>name</p>
-    <p>10</p>
-    <p>omurice</p>
-    <p>よろしくお願いします。</p>
+    <!-- ホーム画面へ戻るボタン -->
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toHome()">←</button>
+
+    <img class="card_image" src="../image/card.png">
+
+    <div class="info_position">
+        <img class="player_info_icon" src="../image/player_icon.png">
+        <p class="player_name">name</p>
+        <p class="player_rank">ランク：10</p>
+        <p class="player_guild">所属ギルド：omurice</p>
+        <p class="player_comment">一言コメント：<br>よろしくお願いします。</p>
+    </div>
 </body>
+
 </html>
