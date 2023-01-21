@@ -21,21 +21,23 @@
     <link rel="stylesheet" href="../components/loader.css">
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
-    <!-- 図鑑画面のCSS -->
-    <link rel="stylesheet" href="../css/pictoriary.css">
+    <!-- ギルド画面のCSS -->
+    <link rel="stylesheet" href="../css/guild.css">
 </head>
 
 <body>
     <!-- 背景 -->
-    <img class="background_image" src="../image/background/cave.png">
+    <img class="background_image" src="../image/background/guild.jpg">
     <!-- ホーム画面へ戻るボタン -->
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toHome()">←</button>
 
-    <p>ギルド名</p>
-    <button class="" onclick="">メンバー</button>
-    <button class="" onclick="">報酬</button>
-    <button class="" onclick="">ギルドショップ</button>
+    <p class="guild_name">ギルド名</p>
+    <div class="content_position">
+        <button class="member" onclick="">メンバー</button>
+        <button class="reward" onclick="">報酬</button>
+        <button class="guild_shop" onclick="">ギルドショップ</button>
+    </div>
 
 
     <div style="display: none;">
