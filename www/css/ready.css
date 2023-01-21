@@ -1,0 +1,21 @@
+.character_position {
+    width: 260px;
+    height: 370px;
+}
+
+/* 装備品一覧 */
+.equipment {
+    display: flex;
+    gap: 30px;
+    position: absolute;
+    top: 50px;
+    transform: translateX(-10px);
+}
+
+/* アイテム単品 */
+.material {
+    background-color: white;
+    border: solid rgb(189, 160, 0);
+    width: 30px;
+    height: 30px;
+}

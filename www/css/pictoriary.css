@@ -36,6 +36,7 @@
 
 /* 項目切り替えボタン */
 .type_buttons {
+    overflow: scroll;
     position: absolute;
     top: 60px;
     left: 40px;

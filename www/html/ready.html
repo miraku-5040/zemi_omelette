@@ -5,47 +5,47 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script src="classic.js"></script>
     <!-- JS -->
     <script src="../components/loader.js">
     </script>
     <!-- DBJS -->
     <script src="../js/db/danjyon_db.js"></script>
     <script src="../js/db/item_db.js"></script>
-    <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/item_weapon_db.js"></script>
     <script src="../js/db/other_db.js"></script>
-    <script src="../js/db/pictoriary_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
+    <!-- weaponJS -->
+    <script src="../js/weapon.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="../components/loader.css">
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
-    <!-- 図鑑画面のCSS -->
-    <link rel="stylesheet" href="../css/pictoriary.css">
+    <!-- 準備画面のCSS -->
+    <link rel="stylesheet" href="../css/ready.css">
 </head>
 
-<body>
-    <!-- 背景 -->
-    <img class="background_image" src="../image/background/cave.png">
+<body onload="soundBGM();getEquipWeaponData()">
     <!-- ホーム画面へ戻るボタン -->
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toHome()">←</button>
 
-    <p>ギルド名</p>
-    <button class="" onclick="">メンバー</button>
-    <button class="" onclick="">報酬</button>
-    <button class="" onclick="">ギルドショップ</button>
+    <img class="background_image" src="../image/background/cave.png">
+    <img class="character_position" src="image/character/yuusya.png">
 
-
-    <div style="display: none;">
-        <p>メンバー</p>
-        <div>
-            <p>プレイヤー１</p>
-            <p>Lv.10</p>
-            <p>リーダー</p>
+    <!-- 装備情報表示 -->
+    <div>
+        <p>装備武器</p>
+        <div class="equipment" id="equipment">
         </div>
     </div>
+
+    <div>
+        <p>装備スキル</p>
+        <p>火のスキル</p>
+    </div>
+
+    <button class="" onclick="">出発</button>
 </body>
 
 </html>
