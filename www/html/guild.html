@@ -34,18 +34,53 @@
 
     <p class="guild_name">ギルド名</p>
     <div class="content_position">
-        <button class="member" onclick="">メンバー</button>
-        <button class="reward" onclick="">報酬</button>
-        <button class="guild_shop" onclick="">ギルドショップ</button>
+        <button class="member" onclick="memberOpen()">メンバー</button>
+        <button class="reward" onclick="guildRewardOpen()">報酬</button>
+        <button class="guild_shop" onclick="toGuildShop()">ギルドショップ</button>
     </div>
 
+    <!-- メンバー用のモーダルウィンドウ -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>メンバー</h2>
+            </div>
+            <div class="modal-body" id="notice_body">
+                <div>
+                    <p>プレイヤー１</p>
+                    <p>Lv.10</p>
+                    <p>リーダー</p>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_close_button" onclick="memberClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
 
-    <div style="display: none;">
-        <p>メンバー</p>
-        <div>
-            <p>プレイヤー１</p>
-            <p>Lv.10</p>
-            <p>リーダー</p>
+    <!-- 報酬用のモーダルウィンドウ -->
+    <div id="guildRewardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>報酬</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="goal_box">
+                    <p class="goal_box_text">強化を1回完了</p>
+                    <img class="goal_box_image" src="../image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button1">完了</button>
+                </div>
+                <div class="goal_box">
+                    <p  class="goal_box_text">戦闘を1回完了</p>
+                    <img class="goal_box_image" src="../image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button2">移動</button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="present_modal_close_button" onclick="guildRewardClose()">閉じる</button>
+            </div>
         </div>
     </div>
 </body>

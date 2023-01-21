@@ -191,6 +191,20 @@ function toEvent() {
     setTimeout('window.location.href = "../html/event.html"', 600);
 }
 
+function toGuild() {
+    // 音声再生
+    go_sound();
+    // ギルド画面へ遷移
+    setTimeout('window.location.href = "../html/guild.html"', 600);
+}
+
+function toGuildShop() {
+    // 音声再生
+    go_sound();
+    // ギルドショップ画面へ遷移
+    setTimeout('window.location.href = "../html/guildShop.html"', 600);
+}
+
 // 項目ボタンの切り替え
 function weaponColumn(element) {
     // 音声再生
@@ -315,6 +329,44 @@ function skillClose() {
     audio.play();
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('skillModal');
+    modal.style.display = 'none';
+}
+
+//モーダルウィンドウを開く
+function memberOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('memberModal');
+    modal.style.display = 'block';
+}
+
+function memberClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('memberModal');
+    modal.style.display = 'none';
+}
+
+//モーダルウィンドウを開く
+function guildRewardOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('guildRewardModal');
+    modal.style.display = 'block';
+}
+
+function guildRewardClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('guildRewardModal');
     modal.style.display = 'none';
 }
 
