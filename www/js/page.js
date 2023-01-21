@@ -5,6 +5,13 @@ function toHome() {
     setTimeout('window.location.href = "../home.html"', 600);
 }
 
+function toReady() {
+    // 音声再生
+    go_sound();
+    // 戦闘準備画面へ遷移
+    setTimeout('window.location.href = "../html/ready.html"', 600);
+}
+
 function goTown() {
     // 音声再生
     go_sound();
@@ -289,6 +296,25 @@ function targetClose() {
     audio.play();
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('targetModal');
+    modal.style.display = 'none';
+}
+
+//モーダルウィンドウを開く
+function skillOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('skillModal');
+    modal.style.display = 'block';
+}
+
+function skillClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('skillModal');
     modal.style.display = 'none';
 }
 

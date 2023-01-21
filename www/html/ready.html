@@ -8,6 +8,7 @@
     <!-- JS -->
     <script src="../components/loader.js">
     </script>
+    <script src="../js/skill.js"></script>
     <!-- DBJS -->
     <script src="../js/db/danjyon_db.js"></script>
     <script src="../js/db/item_db.js"></script>
@@ -27,9 +28,9 @@
 </head>
 
 <body onload="soundBGM();getEquipWeaponData()">
-    <!-- ホーム画面へ戻るボタン -->
+    <!-- 戻るボタン -->
     <div class="cansel_frame"></div>
-    <button class="cansel" onclick="toHome()">←</button>
+    <button class="cansel" onclick="toSelectDanjyon()">←</button>
 
     <img class="background_image" src="../image/background/cave.png">
     <img class="character_position" src="../image/character/yuusya.png">
@@ -44,11 +45,56 @@
 
     <div class="skill_position">
         <p class="skill_title">装備スキル</p>
-        <p class="skill_level" style="color: red">火のスキル：Lv.10</p>
-        <button class="skill_change_button" onclick="">変更</button>
+        <div id="skill_level">
+            <p class="skill_level" style="color: red">火のスキル：Lv.10</p>
+        </div>
+        <button class="skill_change_button" onclick="skillOpen()">変更</button>
     </div>
 
     <button class="go_button" onclick="">出発</button>
+
+    <!-- スキル選択用のモーダルウィンドウ -->
+    <div id="skillModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>スキル</h2>
+            </div>
+            <div class="modal-body" id="notice_body">
+                <div class="modal_skills">
+                    <div class="modal_skill" style="color: red" onclick="fireSkillText()">
+                        <p class="modal_skill_title">火のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: rgb(101, 101, 255)" onclick="waterSkillText()">
+                        <p class="modal_skill_title">水のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: rgb(0, 225, 255)" onclick="iceSkillText()">
+                        <p class="modal_skill_title">氷のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: greenyellow" onclick="windSkillText()">
+                        <p class="modal_skill_title">風のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: rgb(212, 0, 212)" onclick="thunderSkillText()">
+                        <p class="modal_skill_title">雷のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: white" onclick="lightSkillText()">
+                        <p class="modal_skill_title">光のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: rgb(108, 108, 108)" onclick="darkSkillText()">
+                        <p class="modal_skill_title">闇のスキル：Lv.10</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_close_button" onclick="skillClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
