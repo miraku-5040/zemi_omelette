@@ -12,6 +12,7 @@
     <script src="../js/db/danjyon_db.js"></script>
     <script src="../js/db/item_db.js"></script>
     <script src="../js/db/item_weapon_db.js"></script>
+    <script src="../js/db/equip_weapon_db.js"></script>
     <script src="../js/db/other_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
@@ -31,21 +32,23 @@
     <button class="cansel" onclick="toHome()">←</button>
 
     <img class="background_image" src="../image/background/cave.png">
-    <img class="character_position" src="image/character/yuusya.png">
+    <img class="character_position" src="../image/character/yuusya.png">
 
     <!-- 装備情報表示 -->
-    <div>
-        <p>装備武器</p>
+    <div class="equipment_position">
+        <p class="equipment_title">装備武器</p>
         <div class="equipment" id="equipment">
         </div>
+        <button class="equip_change_button" onclick="toEquip()">変更</button>
     </div>
 
-    <div>
-        <p>装備スキル</p>
-        <p>火のスキル</p>
+    <div class="skill_position">
+        <p class="skill_title">装備スキル</p>
+        <p class="skill_level" style="color: red">火のスキル：Lv.10</p>
+        <button class="skill_change_button" onclick="">変更</button>
     </div>
 
-    <button class="" onclick="">出発</button>
+    <button class="go_button" onclick="">出発</button>
 </body>
 
 </html>

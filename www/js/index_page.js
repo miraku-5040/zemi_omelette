@@ -1,3 +1,10 @@
+function toReady() {
+    // 音声再生
+    go_sound();
+    // 戦闘準備画面へ遷移
+    setTimeout('window.location.href = "html/ready.html"', 600);
+}
+
 function goTown() {
     // 音声再生
     go_sound();
