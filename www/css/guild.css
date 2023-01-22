@@ -121,11 +121,23 @@
     text-align: center;
 }
 
-.modal-body {
+.modal-body1 {
     background-color:rgba(0,0,0,0.3);
     border: solid rgb(189, 160, 0);
+    overflow: scroll;
     font-weight: bold;
     font-size: 20px;
+    position: relative;
+    transform: translateY(-20px);
+    width: 430px;
+    height: 130px;
+    padding: 0px 10px;
+}
+
+.modal-body2 {
+    overflow: scroll;
+    font-weight: bold;
+    font-size: 17px;
     position: relative;
     transform: translateY(-20px);
     width: 440px;
@@ -179,14 +191,14 @@
 
 .goal_box_image {
     position: relative;
-    transform: translateY(-25px);
+    transform: translateY(-27px);
     width: 25px;
     height: 25px;
 }
 
 .goal_box_count {
     position: relative;
-    transform: translateY(-68px);
+    transform: translateY(-70px);
     left: 30px;
 }
 
@@ -221,4 +233,27 @@
     color: black;
     width: 100px;
     height: 30px;
+}
+
+.members_posiiton {
+    margin-bottom: -70px;
+}
+
+.member_name {
+    font-size: 18px;
+    position: relative;
+}
+
+.member_level {
+    font-size: 18px;
+    position: relative;
+    transform: translateY(-18px);
+    left: 2px;
+}
+
+.member_role {
+    font-size: 18px;
+    position: relative;
+    transform: translateY(-85px);
+    left: 350px;
 }
