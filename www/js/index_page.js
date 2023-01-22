@@ -205,6 +205,66 @@ function closeAchieve() {
     modal.style.display = 'none';
 }
 
+// コイン購入用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function openCoin() {
+    // 音声再生
+    audio = new Audio("sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('coinModal');
+    modal.style.display = 'block';
+}
+
+function closeCoin() {
+    // 音声再生
+    audio = new Audio("sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('coinModal');
+    modal.style.display = 'none';
+}
+
+// フレンド用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function openFriend() {
+    // 音声再生
+    audio = new Audio("sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('friendModal');
+    modal.style.display = 'block';
+}
+
+function closeFriend() {
+    // 音声再生
+    audio = new Audio("sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('friendModal');
+    modal.style.display = 'none';
+}
+
+// チャット用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function openChat() {
+    // 音声再生
+    audio = new Audio("sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('chatModal');
+    modal.style.display = 'block';
+}
+
+function closeChat() {
+    // 音声再生
+    audio = new Audio("sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('chatModal');
+    modal.style.display = 'none';
+}
+
 function soundBGM() {
     // BGM再生
     audio = new Audio("sound/BGM.m4a");

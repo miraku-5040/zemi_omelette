@@ -44,11 +44,13 @@
         <div class="least_coin">
             <img class="least_coin_image" src="image/coins.png">
             <p id="money" class="least_dia_coin">0</p>
+            <button class="least_dia_coin_plus" onclick="openCoin()"><p class="least_dia_coin_plus_text">＋</p></button>
         </div>
         <!-- ダイヤの残量 -->
         <div class="least_dia">
             <img class="least_dia_image" src="image/diamond.png">
             <p id="crystal" class="least_dia_text">0</p>
+            <button class="least_dia_coin_plus" onclick=""><p class="least_dia_coin_plus_text">＋</p></button>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->
@@ -71,9 +73,14 @@
         <p id="job">職業：</p>
     </div>
 
-    <button class="dairy" onclick="openDairy()"></button><p class="dairy_button_text">デイリー</p>
-    <button class="achieve" onclick="openAchieve()"></button><p class="achieve_button_text">実績</p>
-    <button class="guild" onclick="toGuild()"></button><p class="guild_button_text">ギルド</p>
+    <button class="dairy" onclick="openDairy()"></button>
+    <p class="dairy_button_text">デイリー</p>
+    <button class="achieve" onclick="openAchieve()"></button>
+    <p class="achieve_button_text">実績</p>
+    <button class="guild" onclick="toGuild()"></button>
+    <p class="guild_button_text">ギルド</p>
+    <button class="friend" onclick="openFriend()"></button>
+    <p class="friend_button_text">フレンド</p>
 
     <!-- キャラクター表示 -->
     <div class="content_position">
@@ -165,7 +172,7 @@
                     <button class="goal_box_button1">完了</button>
                 </div>
                 <div class="goal_box">
-                    <p  class="goal_box_text">戦闘を1回完了</p>
+                    <p class="goal_box_text">戦闘を1回完了</p>
                     <img class="goal_box_image" src="image/coins.png">
                     <p class="goal_box_count">×1000</p>
                     <button class="goal_box_button2">移動</button>
@@ -191,7 +198,7 @@
                     <button class="goal_box_button1">完了</button>
                 </div>
                 <div class="goal_box">
-                    <p  class="goal_box_text">武器1つをLv.50にする</p>
+                    <p class="goal_box_text">武器1つをLv.50にする</p>
                     <img class="goal_box_image" src="image/diamond.png">
                     <p class="goal_box_count">×10</p>
                     <button class="goal_box_button2">移動</button>
@@ -199,6 +206,82 @@
             </div>
             <div class="modal-fotter">
                 <button class="present_modal_close_button" onclick="closeAchieve()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- コイン購入用のモーダルウィンドウ -->
+    <div id="coinModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>コイン購入</h2>
+                <button class="modal_coin_close_button" onclick="closeCoin()">×</button>
+            </div>
+            <div class="modal-body_coin" id="modal-body">
+                <div class="modal_dia_position">
+                    <img class="modal_dia_image" src="image/diamond.png">
+                    <p class="modal_dia_text">×10</p>
+                </div>
+                <p class="modal_convert">→</p>
+                <div class="modal_coin_position">
+                    <img class="modal_dia_image" src="image/coins.png">
+                    <p class="modal_coin_text">×1000</p>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_coin_buy_button" onclick="">購入</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- フレンド用のモーダルウィンドウ -->
+    <div id="friendModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>デイリー目標</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="goal_box">
+                    <p class="goal_box_text">強化を1回完了</p>
+                    <img class="goal_box_image" src="image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button1">完了</button>
+                </div>
+                <div class="goal_box">
+                    <p class="goal_box_text">戦闘を1回完了</p>
+                    <img class="goal_box_image" src="image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button2">移動</button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="present_modal_close_button" onclick="closeFriend()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- チャット用のモーダルウィンドウ -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>デイリー目標</h2>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="goal_box">
+                    <p class="goal_box_text">強化を1回完了</p>
+                    <img class="goal_box_image" src="image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button1">完了</button>
+                </div>
+                <div class="goal_box">
+                    <p class="goal_box_text">戦闘を1回完了</p>
+                    <img class="goal_box_image" src="image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button2">移動</button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="present_modal_close_button" onclick="closeDairy()">閉じる</button>
             </div>
         </div>
     </div>
