@@ -381,6 +381,8 @@ function updateLoginData(id) {
 
 // コイン購入機能
 function updateCoin() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
@@ -412,7 +414,6 @@ function getAllChatData() {
         .order("createDate", false)
         .fetchAll()
         .then(function (results) {
-            console.log(results);
             setChat(results);
         })
         .catch(function (err) {
@@ -420,12 +421,14 @@ function getAllChatData() {
         });
 
     function setChat(results) {
+        document.getElementById("chat_type").innerHTML = '全体チャット';
+        document.getElementById("new_chat_button").onclick = updateAllChatData();
         // 初期化
         document.getElementById("chats").innerHTML = '';
         // 情報取得
         var chat = results[0];
         // 新しいHTML要素を作成
-        var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name +'：' + chat.comment +'</p></div>';
+        var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name + '：' + chat.comment + '</p></div>';
         // 作成した要素を追加
         document.getElementById("chats").insertAdjacentHTML('beforeend', itemHtml);
     }
@@ -439,7 +442,6 @@ function getGuildChatData() {
         .order("createDate", false)
         .fetchAll()
         .then(function (results) {
-            console.log(results);
             setChat(results);
         })
         .catch(function (err) {
@@ -447,13 +449,49 @@ function getGuildChatData() {
         });
 
     function setChat(results) {
+        document.getElementById("chat_type").innerHTML = 'ギルドチャット';
+        document.getElementById("new_chat_button").onclick = updateGuildChatData();
         // 初期化
         document.getElementById("chats").innerHTML = '';
         // 情報取得
         var chat = results[0];
         // 新しいHTML要素を作成
-        var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name +'：' + chat.comment +'</p></div>';
+        var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name + '：' + chat.comment + '</p></div>';
         // 作成した要素を追加
         document.getElementById("chats").insertAdjacentHTML('beforeend', itemHtml);
     }
+}
+
+// チャット更新機能
+function updateAllChatData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Chat = ncmb.DataStore(this.CHAT_DB);
+    let comment = document.getElementById('new_chat_text');
+    Chat.set("type", "all")
+         .set("name", "player")
+         .set("comment", comment)
+         .save()
+        .then(function (results) {
+            getAllChatData()
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// チャット更新機能
+function updateGuildChatData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Chat = ncmb.DataStore(this.CHAT_DB);
+    let comment = document.getElementById('new_chat_text');
+    Chat.set("type", "guild")
+         .set("name", "player")
+         .set("comment", comment)
+         .save()
+        .then(function (results) {
+            getAllChatData()
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 }

@@ -267,7 +267,7 @@
     <div id="chatModal" class="modal">
         <div class="chat_modal-content">
             <div class="modal-header">
-                <h2 class="chat_title">チャット</h2>
+                <h2 class="chat_title" id="chat_type">チャット</h2>
             </div>
             <div class="chat_modal-body" id="modal-body">
                 <div class="chat_type_button">
@@ -278,6 +278,10 @@
                     <div class="solo_chat">
                         <p class="chat_text">player：こんにちは</p>
                     </div>
+                </div>
+                <div class="new_chat">
+                    <input class="new_chat_text" id="new_chat_text">
+                    <button id="new_chat_button" class="new_chat_button" onclick="updateAllChatData()"><p class="new_chat_button_text">送信</p></button>
                 </div>
             </div>
             <div class="modal-fotter">
