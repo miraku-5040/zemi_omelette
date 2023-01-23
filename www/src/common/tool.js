@@ -10,7 +10,8 @@ class Tool{
     /**
      * ランダムな整数を返す
      */
-    static getRandomInt(max) {
-        return Math.floor(Math.random() * max);
+    static getRandomInt(max, min = 0) {
+        const int = max - min
+        return Math.floor(Math.random() * int + min);
     }
 }
