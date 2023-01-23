@@ -33,6 +33,13 @@ function toGuild() {
     setTimeout('window.location.href = "html/guild.html"', 600);
 }
 
+function toDiaBuy() {
+    // 音声再生
+    go_sound();
+    // 水晶購入画面へ遷移
+    setTimeout('window.location.href = "html/crystalBuy.html"', 600);
+}
+
 function toDayLogin() {
     // 音声再生
     go_sound();

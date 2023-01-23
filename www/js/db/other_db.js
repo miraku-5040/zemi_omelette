@@ -226,14 +226,14 @@ function getSkillData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Skill = ncmb.DataStore(this.SKILL_DB);
     Skill.order("skill_id", false)
-    .fetchAll()
+        .fetchAll()
         .then(function (results) {
             setSkillData(results);
         })
         .catch(function (err) {
             console.log(err);
         });
-    
+
     function setSkillData(results) {
         // 初期化
         document.getElementById("notice_body").innerHTML = '';
@@ -498,9 +498,9 @@ function updateAllChatData() {
     var Chat = ncmb.DataStore(this.CHAT_DB);
     let comment = document.getElementById('new_chat_text');
     Chat.set("type", "all")
-         .set("name", "player")
-         .set("comment", comment)
-         .save()
+        .set("name", "player")
+        .set("comment", comment)
+        .save()
         .then(function (results) {
             getAllChatData()
         })
@@ -515,9 +515,9 @@ function updateGuildChatData() {
     var Chat = ncmb.DataStore(this.CHAT_DB);
     let comment = document.getElementById('new_chat_text');
     Chat.set("type", "guild")
-         .set("name", "player")
-         .set("comment", comment)
-         .save()
+        .set("name", "player")
+        .set("comment", comment)
+        .save()
         .then(function (results) {
             getAllChatData()
         })
