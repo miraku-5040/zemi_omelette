@@ -254,6 +254,7 @@ function openChat() {
     // モーダルウィンドウを開く
     const modal = document.getElementById('chatModal');
     modal.style.display = 'block';
+    getAllChatData();
 }
 
 function closeChat() {

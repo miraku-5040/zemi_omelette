@@ -271,12 +271,12 @@
             </div>
             <div class="chat_modal-body" id="modal-body">
                 <div class="chat_type_button">
-                    <button class="all_chat_type" onclick=""><p class="all_chat_type_text">全体</p></button>
-                    <button class="guild_chat_type" onclick=""><p class="guild_chat_type_text">ギルド</p></button>
+                    <button class="all_chat_type" onclick="getAllChatData()"><p class="all_chat_type_text">全体</p></button>
+                    <button class="guild_chat_type" onclick="getGuildChatData()"><p class="guild_chat_type_text">ギルド</p></button>
                 </div>
-                <div class="chats">
+                <div class="chats" id="chats">
                     <div class="solo_chat">
-                        <p class="chat_text">player:こんにちは</p>
+                        <p class="chat_text">player：こんにちは</p>
                     </div>
                 </div>
             </div>

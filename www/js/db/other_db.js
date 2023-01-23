@@ -8,6 +8,7 @@ var PRESENT_DB = "present";
 var ITEM_DB = "item";
 var SKILL_DB = "skill";
 var DAIRY_DB = "dairy";
+var CHAT_DB = "chat";
 
 // プレゼントデータ取得
 function getPresentData() {
@@ -401,4 +402,58 @@ function updateCoin() {
         .catch(function (err) {
             console.log(err);
         });
+}
+
+// チャット読み込み機能
+function getAllChatData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Chat = ncmb.DataStore(this.CHAT_DB);
+    Chat.equalTo("type", "all")
+        .order("createDate", false)
+        .fetchAll()
+        .then(function (results) {
+            console.log(results);
+            setChat(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    function setChat(results) {
+        // 初期化
+        document.getElementById("chats").innerHTML = '';
+        // 情報取得
+        var chat = results[0];
+        // 新しいHTML要素を作成
+        var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name +'：' + chat.comment +'</p></div>';
+        // 作成した要素を追加
+        document.getElementById("chats").insertAdjacentHTML('beforeend', itemHtml);
+    }
+}
+
+// チャット読み込み機能
+function getGuildChatData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Chat = ncmb.DataStore(this.CHAT_DB);
+    Chat.equalTo("type", "guild")
+        .order("createDate", false)
+        .fetchAll()
+        .then(function (results) {
+            console.log(results);
+            setChat(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    function setChat(results) {
+        // 初期化
+        document.getElementById("chats").innerHTML = '';
+        // 情報取得
+        var chat = results[0];
+        // 新しいHTML要素を作成
+        var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name +'：' + chat.comment +'</p></div>';
+        // 作成した要素を追加
+        document.getElementById("chats").insertAdjacentHTML('beforeend', itemHtml);
+    }
 }
