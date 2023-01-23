@@ -339,35 +339,31 @@ function selected(element) {
 }
 
 // 武器入れ替えjs
-function changeSoad() {
+function changeSoad(element, id) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
     // 装備を入れ替える
     var soad = document.getElementById('soad').src;
-    // ここが出ていない
-    var element = document.getElementById('weapon').value;
-    document.getElementById('soad').src = element;
-    document.getElementById('weapon').src = soad;
+    document.getElementById('soad').src = element.id;
+    document.getElementById(id).src = soad;
 }
 
-function changeShield() {
+function changeShield(element, id) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
     // 装備を入れ替える
     const shield = document.getElementById('shield').src;
-    const selectWeapon = document.getElementById('weapon').src;
-    document.getElementById('shield').src = selectWeapon;
-    document.getElementById('weapon').src = shield;
+    document.getElementById('shield').src = element.id;
+    document.getElementById(id).src = shield;
 }
 
-function changeDecoration() {
+function changeDecoration(element, id) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
     // 装備を入れ替える
     const decoration = document.getElementById('decoration').src;
-    const selectWeapon = document.getElementById('weapon').src;
-    document.getElementById('decoration').src = selectWeapon;
-    document.getElementById('weapon').src = decoration;
+    document.getElementById('decoration').src = element.id;
+    document.getElementById(id).src = decoration;
 }
 
 // 装備js

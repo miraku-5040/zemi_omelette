@@ -222,6 +222,34 @@ function getNoticeData() {
 }
 
 // スキル機能
+function getSkillData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Skill = ncmb.DataStore(this.SKILL_DB);
+    Skill.order("skill_id", false)
+    .fetchAll()
+        .then(function (results) {
+            setSkillData(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    
+    function setSkillData(results) {
+        // 初期化
+        document.getElementById("notice_body").innerHTML = '';
+        // 情報取得
+        for (var i = 0; i <= results.length - 1; i++) {
+            document.getElementById("fire_level").innerHTML = 'Lv.' + results[0].skill_level;
+            document.getElementById("water_level").innerHTML = 'Lv.' + results[1].skill_level;
+            document.getElementById("ice_level").innerHTML = 'Lv.' + results[2].skill_level;
+            document.getElementById("wind_level").innerHTML = 'Lv.' + results[3].skill_level;
+            document.getElementById("thunder_level").innerHTML = 'Lv.' + results[4].skill_level;
+            document.getElementById("light_level").innerHTML = 'Lv.' + results[5].skill_level;
+            document.getElementById("dark_level").innerHTML = 'Lv.' + results[6].skill_level;
+        }
+    }
+}
+
 function updateSkillData(skill) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -234,6 +262,7 @@ function updateSkillData(skill) {
             var skill_level = results[0];
             results.set("sum", Number(skill_level.sum) + 1);
             results.update();
+            getSkillData();
         })
         .catch(function (err) {
             console.log(err);
@@ -246,6 +275,7 @@ function updateSkillData(skill) {
             var item = results[0];
             results.set("sum", Number(item.sum) - 1);
             results.update();
+            getskillItemData();
         })
         .catch(function (err) {
             console.log(err);
@@ -266,7 +296,7 @@ function getskillItemData() {
             console.log(err);
         });
 
-    // 通知の題名と文章をHTMLに埋め込む
+    // スキル強化素材残量を表示する
     function setItemText(results) {
         // 情報取得
         for (var i = 0; i <= results.length - 1; i++) {
@@ -490,6 +520,38 @@ function updateGuildChatData() {
          .save()
         .then(function (results) {
             getAllChatData()
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// コイン増加
+function updateCoinUp(num) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results.set("money", Number(item.money + Number(num)));
+            results.update();
+            getMoneyCount();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// 水晶増加
+function updateDiaUp(num) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results.set("crystal", Number(item.money + Number(num)));
+            results.update();
+            getMoneyCount();
         })
         .catch(function (err) {
             console.log(err);
