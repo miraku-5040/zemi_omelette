@@ -319,7 +319,7 @@ function getNomalLoginData() {
         .catch(function (err) {
             console.log(err);
         });
-    
+
     function setLoginText(results) {
         // 初期化
         document.getElementById("nomalLogin").innerHTML = '';
@@ -347,7 +347,7 @@ function getRareLoginData() {
         .catch(function (err) {
             console.log(err);
         });
-    
+
     function setLoginText(results) {
         // 初期化
         document.getElementById("rareLogin").innerHTML = '';
@@ -372,6 +372,31 @@ function updateLoginData(id) {
             results.set("flag", 1);
             results.update();
             getNomalLoginData();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// コイン購入機能
+function updateCoin() {
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results.set("money", Number(item.money + 1000));
+            results.update();
+            getMoneyCount();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results.set("crystal", Number(item.money - 10));
+            results.update();
+            getCrystalCount();
         })
         .catch(function (err) {
             console.log(err);

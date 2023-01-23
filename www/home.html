@@ -94,6 +94,10 @@
         <img class="event_adv" src="image/event.png" onclick="toEvent()">
         <img class="login_adv" src="image/login.png" onclick="toDayLogin()">
 
+        <button class="chat_open" onclick="openChat()">
+            <p class="chat_open_text">チャット</p>
+        </button>
+
         <button class="go_town" onclick="goTown()">
             <img class="town_image" src="image/town/gotown.png">
             <p class="town_text">街へ</p>
@@ -229,7 +233,7 @@
                 </div>
             </div>
             <div class="modal-fotter">
-                <button class="modal_coin_buy_button" onclick="">購入</button>
+                <button class="modal_coin_buy_button" onclick="updateCoin()">購入</button>
             </div>
         </div>
     </div>
@@ -238,50 +242,46 @@
     <div id="friendModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>デイリー目標</h2>
+                <h2>フレンド</h2>
             </div>
-            <div class="modal-body" id="modal-body">
-                <div class="goal_box">
-                    <p class="goal_box_text">強化を1回完了</p>
-                    <img class="goal_box_image" src="image/coins.png">
-                    <p class="goal_box_count">×1000</p>
-                    <button class="goal_box_button1">完了</button>
+            <div class="modal-body1" id="notice_body">
+                <div class="members_posiiton">
+                    <p class="member_name">プレイヤー１</p>
+                    <p class="member_level">Lv.10</p>
                 </div>
-                <div class="goal_box">
-                    <p class="goal_box_text">戦闘を1回完了</p>
-                    <img class="goal_box_image" src="image/coins.png">
-                    <p class="goal_box_count">×1000</p>
-                    <button class="goal_box_button2">移動</button>
+
+                <div class="members_posiiton">
+                    <p class="member_name">プレイヤー２</p>
+                    <p class="member_level">Lv.10</p>
                 </div>
             </div>
             <div class="modal-fotter">
-                <button class="present_modal_close_button" onclick="closeFriend()">閉じる</button>
+                <button class="guild_modal_close_button" onclick="closeFriend()">閉じる</button>
             </div>
         </div>
     </div>
 
+
+
     <!-- チャット用のモーダルウィンドウ -->
     <div id="chatModal" class="modal">
-        <div class="modal-content">
+        <div class="chat_modal-content">
             <div class="modal-header">
-                <h2>デイリー目標</h2>
+                <h2 class="chat_title">チャット</h2>
             </div>
-            <div class="modal-body" id="modal-body">
-                <div class="goal_box">
-                    <p class="goal_box_text">強化を1回完了</p>
-                    <img class="goal_box_image" src="image/coins.png">
-                    <p class="goal_box_count">×1000</p>
-                    <button class="goal_box_button1">完了</button>
+            <div class="chat_modal-body" id="modal-body">
+                <div class="chat_type_button">
+                    <button class="all_chat_type" onclick=""><p class="all_chat_type_text">全体</p></button>
+                    <button class="guild_chat_type" onclick=""><p class="guild_chat_type_text">ギルド</p></button>
                 </div>
-                <div class="goal_box">
-                    <p class="goal_box_text">戦闘を1回完了</p>
-                    <img class="goal_box_image" src="image/coins.png">
-                    <p class="goal_box_count">×1000</p>
-                    <button class="goal_box_button2">移動</button>
+                <div class="chats">
+                    <div class="solo_chat">
+                        <p class="chat_text">player:こんにちは</p>
+                    </div>
                 </div>
             </div>
             <div class="modal-fotter">
-                <button class="present_modal_close_button" onclick="closeDairy()">閉じる</button>
+                <button class="chat_modal_close_button" onclick="closeChat()">閉じる</button>
             </div>
         </div>
     </div>
