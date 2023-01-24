@@ -277,14 +277,14 @@
 
 .event_adv {
     position: absolute;
-    transform: translate(-58px, -30px);
+    transform: translate(-58px, -40px);
     width: 190px;
 }
 
 .login_adv {
     position: absolute;
     top: 100px;
-    transform: translate(-53px, -50px);
+    transform: translate(-53px, -60px);
     width: 183px;
 }
 
@@ -312,7 +312,7 @@
     border-radius: 0;
     position: absolute;
     top: 130px;
-    transform: translateX(-30px);
+    transform: translateX(-35px);
     color: rgb(255, 229, 82);
     width: 78px;
     height: 70px;
@@ -367,7 +367,8 @@
     position: relative;
     transform: translate(-5px, -10px);
     font-weight: bold;
-    font-size: 10px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
 }
 
 .buttons {

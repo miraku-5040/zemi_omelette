@@ -32,11 +32,20 @@
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toHome()">←</button>
 
-    <p class="guild_name">ギルド名</p>
+    <p class="guild_name">Omelette</p>
     <div class="content_position">
-        <button class="member" onclick="memberOpen()">メンバー</button>
-        <button class="reward" onclick="guildRewardOpen()">報酬</button>
-        <button class="guild_shop" onclick="toGuildShop()">ギルドショップ</button>
+        <button class="member" onclick="memberOpen()">
+            <img class="member_button_image" src="../image/guild_member.png">
+            <p class="member_button_text">メンバー</p>
+        </button>
+        <button class="reward" onclick="guildRewardOpen()">
+            <img class="reward_button_image" src="../image/guild_reward.png">
+            <p class="reward_button_text">報酬</p>
+        </button>
+        <button class="guild_shop" onclick="toGuildShop()">
+            <img class="guild_button_image" src="../image/guild_shop.png">
+            <p class="guild_button_text">ギルドショップ</p>
+        </button>
     </div>
 
     <!-- メンバー用のモーダルウィンドウ -->
@@ -47,15 +56,24 @@
             </div>
             <div class="modal-body1" id="notice_body">
                 <div class="members_posiiton">
+                    <img class="member_image" src="../image/player_icon.png">
                     <p class="member_name">プレイヤー１</p>
                     <p class="member_level">Lv.10</p>
-                    <p class="member_role">リーダー</p>
+                    <p class="member_role1">リーダー</p>
                 </div>
 
                 <div class="members_posiiton">
+                    <img class="member_image" src="../image/player_icon.png">
                     <p class="member_name">プレイヤー２</p>
                     <p class="member_level">Lv.10</p>
-                    <p class="member_role">サブリーダー</p>
+                    <p class="member_role2">サブリーダー</p>
+                </div>
+
+                <div class="members_posiiton">
+                    <img class="member_image" src="../image/player_icon.png">
+                    <p class="member_name">プレイヤー２</p>
+                    <p class="member_level">Lv.10</p>
+                    <p class="member_role1">メンバー</p>
                 </div>
             </div>
             <div class="modal-fotter">
@@ -78,7 +96,7 @@
                     <button class="goal_box_button1">完了</button>
                 </div>
                 <div class="goal_box">
-                    <p  class="goal_box_text">戦闘を1回完了</p>
+                    <p class="goal_box_text">戦闘を1回完了</p>
                     <img class="goal_box_image" src="../image/coins.png">
                     <p class="goal_box_count">×1000</p>
                     <button class="goal_box_button2">移動</button>

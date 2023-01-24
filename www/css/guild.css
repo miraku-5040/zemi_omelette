@@ -50,9 +50,19 @@
     font-size: 15px;
     font-weight: bold;
     position: relative;
-    top: 15px;
+    top: 25px;
     width: 130px;
     height: 100px;
+}
+
+.member_button_image {
+    width: 50px;
+    height: 60px;
+}
+
+.member_button_text {
+    position: relative;
+    transform: translateY(-15px);
 }
 
 .reward {
@@ -65,10 +75,22 @@
     font-size: 15px;
     font-weight: bold;
     position: relative;
-    top: 15px;
+    top: 5px;
     left: 10px;
     width: 100px;
     height: 100px;
+}
+
+.reward_button_image {
+    width: 50px;
+    height: 40px;
+    position: relative;
+    top: 15px;
+}
+
+.reward_button_text {
+    position: relative;
+    top: 5px;
 }
 
 .guild_shop {
@@ -85,6 +107,18 @@
     left: 20px;
     width: 200px;
     height: 100px;
+}
+
+.guild_button_image {
+    width: 60px;
+    height: 50px;
+    position: relative;
+    top: 10px;
+}
+
+.guild_button_text {
+    position: relative;
+    transform: translateY(-5px);
 }
 
 /* モーダルウィンドウの設定 */
@@ -236,24 +270,40 @@
 }
 
 .members_posiiton {
-    margin-bottom: -70px;
+    margin-bottom: -140px;
+}
+
+.member_image {
+    width: 40px;
+    height: 45px;
+    position: relative;
+    top: 10px;
 }
 
 .member_name {
     font-size: 18px;
     position: relative;
+    transform: translateY(-60px);
+    left: 50px;
 }
 
 .member_level {
     font-size: 18px;
     position: relative;
-    transform: translateY(-18px);
-    left: 2px;
+    transform: translateY(-83px);
+    left: 52px;
 }
 
-.member_role {
+.member_role1 {
     font-size: 18px;
     position: relative;
-    transform: translateY(-85px);
+    transform: translateY(-145px);
     left: 350px;
+}
+
+.member_role2 {
+    font-size: 18px;
+    position: relative;
+    transform: translateY(-145px);
+    left: 315px;
 }

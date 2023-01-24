@@ -36,8 +36,6 @@
 
 /* 項目切り替えボタン */
 .type_buttons {
-    flex-wrap: wrap;
-    overflow: scroll;
     position: absolute;
     top: 60px;
     left: 40px;
@@ -108,11 +106,13 @@
 .pictoriary_content {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+    overflow: scroll;
     background-color: white;
     position: absolute;
     top: 90px;
     left: 200px;
-    width: 200px;
+    width: 400px;
     height: 200px;
     padding: 0px 20px;
 }
