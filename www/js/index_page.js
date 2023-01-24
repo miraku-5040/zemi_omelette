@@ -5,11 +5,11 @@ function toReady() {
     setTimeout('window.location.href = "html/ready.html"', 600);
 }
 
-function goTown() {
+function toMap() {
     // 音声再生
     go_sound();
     // 街画面へ遷移
-    setTimeout('window.location.href = "html/town.html"', 600);
+    setTimeout('window.location.href = "html/map.html"', 600);
 }
 
 function toPict() {

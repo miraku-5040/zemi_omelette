@@ -395,10 +395,6 @@ function setStoryTitle() {
     document.getElementById('pict_title').innerHTML = "物語";
 }
 
-function setStoryTitle() {
-    document.getElementById('pict_title').innerHTML = "キャラクター";
-}
-
 // 音声再生用のjs
 // 画面遷移用の音声再生
 function go_sound() {

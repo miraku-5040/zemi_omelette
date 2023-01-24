@@ -113,9 +113,16 @@
     border-radius: 0;
     position: absolute;
     top: 275px;
-    left: 605px;
+    left: 607px;
     width: 40px;
     height: 40px;
+}
+
+.dairy_button_image {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    transform: translate(-14px, -3px);
 }
 
 .dairy_button_text {
@@ -124,7 +131,7 @@
     font-weight: bold;
     position: absolute;
     top: 287px;
-    left: 605px;
+    left: 607px;
 }
 
 /* 実績目標確認ボタン */
@@ -137,9 +144,16 @@
     border-radius: 0;
     position: absolute;
     top: 275px;
-    left: 555px;
+    left: 559px;
     width: 40px;
     height: 40px;
+}
+
+.achieve_button_image {
+    width: 20px;
+    height: 30px;
+    position: relative;
+    transform: translate(-7px, -3px);
 }
 
 .achieve_button_text {
@@ -148,7 +162,7 @@
     font-weight: bold;
     position: absolute;
     top: 287px;
-    left: 565px;
+    left: 569px;
 }
 
 /* ギルド画面遷移ボタン */
@@ -161,9 +175,16 @@
     border-radius: 0;
     position: absolute;
     top: 275px;
-    left: 505px;
+    left: 511px;
     width: 40px;
     height: 40px;
+}
+
+.guild_button_image {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    transform: translate(-12px, -3px);
 }
 
 .guild_button_text {
@@ -171,8 +192,8 @@
     font-size: 10px;
     font-weight: bold;
     position: absolute;
-    top: 287px;
-    left: 510px;
+    top: 289px;
+    left: 516px;
 }
 
 /* フレンド確認ボタン */
@@ -185,7 +206,7 @@
     border-radius: 0;
     position: absolute;
     top: 275px;
-    left: 455px;
+    left: 461px;
     width: 40px;
     height: 40px;
 }
@@ -196,7 +217,7 @@
     font-weight: bold;
     position: absolute;
     top: 287px;
-    left: 455px;
+    left: 461px;
 }
 
 /* キャラクター画像 */
@@ -620,18 +641,27 @@
 }
 
 .members_posiiton {
-    margin-bottom: -30px;
+    margin-bottom: -90px;
+}
+
+.member_image {
+    width: 40px;
+    height: 45px;
+    position: relative;
+    top: 10px;
 }
 
 .member_name {
     font-size: 18px;
     position: relative;
+    transform: translateY(-50px);
+    left: 50px;
 }
 
 .member_level {
     font-size: 18px;
     position: relative;
-    transform: translateY(-43px);
+    transform: translateY(-94px);
     left: 350px;
 }
 

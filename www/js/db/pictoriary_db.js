@@ -165,7 +165,7 @@ function getStoryData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var item = results[i];
             // 新しいHTML要素を作成
-            var itemHtml = '<div class="pictoriary_item"><img class="pictoriary_item_image"><p class="pictoriary_item_text">第' + (i + 1) + '話</p></div>';
+            var itemHtml = '<div class="pictoriary_item"><img class="pictoriary_item_image" src="../image/book_icon.png"><p class="pictoriary_item_text1">第' + (i + 1) + '話</p></div>';
             // 作成した要素を追加
             document.getElementById("pictorial").insertAdjacentHTML('beforeend', itemHtml);
         }
