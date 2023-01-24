@@ -25,15 +25,19 @@
 <body class="content_position" onload="soundBGM()">
     <img class="background_image" src="../image/background/cave.png">
     <h1 class="setting_title">設定画面</h1>
-    <div class="changes">
-        <p class="setting_text">画面の明るさ</p>
-        <input class="bar" type="range" min="0" max="11">
+    <div class="settings">
+        <div class="changes">
+            <p class="setting_text">画面の明るさ</p>
+            <input class="bar" type="range" min="0" max="11">
+        </div>
+        <div class="changes">
+            <p class="setting_text">音量</p>
+            <input class="bar" type="range" min="0" max="11">
+        </div>
     </div>
     <br>
     <div class="setting_buttons">
         <button class="setting_button" onclick="toHome()"><p class="setting_button_text1">ホーム画面へ</p><div class="button_frame1"></div></button>
-        <button class="setting_button"><p class="setting_button_text2">パスワード<br>変更</p><div class="button_frame2"></div></button>
-        <button class="setting_button" onclick="toStart()"><p class="setting_button_text2">タイトル<br>画面</p><div class="button_frame2"></div></button>
         <button class="setting_button" onclick="toHome()"><p class="setting_button_text1">変更</p><div class="button_frame1"></div></button>
     </div>
 </body>

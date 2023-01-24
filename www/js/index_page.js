@@ -19,6 +19,13 @@ function toPict() {
     setTimeout('window.location.href = "html/pictoriary.html"', 600);
 }
 
+function toCharaInfo() {
+    // 音声再生
+    go_sound();
+    // 図鑑画面へ遷移
+    setTimeout('window.location.href = "html/character_info.html"', 600);
+}
+
 function toInfo() {
     // 音声再生
     go_sound();
@@ -101,6 +108,13 @@ function toSet() {
     go_sound();
     // 設定画面へ遷移
     setTimeout('window.location.href = "html/setting.html"', 600);
+}
+
+function toStart() {
+    // 音声再生
+    go_sound();
+    // スタート画面へ遷移
+    setTimeout('window.location.href = "html/start.html"', 600);
 }
 
 // 音声再生用のjs
@@ -270,6 +284,27 @@ function closeChat() {
     audio.play();
     // モーダルウィンドウを閉じる
     const modal = document.getElementById('chatModal');
+    modal.style.display = 'none';
+}
+
+// チャット用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function openMenu() {
+    // 音声再生
+    audio = new Audio("sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('settingModal');
+    modal.style.display = 'block';
+    getAllChatData();
+}
+
+function closeMenu() {
+    // 音声再生
+    audio = new Audio("sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('settingModal');
     modal.style.display = 'none';
 }
 

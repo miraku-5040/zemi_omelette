@@ -55,7 +55,7 @@
     </div>
     <!-- 設定画面への遷移ボタン -->
     <div class="setting">
-        <img class="setting_image" src="image/gear.png" onclick="toSet()">
+        <img class="setting_image" src="image/gear.png" onclick="openMenu()">
     </div>
     <!-- その他のボタン -->
     <div class="other_icons">
@@ -263,7 +263,23 @@
         </div>
     </div>
 
-
+    <!-- メニュー用のモーダルウィンドウ -->
+    <div id="settingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>メニュー</h2>
+            </div>
+            <div class="menu_modal-body">
+                <button class="setting_button" onclick="toSet()">設定</button>
+                <button class="setting_button">データ引継ぎ</button>
+                <button class="setting_button" onclick="toStart()">タイトル画面へ</button>
+                <button class="setting_button" onclick="toCharaInfo()">キャラクター</button>
+            </div>
+            <div class="modal-fotter">
+                <button class="menu_modal_close_button" onclick="closeMenu()">閉じる</button>
+            </div>
+        </div>
+    </div>
 
     <!-- チャット用のモーダルウィンドウ -->
     <div id="chatModal" class="modal">

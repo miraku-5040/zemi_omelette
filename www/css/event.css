@@ -49,6 +49,14 @@
     left: 320px;
 }
 
+.event_point_image {
+    width: 25px;
+    height: 30px;
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+
 .content_position {
     position: absolute;
     top: 130px;
@@ -114,15 +122,15 @@
 
 .event_point_count {
     position: relative;
-    transform: translateY(-20px);
-    left: 10px;
+    transform: translateY(-55px);
+    left: 40px;
     font-size: 25px;
 }
 
 .event_point_text {
     position: relative;
-    transform: translateY(-70px);
-    left: 220px;
+    transform: translateY(-105px);
+    left: 230px;
     font-size: 20px;
 }
 
