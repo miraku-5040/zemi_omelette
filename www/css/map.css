@@ -4,3 +4,61 @@ body {
     background-repeat: no-repeat;
     background-size: 670px 380px;
 }
+
+.map_image {
+    width: 580px;
+    height: 330px;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+}
+
+.map_town {
+    position: absolute;
+    left: 150px;
+    z-index: 10;
+}
+
+.map_town_image {
+    position: relative;
+    top: 50px;
+    transform: translateX(-10px);
+    width: 50px;
+    height: 50px;
+}
+
+.map_town_text {
+    position: relative;
+    top: 18px;
+    left: 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.map_ping_image {
+    width: 30px;
+    height: 50px;
+}
+
+.map_home {
+    position: absolute;
+    top: 125px;
+    left: 380px;
+    z-index: 10;
+}
+
+.map_home_image {
+    position: relative;
+    top: 50px;
+    transform: translateX(-10px);
+    width: 50px;
+    height: 40px;
+}
+
+.map_home_text {
+    position: relative;
+    top: 23px;
+    transform: translateX(-7px);
+    font-weight: bold;
+    font-size: 15px;
+}

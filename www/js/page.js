@@ -12,6 +12,13 @@ function toReady() {
     setTimeout('window.location.href = "../html/ready.html"', 600);
 }
 
+function toMap() {
+    // 音声再生
+    go_sound();
+    // 地図画面へ遷移
+    setTimeout('window.location.href = "map.html"', 600);
+}
+
 function goTown() {
     // 音声再生
     go_sound();

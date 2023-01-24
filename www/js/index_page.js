@@ -8,7 +8,7 @@ function toReady() {
 function toMap() {
     // 音声再生
     go_sound();
-    // 街画面へ遷移
+    // 地図画面へ遷移
     setTimeout('window.location.href = "html/map.html"', 600);
 }
 
