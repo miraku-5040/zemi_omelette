@@ -20,21 +20,18 @@
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- イベントガチャ画面のCSS -->
-    <link rel="stylesheet" href="../css/gatya.css">
     <link rel="stylesheet" href="../css/event.css">
-    <script>
-    </script>
 </head>
 
-<body onload="soundEventBGM()">
+<body onload="soundEventBGM();getEventPointCount()">
     <img class="background_image" src="../image/background/event.jpg">
     <!-- ホーム画面へ戻るボタン -->
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toEvent()">←</button>
     <!-- ダイヤの残量 -->
     <div class="least_dia">
-        <img class="least_dia_image" src="../image/diamond.png">
-        <p id="crystal" class="least_dia_text">100</p>
+        <img class="least_dia_image" src="../image/event_coins.png">
+        <p id="point" class="least_dia_text">100</p>
     </div>
     <!-- ガチャ画面の表示 -->
     <div data-role="page" id="gatya" data-role="content">
@@ -44,14 +41,14 @@
             <button class="pull" onclick="toPullItem1()">1連
                 <div class="gatya_button_frame"></div>
                 <div class="dia_frame">
-                <img class="dia_frame_image" src="../image/diamond.png">
+                <img class="dia_frame_image" src="../image/event_coins.png">
                 <p class="dia_frame_text">×20</p>
                 </div>
                 </button>
             <button class="pull" onclick="toPullItem10()">10連
                 <div class="gatya_button_frame"></div>
                 <div class="dia_frame">
-                <img class="dia_frame_image" src="../image/diamond.png">
+                <img class="dia_frame_image" src="../image/event_coins.png">
                 <p class="dia_frame_text">×200</p>
                 </div>
             </button>

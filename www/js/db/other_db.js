@@ -195,6 +195,76 @@ function getCrystalCount() {
     }
 }
 
+// イベントポイント取得
+function getEventPointCount() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            setCharacterData(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // コイン情報をHTMLに埋め込む
+    function setCharacterData(results) {
+        var character = results[0];
+        document.getElementById("point").innerHTML = character.event_point;
+    }
+}
+
+// ギルドコイン取得
+function getGuildCoinCount() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            setCharacterData(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // コイン情報をHTMLに埋め込む
+    function setCharacterData(results) {
+        var character = results[0];
+        document.getElementById("money").innerHTML = character.guild_coin;
+    }
+}
+
+// 水晶減少
+function updateCrystalCount(crystal) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results.set("crystal", Number(item.crystal - Number(crystal)));
+            results.update();
+            getCrystalCount();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// イベントポイント減少
+function updateEventPointCount(point) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results.set("event_point", Number(item.event_point - Number(point)));
+            results.update();
+            getEventPointCount();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
 // 通知情報取得
 function getNoticeData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
@@ -310,7 +380,7 @@ function getskillItemData() {
     }
 }
 
-// ショップ(アイテム)機能
+// ショップ機能
 function buy(item) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -331,6 +401,35 @@ function buy(item) {
         .then(function (results) {
             var item = results[0];
             results.set("money", Number(item.money - 2000));
+            results.update();
+            getMoneyCount();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+// ショップ(ギルド)機能
+function buy(item) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    // アイテム追加
+    Item.equalTo("item_id", Number(item))
+        .fetch()
+        .then(function (results) {
+            var item = results[0];
+            results.set("sum", Number(item.sum) + 1);
+            results.update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    // ギルドコイン減少
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results.set("guild_coin", Number(item.money - 2000));
             results.update();
             getMoneyCount();
         })

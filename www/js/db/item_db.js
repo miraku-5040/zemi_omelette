@@ -197,6 +197,7 @@ function pullItem1() {
     Item.equalTo("item_id", Number(random))
         .fetchAll()
         .then(function (results) {
+            updateEventPointCount(20);
             var item = results[0];
             // 背景色変更
             var weaponHtml = '<img class="result_image" src="' + item.item_image +'">';
@@ -219,6 +220,7 @@ function pullItem10() {
     Item.equalTo("item_id", Number(random))
         .fetchAll()
         .then(function (results) {
+            updateEventPointCount(200);
             var item = results[0];
             // 背景色変更
             var weaponHtml = '<img class="result_image" src="' + item.item_image +'">';
