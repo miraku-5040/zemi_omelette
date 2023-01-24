@@ -9,6 +9,7 @@ var ITEM_DB = "item";
 var SKILL_DB = "skill";
 var DAIRY_DB = "dairy";
 var CHAT_DB = "chat";
+var ENEMY_DB = "enemy";
 
 // プレゼントデータ取得
 function getPresentData() {
@@ -235,18 +236,20 @@ function getSkillData() {
         });
 
     function setSkillData(results) {
-        // 初期化
-        document.getElementById("notice_body").innerHTML = '';
-        // 情報取得
-        for (var i = 0; i <= results.length - 1; i++) {
-            document.getElementById("fire_level").innerHTML = 'Lv.' + results[0].skill_level;
-            document.getElementById("water_level").innerHTML = 'Lv.' + results[1].skill_level;
-            document.getElementById("ice_level").innerHTML = 'Lv.' + results[2].skill_level;
-            document.getElementById("wind_level").innerHTML = 'Lv.' + results[3].skill_level;
-            document.getElementById("thunder_level").innerHTML = 'Lv.' + results[4].skill_level;
-            document.getElementById("light_level").innerHTML = 'Lv.' + results[5].skill_level;
-            document.getElementById("dark_level").innerHTML = 'Lv.' + results[6].skill_level;
-        }
+        var skill = results[0];
+        document.getElementById("fire_level").innerHTML = 'Lv.' + skill.skill_level;
+        skill = results[1];
+        document.getElementById("water_level").innerHTML = 'Lv.' + skill.skill_level;
+        skill = results[2];
+        document.getElementById("ice_level").innerHTML = 'Lv.' + skill.skill_level;
+        skill = results[3];
+        document.getElementById("wind_level").innerHTML = 'Lv.' + skill.skill_level;
+        skill = results[4];
+        document.getElementById("thunder_level").innerHTML = 'Lv.' + skill.skill_level;
+        skill = results[5];
+        document.getElementById("light_level").innerHTML = 'Lv.' + skill.skill_level;
+        skill = results[6];
+        document.getElementById("dark_level").innerHTML = 'Lv.' + skill.skill_level;
     }
 }
 

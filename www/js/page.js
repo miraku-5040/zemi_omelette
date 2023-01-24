@@ -395,6 +395,10 @@ function setStoryTitle() {
     document.getElementById('pict_title').innerHTML = "物語";
 }
 
+function setStoryTitle() {
+    document.getElementById('pict_title').innerHTML = "キャラクター";
+}
+
 // 音声再生用のjs
 // 画面遷移用の音声再生
 function go_sound() {
@@ -452,6 +456,30 @@ function ColumnButtonInitializationPlus() {
 function soundBGM() {
     // BGM再生
     audio = new Audio("../sound/BGM.m4a");
+    audio.loop = true;
+    audio.volume = 0.1;
+    audio.play();
+}
+
+function soundEventBGM() {
+    // BGM再生
+    audio = new Audio("../sound/eventBGM.m4a");
+    audio.loop = true;
+    audio.volume = 0.1;
+    audio.play();
+}
+
+function soundCityBGM() {
+    // BGM再生
+    audio = new Audio("../sound/cityBGM.m4a");
+    audio.loop = true;
+    audio.volume = 0.1;
+    audio.play();
+}
+
+function soundGuildBGM() {
+    // BGM再生
+    audio = new Audio("../sound/guildBGM.m4a");
     audio.loop = true;
     audio.volume = 0.1;
     audio.play();

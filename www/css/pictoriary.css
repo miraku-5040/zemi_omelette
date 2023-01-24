@@ -36,10 +36,12 @@
 
 /* 項目切り替えボタン */
 .type_buttons {
+    flex-wrap: wrap;
     overflow: scroll;
     position: absolute;
     top: 60px;
     left: 40px;
+    height: 300px;
 }
 
 /* ボタンの名前 */
@@ -91,6 +93,11 @@
 .story_button {
     position: relative;
     transform: translateY(-250px);
+}
+
+.chara_button {
+    position: relative;
+    transform: translateY(-300px);
 }
 
 /* 図鑑の内容 */

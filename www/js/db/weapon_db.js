@@ -53,10 +53,11 @@ function getSoloPowerWeaponData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    LoadWeapon.equalTo("loadweapon_id", 1)
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
         .then(function (results) {
-            Weapon.equalTo("weapon_id", results.weapon_id)
+            weaponId = results[0];
+            Weapon.equalTo("weapon_id", weaponId.weapon_id)
                 .fetchAll()
                 .then(function (results) {
                     setDecorationImage(results);
