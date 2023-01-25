@@ -5,6 +5,14 @@
     width: 700px;
 }
 
+.clock_image {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 80px;
+    left: 210px;
+}
+
 /* スキル画面の枠 */
 .skill_frame {
     margin: 30px 30px;

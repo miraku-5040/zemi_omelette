@@ -21,7 +21,7 @@ function toMap() {
 
 function goTown() {
     // 音声再生
-    go_sound();
+    go_movie();
     // 街画面へ遷移
     setTimeout('window.location.href = "town.html"', 600);
 }
@@ -407,6 +407,11 @@ function setStoryTitle() {
 function go_sound() {
     audio = new Audio("../sound/select.m4a");
     audio.play();
+}
+
+function go_movie() {
+    video = new Video("../image/train.gif");
+    video.play();
 }
 
 // 項目ボタンのCSS初期化
