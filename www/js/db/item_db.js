@@ -196,12 +196,12 @@ function pullItem1() {
     Item.equalTo("item_id", Number(random))
         .fetchAll()
         .then(function (results) {
-            updateEventPointCount(20);
             var item = results[0];
             // 背景色変更
             var weaponHtml = '<img class="result_image" src="' + item.item_image +'">';
             // 作成した要素を追加
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+            updateEventPointCount(20);
         })
         .catch(function (err) {
             console.log(err);
@@ -219,12 +219,12 @@ function pullItem10() {
     Item.equalTo("item_id", Number(random))
         .fetchAll()
         .then(function (results) {
-            updateEventPointCount(200);
             var item = results[0];
             // 背景色変更
             var weaponHtml = '<img class="result_image" src="' + item.item_image +'">';
             // 作成した要素を追加
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+            updateEventPointCount(200);
         })
         .catch(function (err) {
             console.log(err);

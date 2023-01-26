@@ -200,11 +200,11 @@ function pullWeapon1() {
     Weapon.equalTo("weapon_id", Number(random))
         .fetchAll()
         .then(function (results) {
-            updateCrystalCount(200);
             var weapon = results[0];
             var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
             // 作成した要素を追加
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+            updateCrystalCount(200);
         })
         .catch(function (err) {
             console.log(err);
@@ -222,12 +222,12 @@ function pullWeapon10() {
         Weapon.equalTo("weapon_id", Number(random))
             .fetchAll()
             .then(function (results) {
-                updateCrystalCount(2000)
                 var weapon = results[0];
                 // 背景色変更
                 var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
                 // 作成した要素を追加
                 document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+                updateCrystalCount(2000);
             })
             .catch(function (err) {
                 console.log(err);

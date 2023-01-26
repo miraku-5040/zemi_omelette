@@ -371,7 +371,7 @@ function updateSkillData(skill) {
             console.log(err);
         });
     // 画面更新
-    setTimeout('window.location.href = "skill.html"', 600);
+    setTimeout('window.location.href = "skill.html"', 1500);
 }
 
 function getskillItemData() {
@@ -522,7 +522,7 @@ function guildBuy(item) {
             console.log(err);
         });
 
-    setTimeout('window.location.href = "../html/guildShop.html"', 600);
+    setTimeout('window.location.href = "../html/guildShop.html"', 1500);
 }
 
 // 毎日ログイン機能
