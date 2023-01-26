@@ -377,6 +377,25 @@ function guildRewardClose() {
     modal.style.display = 'none';
 }
 
+//モーダルウィンドウを開く
+function pictExplainOpen() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('PictDetailModal');
+    modal.style.display = 'block';
+}
+
+function pictExplainClose() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('PictDetailModal');
+    modal.style.display = 'none';
+}
+
 // 辞書の題名変更
 function setSoadTitle() {
     document.getElementById('pict_title').innerHTML = "剣";
