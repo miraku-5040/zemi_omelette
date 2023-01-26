@@ -107,7 +107,7 @@ function updateItemSum() {
 function updateEvoItemSum() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
-    let element = document.getElementById('counter1');
+    let element = document.getElementById('power_ber');
     var remaining = Number(element.max) - Number(element.value);
     Item.equalTo("item_id", 9)
         .fetch()
@@ -180,7 +180,7 @@ function getEvoItemSum() {
         // 情報取得
         var item = results[0];
         // 新しいHTML要素を作成
-        var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/ssr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p><div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="evoCountDown()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counterEvo" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus"onclick="evoCountUp()"><p class="count_button_text">＋</p></button> </div></div>';
+        var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/IW4008.png"><p class="power_for_item_text">' + item.item_name + '</p><div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="evoCountDown()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counterEvo" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus"onclick="evoCountUp()"><p class="count_button_text">＋</p></button> </div></div>';
         // 作成した要素を追加
         document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
     }

@@ -10,6 +10,10 @@ var SKILL_DB = "skill";
 var DAIRY_DB = "dairy";
 var CHAT_DB = "chat";
 var ENEMY_DB = "enemy";
+var DAIRY_AHIEVE_DB = "dairy_achieve";
+var ACHIEVE_DB = "achieve";
+var GUILD_ACHIEVE_DB = "guild_achieve";
+var EVENT_ACHIEVE_DB = "event_achieve";
 
 // プレゼントデータ取得
 function getPresentData() {
@@ -252,13 +256,30 @@ function updateEventPointCount(point) {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results.set("event_point", Number(item.event_point - Number(point)));
-            results.update();
-            getEventPointCount();
+            results[0].set("event_point", Number(item.event_point - Number(point)));
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+    getEventPointCount();
+}
+
+// イベントポイント増加
+function updateEventPointCountUp(point) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("event_point", Number(item.event_point + Number(point)));
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    getEventPointCount();
+    setTimeout('window.location.href = "../html/event.html"', 1500);
 }
 
 // 通知情報取得
@@ -376,12 +397,12 @@ function getskillItemData() {
     }
 }
 
-// ショップ機能
-function buy(item) {
+// ショップ機能(武器屋)
+function buy_weapon(item) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Character = ncmb.DataStore(this.CHARACTER_DB);
-    // アイテム追加
+    // アイテム追加(動かない)
     Item.equalTo("item_id", Number(item))
         .fetch()
         .then(function (results) {
@@ -404,6 +425,72 @@ function buy(item) {
         .catch(function (err) {
             console.log(err);
         });
+
+    setTimeout('window.location.href = "weaponShop.html"', 1500);
+}
+
+// ショップ機能(食料品店)
+function buy_item(item) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    // アイテム追加(動かない)
+    Item.equalTo("item_id", Number(item))
+        .fetch()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("sum", Number(item.sum) + 1);
+            console.log("ok");
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    // コイン減少
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("money", Number(item.money - 2000));
+            console.log("ok");
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    setTimeout('window.location.href = "itemShop.html"', 600);
+}
+
+// ショップ機能(書店)
+function buy_book(item) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    // アイテム追加(動かない)
+    Item.equalTo("item_id", Number(item))
+        .fetch()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("sum", Number(item.sum) + 1);
+            console.log("ok");
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    // コイン減少
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("money", Number(item.money - 2000));
+            console.log("ok");
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    setTimeout('window.location.href = "skillShop.html"', 600);
 }
 
 // ショップ(ギルド)機能
@@ -539,6 +626,259 @@ function updateCoin() {
     setTimeout('window.location.href = "home.html"', 1500);
 }
 
+// デイリー表示機能
+function getDairyData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.DAIRY_AHIEVE_DB);
+
+    Dairy.equalTo("flag", 0)
+        .fetchAll()
+        .then(function (results) {
+            setDairy(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    function setDairy(results) {
+        // 初期化
+        document.getElementById("dairy_modal-body").innerHTML = '';
+        for (var i = 0; i <= results.length - 1; i++) {
+            // 情報取得
+            var dairy = results[i];
+            if (Number(dairy.count) >= Number(dairy.max)) {
+                // 新しいHTML要素を作成
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateDairyData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                // 作成した要素を追加
+                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+            } else {
+                // 新しいHTML要素を作成
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
+                // 作成した要素を追加
+                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+            }
+        }
+    }
+}
+
+function updateDairyData(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.DAIRY_AHIEVE_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            results[0].set("flag", 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+function updateDairyCountUp(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.DAIRY_AHIEVE_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            dairy = results[0];
+            results[0].set("count", Number(dairy.count) + 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+function getAchieveData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.ACHIEVE_DB);
+
+    Dairy.equalTo("flag", 0)
+        .fetchAll()
+        .then(function (results) {
+            setDairy(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    function setDairy(results) {
+        // 初期化
+        document.getElementById("dairy_modal-body").innerHTML = '';
+        for (var i = 0; i <= results.length - 1; i++) {
+            // 情報取得
+            var dairy = results[i];
+            if (Number(dairy.count) >= Number(dairy.max)) {
+                // 新しいHTML要素を作成
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateDairyData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                // 作成した要素を追加
+                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+            } else {
+                // 新しいHTML要素を作成
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
+                // 作成した要素を追加
+                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+            }
+        }
+    }
+}
+
+function updateAchieveData(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.ACHIEVE_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            results[0].set("flag", 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+function updateAchieveCountUp(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.ACHIEVE_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            dairy = results[0];
+            results[0].set("count", Number(dairy.count) + 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+function getGuildAchieveData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.GUILD_ACHIEVE_DB);
+
+    Dairy.equalTo("flag", 0)
+        .fetchAll()
+        .then(function (results) {
+            setDairy(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    function setDairy(results) {
+        // 初期化
+        document.getElementById("dairy_modal-body").innerHTML = '';
+        for (var i = 0; i <= results.length - 1; i++) {
+            // 情報取得
+            var dairy = results[i];
+            if (Number(dairy.count) >= Number(dairy.max)) {
+                // 新しいHTML要素を作成
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateDairyData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                // 作成した要素を追加
+                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+            } else {
+                // 新しいHTML要素を作成
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
+                // 作成した要素を追加
+                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+            }
+        }
+    }
+}
+
+function updateGuildAchieveData(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.GUILD_ACHIEVE_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            results[0].set("flag", 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+function updateGuildAchieveCountUp(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.GUILD_ACHIEVE_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            dairy = results[0];
+            results[0].set("count", Number(dairy.count) + 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+function getEventAchieveData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.EVENT_ACHIEVE_DB);
+
+    Dairy.equalTo("flag", 0)
+        .fetchAll()
+        .then(function (results) {
+            setDairy(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    function setDairy(results) {
+        // 初期化
+        document.getElementById("dairy_modal-body").innerHTML = '';
+        for (var i = 0; i <= results.length - 1; i++) {
+            // 情報取得
+            var dairy = results[i];
+            if (Number(dairy.count) >= Number(dairy.max)) {
+                // 新しいHTML要素を作成
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateDairyData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                // 作成した要素を追加
+                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+            } else {
+                // 新しいHTML要素を作成
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
+                // 作成した要素を追加
+                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+            }
+        }
+    }
+}
+
+function updateEventAchieveData(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.EVENT_ACHIEVE_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            results[0].set("flag", 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
+function updateEventAchieveCountUp(id) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Dairy = ncmb.DataStore(this.EVENT_ACHIEVE_DB);
+    Dairy.equalTo("id", id)
+        .fetchAll()
+        .then(function (results) {
+            dairy = results[0];
+            results[0].set("count", Number(dairy.count) + 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
 // チャット読み込み機能
 function getAllChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
@@ -558,12 +898,14 @@ function getAllChatData() {
         document.getElementById("new_chat_button").onclick = updateAllChatData();
         // 初期化
         document.getElementById("chats").innerHTML = '';
-        // 情報取得
-        var chat = results[0];
-        // 新しいHTML要素を作成
-        var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name + '：' + chat.comment + '</p></div>';
-        // 作成した要素を追加
-        document.getElementById("chats").insertAdjacentHTML('beforeend', itemHtml);
+        for (var i = 0; i <= results.length - 1; i++) {
+            // 情報取得
+            var chat = results[i];
+            // 新しいHTML要素を作成
+            var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name + '：' + chat.comment + '</p></div>';
+            // 作成した要素を追加
+            document.getElementById("chats").insertAdjacentHTML('beforeend', itemHtml);
+        }
     }
 }
 
@@ -586,12 +928,14 @@ function getGuildChatData() {
         document.getElementById("new_chat_button").onclick = updateGuildChatData();
         // 初期化
         document.getElementById("chats").innerHTML = '';
-        // 情報取得
-        var chat = results[0];
-        // 新しいHTML要素を作成
-        var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name + '：' + chat.comment + '</p></div>';
-        // 作成した要素を追加
-        document.getElementById("chats").insertAdjacentHTML('beforeend', itemHtml);
+        for (var i = 0; i <= results.length - 1; i++) {
+            // 情報取得
+            var chat = results[i];
+            // 新しいHTML要素を作成
+            var itemHtml = '<div class="solo_chat"><p class="chat_text">' + chat.name + '：' + chat.comment + '</p></div>';
+            // 作成した要素を追加
+            document.getElementById("chats").insertAdjacentHTML('beforeend', itemHtml);
+        }
     }
 }
 
@@ -643,7 +987,7 @@ function updateCoinUp(num) {
             console.log(err);
         });
 
-        setTimeout('window.location.href = "home.html"', 1500);
+    setTimeout('window.location.href = "home.html"', 1500);
 }
 
 // 水晶増加
@@ -660,5 +1004,5 @@ function updateDiaUp(num) {
             console.log(err);
         });
 
-        setTimeout('window.location.href = "home.html"', 1500);
+    setTimeout('window.location.href = "home.html"', 1500);
 }
