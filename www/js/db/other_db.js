@@ -55,12 +55,8 @@ function getSoloPresentData(element) {
                 .fetchAll()
                 .then(function (results) {
                     var item = results[0];
-                    console.log(Number(item.sum) + Number(item_count));
-                    // ↓更新が出来ない
-                    results.set("sum", Number(item.sum) + Number(item_count))
-                        .update();
-                    console.log("ok");
-                    presentReceive();
+                    results[0].set("sum", Number(item.sum) + Number(item_count));
+                    return results[0].update();
                 })
                 .catch(function (err) {
                     console.log(err);
@@ -69,6 +65,7 @@ function getSoloPresentData(element) {
         .catch(function (err) {
             console.log(err);
         });
+    presentReceive();
 }
 
 // キャラクター情報取得
@@ -240,9 +237,8 @@ function updateCrystalCount(crystal) {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results.set("crystal", Number(item.crystal - Number(crystal)));
-            results.update();
-            getCrystalCount();
+            results[0].set("crystal", Number(item.crystal - Number(crystal)));
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
@@ -333,9 +329,9 @@ function updateSkillData(skill) {
         .then(function (results) {
             console.log(results);
             var skill_level = results[0];
-            results.set("sum", Number(skill_level.sum) + 1);
-            results.update();
-            getSkillData();
+            results[0].set("sum", Number(skill_level.sum) + 1);
+            console.log("ok");
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
@@ -346,9 +342,9 @@ function updateSkillData(skill) {
         .then(function (results) {
             console.log(results);
             var item = results[0];
-            results.set("sum", Number(item.sum) - 1);
-            results.update();
-            getskillItemData();
+            results[0].set("sum", Number(item.sum) - 1);
+            console.log("ok");
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
@@ -390,8 +386,9 @@ function buy(item) {
         .fetch()
         .then(function (results) {
             var item = results[0];
-            results.set("sum", Number(item.sum) + 1);
-            results.update();
+            results[0].set("sum", Number(item.sum) + 1);
+            console.log("ok");
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
@@ -400,9 +397,9 @@ function buy(item) {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results.set("money", Number(item.money - 2000));
-            results.update();
-            getMoneyCount();
+            results[0].set("money", Number(item.money - 2000));
+            console.log("ok");
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
@@ -410,7 +407,7 @@ function buy(item) {
 }
 
 // ショップ(ギルド)機能
-function buy(item) {
+function guildBuy(item) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Character = ncmb.DataStore(this.CHARACTER_DB);
@@ -419,8 +416,9 @@ function buy(item) {
         .fetch()
         .then(function (results) {
             var item = results[0];
-            results.set("sum", Number(item.sum) + 1);
-            results.update();
+            results[0].set("sum", Number(item.sum) + 1);
+            console.log("ok");
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
@@ -429,13 +427,15 @@ function buy(item) {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results.set("guild_coin", Number(item.money - 2000));
-            results.update();
-            getMoneyCount();
+            results[0].set("guild_coin", Number(item.money - 2000));
+            console.log("ok");
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+
+    setTimeout('window.location.href = "../html/guildShop.html"', 600);
 }
 
 // 毎日ログイン機能
@@ -502,13 +502,13 @@ function updateLoginData(id) {
     Dairy.equalTo("id", id)
         .fetchAll()
         .then(function (results) {
-            results.set("flag", 1);
-            results.update();
-            getNomalLoginData();
+            results[0].set("flag", 1);
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+    setTimeout('window.location.href = "../html/dayLogin.html"', 1500);
 }
 
 // コイン購入機能
@@ -518,24 +518,25 @@ function updateCoin() {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results.set("money", Number(item.money + 1000));
-            results.update();
-            getMoneyCount();
+            results[0].set("money", Number(item.money + 1000));
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+    getMoneyCount();
 
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results.set("crystal", Number(item.money - 10));
-            results.update();
-            getCrystalCount();
+            results[0].set("crystal", Number(item.money - 10));
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+    getCrystalCount();
+    setTimeout('window.location.href = "home.html"', 1500);
 }
 
 // チャット読み込み機能
@@ -635,13 +636,14 @@ function updateCoinUp(num) {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results.set("money", Number(item.money + Number(num)));
-            results.update();
-            getMoneyCount();
+            results[0].set("money", Number(item.money + Number(num)));
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+
+        setTimeout('window.location.href = "home.html"', 1500);
 }
 
 // 水晶増加
@@ -651,11 +653,12 @@ function updateDiaUp(num) {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results.set("crystal", Number(item.money + Number(num)));
-            results.update();
-            getMoneyCount();
+            results[0].set("crystal", Number(item.money + Number(num)));
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+
+        setTimeout('window.location.href = "home.html"', 1500);
 }

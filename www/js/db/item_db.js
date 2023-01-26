@@ -112,9 +112,8 @@ function updateEvoItemSum() {
     Item.equalTo("item_id", 9)
         .fetch()
         .then(function (results) {
-            console.log(results);
-            results.set("sum", Number(remaining));
-            results.update();
+            results[0].set("sum", Number(remaining));
+            return results[0].update();
         })
         .catch(function (err) {
             console.log(err);

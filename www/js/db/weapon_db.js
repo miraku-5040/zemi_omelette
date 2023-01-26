@@ -175,14 +175,8 @@ function updateWeaponEvolution() {
             Weapon.equalTo("weapon_id", Number(1))
                 .fetch()
                 .then(function (results) {
-                    // ↓取れない
-                    console.log(weapon.overlap);
-                    console.log(Number(weapon.overlap) + Number(usedWeapon));
-                    results.set("overlap", Number(results.overlap) + Number(usedItem));
-                    results.update();
-                    console.log("sinka:ok");
-                    EvolutionSuccsess();
-                    updateEvoItemSum();
+                    results[0].set("overlap", Number(results.overlap) + Number(usedItem));
+                    return results[0].update();
                 })
                 .catch(function (err) {
                     console.log("sinka:ng");
@@ -191,6 +185,9 @@ function updateWeaponEvolution() {
         .catch(function (err) {
             console.log(err);
         });
+
+    EvolutionSuccsess();
+    updateEvoItemSum();
 }
 
 // ガチャロジック
@@ -205,7 +202,7 @@ function pullWeapon1() {
         .then(function (results) {
             updateCrystalCount(200);
             var weapon = results[0];
-            var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image +'">';
+            var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
             // 作成した要素を追加
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
         })
@@ -228,7 +225,7 @@ function pullWeapon10() {
                 updateCrystalCount(2000)
                 var weapon = results[0];
                 // 背景色変更
-                var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image +'">';
+                var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
                 // 作成した要素を追加
                 document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
             })

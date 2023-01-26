@@ -16,23 +16,21 @@ function updateEquipWeaponData() {
     console.log(document.getElementById("soad"));
     var shield = document.getElementById("shield").src;
     var decoration = document.getElementById("decoration").src;
-    console.log(soad);
-    Equip.equalTo("equipment_id", "1").fetch()
-    .then(function (results) {
-        console.log(results);
-        results.set("soad", soad)
-                .set("shield", shield)
-                .set("decoration", decoration)
-                .update()
-                .then(function (results) {
-                    console.log("updateEquipWeaponData:ok");
-                    getEquipWeaponData();
-                    equip();
-                })
-        .catch(function(err){
+    Equip.equalTo("equipment_id", "1")
+        .fetch()
+        .then(function (results) {
+            // ここが出ていない
+            console.log(results);
+            results[0].set("soad", soad);
+            results[0].set("shield", shield);
+            results[0].set("decoration", decoration);
+            return results[0].update();
+        })
+        .catch(function (err) {
             console.log("outsideng");
         });
-    });
+    getEquipWeaponData();
+    equip();
 }
 
 // 装備品取得

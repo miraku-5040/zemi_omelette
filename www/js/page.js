@@ -21,7 +21,7 @@ function toMap() {
 
 function goTown() {
     // 音声再生
-    go_movie();
+    go_sound();
     // 街画面へ遷移
     setTimeout('window.location.href = "town.html"', 600);
 }
