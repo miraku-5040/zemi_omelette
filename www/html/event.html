@@ -39,7 +39,7 @@
             <p class="event_point_count" id="point">2000</p>
             <p class="event_point_text">pt</p>
         </div>
-        <button class="event_target" onclick="targetOpen()">目標</button>
+        <button class="event_target" onclick="getEventAchieveData();targetOpen()">目標</button>
         <button class="event_gatya" onclick="toEventGatya()">イベントガチャ</button>
         <button class="event_story" onclick="toEventStory()">イベントストーリー</button>
     </div>
@@ -50,7 +50,7 @@
             <div class="modal-header">
                 <h2>イベント目標</h2>
             </div>
-            <div class="modal-body" id="modal-body">
+            <div class="modal-body" id="event_modal-body">
                 <div class="goal_box">
                     <p class="goal_box_text">強化を1回完了</p>
                     <img class="goal_box_image" src="../image/event_coins.png">

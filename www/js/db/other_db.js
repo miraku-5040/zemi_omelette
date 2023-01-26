@@ -705,20 +705,20 @@ function getAchieveData() {
 
     function setDairy(results) {
         // 初期化
-        document.getElementById("dairy_modal-body").innerHTML = '';
+        document.getElementById("achieve_modal-body").innerHTML = '';
         for (var i = 0; i <= results.length - 1; i++) {
             // 情報取得
             var dairy = results[i];
             if (Number(dairy.count) >= Number(dairy.max)) {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateDairyData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/diamond.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateAchieveData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
                 // 作成した要素を追加
-                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+                document.getElementById("achieve_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             } else {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/diamond.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
                 // 作成した要素を追加
-                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+                document.getElementById("achieve_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             }
         }
     }
@@ -768,20 +768,20 @@ function getGuildAchieveData() {
 
     function setDairy(results) {
         // 初期化
-        document.getElementById("dairy_modal-body").innerHTML = '';
+        document.getElementById("event_modal-body").innerHTML = '';
         for (var i = 0; i <= results.length - 1; i++) {
             // 情報取得
             var dairy = results[i];
             if (Number(dairy.count) >= Number(dairy.max)) {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateDairyData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="../image/guild_coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateGuildAchieveData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
                 // 作成した要素を追加
-                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+                document.getElementById("event_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             } else {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="../image/guild_coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
                 // 作成した要素を追加
-                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+                document.getElementById("event_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             }
         }
     }
@@ -831,20 +831,20 @@ function getEventAchieveData() {
 
     function setDairy(results) {
         // 初期化
-        document.getElementById("dairy_modal-body").innerHTML = '';
+        document.getElementById("event_modal-body").innerHTML = '';
         for (var i = 0; i <= results.length - 1; i++) {
             // 情報取得
             var dairy = results[i];
             if (Number(dairy.count) >= Number(dairy.max)) {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateDairyData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="../image/event_coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateEventAchieveData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
                 // 作成した要素を追加
-                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+                document.getElementById("event_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             } else {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="../image/event_coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button2">未完了</button></div>';
                 // 作成した要素を追加
-                document.getElementById("dairy_modal-body").insertAdjacentHTML('beforeend', itemHtml);
+                document.getElementById("event_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             }
         }
     }

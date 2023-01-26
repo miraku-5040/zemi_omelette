@@ -260,7 +260,7 @@
 
 .present_modal_close_button {
     position: absolute;
-    transform: translateY(-80px);
+    transform: translateY(-70px);
     left: 175px;
     background-color: #F4F4E8;
     border: solid 2px #c4c4b8;

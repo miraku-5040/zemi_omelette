@@ -75,7 +75,7 @@
 
     <button class="dairy" onclick="getDairyData();openDairy()"><img class="dairy_button_image" src="image/dairy.png"></button>
     <p class="dairy_button_text">デイリー</p>
-    <button class="achieve" onclick="openAchieve()"><img class="achieve_button_image" src="image/achieve.png"></button>
+    <button class="achieve" onclick="getAchieveData();openAchieve()"><img class="achieve_button_image" src="image/achieve.png"></button>
     <p class="achieve_button_text">実績</p>
     <button class="guild" onclick="toGuild()"><img class="guild_button_image" src="image/guild_icon.png"></button>
     <p class="guild_button_text">ギルド</p>
@@ -194,7 +194,7 @@
             <div class="modal-header">
                 <h2>実績</h2>
             </div>
-            <div class="modal-body" id="modal-body">
+            <div class="modal-body" id="achieve_modal-body">
                 <div class="goal_box">
                     <p class="goal_box_text">強化を1回完了</p>
                     <img class="goal_box_image" src="image/diamond.png">
