@@ -60,6 +60,7 @@ body {
     position: absolute;
     top: 40px;
     left: 150px;
+    width: 450px;
 }
 
 .rare {
@@ -69,6 +70,7 @@ body {
     position: absolute;
     top: 195px;
     left: 150px;
+    width: 450px;
 }
 
 .login_dairy_title {
