@@ -112,6 +112,7 @@ class Enemy{
                 let next = {};
                 /* move */
                 next.type = 'move';
+                
                 if(this.checkAround(indexX,indexY)){
                     next.x = indexX;
                     next.y = indexY;
@@ -121,6 +122,13 @@ class Enemy{
                 }
                 const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
                 if(result == "TypeError"){
+                    next.x = indexX;
+                    next.y = indexY;
+                    this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
+                    element.next = next;
+                    return;
+                }
+                if(Stage.checkStage(result.x,result.y)){
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする

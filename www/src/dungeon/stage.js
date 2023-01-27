@@ -19,6 +19,9 @@ class Stage {
         stageLayerElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
         this.stageLayerElement = stageLayerElement; //new
 
+        //ミニマップのフィールドを取得
+        this.minmap = document.getElementById("min_map")
+
         //ステージの情報をDBから取得する
         this.stageStatus = {
             stageName: '始まりの遺跡',
@@ -43,7 +46,7 @@ class Stage {
     static createStage(){
         const possiblePositions = [];
         //ランダム生成
-        this.board = CreateStage.randomStageSelect()
+        this.board = CreateStage.randomStageCreate()//randomStageSelect()
         this.board.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
                 this.setStageImage(indexX, indexY, element);
@@ -82,7 +85,6 @@ class Stage {
     }
 
     static createEnemys(possiblePositions){
-        console.log(possiblePositions)
         //敵を最大ポップ数生成
         for(let i = 0; i < this.stageStatus.maxEnemy; i++){
             //配置可能座標からランダムに座標を取得
@@ -136,6 +138,11 @@ class Stage {
             stageImageNumber: stageImageNumber,
             element: stageImage
         }
+
+        const min = Image.getMinmapImage(stageImageNumber);
+        min.style.left = x * 5 + "px";
+        min.style.top = y * 5 + "px";
+        this.minmap.appendChild(min);
     }
 
     static popEnemy(){
@@ -164,7 +171,7 @@ class Stage {
      * **/
     static checkStage(x,y){
         //移動できる床か判定
-        if(this.board[y][x].stageImageNumber != 1){
+        if(this.board[y][x].stageImageNumber != Config.regularField){
             return true;
         }
         if(Enemy.checkEnemy(x,y)){

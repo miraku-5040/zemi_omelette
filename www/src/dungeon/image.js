@@ -126,6 +126,23 @@ class Image {
         return image;
     }
 
+    /* minmapの要素を取得 */
+     static getMinmapImage(index) {
+         const elem = document.createElement(`img`);
+        //src
+        elem.width = 5;
+        elem.height = 5;
+        elem.style.position = 'absolute';
+        if(index == 1){
+            elem.style.backgroundColor = "#FF6600";
+        }else if(index == 2){
+            elem.style.backgroundColor = "#000000";
+        }else{
+            elem.style.backgroundColor = "#CCCCCC";
+        }
+        return elem;
+    }
+
 
 
     /* playerImagesの要素を取得 */
