@@ -349,8 +349,8 @@ function updateSkillData(skill) {
         .fetch()
         .then(function (results) {
             console.log(results);
-            var skill_level = results[0];
-            results[0].set("sum", Number(skill_level.sum) + 1);
+            var skill_detail = results[0];
+            results[0].set("skill_level", Number(skill_detail.skill_level) + 1);
             console.log("ok");
             return results[0].update();
         })
@@ -358,7 +358,7 @@ function updateSkillData(skill) {
             console.log(err);
         });
     // 書物冊数を減らす
-    Item.equalTo("item_id", 9)
+    Item.equalTo("item_id", 4)
         .fetch()
         .then(function (results) {
             console.log(results);
@@ -399,6 +399,9 @@ function getskillItemData() {
 
 // ショップ機能(武器屋)
 function buy_weapon(item) {
+    // 音声再生
+    audio = new Audio("../sound/buy.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Character = ncmb.DataStore(this.CHARACTER_DB);
@@ -431,6 +434,9 @@ function buy_weapon(item) {
 
 // ショップ機能(食料品店)
 function buy_item(item) {
+    // 音声再生
+    audio = new Audio("../sound/buy.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Character = ncmb.DataStore(this.CHARACTER_DB);
@@ -463,6 +469,9 @@ function buy_item(item) {
 
 // ショップ機能(書店)
 function buy_book(item) {
+    // 音声再生
+    audio = new Audio("../sound/buy.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Character = ncmb.DataStore(this.CHARACTER_DB);
@@ -495,6 +504,9 @@ function buy_book(item) {
 
 // ショップ(ギルド)機能
 function guildBuy(item) {
+    // 音声再生
+    audio = new Audio("../sound/buy.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Character = ncmb.DataStore(this.CHARACTER_DB);
@@ -584,6 +596,9 @@ function getRareLoginData() {
 
 // 毎日ログイン機能(更新)
 function updateLoginData(id) {
+    // 音声再生
+    audio = new Audio("../sound/succsess.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.DAIRY_DB);
     Dairy.equalTo("id", id)
@@ -600,6 +615,9 @@ function updateLoginData(id) {
 
 // コイン購入機能
 function updateCoin() {
+    // 音声再生
+    audio = new Audio("sound/buy.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Character = ncmb.DataStore(this.CHARACTER_DB);
     Character.fetchAll()
@@ -662,6 +680,9 @@ function getDairyData() {
 }
 
 function updateDairyData(id) {
+    // 音声再生
+    audio = new Audio("sound/succsess.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.DAIRY_AHIEVE_DB);
     Dairy.equalTo("id", id)
@@ -725,6 +746,9 @@ function getAchieveData() {
 }
 
 function updateAchieveData(id) {
+    // 音声再生
+    audio = new Audio("sound/succsess.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.ACHIEVE_DB);
     Dairy.equalTo("id", id)
@@ -774,7 +798,7 @@ function getGuildAchieveData() {
             var dairy = results[i];
             if (Number(dairy.count) >= Number(dairy.max)) {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="../image/guild_coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateGuildAchieveData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="../image/guild_coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateGuildAchieveData(' + dairy.id + ');updateGuildCoinUp(1000)">完了</button></div>';
                 // 作成した要素を追加
                 document.getElementById("event_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             } else {
@@ -788,6 +812,9 @@ function getGuildAchieveData() {
 }
 
 function updateGuildAchieveData(id) {
+    // 音声再生
+    audio = new Audio("../sound/succsess.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.GUILD_ACHIEVE_DB);
     Dairy.equalTo("id", id)
@@ -837,7 +864,7 @@ function getEventAchieveData() {
             var dairy = results[i];
             if (Number(dairy.count) >= Number(dairy.max)) {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="../image/event_coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateEventAchieveData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="../image/event_coins.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateEventAchieveData(' + dairy.id + ');updateEventCoinUp(1000)">完了</button></div>';
                 // 作成した要素を追加
                 document.getElementById("event_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             } else {
@@ -851,6 +878,9 @@ function getEventAchieveData() {
 }
 
 function updateEventAchieveData(id) {
+    // 音声再生
+    audio = new Audio("../sound/succsess.m4a");
+    audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.EVENT_ACHIEVE_DB);
     Dairy.equalTo("id", id)
@@ -1005,4 +1035,38 @@ function updateDiaUp(num) {
         });
 
     setTimeout('window.location.href = "home.html"', 1500);
+}
+
+// ギルドコイン増加
+function updateGuildCoinUp(num) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("guild_coin", Number(item.guild_coin + Number(num)));
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    setTimeout('window.location.href = "../html/guild.html"', 1500);
+}
+
+// イベントポイント増加
+function updateEventCoinUp(num) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("event_point", Number(item.event_point + Number(num)));
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    setTimeout('window.location.href = "../html/event.html"', 1500);
 }

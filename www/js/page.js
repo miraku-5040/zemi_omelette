@@ -21,6 +21,14 @@ function toMap() {
 
 function goTown() {
     // 音声再生
+    audio = new Audio("../sound/zoom.m4a");
+    audio.play();
+    // 街画面へ遷移
+    setTimeout('window.location.href = "town.html"', 600);
+}
+
+function outShop() {
+    // 音声再生
     go_sound();
     // 街画面へ遷移
     setTimeout('window.location.href = "town.html"', 600);
@@ -138,23 +146,26 @@ function toWeaponEvo() {
 
 function toShop1() {
     // 音声再生
-    go_sound();
+    audio = new Audio("../sound/shop.m4a");
+    audio.play();
     // 武器屋画面へ遷移
-    setTimeout('window.location.href = "weaponShop.html"', 600);
+    setTimeout('window.location.href = "weaponShop.html"', 1000);
 }
 
 function toShop2() {
     // 音声再生
-    go_sound();
+    audio = new Audio("../sound/shop.m4a");
+    audio.play();
     // 書店画面へ遷移
-    setTimeout('window.location.href = "skillShop.html"', 600);
+    setTimeout('window.location.href = "skillShop.html"', 1000);
 }
 
 function toShop3() {
     // 音声再生
-    go_sound();
+    audio = new Audio("../sound/shop.m4a");
+    audio.play();
     // 市場画面へ遷移
-    setTimeout('window.location.href = "itemShop.html"', 600);
+    setTimeout('window.location.href = "itemShop.html"', 1000);
 }
 
 function toDanjyon() {
@@ -398,15 +409,15 @@ function pictExplainClose() {
 
 // 辞書の題名変更
 function setSoadTitle() {
-    document.getElementById('pict_title').innerHTML = "剣";
+    document.getElementById('pict_title').innerHTML = "武器";
 }
 
 function setShieldTitle() {
-    document.getElementById('pict_title').innerHTML = "盾";
+    document.getElementById('pict_title').innerHTML = "防具";
 }
 
 function setDecorationTitle() {
-    document.getElementById('pict_title').innerHTML = "宝石";
+    document.getElementById('pict_title').innerHTML = "装飾";
 }
 
 function setItemTitle() {

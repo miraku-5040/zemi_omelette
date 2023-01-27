@@ -7,14 +7,16 @@ function toReady() {
 
 function toMap() {
     // 音声再生
-    go_sound();
+    audio = new Audio("sound/map.m4a");
+    audio.play();
     // 地図画面へ遷移
     setTimeout('window.location.href = "html/map.html"', 600);
 }
 
 function toPict() {
     // 音声再生
-    go_sound();
+    audio = new Audio("sound/page.m4a");
+    audio.play();
     // 図鑑画面へ遷移
     setTimeout('window.location.href = "html/pictoriary.html"', 600);
 }
@@ -22,7 +24,7 @@ function toPict() {
 function toCharaInfo() {
     // 音声再生
     go_sound();
-    // 図鑑画面へ遷移
+    // キャラクター紹介画面へ遷移
     setTimeout('window.location.href = "html/character_info.html"', 600);
 }
 
@@ -35,7 +37,8 @@ function toInfo() {
 
 function toGuild() {
     // 音声再生
-    go_sound();
+    audio = new Audio("sound/door_open.m4a");
+    audio.play();
     // ギルド画面へ遷移
     setTimeout('window.location.href = "html/guild.html"', 600);
 }
@@ -56,7 +59,8 @@ function toDayLogin() {
 
 function toEvent() {
     // 音声再生
-    go_sound();
+    audio = new Audio("sound/door_open.m4a");
+    audio.play();
     // イベント画面へ遷移
     setTimeout('window.location.href = "html/event.html"', 600);
 }
