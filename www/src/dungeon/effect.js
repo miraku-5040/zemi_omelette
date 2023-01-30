@@ -1,10 +1,10 @@
 /* エフェクトを表示するjs */
-class Effect{
+class Effect {
 
     /**
      * 初期化
      */
-    static initialize(){
+    static initialize() {
         this.effectData = new Map();
         this.#setAllEffectData();
         this.effectReadyData = new Map();
@@ -21,7 +21,7 @@ class Effect{
      * effectIdが"SE"(scopeEffect)のものを処理する
      * positionArrayの形式:[{x, y, direction, length}, ...]
      */
-    static scopeEffectDisplay(effectId, positionArray){
+    static scopeEffectDisplay(effectId, positionArray) {
         const displayTime = 1000; //ms
         const readyKey = this.#setEffectReadyData(effectId, displayTime);
         this.effectDisplay(readyKey, positionArray);
@@ -32,7 +32,7 @@ class Effect{
      * スキル対象のエフェクトの準備をする
      * effectIdが"TE"(targetEffect)のものを処理する
      */
-    static targetEffectReady(effectId){
+    static targetEffectReady(effectId) {
         const displayTime = 1000; //ms
         const readyKey = this.#setEffectReadyData(effectId, displayTime);
         return readyKey;
@@ -41,18 +41,32 @@ class Effect{
     /**
      * エフェクト表示を行う
      */
-    static effectDisplay(readyKey, positionArray){
+    static effectDisplay(readyKey, positionArray) {
         const effectReadyData = this.effectReadyData.get(readyKey);
         // 表示処理
-        if(effectReadyData.move){ //画像移動あり
+        if (effectReadyData.move) { //画像移動あり
             this.#moveEffectDisplay(effectReadyData, positionArray);
-        }else{ //画像移動なし
+        } else { //画像移動なし
             this.#fixEffectDisplay(effectReadyData, positionArray);
         }
     }
 
+    /**
+     * エフェクト表示の終了
+     * エフェクト準備のデータを削除する
+     */
+    static endEffectDisplay(readyKey) {
+        if (Number(readyKey) === NaN || readyKey === 0) {
+            // エラー
+            return;
+        }
+        const effectReadyData = this.effectReadyData.get(readyKey);
+        effectReadyData.imgElement.remove();
+        this.effectReadyData.delete(readyKey);
+    }
+
     /* 座標移動するエフェクトを表示する */
-    static #moveEffectDisplay(effectReadyData, positionArray){
+    static #moveEffectDisplay(effectReadyData, positionArray) {
         // データ準備
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElement = effectReadyData.imgElement;
@@ -67,12 +81,12 @@ class Effect{
             effectLayerElement.appendChild(cloneImgElement);
             imgElementArray.push(cloneImgElement);
             //animation
-            const endPosition = this.#getNextPosition({x:0, y:0}, position.direction, position.length);
+            const endPosition = this.#getNextPosition({ x: 0, y: 0 }, position.direction, position.length);
             const moveX = endPosition.x * this.stageImgWidth;
             const moveY = endPosition.y * this.stageImgHeight;
             const animateKeyfreames = [
-                {transform: "translate(0, 0)"}, // check
-                {transform: "translate(" + moveX + "px, " + moveY + "px)"} // check
+                { transform: "translate(0, 0)" }, // check
+                { transform: "translate(" + moveX + "px, " + moveY + "px)" } // check
             ]; //キーフレーム
             const animateOption = {
                 fill: "forwards",
@@ -84,6 +98,8 @@ class Effect{
             animate.pause();
         });
         // 表示と削除
+        const audioElement = effectReadyData.audioElement;
+        audioElement.play();
         const displayTime = effectReadyData.time;
         imgElementArray.forEach((imgElement) => {
             imgElement.style.display = "block";
@@ -93,12 +109,12 @@ class Effect{
             });
             setTimeout((imgElement) => {
                 imgElement.remove();
-                }, displayTime, imgElement);
+            }, displayTime, imgElement);
         });
     }
 
     /* 座標移動しないエフェクトを表示する */
-    static #fixEffectDisplay(effectReadyData, positionArray){
+    static #fixEffectDisplay(effectReadyData, positionArray) {
         // データ準備
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElement = effectReadyData.imgElement;
@@ -107,7 +123,7 @@ class Effect{
             const angle = this.#getAngle(position.direction);
             const getNextPositionFunction = this.#getNextPositionFunction(position.direction);
             let nextPosition = position;
-            for(let i = position.length ; i >= 0 ; i--){
+            for (let i = position.length; i >= 0; i--) {
                 const cloneElement = imgElement.cloneNode();
                 cloneElement.style.top = nextPosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
                 cloneElement.style.left = nextPosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
@@ -119,49 +135,37 @@ class Effect{
             }
         });
         // 表示と削除
+        const audioElement = effectReadyData.audioElement;
+        audioElement.play();
         const displayTime = effectReadyData.time;
         imgElementArray.forEach((imgElement) => {
             imgElement.style.display = "block";
             setTimeout((imgElement) => {
                 imgElement.remove();
-                }, displayTime, imgElement);
+            }, displayTime, imgElement);
         });
     }
 
-    /**
-     * エフェクト表示の終了
-     * エフェクト準備のデータを削除する
-     */
-    static endEffectDisplay(readyKey){
-        if(Number(readyKey) === NaN || readyKey === 0){
-            // エラー
-            return;
-        }
-        const effectReadyData = this.effectReadyData.get(readyKey);
-        effectReadyData.imgElement.remove();
-        this.effectReadyData.delete(readyKey);
-    }
-
     /* 全てのエフェクトデータをセットする */
-    static #setAllEffectData(){
-        const effectEF000 = {move:true, rotation:true, sound:"00000"};
+    static #setAllEffectData() {
+        const effectEF000 = { move: true, rotation: true, audio: "EF000" };
         this.effectData.set("EF000", effectEF000);
-        const effectEF001 = {move:false, rotation:true, sound:"00000"};
+        const effectEF001 = { move: false, rotation: true, audio: "EF000" };
         this.effectData.set("EF001", effectEF001);
         // TODO 追加する
     }
 
     /* エフェクト準備データをセットする */
-    static #setEffectReadyData(effectId, time){
+    static #setEffectReadyData(effectId, time) {
         // readyData作成と設定
         const effectData = this.effectData.get(effectId);
         const data = {};
-        // {type, move, rotation, sound, time, imgElement}
+        // {type, move, rotation, time, audioElement, imgElement}
         data.type = effectData.type;
         data.move = effectData.move;
         data.rotation = effectData.rotation;
-        data.sound = effectData.sound;
         data.time = time;
+        data.audioElement = this.#createAudioElement(effectData.audio);
         const imgElement = Image.getEffectImage(effectId);
         imgElement.style.height = this.stageImgHeight;
         imgElement.style.width = this.stageImgWidth;
@@ -172,10 +176,22 @@ class Effect{
         return newKey;
     }
 
+    /* audioElementを作成する */
+    static #createAudioElement(audioId) {
+        const fileExtension = ".mp3";
+        const fileName = audioId + fileExtension;
+        const basePath = "./sound/";
+        const filePath = basePath + fileName;
+        const audioElement = new Audio(filePath);
+        audioElement.autoplay = false;
+        audioElement.loop = false;
+        return audioElement;
+    }
+
     /* 画像の回転角を取得する */
-    static #getAngle(direction){
+    static #getAngle(direction) {
         let angle = 0;
-        switch(direction){
+        switch (direction) {
             case "up":
                 angle = 0;
                 break;
@@ -209,9 +225,9 @@ class Effect{
     }
 
     /* 方向別の次座標作成用関数 */
-    static #getNextPositionFunction(direction){
+    static #getNextPositionFunction(direction) {
         let getNextFunction
-        switch(direction){
+        switch (direction) {
             case "up":
                 getNextFunction = (position, length = 1) => {
                     const nextPosition = {};
@@ -287,9 +303,9 @@ class Effect{
     }
 
     /* 次座標作成 */
-    static #getNextPosition(position, direction, length = 0){
+    static #getNextPosition(position, direction, length = 0) {
         const nextPosition = {};
-        switch(direction){
+        switch (direction) {
             case "up":
                 nextPosition.x = position.x;
                 nextPosition.y = position.y - length;
@@ -324,7 +340,7 @@ class Effect{
                 break;
             default:
                 break;
-            }
+        }
         return nextPosition;
     }
 }
