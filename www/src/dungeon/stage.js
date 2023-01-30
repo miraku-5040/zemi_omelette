@@ -46,7 +46,7 @@ class Stage {
     static createStage(){
         const possiblePositions = [];
         //ランダム生成
-        this.board = CreateStage.randomStageCreate()//randomStageSelect()
+        this.board = CreateStage.randomStageSelect()//randomStageCreate
         this.board.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
                 this.setStageImage(indexX, indexY, element);
