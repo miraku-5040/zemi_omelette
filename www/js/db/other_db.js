@@ -559,7 +559,7 @@ function getNomalLoginData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var login = results[i];
             // 新しいHTML要素を作成
-            var itemHtml = '<div class="login_dairy" onclick="updateLoginData(' + login.id + ')"><p class="login_dairy_title">' + login.id + '日目</p><img class="login_dairy_image" src="' + login.image + '"><p class="login_dairy_count">×' + login.count + '</p></div>';
+            var itemHtml = '<div class="login_dairy" onclick="updateLoginData(' + login.id + ',' + login.item_id + ',' + login.count +  ')"><p class="login_dairy_title">' + login.id + '日目</p><img class="login_dairy_image" src="' + login.image + '"><p class="login_dairy_count">×' + login.count + '</p></div>';
             // 作成した要素を追加
             document.getElementById("nomalLogin").insertAdjacentHTML('beforeend', itemHtml);
         }
@@ -595,7 +595,7 @@ function getRareLoginData() {
 }
 
 // 毎日ログイン機能(更新)
-function updateLoginData(id) {
+function updateLoginData(id, itemId, count) {
     // 音声再生
     audio = new Audio("../sound/succsess.m4a");
     audio.play();
@@ -610,6 +610,7 @@ function updateLoginData(id) {
         .catch(function (err) {
             console.log(err);
         });
+    updateSoloItemData(Number(itemId), count);
     setTimeout('window.location.href = "../html/dayLogin.html"', 1500);
 }
 
@@ -624,22 +625,13 @@ function updateCoin() {
         .then(function (results) {
             var item = results[0];
             results[0].set("money", Number(item.money + 1000));
-            return results[0].update();
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-    getMoneyCount();
-
-    Character.fetchAll()
-        .then(function (results) {
-            var item = results[0];
             results[0].set("crystal", Number(item.money - 10));
             return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+    getMoneyCount();
     getCrystalCount();
     setTimeout('window.location.href = "home.html"', 1500);
 }

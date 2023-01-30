@@ -58,6 +58,22 @@ function getSoloItemData(element) {
     }
 }
 
+// アイテム個数増加(1件)
+function updateSoloItemData(element, count) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Item = ncmb.DataStore(this.ITEM_DB);
+    Item.equalTo("item_id", Number(element.id))
+        .fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("sum", Number(item.money + Number(count)));
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+}
+
 // アイテム残数更新(強化)
 function updateItemSum() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
@@ -198,10 +214,11 @@ function pullItem1() {
         .then(function (results) {
             var item = results[0];
             // 背景色変更
-            var weaponHtml = '<img class="result_image" src="' + item.item_image +'">';
+            var weaponHtml = '<img class="result_image" src="' + item.item_image + '">';
             // 作成した要素を追加
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
             updateEventPointCount(20);
+            updateSoloItemData(Number(random), 1);
         })
         .catch(function (err) {
             console.log(err);
@@ -214,20 +231,21 @@ function pullItem10() {
     var Item = ncmb.DataStore(this.ITEM_DB);
     for (var i = 1; i <= 10; i++) {
         // 乱数発生(1から9)
-    var random = Math.floor(Math.random() * 9) + 1;
-    // 武器の全データ取得
-    Item.equalTo("item_id", Number(random))
-        .fetchAll()
-        .then(function (results) {
-            var item = results[0];
-            // 背景色変更
-            var weaponHtml = '<img class="result_image" src="' + item.item_image +'">';
-            // 作成した要素を追加
-            document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
-            updateEventPointCount(200);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });        
+        var random = Math.floor(Math.random() * 9) + 1;
+        // 武器のデータ取得
+        Item.equalTo("item_id", Number(random))
+            .fetchAll()
+            .then(function (results) {
+                var item = results[0];
+                // 背景色変更
+                var weaponHtml = '<img class="result_image" src="' + item.item_image + '">';
+                // 作成した要素を追加
+                document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+                updateSoloItemData(Number(random), 1);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
     }
+    updateEventPointCount(200);
 }

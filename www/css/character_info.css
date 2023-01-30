@@ -1,8 +1,10 @@
+/* 背景色 */
 body {
     background-color: #0064b0;
 }
 
 /* 戻るボタン */
+/* 戻るボタンのフレーム */
 .cansel_frame {
     border: solid rgb(189, 160, 0);
     position: absolute;
@@ -12,6 +14,7 @@ body {
     height: 32px;
 }
 
+/* 戻るボタンのボタン */
 .cansel {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -29,6 +32,7 @@ body {
     height: 35px;
 }
 
+/* キャラクターイラスト */
 .character_position {
     width: 260px;
     height: 370px;
@@ -37,6 +41,7 @@ body {
     left: 40px;
 }
 
+/* キャラクターの名前 */
 .character_name {
     color: gold;
     font-size: 50px;
@@ -48,6 +53,7 @@ body {
     padding-right: 230px;
 }
 
+/* キャラクターの紹介内容 */
 .character_detail {
     flex-wrap: wrap;
     overflow: scroll;
@@ -63,6 +69,7 @@ body {
     padding-left: 10px;
 }
 
+/* キャラクターの紹介内容の行間 */
 .character_detail_text {
     margin-top: -1px;
     margin-bottom: -1px;
