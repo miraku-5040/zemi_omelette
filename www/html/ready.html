@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <script src="../js/skill.js"></script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/item_weapon_db.js"></script>
+    <script src="../js/db/equip_weapon_db.js"></script>
+    <script src="../js/db/other_db.js"></script>
+    <!-- pageJS -->
+    <script src="../js/page.js"></script>
+    <!-- weaponJS -->
+    <script src="../js/weapon.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 準備画面のCSS -->
+    <link rel="stylesheet" href="../css/ready.css">
+</head>
+
+<body onload="soundBGM();getEquipWeaponData()">
+    <!-- 戻るボタン -->
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toSelectDanjyon()">←</button>
+
+    <img class="background_image" src="../image/background/cave.png">
+    <img class="character_position" src="../image/character/yuusya.png">
+
+    <!-- 装備情報表示 -->
+    <div class="equipment_position">
+        <p class="equipment_title">装備</p>
+        <div class="equipment" id="equipment">
+        </div>
+        <button class="equip_change_button" onclick="toEquip()">変更</button>
+    </div>
+
+    <div class="skill_position">
+        <p class="skill_title">スキル</p>
+        <div id="skill_level">
+            <p class="skill_level" style="color: red">火のスキル：Lv.10</p>
+        </div>
+        <button class="skill_change_button" onclick="skillOpen()">変更</button>
+    </div>
+
+    <button class="go_button" onclick="toDanjyon();updateDairyCountUp(2);updateAchieveCountUp(2);updateGuildAchieveCountUp(2);getEventAchieveData(2)">出発</button>
+
+    <!-- スキル選択用のモーダルウィンドウ -->
+    <div id="skillModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>スキル</h2>
+            </div>
+            <div class="modal-body" id="notice_body">
+                <div class="modal_skills">
+                    <div class="modal_skill" style="color: red" onclick="fireSkillText()">
+                        <p class="modal_skill_title">火のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: rgb(101, 101, 255)" onclick="waterSkillText()">
+                        <p class="modal_skill_title">水のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: rgb(0, 225, 255)" onclick="iceSkillText()">
+                        <p class="modal_skill_title">氷のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: greenyellow" onclick="windSkillText()">
+                        <p class="modal_skill_title">風のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: rgb(212, 0, 212)" onclick="thunderSkillText()">
+                        <p class="modal_skill_title">雷のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: white" onclick="lightSkillText()">
+                        <p class="modal_skill_title">光のスキル：Lv.10</p>
+                    </div>
+
+                    <div class="modal_skill" style="color: rgb(108, 108, 108)" onclick="darkSkillText()">
+                        <p class="modal_skill_title">闇のスキル：Lv.10</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_close_button" onclick="skillClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

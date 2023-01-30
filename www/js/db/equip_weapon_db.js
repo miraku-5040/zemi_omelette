@@ -13,22 +13,24 @@ function updateEquipWeaponData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Equip = ncmb.DataStore(this.EQUIP_DB);
     var soad = document.getElementById("soad").src;
+    console.log(document.getElementById("soad"));
     var shield = document.getElementById("shield").src;
     var decoration = document.getElementById("decoration").src;
-    Equip.equalTo("equipment_id", "1").fetch()
-    .then(function (results) {
-        console.log(results);
-        results.set("soad", soad)
-                .set("shield", shield)
-                .set("decoration", decoration)
-                .update()
-                .then(function (results) {
-                    console.log("updateEquipWeaponData:ok");
-                })
-        .catch(function(err){
+    Equip.equalTo("equipment_id", "1")
+        .fetch()
+        .then(function (results) {
+            // ここが出ていない
+            console.log(results);
+            results[0].set("soad", soad);
+            results[0].set("shield", shield);
+            results[0].set("decoration", decoration);
+            return results[0].update();
+        })
+        .catch(function (err) {
             console.log("outsideng");
         });
-    });
+    getEquipWeaponData();
+    equip();
 }
 
 // 装備品取得
@@ -74,7 +76,7 @@ function getEquipSoadData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="changeSoad()" id="weapon" value="../image/soad/soad-provisional.png"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" id="' + weapon.weapon_image + '" onclick="changeSoad(this, ' + weapon.weapon_id + ')"><p class="overlap_color">' + weapon.overlap + '</p><img id="' + weapon.weapon_id + '" class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -103,7 +105,7 @@ function getEquipShieldData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" onclick="changeShield()" id="weapon" value="../image/shield/shield-provisional.png"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" id="' + weapon.weapon_image + '" onclick="changeShield(this, ' + weapon.weapon_id + ')" ><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
@@ -132,7 +134,7 @@ function getEquipDecoraionData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var weapon = results[i];
             // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" id="weapon" onclick="changeDecoration()" value="../image/decoration/juel-provisional.png"><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
+            var weaponHtml = '<div class="item_border" id="' + weapon.weapon_image + '" onclick="changeDecoration(this, ' + weapon.weapon_id + ')" ><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }

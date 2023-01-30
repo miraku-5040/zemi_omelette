@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="../css/town.css">
 </head>
 
-<body>
+<body onload="soundCityBGM()">
+    <p class="town_name">街</p>
     <div class="weapon_shop" onclick="toShop1()">
         <img class="weapon_shop_image" src="../image/town/bukiya.png">
         <p class="shop_text">武器屋</p>
@@ -36,14 +37,10 @@
         <img class="item_shop_image" src="../image/town/itiba.png">
         <p class="shop_text">食料品店</p>
     </div>
-    <div class="cave" onclick="toHome()">
-        <img class="cave_image" src="../image/home_icon/home.png">
-        <p class="shop_text">洞窟</p>
-    </div>
 
-    <button class="out_button" onclick="toHome()">
-        <img class="out_button_image" src="../image/home_icon/home.png">
-        <p class="out_button_text">ホームに戻る</p>
+    <button class="out_button" onclick="toMap()">
+        <img class="out_button_image" src="../image/map_icon.png">
+        <p class="out_button_text">地図に戻る</p>
     </button>
 </body>
 

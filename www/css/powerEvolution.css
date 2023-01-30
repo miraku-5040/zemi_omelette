@@ -55,47 +55,82 @@
     position: absolute;
     top: 55px;
     left: 320px;
-    width: 280px;
+    width: 270px;
     height: 175px;
 }
 
-/* 進化アイテムのボーダー */
-.item_border {
-    border: 2px solid black;
-    width: 44px;
-    height: 63px;
+/* 強化用アイテムの枠 */
+.power_for_item {
+    position: relative;
+    margin-bottom: -100px;
 }
 
 /* 強化用アイテムの画像 */
 .power_for_item_image {
-    background-color: rgb(214, 0, 214);
-    border-top: 2px solid white;
-    border-right: 2px solid white;
-    border-bottom: 20px solid white;
-    border-left: 2px solid white;
+    border: solid rgb(189, 160, 0);
+    width: 50px;
+    height: 50px;
+}
+
+/* 強化用アイテムのテキスト */
+.power_for_item_text {
+    position: relative;
+    transform: translateY(-78px);
+    left: 63px;
+    font-weight: bold;
+    color: white;
+}
+
+/* 強化用アイテムのボタン達 */
+.power_for_item_count {
+    display: flex;
+    gap: 7px;
+    position: relative;
+    transform: translateY(-92px);
+    left: 63px;
+}
+
+/* 強化用アイテムの数値入力欄 */
+.power_for_item_count_number {
+    position: relative;
+    top: 1px;
     width: 40px;
-    height: 40px;
-    transform: translateY(-50px);
+    height: 22px;
 }
 
-.overlap_color {
-    background: white;
-    width: 18px;
-    height: 18px;
-    position: relative;
-    transform: translateY(-15px);
-    left: 1px;
+.power_for_item_count_minus {
+    background: rgb(231, 231, 231);
+    border-top: 4px solid rgb(255, 255, 255);
+    border-right: 4px solid rgb(199, 199, 199);
+    border-bottom: 4px solid rgb(177, 177, 177);
+    border-left: 4px solid rgb(255, 255, 255);
+    border-radius: 0;
+    color: black;
+    font-weight: bold;
+    font-size: 11px;
     text-align: center;
-    font-weight: bold;
-    z-index: 1;
+    width: 50px;
+    height: 30px;
 }
 
-/* レベル表示 */
-.level_text {
-    position: relative;
-    transform: translateY(-90px);
-    left: 5px;
+.power_for_item_count_plus {
+    background: rgb(231, 231, 231);
+    border-top: 4px solid rgb(255, 255, 255);
+    border-right: 4px solid rgb(199, 199, 199);
+    border-bottom: 4px solid rgb(177, 177, 177);
+    border-left: 4px solid rgb(255, 255, 255);
+    border-radius: 0;
+    color: black;
     font-weight: bold;
+    font-size: 11px;
+    text-align: center;
+    width: 50px;
+    height: 30px;
+}
+
+.count_button_text {
+    position: relative;
+    transform: translate(-5px,-7px);
 }
 
 /* 意思決定ボタン達 */

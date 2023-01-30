@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/other_db.js"></script>
+    <!-- pageJS -->
+    <script src="../js/page.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- マップ画面のCSS -->
+    <link rel="stylesheet" href="../css/map.css">
+</head>
+
+<body onload="soundBGM()">
+    <img class="map_image" src="../image/town/map.png">
+    <div class="map_town" onclick="goTown()">
+        <img class="map_town_image" src="../image/town/gotown.png">
+        <p class="map_town_text">街</p>
+        <img class="map_ping_image" src="../image/town/ping.png">
+    </div>
+
+    <div class="map_home" onclick="toHome()">
+        <img class="map_home_image" src="../image/home_icon/home.png">
+        <p class="map_home_text">ホーム</p>
+        <img class="map_ping_image" src="../image/town/ping.png">
+    </div>
+</body>
+
+</html>

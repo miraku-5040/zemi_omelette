@@ -1,0 +1,92 @@
+body {
+    background-color: aqua;
+}
+
+/* 戻るボタン */
+.cansel_frame {
+    border: solid rgb(189, 160, 0);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 57px;
+    height: 32px;
+}
+
+.cansel {
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
+    border-radius: 0;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 60px;
+    height: 35px;
+}
+
+.login_everyday {
+    position: absolute;
+    top: 50px;
+    left: 40px;
+    width: 580px;
+    height: 290px;
+}
+
+.login_dairy_division {
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 95px;
+    left: 65px;
+}
+
+.login_dairy_division2 {
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 245px;
+    left: 65px;
+}
+
+.nomal {
+    display: flex;
+    gap: 10px;
+    overflow: scroll;
+    position: absolute;
+    top: 40px;
+    left: 150px;
+    width: 450px;
+}
+
+.rare {
+    display: flex;
+    gap: 10px;
+    overflow: scroll;
+    position: absolute;
+    top: 195px;
+    left: 150px;
+    width: 450px;
+}
+
+.login_dairy_title {
+    font-weight: bold;
+}
+
+.login_dairy_image {
+    position: relative;
+    transform: translate(-10px, -5px);
+    width: 70px;
+    height: 70px;
+}
+
+.login_dairy_count {
+    font-weight: bold;
+    position: relative;
+    transform: translateY(-25px);
+    left: 7px;
+}

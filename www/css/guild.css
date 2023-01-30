@@ -1,0 +1,309 @@
+/* 戻るボタン */
+.cansel_frame {
+    border: solid rgb(189, 160, 0);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 57px;
+    height: 32px;
+}
+
+.cansel {
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
+    border-radius: 0;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 60px;
+    height: 35px;
+}
+
+.guild_name {
+    color: gold;
+    font-weight: bold;
+    font-size: 45px;
+    position: absolute;
+    transform: translateY(-10px);
+    left: 80px;
+}
+
+.content_position {
+    position: absolute;
+    top: 130px;
+    left: 80px;
+}
+
+.member {
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    top: 25px;
+    width: 130px;
+    height: 100px;
+}
+
+.member_button_image {
+    width: 50px;
+    height: 60px;
+}
+
+.member_button_text {
+    position: relative;
+    transform: translateY(-15px);
+}
+
+.reward {
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    top: 5px;
+    left: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.reward_button_image {
+    width: 50px;
+    height: 40px;
+    position: relative;
+    top: 15px;
+}
+
+.reward_button_text {
+    position: relative;
+    top: 5px;
+}
+
+.guild_shop {
+    background: rgb(231, 231, 231);
+    border-top: 6px solid rgb(255, 255, 255);
+    border-right: 6px solid rgb(199, 199, 199);
+    border-bottom: 6px solid rgb(177, 177, 177);
+    border-left: 6px solid rgb(255, 255, 255);
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;
+    top: 15px;
+    left: 20px;
+    width: 200px;
+    height: 100px;
+}
+
+.guild_button_image {
+    width: 60px;
+    height: 50px;
+    position: relative;
+    top: 10px;
+}
+
+.guild_button_text {
+    position: relative;
+    transform: translateY(-5px);
+}
+
+/* モーダルウィンドウの設定 */
+/* モーダルウィンドウの背景 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+/* モーダルウィンドウの中身 */
+.modal-content {
+  background-color: #01508d;
+  border: 5px solid rgb(189, 160, 0);
+  color: gold;
+  margin: 60px 90px;
+  padding: 1px 20px;
+  width: 450px;
+  height: 250px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+
+.modal-header {
+    position: relative;
+    transform: translateY(-10px);
+    text-align: center;
+}
+
+.modal-body1 {
+    background-color:rgba(0,0,0,0.3);
+    border: solid rgb(189, 160, 0);
+    overflow: scroll;
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    transform: translateY(-20px);
+    width: 430px;
+    height: 130px;
+    padding: 0px 10px;
+}
+
+.modal-body2 {
+    overflow: scroll;
+    font-weight: bold;
+    font-size: 17px;
+    position: relative;
+    transform: translateY(-20px);
+    width: 440px;
+    height: 130px;
+}
+
+.notice_button {
+    background-color: #F4F4E8;
+    border: solid 2px #c4c4b8;
+    color: black;
+    width: 450px;
+    height: 70px;
+    border-radius: 10px;
+    position: relative;
+    top: 20px;
+}
+
+.modal-fotter {
+    position: relative;
+    top: 65px;
+}
+
+.modal_close_button {
+    position: relative;
+    transform: translateY(-70px);
+    left: 175px;
+    background-color: #F4F4E8;
+    border: solid 2px #c4c4b8;
+    color: black;
+    width: 100px;
+    height: 30px;
+}
+
+/* デイリー＆実績のCSS */
+.goal_box {
+    background-color: #F4F4E8;
+    border: solid 2px #c4c4b8;
+    color: black;
+    margin-bottom: 10px;
+    width: 420px;
+    height: 60px;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+
+.goal_box_text {
+    position: relative;
+    transform: translateY(-10px);
+    font-weight: bold;
+}
+
+.goal_box_image {
+    position: relative;
+    transform: translateY(-27px);
+    width: 25px;
+    height: 25px;
+}
+
+.goal_box_count {
+    position: relative;
+    transform: translateY(-70px);
+    left: 30px;
+}
+
+.goal_box_button1 {
+    position: relative;
+    transform: translateY(-130px);
+    left: 340px;
+    background-color: #f8f8a7;
+    border: solid 2px #c2c2b5;
+    color: black;
+    width: 80px;
+    height: 30px;
+}
+
+.goal_box_button2 {
+    position: relative;
+    transform: translateY(-130px);
+    left: 340px;
+    background-color: #c4c4b8;
+    border: solid 2px #c2c2b5;
+    color: black;
+    width: 80px;
+    height: 30px;
+}
+
+.present_modal_close_button {
+    position: absolute;
+    transform: translateY(-70px);
+    left: 175px;
+    background-color: #F4F4E8;
+    border: solid 2px #c4c4b8;
+    color: black;
+    width: 100px;
+    height: 30px;
+}
+
+.members_posiiton {
+    margin-bottom: -140px;
+}
+
+.member_image {
+    width: 40px;
+    height: 45px;
+    position: relative;
+    top: 10px;
+}
+
+.member_name {
+    font-size: 18px;
+    position: relative;
+    transform: translateY(-60px);
+    left: 50px;
+}
+
+.member_level {
+    font-size: 18px;
+    position: relative;
+    transform: translateY(-83px);
+    left: 52px;
+}
+
+.member_role1 {
+    font-size: 18px;
+    position: relative;
+    transform: translateY(-145px);
+    left: 350px;
+}
+
+.member_role2 {
+    font-size: 18px;
+    position: relative;
+    transform: translateY(-145px);
+    left: 315px;
+}

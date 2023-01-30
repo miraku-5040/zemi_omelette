@@ -22,6 +22,7 @@
 }
 
 .list_material1 {
+    background-color: rgb(217, 217, 217);
     border-top: 2px solid white;
     border-right: 2px solid white;
     border-bottom: 20px solid white;
@@ -38,7 +39,7 @@
 }
 
 .list_material2 {
-    background-color: rgb(214, 0, 214);
+    background-color: rgb(217, 217, 217);
     border-top: 2px solid white;
     border-right: 2px solid white;
     border-bottom: 20px solid white;
@@ -92,7 +93,7 @@
     width: 49px;
     height: 37px;
     position: relative;
-    transform: translate(-15px, -45px);
+    transform: translate(-15px, -62px);
 }
 
 .weapon_type_frame3 {
@@ -120,6 +121,11 @@
 .weapon_other_text {
     position: relative;
     transform: translate(-3px, -3px);
+}
+
+.weapon_other_text1 {
+    position: relative;
+    transform: translate(-3px, -10px);
 }
 
 .weapon_soad_button {
@@ -228,10 +234,14 @@
 }
 
 .modal_note {
+    flex-wrap: wrap;
+    overflow: scroll;
     font-size: 12px;
     position: absolute;
     top: 55px;
     left: 5px;
+    width: 190px;
+    height: 100px;
 }
 
 /* モーダルウィンドウのボタン */

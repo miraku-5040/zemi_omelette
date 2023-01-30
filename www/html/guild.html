@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="classic.js"></script>
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/other_db.js"></script>
+    <script src="../js/db/pictoriary_db.js"></script>
+    <!-- pageJS -->
+    <script src="../js/page.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- ギルド画面のCSS -->
+    <link rel="stylesheet" href="../css/guild.css">
+</head>
+
+<body onload="soundGuildBGM()">
+    <!-- 背景 -->
+    <img class="background_image" src="../image/background/guild.jpg">
+    <!-- ホーム画面へ戻るボタン -->
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toHome()">←</button>
+
+    <p class="guild_name">Omelette</p>
+    <div class="content_position">
+        <button class="member" onclick="memberOpen()">
+            <img class="member_button_image" src="../image/guild_member.png">
+            <p class="member_button_text">メンバー</p>
+        </button>
+        <button class="reward" onclick="getGuildAchieveData();guildRewardOpen()">
+            <img class="reward_button_image" src="../image/guild_reward.png">
+            <p class="reward_button_text">報酬</p>
+        </button>
+        <button class="guild_shop" onclick="toGuildShop()">
+            <img class="guild_button_image" src="../image/guild_shop.png">
+            <p class="guild_button_text">ギルドショップ</p>
+        </button>
+    </div>
+
+    <!-- メンバー用のモーダルウィンドウ -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>メンバー</h2>
+            </div>
+            <div class="modal-body1" id="notice_body">
+                <div class="members_posiiton">
+                    <img class="member_image" src="../image/player_icon.png">
+                    <p class="member_name">プレイヤー１</p>
+                    <p class="member_level">Lv.10</p>
+                    <p class="member_role1">リーダー</p>
+                </div>
+
+                <div class="members_posiiton">
+                    <img class="member_image" src="../image/player_icon.png">
+                    <p class="member_name">プレイヤー２</p>
+                    <p class="member_level">Lv.10</p>
+                    <p class="member_role2">サブリーダー</p>
+                </div>
+
+                <div class="members_posiiton">
+                    <img class="member_image" src="../image/player_icon.png">
+                    <p class="member_name">プレイヤー２</p>
+                    <p class="member_level">Lv.10</p>
+                    <p class="member_role1">メンバー</p>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_close_button" onclick="memberClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 報酬用のモーダルウィンドウ -->
+    <div id="guildRewardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>報酬</h2>
+            </div>
+            <div class="modal-body2" id="event_modal-body">
+                <div class="goal_box">
+                    <p class="goal_box_text">強化を1回完了</p>
+                    <img class="goal_box_image" src="../image/guild_coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button1">完了</button>
+                </div>
+                <div class="goal_box">
+                    <p class="goal_box_text">戦闘を1回完了</p>
+                    <img class="goal_box_image" src="../image/guild_coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button2">移動</button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="present_modal_close_button" onclick="guildRewardClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

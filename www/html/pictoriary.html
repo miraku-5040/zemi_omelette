@@ -14,6 +14,7 @@
     <script src="../js/db/item_db.js"></script>
     <script src="../js/db/weapon_db.js"></script>
     <script src="../js/db/other_db.js"></script>
+    <script src="../js/db/pictoriary_db.js"></script>
     <!-- pageJS -->
     <script src="../js/page.js"></script>
     <!-- CSS -->
@@ -24,24 +25,68 @@
     <link rel="stylesheet" href="../css/pictoriary.css">
 </head>
 
-<body onload="soundBGM()">
+<body onload="soundBGM();getPictorialSoadData()">
     <!-- 背景 -->
     <img class="background_image" src="../image/background/cave.png">
-    <!-- 強化方法選択画面へ戻るボタン -->
+    <!-- 戻るボタン -->
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toHome()">←</button>
+    <!-- 辞書の画像 -->
+    <img class="pictoriary_image" src="../image/book.png">
     <!-- 項目切り替えボタン -->
-    <div class="weapon_type_buttons">
-        <button class="weapon_other_button" id="othercolumn" onclick="itemColumn(this);getItemData()">
-                <p class="weapon_other_text">アイテム</p><div class="weapon_type_frame"></div></button>
-        <button class="weapon_soad_button" id="soadcolumn" onclick="itemColumn(this);getItemSoadData()">
-                <p class="weapon_other_text">剣</p><div class="weapon_type_frame2"></div></button>
-        <button class="weapon_shield_button" id="shieldcolumn" onclick="itemColumn(this);getItemShieldData()">
-                <p  class="weapon_other_text">盾</p><div class="weapon_type_frame2"></div></button>
-        <button class="weapon_decoration_button" id="decorationcolumn" onclick="itemColumn(this);getItemDecoraionData()">
-                <p  class="weapon_other_text2">宝石</p><div class="weapon_type_frame3"></div></button>
+    <div class="type_buttons">
+        <div class="soad_botton" id="othercolumn" onclick="setSoadTitle();getPictorialSoadData()">
+            <img class="sticky_image" src="../image/husen.png">
+            <p class="deco_text">武器</p>
+        </div>
+        <div class="shield_button" id="othercolumn" onclick="setShieldTitle();getPictorialShieldData()">
+            <img class="sticky_image" src="../image/husen.png">
+            <p class="deco_text">防具</p>
+        </div>
+        <div class="deco_button" id="othercolumn" onclick="setDecorationTitle();getPictorialDecorationData()">
+            <img class="sticky_image" src="../image/husen.png">
+            <p class="deco_text">装飾</p>
+        </div>
+        <div class="item_button" id="othercolumn" onclick="setItemTitle();getPictorialItemData()">
+            <img class="sticky_image" src="../image/husen.png">
+            <p class="item_text">アイテム</p>
+        </div>
+        <div class="enemy_button" id="othercolumn" onclick="setEnemyTitle();getEnemyData()">
+            <img class="sticky_image" src="../image/husen.png">
+            <p class="type_text">敵</p>
+        </div>
+        <div class="story_button" id="othercolumn" onclick="setStoryTitle();getStoryData()">
+            <img class="sticky_image" src="../image/husen.png">
+            <p class="deco_text">物語</p>
+        </div>
     </div>
     <!-- 図鑑内容 -->
+    <p id="pict_title" class="pict_title">武器</p>
+    <div id="pictorial" class="pictoriary_content">
+        <div class="pictoriary_item">
+            <img class="pictoriary_item_image" src="../image/soad/IW0000.png">
+            <p class="pictoriary_item_text">No.1</p>
+        </div>
+
+    </div>
+
+    <!-- 強化素材説明用のモーダルウィンドウ -->
+    <div id="PictDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body">
+                <img class="modal_image" id="item_image" src="../image/item/item-provisional.png">
+                <div class="modal_text">
+                    <p class="modal_title" id="item_modal_title">XXX</p>
+                    <p class="modal_note" id="item_modal_note">NaN</p>
+                </div>
+                <div class="modal_buttons">
+                    <button class="calsel_button" onclick="pictExplainClose()">閉じる</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

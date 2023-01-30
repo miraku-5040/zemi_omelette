@@ -41,17 +41,13 @@
             </div>
         </div>
     </div>
-    <!-- 設定画面への遷移ボタン -->
-    <div class="setting">
-        <img class="setting_image" src="../image/gear.png" onclick="toSet()">
-    </div>
     <!-- アイテム情報表示 -->
     <div class="content_position">
         <!-- 装備情報表示 -->
         <div class="equipment" id="equipment">
         </div>
 
-        <button class="equipment_button" onclick="updateEquipWeaponData();getEquipWeaponData();equip()">装備する</button>
+        <button class="equipment_button" onclick="updateEquipWeaponData()">装備する</button>
         <div class="equipment_button_flame">
         </div>
 
@@ -61,11 +57,11 @@
 
         <div class="weapon_type_buttons">
             <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this);getEquipSoadData()">
-                <p>剣</p><div class="weapon_type_frame"></div></button>
+                <p class="weapon_decoration_text">武器</p><div class="weapon_type_frame"></div></button>
             <button class="weapon_shield_button" id="shieldcolumn" onclick="weaponColumn(this);getEquipShieldData()">
-                <p>盾</p><div class="weapon_type_frame"></div></button>
+                <p class="weapon_decoration_text">防具</p><div class="weapon_type_frame"></div></button>
             <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this);getEquipDecoraionData()">
-                <p class="weapon_decoration_text">宝石</p><div class="weapon_type_frame2"></div></button>
+                <p class="weapon_decoration_text">装飾</p><div class="weapon_type_frame2"></div></button>
         </div>
 
         <!-- 各画面への遷移ボタン -->

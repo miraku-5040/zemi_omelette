@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
+    <!-- pageJS -->
+    <script src="../js/page.js"></script>
+    <script src="../js/weapon.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- イベント画面のCSS -->
+    <link rel="stylesheet" href="../css/crystalBuy.css">
+</head>
+
+<body onload="soundBGM()">
+    <!-- ホーム画面へ戻るボタン -->
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toHome()">←</button>
+
+    <p class="dia_buy_title">水晶購入</p>
+    <div class="dia_buy">
+        <div class="solo_dia_buy">
+            <img class="solo_dia_buy_image" src="../image/diamond.png">
+            <!-- ダイヤの数量 -->
+            <div class="least_dia">
+                <img class="least_dia_image" src="../image/diamond.png">
+                <p class="least_dia_text">70</p>
+            </div>
+            <p class="solo_dia_buy_text">￥120</p>
+        </div>
+
+        <div class="solo_dia_buy">
+            <img class="solo_dia_buy_image" src="../image/diamond.png">
+            <!-- ダイヤの数量 -->
+            <div class="least_dia">
+                <img class="least_dia_image" src="../image/diamond.png">
+                <p class="least_dia_text">350</p>
+            </div>
+            <p class="solo_dia_buy_text">￥610</p>
+        </div>
+
+        <div class="solo_dia_buy">
+            <img class="solo_dia_buy_image" src="../image/diamond.png">
+            <!-- ダイヤの数量 -->
+            <div class="least_dia">
+                <img class="least_dia_image" src="../image/diamond.png">
+                <p class="least_dia_text">720</p>
+            </div>
+            <p class="solo_dia_buy_text">￥1220</p>
+        </div>
+
+        <div class="solo_dia_buy">
+            <img class="solo_dia_buy_image" src="../image/diamond.png">
+            <!-- ダイヤの数量 -->
+            <div class="least_dia">
+                <img class="least_dia_image" src="../image/diamond.png">
+                <p class="least_dia_text">1200</p>
+            </div>
+            <p class="solo_dia_buy_text">￥2080</p>
+        </div>
+
+        <div class="solo_dia_buy">
+            <img class="solo_dia_buy_image" src="../image/diamond.png">
+            <!-- ダイヤの数量 -->
+            <div class="least_dia">
+                <img class="least_dia_image" src="../image/diamond.png">
+                <p class="least_dia_text">1800</p>
+            </div>
+            <p class="solo_dia_buy_text">￥3060</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!-- JS -->
+    <script src="../components/loader.js">
+    </script>
+    <!-- DBJS -->
+    <script src="../js/db/danjyon_db.js"></script>
+    <script src="../js/db/item_db.js"></script>
+    <script src="../js/db/weapon_db.js"></script>
+    <script src="../js/db/other_db.js"></script>
+    <!-- pageJS -->
+    <script src="../js/page.js"></script>
+    <script src="../js/weapon.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../components/loader.css">
+    <!-- 共通のCSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- イベント画面のCSS -->
+    <link rel="stylesheet" href="../css/event.css">
+</head>
+
+<body onload="soundEventBGM();getEventPointCount()">
+    <img class="background_image" src="../image/background/event.jpg">
+    <!-- ホーム画面へ戻るボタン -->
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toHome()">←</button>
+
+    <img class="event_character_position" src="../image/character/yuusya.png">
+
+    <p class="event_title">少年の休日</p>
+    <p class="limit_date_text">02/28 23:59 まで</p>
+    <div class="content_position">
+        <div class="event_point">
+            <img class="event_point_image" src="../image/event_coins.png">
+            <p class="event_point_count" id="point">2000</p>
+            <p class="event_point_text">pt</p>
+        </div>
+        <button class="event_target" onclick="getEventAchieveData();targetOpen()">目標</button>
+        <button class="event_gatya" onclick="toEventGatya()">イベントガチャ</button>
+        <button class="event_story" onclick="toEventStory()">イベントストーリー</button>
+    </div>
+
+    <!-- 目標用のモーダルウィンドウ -->
+    <div id="targetModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>イベント目標</h2>
+            </div>
+            <div class="modal-body" id="event_modal-body">
+                <div class="goal_box">
+                    <p class="goal_box_text">強化を1回完了</p>
+                    <img class="goal_box_image" src="../image/event_coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button1" onclick="updateEventPointCountUp(1000)">完了</button>
+                </div>
+                <div class="goal_box">
+                    <p  class="goal_box_text">戦闘を1回完了</p>
+                    <img class="goal_box_image" src="../image/event_coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button2">未完了</button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="present_modal_close_button" onclick="targetClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

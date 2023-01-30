@@ -9,18 +9,48 @@ function countDown1() {
         element.value = expNumber - 50;
         // 経験値が0以下ならレベルを下げる
         if (element.value <= 0) {
-            element.value = Number(expNumber - 50) + Number(element.max)
+            element.value = Number(expNumber - 50) + Number(element.max);
+            // レベルを更新
+            var str = document.getElementById('weaponLevel');
+            var result = String(str.textContent).slice(4, 6);
+            result = Number(result) - 1;
+            document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) - 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
 }
 
 function countDownMore1() {
+    // 数値取得
     let element = document.getElementById('counter1');
     let ber = document.getElementById('power_ber');
-    ber.value = ber.value - (element.value * 50);
+    let number = ber.value;
+    // 値減少
+    number = number - (element.value * 50);
+    number = Math.abs(number + (Math.ceil(Number(Math.abs(number) / 1000)) * 1000));
+    if (number < 0) {
+        // レベルを減らす
+        var str = document.getElementById('weaponLevel');
+        var result = String(str.textContent).slice(4, 6);
+        result = Math.ceil(Number(result) - Number(number / 1000));
+        document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+        // 攻撃力を更新
+        str = document.getElementById('weaponAttack');
+        var attack = String(str.textContent).slice(4);
+        attack = Number(attack) - (10 * result);
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
+    }
+
+    // 強化素材数を0にする
     element.value = 0;
-    document.getElementById("exp_text").innerHTML = ber.value + "/1000";
+    // 経験値のテキスト変更
+    document.getElementById("exp_text").innerHTML = Number(number % 1000) + "/1000";
+    ber.value = Number(number % 1000);
 }
 
 // カウントアップjs
@@ -34,27 +64,39 @@ function countUp1() {
         let beforeNuber = Number(element.value);
         element.value = expNumber + 50;
         if (Number(element.value) >= Number(element.max)) {
+            // 経験値を0にする
             element.value = (beforeNuber + 50) - Number(element.max);
-            console.log(element.value);
-            // ↓ここが取れていない
+            // レベルを更新
             var str = document.getElementById('weaponLevel');
-            console.log(str);
-            var result = String(str).slice(4, 6);
+            var result = String(str.textContent).slice(4, 6);
             result = Number(result) + 1;
             document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
-            document.getElementById("exp_text").innerHTML = element.value + "/1000";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) + 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
 }
 
 function countUpMore1() {
-    let element1 = document.getElementById('counter1');
-    element1.value = element1.max;
-    let element2 = document.getElementById('power_ber');
-    let expNumber = Number(element2.value);
-    element2.value = expNumber + (element1.max * 50);
-    document.getElementById("exp_text").innerHTML = element2.value + "/1000";
+    // 数値取得
+    let element = document.getElementById('counter1');
+    element.value = element.max;
+    let ber = document.getElementById('power_ber');
+    let number = ber.value;
+    // 値増加
+    number = number + (element.value * 50);
+    // レベルを増やす
+    var str = document.getElementById('weaponLevel');
+    var result = String(str.textContent).slice(4, 6);
+    result = Math.ceil(Number(result) + Number(Math.abs(number) / 1000));
+    document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+    // 経験値のテキスト変更
+    document.getElementById("exp_text").innerHTML = Number(Math.abs(number) % 1000) + "/1000";
+    ber.value = Number(Math.abs(number) % 1000);
 }
 
 //カウントダウンjs
@@ -68,7 +110,17 @@ function countDown2() {
         element.value = expNumber - 100;
         // 経験値が0以下ならレベルを下げる
         if (element.value <= 0) {
-            element.value = Number(expNumber - 100) + Number(element.max)
+            element.value = Number(expNumber - 100) + Number(element.max);
+            // レベルを更新
+            var str = document.getElementById('weaponLevel');
+            var result = String(str.textContent).slice(4, 6);
+            result = Number(result) - 1;
+            document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) - 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
@@ -77,9 +129,20 @@ function countDown2() {
 function countDownMore2() {
     let element = document.getElementById('counter2');
     let ber = document.getElementById('power_ber');
-    ber.value = ber.value - (element.value * 100);
+    let number = ber.value;
+    // 値減少
+    number = number - (element.value * 100);
+    number = Math.abs(number + (Math.ceil(Number(Math.abs(number) / 1000)) * 1000));
+    // レベルを減らす
+    var str = document.getElementById('weaponLevel');
+    var result = String(str.textContent).slice(4, 6);
+    result = Math.ceil(Number(result) - Number(number / 1000));
+    document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+    // 強化素材数を0にする
     element.value = 0;
-    document.getElementById("exp_text").innerHTML = ber.value + "/1000";
+    // 経験値のテキスト変更
+    document.getElementById("exp_text").innerHTML = Number(number % 1000) + "/1000";
+    ber.value = Number(number % 1000);
 }
 
 // カウントアップjs
@@ -93,19 +156,39 @@ function countUp2() {
         let beforeNuber = Number(element.value);
         element.value = expNumber + 100;
         if (Number(element.value) >= Number(element.max)) {
+            // 経験値を0にする
             element.value = (beforeNuber + 100) - Number(element.max);
+            // レベルを更新
+            var str = document.getElementById('weaponLevel');
+            var result = String(str.textContent).slice(4, 6);
+            result = Number(result) + 1;
+            document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) + 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
 }
 
 function countUpMore2() {
-    let element1 = document.getElementById('counter1');
-    element1.value = element1.max;
-    let element2 = document.getElementById('power_ber');
-    let expNumber = Number(element2.value);
-    element2.value = expNumber + (element1.max * 100);
-    document.getElementById("exp_text").innerHTML = element2.value + "/1000";
+    // 数値取得
+    let element = document.getElementById('counter2');
+    element.value = element.max;
+    let ber = document.getElementById('power_ber');
+    let number = ber.value;
+    // 値増加
+    number = number + (element.value * 100);
+    // レベルを増やす
+    var str = document.getElementById('weaponLevel');
+    var result = String(str.textContent).slice(4, 6);
+    result = Math.ceil(Number(result) + Number(Math.abs(number) / 1000));
+    document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+    // 経験値のテキスト変更
+    document.getElementById("exp_text").innerHTML = Number(Math.abs(number) % 1000) + "/1000";
+    ber.value = Number(Math.abs(number) % 1000);
 }
 //カウントダウンjs
 function countDown3() {
@@ -118,7 +201,17 @@ function countDown3() {
         element.value = expNumber - 500;
         // 経験値が0以下ならレベルを下げる
         if (element.value <= 0) {
-            element.value = Number(expNumber - 500) + Number(element.max)
+            element.value = Number(expNumber - 500) + Number(element.max);
+            // レベルを更新
+            var str = document.getElementById('weaponLevel');
+            var result = String(str.textContent).slice(4, 6);
+            result = Number(result) - 1;
+            document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) - 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
@@ -127,14 +220,20 @@ function countDown3() {
 function countDownMore3() {
     let element = document.getElementById('counter3');
     let ber = document.getElementById('power_ber');
+    let number = ber.value;
+    // 値減少
+    number = number - (element.value * 500);
+    number = Math.abs(number + (Math.ceil(Number(Math.abs(number) / 1000)) * 1000));
+    // レベルを減らす
+    var str = document.getElementById('weaponLevel');
+    var result = String(str.textContent).slice(4, 6);
+    result = Math.ceil(Number(result) - Number(number / 1000));
+    document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+    // 強化素材数を0にする
     element.value = 0;
-    // falseなのに処理が動かない
-    if (Number(ber.value - (element.value * 500)) <= 0) {
-        ber.value = Number(ber.value) % 1000 + 1000;
-    } else {
-        ber.value = ber.value - (element.value * 500);
-    }
-    document.getElementById("exp_text").innerHTML = ber.value + "/1000";
+    // 経験値のテキスト変更
+    document.getElementById("exp_text").innerHTML = Number(number % 1000) + "/1000";
+    ber.value = Number(number % 1000);
 }
 
 // カウントアップjs
@@ -148,27 +247,76 @@ function countUp3() {
         let beforeNuber = Number(element.value);
         element.value = expNumber + 500;
         if (Number(element.value) >= Number(element.max)) {
+            // 経験値を0にする
             element.value = (beforeNuber + 500) - Number(element.max);
-            console.log(element.value);
-            // ↓ここが取れていない
+            // レベルを更新
             var str = document.getElementById('weaponLevel');
-            console.log(str);
-            var result = String(str).slice(4, 6);
+            var result = String(str.textContent).slice(4, 6);
             result = Number(result) + 1;
             document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
-            document.getElementById("exp_text").innerHTML = element.value + "/1000";
+            // 攻撃力を更新
+            str = document.getElementById('weaponAttack');
+            result = String(str.textContent).slice(4);
+            result = Number(result) + 10;
+            document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
         }
         document.getElementById("exp_text").innerHTML = element.value + "/1000";
     }
 }
 
 function countUpMore3() {
-    let element1 = document.getElementById('counter1');
-    element1.value = element1.max;
-    let element2 = document.getElementById('power_ber');
-    let expNumber = Number(element2.value);
-    element2.value = expNumber + (element1.max * 500);
-    document.getElementById("exp_text").innerHTML = element2.value + "/1000";
+    // 数値取得
+    let element = document.getElementById('counter3');
+    element.value = element.max;
+    let ber = document.getElementById('power_ber');
+    let number = ber.value;
+    // 値増加
+    number = number + (element.value * 500);
+    // レベルを増やす
+    var str = document.getElementById('weaponLevel');
+    var result = String(str.textContent).slice(4, 6);
+    result = Math.ceil(Number(result) + Number(Math.abs(number) / 1000));
+    document.getElementById("weaponLevel").innerHTML = "レベル：" + result + "/100";
+    // 経験値のテキスト変更
+    document.getElementById("exp_text").innerHTML = Number(Math.abs(number) % 1000) + "/1000";
+    ber.value = Number(Math.abs(number) % 1000);
+}
+
+// カウンター(進化)
+// カウントアップ
+function evoCountUp() {
+    let element = document.getElementById('counterEvo');
+    let countNumber = Number(element.value);
+    if (countNumber < element.max) {
+        element.value = countNumber + 1;
+        // 重ね合わせ数増加
+        element = document.getElementById('power_ber');
+        element.value = Number(element.value) + 1;
+        document.getElementById("overlap_text").innerHTML = element.value + "/5";
+        // 攻撃力を更新
+        var str = document.getElementById('weaponAttack');
+        var result = String(str.textContent).slice(4);
+        result = Number(result) + 30;
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
+    }
+}
+
+// カウントダウン
+function evoCountDown() {
+    let element = document.getElementById('counterEvo');
+    let countNumber = Number(element.value);
+    if (countNumber > 0) {
+        element.value = countNumber - 1;
+        // 重ね合わせ数減少
+        element = document.getElementById('power_ber');
+        element.value = Number(element.value) - 1;
+        document.getElementById("overlap_text").innerHTML = element.value + "/5";
+        // 攻撃力を更新
+        var str = document.getElementById('weaponAttack');
+        var result = String(str.textContent).slice(4);
+        result = Number(result) - 30;
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + result;
+    }
 }
 
 // 武器選択js
@@ -191,36 +339,31 @@ function selected(element) {
 }
 
 // 武器入れ替えjs
-function changeSoad() {
+function changeSoad(element, id) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
     // 装備を入れ替える
     var soad = document.getElementById('soad').src;
-    var element = document.getElementById('weapon').value;
-    // ↓ここが取れていない
-    console.log(element);
-    document.getElementById('soad').src = element;
-    document.getElementById('weapon').src = soad;
+    document.getElementById('soad').src = element.id;
+    document.getElementById(id).src = soad;
 }
 
-function changeShield() {
+function changeShield(element, id) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
     // 装備を入れ替える
     const shield = document.getElementById('shield').src;
-    const selectWeapon = document.getElementById('weapon').src;
-    document.getElementById('shield').src = selectWeapon;
-    document.getElementById('weapon').src = shield;
+    document.getElementById('shield').src = element.id;
+    document.getElementById(id).src = shield;
 }
 
-function changeDecoration() {
+function changeDecoration(element, id) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
     // 装備を入れ替える
     const decoration = document.getElementById('decoration').src;
-    const selectWeapon = document.getElementById('weapon').src;
-    document.getElementById('decoration').src = selectWeapon;
-    document.getElementById('weapon').src = decoration;
+    document.getElementById('decoration').src = element.id;
+    document.getElementById(id).src = decoration;
 }
 
 // 装備js

@@ -53,10 +53,11 @@ function getSoloPowerWeaponData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    LoadWeapon.equalTo("loadweapon_id", 1)
+    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
         .then(function (results) {
-            Weapon.equalTo("weapon_id", results.weapon_id)
+            weaponId = results[0];
+            Weapon.equalTo("weapon_id", weaponId.weapon_id)
                 .fetchAll()
                 .then(function (results) {
                     setDecorationImage(results);
@@ -68,17 +69,18 @@ function getSoloPowerWeaponData() {
         .catch(function (err) {
             console.log(err);
         });
-}
-// 武器の画像(仮)とレベルをHTMLに埋め込む
-function setDecorationImage(results) {
-    var weapon = results[0];
-    document.getElementById("powerUpWeapon").src = weapon.weapon_image;
-    document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
-    document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
-    document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
-    document.getElementById("power_ber").value = weapon.weapon_exp;
-    document.getElementById("power_ber").low = weapon.weapon_exp;
-    document.getElementById("exp_text").innerHTML = weapon.weapon_exp + "/1000";
+
+    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    function setDecorationImage(results) {
+        var weapon = results[0];
+        document.getElementById("powerUpWeapon").src = weapon.weapon_image;
+        document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
+        document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + weapon.weapon_attack;
+        document.getElementById("power_ber").value = weapon.weapon_exp;
+        document.getElementById("power_ber").low = weapon.weapon_exp;
+        document.getElementById("exp_text").innerHTML = weapon.weapon_exp + "/1000";
+    }
 }
 
 // 1件分の武器情報取得(進化)
@@ -105,60 +107,15 @@ function getSoloEvoWeaponData() {
 
     // 武器の画像(仮)とレベルをHTMLに埋め込む
     function setDecorationImage(results) {
-        console.log(results);
         var weapon = results[0];
         document.getElementById("powerUpWeapon").src = weapon.weapon_image;
         document.getElementById("weaponName").innerHTML = "&lt;" + weapon.weapon_name + "&gt;";
         document.getElementById("weaponLevel").innerHTML = "レベル：" + weapon.weapon_level + "/100";
-        document.getElementById("weaponAttack").innerHTML = "総合力：" + weapon.weapon_attack;
+        document.getElementById("weaponAttack").innerHTML = "攻撃力：" + weapon.weapon_attack;
         document.getElementById("power_ber").value = weapon.overlap;
         document.getElementById("power_ber").low = weapon.overlap;
         document.getElementById("power_ber").max = 5;
         document.getElementById("overlap_text").innerHTML = weapon.overlap + "/5";
-    }
-}
-
-// 非進化武器の検査(weapon_idを１に固定)
-function getEvolutionWeaponData() {
-    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
-        .fetchAll()
-        .then(function (results) {
-            weaponId = results[0];
-            Weapon.equalTo("weapon_id", weaponId.weapon_id)
-                .fetchAll()
-                .then(function (results) {
-                    weaponId = results[0];
-                    Weapon.equalTo("weapon_name", weaponId.weapon_name)
-                        .fetchAll()
-                        .then(function (results) {
-                            setWeaponImage(results);
-                        })
-                        .catch(function (err) {
-                            console.log(err);
-                        });
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
-    function setWeaponImage(results) {
-        // 初期化
-        document.getElementById("item_frame").innerHTML = '';
-        for (var i = 1; i <= results.length - 1; i++) {
-            var weapon = results[i];
-            // 新しいHTML要素を作成
-            var weaponHtml = '<div class="item_border" id="' + weapon.weapon_id + '" onclick="selected(this)"><p class="overlap_color">' + weapon.overlap + '</p><img class="power_for_item_image" src="' + weapon.weapon_image + '"><p class="level_text">Lv' + weapon.weapon_level + '</p></div>';
-            // 作成した要素を追加
-            document.getElementById("item_frame").insertAdjacentHTML('beforeend', weaponHtml);
-        }
     }
 }
 
@@ -209,7 +166,7 @@ function updateWeaponEvolution() {
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
     var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     // 進化のアイテム数取得
-    var usedWeapon = Number(document.getElementById("power_ber").value) - Number(document.getElementById("power_ber").low);
+    var usedItem = Number(document.getElementById("counterEvo").value);
     // 進化対象の武器を取得
     LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetch()
@@ -218,29 +175,36 @@ function updateWeaponEvolution() {
             Weapon.equalTo("weapon_id", Number(1))
                 .fetch()
                 .then(function (results) {
-                    // ↓取れない
-                    console.log(weapon.overlap);
-                    console.log(Number(weapon.overlap) + Number(usedWeapon));
-                    results.set("overlap", Number(results.overlap) + Number(usedWeapon));
-                    results.update();
-                    console.log("sinka:ok");
-                    EvolutionSuccsess();
+                    results[0].set("overlap", Number(results.overlap) + Number(usedItem));
+                    return results[0].update();
                 })
                 .catch(function (err) {
                     console.log("sinka:ng");
                 });
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 
-            // 使用した武器を削除(冬休み後作成)
-            // Weapon.equalTo("weapon_name", weapon.weapon_name)
-            //     .limit(usedWeapon)
-            //     .order("weapon_id", true)
-            //     .fetchAll()
-            //     .then(function (results) {
-            //         results.delete();
-            //     })
-            //     .catch(function (err) {
-            //         console.log(err);
-            //     });
+    EvolutionSuccsess();
+    updateEvoItemSum();
+}
+
+// ガチャロジック
+function pullWeapon1() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    // 乱数発生(1から6)
+    var random = Math.floor(Math.random() * 6) + 1;
+    // 武器の全データ取得
+    Weapon.equalTo("weapon_id", Number(random))
+        .fetchAll()
+        .then(function (results) {
+            var weapon = results[0];
+            var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
+            // 作成した要素を追加
+            document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+            updateCrystalCount(200);
         })
         .catch(function (err) {
             console.log(err);
@@ -248,46 +212,26 @@ function updateWeaponEvolution() {
 }
 
 // ガチャロジック
-function gatyaPull(gatyaNum) {
+function pullWeapon10() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    // 武器の全データ取得
-    Weapon.fetchAll()
-        .then(function (results) {
-            setTimeout(setGatyaResult(results, gatyaNum), 5000);
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
-}
-function setGatyaResult(results, gatyaNum) {
-    // 初期化
-    document.getElementById("results").innerHTML = '';
-    for (var i = 1; i <= gatyaNum; i++) {
-        // 乱数発生(0から10)
-        var random = Math.floor(Math.random() * 11);
-        // 発生結果によって分岐してhtml追加
-        if (random == 0) {
-            raritySelect(results, "SSR", "gold");
-        } else if (1 <= random && random <= 5) {
-            raritySelect(results, "SR", "rgb(214, 0, 214)");
-        } else {
-            raritySelect(results, "R", "blue");
-        }
-    }
-}
-
-// レアリティ別に武器を選ぶ
-function raritySelect(results, rarity, color) {
-    for (var i = 0; i <= results.length - 1; i++) {
-        var weapon = results[i];
-        if (weapon.weapon_rarity == rarity) {
-            // 背景色変更
-            var weaponHtml = '<img class="result_image" style="background-color: ' + color + '" src="../image/soad/soad-provisional.png">';
-            // 作成した要素を追加
-            document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
-            break;
-        }
+    for (var i = 1; i <= 10; i++) {
+        // 乱数発生(1から6)
+        var random = Math.floor(Math.random() * 6) + 1;
+        // 武器の全データ取得
+        Weapon.equalTo("weapon_id", Number(random))
+            .fetchAll()
+            .then(function (results) {
+                var weapon = results[0];
+                // 背景色変更
+                var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
+                // 作成した要素を追加
+                document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+                updateCrystalCount(2000);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
     }
 }
 

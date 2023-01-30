@@ -25,8 +25,19 @@ function getDanjyonData() {
         // 情報取得
         for (var i = 0; i <= results.length - 1; i++) {
             var danjyon = results[i];
-            // 新しいHTML要素を作成
-            var danjyonHtml = '<div id="' + danjyon.danjyon_id + '" onclick="modalOpen();searchDanjyonData(this)"><img class="note_button_image" src="../image/danjyonSelectButton.png" ><p class="note_button_text">' + danjyon.danjyon_name + '</p></div>';
+            if (Number(danjyon.type) == 0) {
+                // 新しいHTML要素を作成
+                var danjyonHtml = '<div id="' + danjyon.danjyon_id + '" onclick="modalOpen();searchDanjyonData(this)"><img class="note_button_image" src="../image/danjyonSelectButton.png" ><p class="note_button_text">' + danjyon.danjyon_name + '</p></div>';
+            } else if (Number(danjyon.type) == 1) {
+                // 新しいHTML要素を作成
+                var danjyonHtml = '<div id="' + danjyon.danjyon_id + '" onclick="modalOpen();searchDanjyonData(this)"><img class="note_button_image" src="../image/danjyonSelectButtonBattle.png.png" ><p class="note_button_text">' + danjyon.danjyon_name + '</p></div>';
+            } else if (Number(danjyon.type) == 2) {
+                // 新しいHTML要素を作成
+                var danjyonHtml = '<div id="' + danjyon.danjyon_id + '" onclick="modalOpen();searchDanjyonData(this)"><img class="note_button_image" src="../image/danjyonSelectButtonGuild.png.png" ><p class="note_button_text">' + danjyon.danjyon_name + '</p></div>';
+            } else if (Number(danjyon.type) == 3) {
+                // 新しいHTML要素を作成
+                var danjyonHtml = '<div id="' + danjyon.danjyon_id + '" onclick="modalOpen();searchDanjyonData(this)"><img class="note_button_image" src="../image/danjyonSelectButtonEvent.png.png" ><p class="note_button_text">' + danjyon.danjyon_name + '</p></div>';
+            }
             // 作成した要素を追加
             document.getElementById("note").insertAdjacentHTML('beforeend', danjyonHtml);
         }
@@ -54,7 +65,6 @@ function searchDanjyonData(danjyonId) {
         // 情報取得
         // 新しいHTML要素を作成
         var danjyonHtml = '<p class="modal_title" >' + danjyon.danjyon_name.replace("<br>", "") + '</p><p class="modal_note">' + danjyon.danjyon_detail + '</p>';
-        console.log(danjyonHtml);
         // 作成した要素を追加
         document.getElementById("modal_text").insertAdjacentHTML('beforeend', danjyonHtml);
     }

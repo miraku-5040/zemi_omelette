@@ -154,11 +154,11 @@ class Skill{
             return;
         }
         const nowSkillData = skillData[this.skillDataIndex]; //メインのスキルデータを取得する
-        // TODO scopeで分岐する関数を設定
+        // scopeで分岐する関数を設定
         const scopeUseFunctionMap = this.#scopeBranch(nowSkillData.scope);
         const createTargetCoordinateArrayFunction = scopeUseFunctionMap.get("createTargetCoordinateArray");
         // targetCoordinateArray作成
-        const targetCoordinateArray = createTargetCoordinateArrayFunction(nowSkillData.scope, this.skillUserData.direction);
+        const targetCoordinateArray = createTargetCoordinateArrayFunction(nowSkillData.scope);
         // スキル座標を設定する
         if(skillData.skillId === this.normalAttackId){ //通常攻撃の場合は準備をスキップする
             // skillGoに渡すデータをクラス変数に設定する
@@ -236,12 +236,12 @@ class Skill{
                 switch(true){
                     case (isTargetEnemy):
                         // enemyがターゲットの処理
-                        const enemyStatusFluctuation = calcFunctionFunctionArray[index](this.skillUserData.attackStatus, enemyDefenceStatus);
+                        const enemyStatusFluctuation = calcFunctionFunctionArray[index](effectData, enemyDefenceStatus);
                         enemyStatusFluctuationFunctionArray[index](coordinate, enemyStatusFluctuation);
                         break;
                     case (isTargetPlayer):
                         // playerがターゲットの処理
-                        const playerStatusFluctuation = calcFunctionFunctionArray[index](this.skillUserData.attackStatus, playerDefenceStatus);
+                        const playerStatusFluctuation = calcFunctionFunctionArray[index](effectData, playerDefenceStatus);
                         playerStatusFluctuationFunctionArray[index](playerId, playerStatusFluctuation);
                         break;
                     default:
@@ -340,7 +340,7 @@ class Skill{
                     break;
                 case this.testSkillId2:
                     //テストスキル2
-                    skillData = [{name:"スキル2", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{name:"スキル2", scope:{type:"line", x:0, y:-1, direction:"up", rotation:true, padding:1, length:10}, effect:[{type:"normal", target:"hostility", hits:2}, {type:"normal", target:"hostility", hits:"all"}]}];
                     break;
                 default:
                     //テスト用の通常攻撃
@@ -369,7 +369,7 @@ class Skill{
                     baseCoordinate.y = scopeData.y;
                     if(scopeData.rotation){
                         // 座標回転
-                        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray([baseCoordinate], direction, this.skillUserData.direction);
+                        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray([baseCoordinate], scopeData.direction, this.skillUserData.direction);
                         const relativeCoordinate = this.#convertRelativeToAbsolute(rotatedTargetCoordinateArray[0].x, rotatedTargetCoordinateArray[0].y);
                         baseCoordinate.x = relativeCoordinate.x;
                         baseCoordinate.y = relativeCoordinate.y;
@@ -390,7 +390,169 @@ class Skill{
                 functionMap.set("createTargetCoordinateArray", typeOne);
                 break;
             case "line":
-                // TODO
+                const typeLine = (scopeData) => {
+                    const targetCoordinateArray = [];
+                    // 基準点を設定する
+                    const baseCoordinate = {};
+                    baseCoordinate.x = scopeData.x;
+                    baseCoordinate.y = scopeData.y;
+                    if(scopeData.direction !== this.defaultDirection){
+                        // 基準をデフォルトの方向に回転する
+                        const rotatedTargetCoordinateArray = this.#rotatetargetCoordinateArray([baseCoordinate], scopeData.direction, this.skillUserData.direction);
+                        const relativeCoordinate = this.#convertRelativeToAbsolute(rotatedTargetCoordinateArray[0].x, rotatedTargetCoordinateArray[0].y);
+                        baseCoordinate.x = relativeCoordinate.x;
+                        baseCoordinate.y = relativeCoordinate.y;
+                        scopeData.direction = this.defaultDirection;
+                    }
+                    // 各列の基準点を設定する
+                    const lineWidth = scopeData.padding * 2 + 1
+                    const baseCoordinateArray = [];
+                    for(let index = 0 ; index < lineWidth ; index++){
+                        const coordinate = {};
+                        if(index % 2 === 0){
+                            //indexが偶数
+                            coordinate.x = baseCoordinate.x - Math.floor(index / 2);
+                            coordinate.y = baseCoordinate.y;
+                            baseCoordinateArray.push(coordinate);
+                        }else{
+                            //indexが奇数
+                            coordinate.x = baseCoordinate.x + Math.ceil(index / 2);
+                            coordinate.y = baseCoordinate.y;
+                            baseCoordinateArray.push(coordinate);
+                        }
+                    }
+                    // 基準点をplayerの向きに回転する
+                    const coordinateArray = new Array(lineWidth); // [0[], +1[], -1[], +2[], -2[], ...]
+                    if(this.skillUserData.direction !== scopeData.direction){
+                        const rotatedBaseCoordinateArray = this.#rotatetargetCoordinateArray(baseCoordinateArray, scopeData.direction, this.skillUserData.direction);
+                        rotatedBaseCoordinateArray.forEach((coordinate, index) => {
+                            coordinateArray[index] = [coordinate];
+                        });
+                        scopeData.direction = this.skillUserData.direction;
+                    }else{
+                        baseCoordinateArray.forEach((coordinate, index) => {
+                            coordinateArray[index] = [coordinate];
+                        });
+                    }
+                    // 関数準備
+                    let increaseFunction = () => {};
+                    switch(this.skillUserData.direction){
+                        case "up":
+                            increaseFunction = (coordinate) => {
+                                const nextCoordinate = {};
+                                nextCoordinate.x = coordinate.x;
+                                nextCoordinate.y = coordinate.y - 1;
+                                return nextCoordinate;
+                            };
+                            break;
+                        case "down":
+                            increaseFunction = (coordinate) => {
+                                const nextCoordinate = {};
+                                nextCoordinate.x = coordinate.x;
+                                nextCoordinate.y = coordinate.y + 1;
+                                return nextCoordinate;
+                            };
+                            break;
+                        case "right":
+                            increaseFunction = (coordinate) => {
+                                const nextCoordinate = {};
+                                nextCoordinate.x = coordinate.x + 1;
+                                nextCoordinate.y = coordinate.y;
+                                return nextCoordinate;
+                            };
+                            break;
+                        case "left":
+                            increaseFunction = (coordinate) => {
+                                const nextCoordinate = {};
+                                nextCoordinate.x = coordinate.x - 1;
+                                nextCoordinate.y = coordinate.y;
+                                return nextCoordinate;
+                            };
+                            break;
+                        case "leftup":
+                            increaseFunction = (coordinate) => {
+                                const nextCoordinate = {};
+                                nextCoordinate.x = coordinate.x - 1;
+                                nextCoordinate.y = coordinate.y - 1;
+                                return nextCoordinate;
+                            };
+                            break;
+                        case "rightup":
+                            increaseFunction = (coordinate) => {
+                                const nextCoordinate = {};
+                                nextCoordinate.x = coordinate.x + 1;
+                                nextCoordinate.y = coordinate.y - 1;
+                                return nextCoordinate;
+                            };
+                            break;
+                        case "rightdown":
+                            increaseFunction = (coordinate) => {
+                                const nextCoordinate = {};
+                                nextCoordinate.x = coordinate.x + 1;
+                                nextCoordinate.y = coordinate.y + 1;
+                                return nextCoordinate;
+                            };
+                            break;
+                        case "leftdown":
+                            increaseFunction = (coordinate) => {
+                                const nextCoordinate = {};
+                                nextCoordinate.x = coordinate.x - 1;
+                                nextCoordinate.y = coordinate.y + 1;
+                                return nextCoordinate;
+                            };
+                            break;
+                        default:
+                            // エラー
+                            return [];
+                    }
+                    coordinateArray.forEach((oneLineArray) => {
+                        //配列の最後の座標を評価
+                        const absoluteCoordinate = this.#convertRelativeToAbsolute(oneLineArray[0].x, oneLineArray[0].y);
+                        if(!this.#isInCoordinateRange(absoluteCoordinate.x, absoluteCoordinate.y)){
+                            //範囲外
+                            oneLineArray = [];
+                            return;
+                        }
+                        if(!Stage.isFloor(absoluteCoordinate.x, absoluteCoordinate.y)){
+                            //床でない
+                            oneLineArray = [];
+                            return;
+                        }
+                        oneLineArray[0] = absoluteCoordinate;
+                        targetCoordinateArray.push(absoluteCoordinate);
+                        for(let i = 0 ; i < scopeData.length ; i++){
+                            // 列の座標を作成
+                            const lastCoordinate = oneLineArray[i];
+                            const nextCoordinate = increaseFunction(lastCoordinate);
+                            if(!this.#isInCoordinateRange(nextCoordinate.x, nextCoordinate.y)){
+                                // 座標範囲外
+                                break;
+                            }
+                            if(!Stage.isFloor(nextCoordinate.x, nextCoordinate.y)){
+                                // 床ではない
+                                break;
+                            }
+                            oneLineArray.push(nextCoordinate);
+                        }
+                    });
+                    // 座標の配列を作成
+                    let indexCount = 0;
+                    let continueCount = lineWidth;
+                    while(continueCount > 0){
+                        continueCount = lineWidth;
+                        indexCount++;
+                        for(let i = 0 ; i < lineWidth ; i++){
+                            if(!coordinateArray[i][indexCount]){
+                                //配列の要素が存在しない
+                                continueCount = continueCount - 1;
+                                continue;
+                            }
+                            targetCoordinateArray.push(coordinateArray[i][indexCount]);
+                        }
+                    }
+                    return targetCoordinateArray;
+                };
+                functionMap.set("createTargetCoordinateArray", typeLine);
                 break;
             // TODO タイプを追加する
             default:
@@ -431,10 +593,12 @@ class Skill{
         const enemyStatusFluctuationFunctionArray = [];
         effect.forEach((effectElement) => {
             switch(effectElement.type){
-                case "normal":
+                case "normal": // 通常攻撃
                     // 計算関数設定
-                    const normalCalc = (attackStatus, defenseStatus) => {
-                        const damage = this.#normalDmaageCalc(attackStatus, defenseStatus);
+                    const normalCalc = (effectData, defenseStatus) => {
+                        const atk = this.skillUserData.attackStatus.atk;
+                        const def = defenseStatus.def;
+                        const damage = this.#normalDamageCalc(atk, def);
                         return {hp:-damage};
                     };
                     calcFunctionArray.push(normalCalc);
@@ -449,9 +613,47 @@ class Skill{
                     };
                     enemyStatusFluctuationFunctionArray.push(normalEnemyStatusFluctuation);
                     break;
-                 case "attack":
-                    // TODO
+                 case "attack": // 物理攻撃
+                    // TODO 計算関数設定
+                    const attackCalc = (effectData, defenseStatus) => {
+                        const level = this.skillUserData.level;
+                        const magnification = effectData.magnification;
+                        const damage = this.#attackDamageCalc(level, magnification);
+                        return {hp:-damage};
+                    };
+                    calcFunctionArray.push(attackCalc);
+                    // ステータス更新関数設定
+                    const attackPlayerStatusFluctuation = (playerId, statusFluctuation) => {
+                        Player.playerHpFluctuation(playerId, statusFluctuation.hp);
+                    };
+                    playerStatusFluctuationFunctionArray.push(attackPlayerStatusFluctuation);
+                    const attackEnemyStatusFluctuation = (coordinate, statusFluctuation) => {
+                        Enemy.enemyHpFluctuation(coordinate.x, coordinate.y, statusFluctuation.hp);
+                    };
+                    enemyStatusFluctuationFunctionArray.push(attackEnemyStatusFluctuation);
                     break;
+                case "magic": // 魔法攻撃
+                    // 計算関数設定
+                    const magicCalc = (effectData, defenseStatus) => {
+                        const atk = this.skillUserData.attackStatus.atk;
+                        const def = defenseStatus.def;
+                        const normalDamage = this.#normalDamageCalc(atk, def);
+                        const constantValue = effectData.constantValue;
+                        const damage = this.#magicDamageCalc(normalDamage, constantValue);
+                        return {hp:-damage};
+                    };
+                    calcFunctionArray.push(magicCalc);
+                    // ステータス更新関数設定
+                    const magicPlayerStatusFluctuation = (playerId, statusFluctuation) => {
+                        Player.playerHpFluctuation(playerId, statusFluctuation.hp);
+                    };
+                    playerStatusFluctuationFunctionArray.push(magicPlayerStatusFluctuation);
+                    const magicEnemyStatusFluctuation = (coordinate, statusFluctuation) => {
+                        Enemy.enemyHpFluctuation(coordinate.x, coordinate.y, statusFluctuation.hp);
+                    };
+                    enemyStatusFluctuationFunctionArray.push(magicEnemyStatusFluctuation);
+                    break;
+                // TODO 種類を追加する
                 default:
                     //エラー
                     calcFunctionArray.push(() => {});
@@ -611,19 +813,19 @@ class Skill{
             const range = Math.max(Math.abs(nowX), Math.abs(nowY));
             for(let i = 0; i < range; i++){
                 switch(true){
-                    case (-range <= nowX < range && nowY === -range):
+                    case (-range <= nowX && nowX < range && nowY === -range):
                         // x+方向に移動
                         nowX += 1;
                         break;
-                    case (nowX === range && -range <= nowY < range):
+                    case (nowX === range && -range <= nowY && nowY < range):
                         // y+方向に移動
                         nowY += 1;
                         break;
-                    case (range >= nowX >-range && nowY === range):
+                    case (range >= nowX && nowX >-range && nowY === range):
                         // x-方向に移動
                         nowX -= 1;
                         break;
-                    case (nowX === -range && range >= nowY > -range):
+                    case (nowX === -range && range >= nowY && nowY > -range):
                         // y-方向に移動
                         nowY -= 1;
                         break;
@@ -684,20 +886,26 @@ class Skill{
     }
 
     /*  ダメージ計算 (normal)*/
-    static #normalDmaageCalc(attackStatus, defenseStatus){
+    static #normalDamageCalc(atk, def){
         //攻撃力(*補助系)/２ー守備力(*補助系)/４
-        const damage = attackStatus.atk / 2 - defenseStatus.def / 4;
+        const damage = atk / 2 - def / 4;
         const integerDamage = Math.round(damage); //四捨五入で整数にする
-        // TODO 修正する
         return integerDamage;
     }
+
     /* ダメージ計算 (magic) */
-    static #magicDmaageCalc(){
-        //TODO
+    static #magicDamageCalc(level, constantValue){
+        // レベル * 固定値
+        const damage = level * constantValue;
+        const integerDamage = Math.round(damage); //四捨五入で整数にする
+        return integerDamage;
     }
 
-    /* ダメージ計算 (physics) */
-    static #attackDmaageCalc(){
-        //TODO
+    /* ダメージ計算 (attack) */
+    static #attackDamageCalc(normalDamage ,magnification){
+        // 通常攻撃 * スキル倍率
+        const damage = normalDamage * magnification;
+        const integerDamage = Math.round(damage); //四捨五入で整数にする
+        return integerDamage;
     }
 }

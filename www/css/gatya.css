@@ -50,9 +50,9 @@
 .gatya_button_frame{
     border: solid rgb(189, 160, 0);
     width: 90.5px;
-    height: 55.5px;
+    height: 53px;
     position: relative;
-    transform: translate(-24px, -28px);
+    transform: translate(-24px, -33px);
 }
 
 /* ガチャを引くボタン */

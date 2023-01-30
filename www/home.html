@@ -27,7 +27,7 @@
     <img class="background_image" src="image/background/cave.png">
     <!-- プレイヤー情報表示 -->
     <div class="flame">
-        <img class="player_image" src="image/player_icon.png">
+        <img class="player_image" src="image/player_icon.png" onclick="toInfo()">
         <p class="rank_text" id="rank_text">ランク00</p>
         <p class="name_text1" id="player_name">NaN</p>
         <div class="other">
@@ -44,16 +44,18 @@
         <div class="least_coin">
             <img class="least_coin_image" src="image/coins.png">
             <p id="money" class="least_dia_coin">0</p>
+            <button class="least_dia_coin_plus" onclick="openCoin()"><p class="least_dia_coin_plus_text">＋</p></button>
         </div>
         <!-- ダイヤの残量 -->
         <div class="least_dia">
             <img class="least_dia_image" src="image/diamond.png">
             <p id="crystal" class="least_dia_text">0</p>
+            <button class="least_dia_coin_plus" onclick="toDiaBuy()"><p class="least_dia_coin_plus_text">＋</p></button>
         </div>
     </div>
     <!-- 設定画面への遷移ボタン -->
     <div class="setting">
-        <img class="setting_image" src="image/gear.png" onclick="toSet()">
+        <img class="setting_image" src="image/gear.png" onclick="openMenu()">
     </div>
     <!-- その他のボタン -->
     <div class="other_icons">
@@ -71,6 +73,15 @@
         <p id="job">職業：</p>
     </div>
 
+    <button class="dairy" onclick="getDairyData();openDairy()"><img class="dairy_button_image" src="image/dairy.png"></button>
+    <p class="dairy_button_text">デイリー</p>
+    <button class="achieve" onclick="getAchieveData();openAchieve()"><img class="achieve_button_image" src="image/achieve.png"></button>
+    <p class="achieve_button_text">実績</p>
+    <button class="guild" onclick="toGuild()"><img class="guild_button_image" src="image/guild_icon.png"></button>
+    <p class="guild_button_text">ギルド</p>
+    <button class="friend" onclick="openFriend()"><img class="guild_button_image" src="image/friend.png"></button>
+    <p class="friend_button_text">フレンド</p>
+
     <!-- キャラクター表示 -->
     <div class="content_position">
         <img class="character_position" src="image/character/yuusya.png">
@@ -80,17 +91,21 @@
             <img class="sound_icon" src="image/sound.png"></button>
         </div>
 
-        <img class="event_adv" src="image/event.png">
-        <img class="login_adv" src="image/login.png">
+        <img class="event_adv" src="image/event.png" onclick="toEvent()">
+        <img class="login_adv" src="image/login.png" onclick="toDayLogin()">
 
-        <button class="go_town" onclick="goTown()">
-            <img class="town_image" src="image/town/gotown.png">
-            <p class="town_text">街へ</p>
+        <button class="chat_open" onclick="openChat()">
+            <p class="chat_open_text">チャット</p>
+        </button>
+
+        <button class="go_town" onclick="toMap()">
+            <img class="town_image" src="image/map_icon.png">
+            <p class="town_text">地図</p>
         </button>
 
         <button class="pictoriary" onclick="toPict()">
-            <img class="town_image" src="image/town/gotown.png">
-            <p class="town_text">図鑑</p>
+            <img class="pict_image" src="image/pictorary.png">
+            <p class="pict_text">図鑑</p>
         </button>
 
         <!-- 各画面への遷移ボタン -->
@@ -143,6 +158,152 @@
             </div>
             <div class="modal-fotter">
                 <button class="present_modal_close_button" onclick="presentModalClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- デイリー用のモーダルウィンドウ -->
+    <div id="dairyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>デイリー目標</h2>
+            </div>
+            <div class="modal-body" id="dairy_modal-body">
+                <div class="goal_box">
+                    <p class="goal_box_text">強化を1回完了</p>
+                    <img class="goal_box_image" src="image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button1" onclick="updateCoinUp(1000)">完了</button>
+                </div>
+                <div class="goal_box">
+                    <p class="goal_box_text">戦闘を1回完了</p>
+                    <img class="goal_box_image" src="image/coins.png">
+                    <p class="goal_box_count">×1000</p>
+                    <button class="goal_box_button2">未完了</button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="present_modal_close_button" onclick="closeDairy()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 実績用のモーダルウィンドウ -->
+    <div id="achieveModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>実績</h2>
+            </div>
+            <div class="modal-body" id="achieve_modal-body">
+                <div class="goal_box">
+                    <p class="goal_box_text">強化を1回完了</p>
+                    <img class="goal_box_image" src="image/diamond.png">
+                    <p class="goal_box_count">×10</p>
+                    <button class="goal_box_button1" onclick="updateDiaUp(10)">完了</button>
+                </div>
+                <div class="goal_box">
+                    <p class="goal_box_text">武器1つをLv.50にする</p>
+                    <img class="goal_box_image" src="image/diamond.png">
+                    <p class="goal_box_count">×10</p>
+                    <button class="goal_box_button2">未完了</button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="present_modal_close_button" onclick="closeAchieve()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- コイン購入用のモーダルウィンドウ -->
+    <div id="coinModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>コイン購入</h2>
+                <button class="modal_coin_close_button" onclick="closeCoin()">×</button>
+            </div>
+            <div class="modal-body_coin" id="modal-body">
+                <div class="modal_dia_position">
+                    <img class="modal_dia_image" src="image/diamond.png">
+                    <p class="modal_dia_text">×10</p>
+                </div>
+                <p class="modal_convert">→</p>
+                <div class="modal_coin_position">
+                    <img class="modal_dia_image" src="image/coins.png">
+                    <p class="modal_coin_text">×1000</p>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="modal_coin_buy_button" onclick="updateCoin()">購入</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- フレンド用のモーダルウィンドウ -->
+    <div id="friendModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>フレンド</h2>
+            </div>
+            <div class="modal-body1" id="notice_body">
+                <div class="members_posiiton">
+                    <img class="member_image" src="image/player_icon.png">
+                    <p class="member_name">プレイヤー１</p>
+                    <p class="member_level">Lv.10</p>
+                </div>
+
+                <div class="members_posiiton">
+                    <img class="member_image" src="image/player_icon.png">
+                    <p class="member_name">プレイヤー２</p>
+                    <p class="member_level">Lv.10</p>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="guild_modal_close_button" onclick="closeFriend()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- メニュー用のモーダルウィンドウ -->
+    <div id="settingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>メニュー</h2>
+            </div>
+            <div class="menu_modal-body">
+                <button class="setting_button" onclick="toSet()">設定</button>
+                <button class="setting_button">データ引継ぎ</button>
+                <button class="setting_button" onclick="toStart()">タイトル画面へ</button>
+                <button class="setting_button" onclick="toCharaInfo()">キャラクター</button>
+            </div>
+            <div class="modal-fotter">
+                <button class="menu_modal_close_button" onclick="closeMenu()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- チャット用のモーダルウィンドウ -->
+    <div id="chatModal" class="modal">
+        <div class="chat_modal-content">
+            <div class="modal-header">
+                <h2 class="chat_title" id="chat_type">チャット</h2>
+            </div>
+            <div class="chat_modal-body" id="modal-body">
+                <div class="chat_type_button">
+                    <button class="all_chat_type" onclick="getAllChatData()"><p class="all_chat_type_text">全体</p></button>
+                    <button class="guild_chat_type" onclick="getGuildChatData()"><p class="guild_chat_type_text">ギルド</p></button>
+                </div>
+                <div class="chats" id="chats">
+                    <div class="solo_chat">
+                        <p class="chat_text">player：こんにちは</p>
+                    </div>
+                </div>
+                <div class="new_chat">
+                    <input class="new_chat_text" id="new_chat_text">
+                    <button id="new_chat_button" class="new_chat_button" onclick="updateAllChatData()"><p class="new_chat_button_text">送信</p></button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="chat_modal_close_button" onclick="closeChat()">閉じる</button>
             </div>
         </div>
     </div>

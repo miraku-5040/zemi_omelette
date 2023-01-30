@@ -66,7 +66,7 @@
 }
 
 .list_material {
-    background-color: rgb(214, 0, 214);
+    background-color: rgb(217, 217, 217);
     border-top: 2px solid white;
     border-right: 2px solid white;
     border-bottom: 20px solid white;
@@ -111,7 +111,7 @@
     width: 49px;
     height: 47px;
     position: relative;
-    transform: translate(-18px, -49px);
+    transform: translate(-18px, -70px);
 }
 
 .weapon_type_frame2 {

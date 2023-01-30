@@ -19,9 +19,9 @@
     <!-- 共通のCSS -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- ショップ画面のCSS -->
-    <link rel="stylesheet" href="../css/shop3.css">
+    <link rel="stylesheet" href="../css/itemShop.css">
 </head>
-<body onload="getMoneyCount()">
+<body onload="soundCityBGM();getMoneyCount()">
     <!-- お店の画像 -->
     <img class="interior" src="../image/town/shop2.png">
     <!-- 所持しているコイン数 -->
@@ -32,80 +32,80 @@
 
     <!-- 品揃え -->
     <div class="shop_list">
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(5)">
+            <img class="item" src="../image/item/IW4004.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(5)">
+            <img class="item" src="../image/item/IW4004.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(5)">
+            <img class="item" src="../image/item/IW4004.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(7)">
+            <img class="item" src="../image/item/IW4006.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(7)">
+            <img class="item" src="../image/item/IW4006.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(6)">
+            <img class="item" src="../image/item/IW4005.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(6)">
+            <img class="item" src="../image/item/IW4005.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(6)">
+            <img class="item" src="../image/item/IW4005.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(8)">
+            <img class="item" src="../image/item/IW4007.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
             </div>
         </div>
 
-        <div class="shop_item">
-            <img class="item" src="../image/soad/IW0001.png">
+        <div class="shop_item" onclick="buy_item(8)">
+            <img class="item" src="../image/item/IW4007.png">
             <div class="least_coin">
                 <img class="least_coin_image" src="../image/coins.png">
                 <p class="least_dia_coin">2000</p>
@@ -113,6 +113,6 @@
         </div>
     </div>
 
-    <button class="out_button" onclick="goTown()"><p class="out_button_text">店を出る</p></button>
+    <button class="out_button" onclick="outShop()"><img class="out_button_image" src="../image/town/door.png"><p class="out_button_text">店を出る</p></button>
 </body>
 </html>
