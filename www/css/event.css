@@ -1,11 +1,14 @@
+/* 背景の画像 */
 .background_image {
     position: absolute;
     transform: translate(-40px, -16px);
     z-index: -1;
     width: 700px;
+    height: 390px;
 }
 
 /* 戻るボタン */
+/* 戻るボタンのフレーム */
 .cansel_frame {
     border: solid rgb(189, 160, 0);
     position: absolute;
@@ -15,6 +18,7 @@
     height: 32px;
 }
 
+/* 戻るボタンのボタン */
 .cansel {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -32,6 +36,8 @@
     height: 35px;
 }
 
+/* イベントのメイン画面 */
+/* キャラクターイラスト */
 .event_character_position {
     width: 260px;
     height: 370px;
@@ -40,6 +46,7 @@
     left: 40px;
 }
 
+/* イベントのタイトル */
 .event_title {
     color: gold;
     font-weight: bold;
@@ -49,6 +56,7 @@
     left: 320px;
 }
 
+/* イベントの期限 */
 .limit_date_text {
     color: white;
     font-weight: bold;
@@ -58,67 +66,14 @@
     left: 325px;
 }
 
-.event_point_image {
-    width: 25px;
-    height: 30px;
-    position: relative;
-    top: 5px;
-    left: 10px;
-}
-
+/* ポイント表示から下のアイテム */
 .content_position {
     position: absolute;
     top: 130px;
     left: 320px;
 }
 
-.story_content_position {
-    overflow: scroll;
-    background-color:rgba(0,0,0,0.3);
-    border: solid rgb(189, 160, 0);
-    width: 260px;
-    height: 180px;
-    position: absolute;
-    top: 130px;
-    left: 320px;
-    padding: 20px 20px;
-}
-
-.story_position {
-    margin-bottom: -80px;
-}
-
-.yet_position {
-    margin-top: -15px;
-    margin-bottom: 20px;
-}
-
-.yet_text {
-    color: white;
-    font-weight: bold;
-}
-
-.story_image {
-    width: 90px;
-    height: 60px;
-}
-
-.story_title {
-    color: gold;
-    font-weight: bold;
-    position: relative;
-    transform: translateY(-75px);
-    left: 100px;
-}
-
-.story_text {
-    color: gold;
-    font-weight: bold;
-    position: relative;
-    transform: translateY(-90px);
-    left: 100px;
-}
-
+/* イベントポイント表示 */
 .event_point {
     background-color:rgba(0,0,0,0.3);
     border: solid rgb(189, 160, 0);
@@ -131,6 +86,16 @@
     top: 20px;
 }
 
+/* イベントポイントの画像 */
+.event_point_image {
+    width: 25px;
+    height: 30px;
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+
+/* イベントポイント数の数字 */
 .event_point_count {
     position: relative;
     transform: translateY(-55px);
@@ -138,6 +103,7 @@
     font-size: 25px;
 }
 
+/* 「pt」の表示 */
 .event_point_text {
     position: relative;
     transform: translateY(-105px);
@@ -145,6 +111,7 @@
     font-size: 20px;
 }
 
+/* 目標ボタン */
 .event_target {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -160,6 +127,7 @@
     height: 50px;
 }
 
+/* イベントガチャボタン */
 .event_gatya {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -176,6 +144,7 @@
     height: 50px;
 }
 
+/* イベントストーリーボタン */
 .event_story {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -191,7 +160,63 @@
     height: 50px;
 }
 
-/* ダイヤの残量 */
+/* イベントストーリー画面 */
+/* ストーリー表示ボックス */
+.story_content_position {
+    overflow: scroll;
+    background-color:rgba(0,0,0,0.3);
+    border: solid rgb(189, 160, 0);
+    width: 260px;
+    height: 180px;
+    position: absolute;
+    top: 130px;
+    left: 320px;
+    padding: 20px 20px;
+}
+
+/* ストーリー未開放の位置 */
+.yet_position {
+    margin-top: -15px;
+    margin-bottom: 20px;
+}
+
+/* ストーリー未開放のテキスト */
+.yet_text {
+    color: white;
+    font-weight: bold;
+}
+
+/* 一話ごと位置 */
+.story_position {
+    margin-bottom: -80px;
+}
+
+/* ストーリーのイメージ画像 */
+.story_image {
+    width: 90px;
+    height: 60px;
+}
+
+/* ストーリーの話数 */
+.story_title {
+    color: gold;
+    font-weight: bold;
+    position: relative;
+    transform: translateY(-75px);
+    left: 100px;
+}
+
+/* ストーリーのタイトル */
+.story_text {
+    color: gold;
+    font-weight: bold;
+    position: relative;
+    transform: translateY(-90px);
+    left: 100px;
+}
+
+/* イベントガチャの設定 */
+/* イベントポイントの残量 */
 .least_dia {
     background-color: #003761;
     border-top: solid #005291;
@@ -265,7 +290,7 @@
     height: 55px;
 }
 
-/* 使用ダイヤ数 */
+/* 使用ポイント数 */
 .dia_frame {
     background: rgb(230, 195, 0);
     border-radius: 10px;
@@ -288,34 +313,6 @@
     position: relative;
     transform: translateY(-36px);
     left: 7px;
-}
-
-/* ガチャ画面のボタン */
-.home_button_text2 {
-    position: relative;
-    transform: translateY(-25px);
-    left: 3px;
-}
-
-.homepage_icon_danjyon2 {
-    position: relative;
-    left: 3px;
-    width: 50px;
-    height: 40px;
-}
-
-.gatya_buttons {
-    background-color: #003761;
-    position: absolute;
-    top: 330px;
-    transform: translateX(-10px);
-    width: 670px;
-    height: 45px;
-}
-
-.gatya {
-    background: #0062ad;
-    border-radius: 0;
 }
 
 /* モーダルウィンドウの設定 */
@@ -374,7 +371,6 @@
     height: 30px;
 }
 
-/* デイリー＆実績のCSS */
 .goal_box {
     background-color: #F4F4E8;
     border: solid 2px #c4c4b8;

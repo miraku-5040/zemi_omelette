@@ -186,6 +186,7 @@ function getPictWeaponSoloData(id) {
             console.log(err);
         });
 
+    // 画像と名前と説明をHTMLに埋め込む
     function setModal(results) {
         // 情報取得
         var weapon = results[0];
@@ -209,6 +210,7 @@ function getPictItemSoloData(id) {
             console.log(err);
         });
 
+    // 画像と名前と説明をHTMLに埋め込む
     function setModal(results) {
         // 情報取得
         var item = results[0];
@@ -232,6 +234,7 @@ function getPictEnemySoloData(id) {
             console.log(err);
         });
 
+    // 画像と名前と説明をHTMLに埋め込む
     function setModal(results) {
         // 情報取得
         var enemy = results[0];
@@ -255,6 +258,7 @@ function getPictStorySoloData(id) {
             console.log(err);
         });
 
+    // 名前と説明をHTMLに埋め込む
     function setModal(results) {
         // 情報取得
         var story = results[0];

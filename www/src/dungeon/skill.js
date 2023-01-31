@@ -24,11 +24,11 @@ class Skill{
         scopeElement.style.opacity = 0.5;
         this. scopeElement = scopeElement;
         this.normalAttackId = "SA0000"; //通常攻撃のスキルid
-        this.defaultDirection = "up"; //方向の初期値
+        this.defaultDirection = "up"; //標準の方向
         this.defaultScopeLength = 20; //スキル範囲作成時の標準最大長
-        /* 開発用スキルid */
-        this.testSkillId1 = "SA001";
-        this.testSkillId2 = "SA002";
+        /* テスト用 */
+        this.testSkillId1 = "SA001"; // one attack
+        this.testSkillId2 = "SA002"; //line magic
     }
 
     /**
@@ -207,6 +207,7 @@ class Skill{
         let isSkillEnd = new Array(nowSkillData.effect.length); //ターゲット数の上限でスキップするフラグ
         isSkillEnd.fill(false);
         let continueCount = nowSkillData.effect.length;
+        // 効果実行
         for(const coordinate of targetCoordinateArray){
             if(continueCount <= 0){
                 // 継続数が0以下の場合は終了する
@@ -233,6 +234,8 @@ class Skill{
                     // スキップ
                     return;
                 }
+
+                // 計算とスキル効果反映
                 switch(true){
                     case (isTargetEnemy):
                         // enemyがターゲットの処理
@@ -334,17 +337,17 @@ class Skill{
         skillIdArray.forEach((skillId) => {
             let skillData;
             switch(skillId){
-                case this.testSkillId1:
+                case this.testSkillId1: //one
                     //テストスキル1
-                    skillData = [{name:"スキル1", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{name:"スキル1", scope:{type:"one", x:0, y:-1, direction:"up", rotation:true, scopeEffectId:""}, effect:[{type:"attack", target:"hostility", hits:"all", magnification:2, targetEffectId:"EF000"}]}];
                     break;
-                case this.testSkillId2:
+                case this.testSkillId2: //line
                     //テストスキル2
-                    skillData = [{name:"スキル2", scope:{type:"line", x:0, y:-1, direction:"up", rotation:true, padding:1, length:10}, effect:[{type:"normal", target:"hostility", hits:2}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{name:"スキル2", scope:{type:"line", x:0, y:-1, direction:"up", rotation:true, padding:1, length:10}, effect:[{type:"magic", target:"hostility", hits:2, constantValue:2}]}];
                     break;
                 default:
                     //テスト用の通常攻撃
-                    skillData = [{name:"通常攻撃", scope:{type:"one", x:0, y:-1, rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}, {type:"normal", target:"hostility", hits:"all"}]}];
+                    skillData = [{name:"通常攻撃", scope:{type:"one", x:0, y:-1, direction:"up", rotation:true}, effect:[{type:"normal", target:"hostility", hits:1}]}];
                     break;
             }
             this.skillDataMap.set(skillId, skillData);
@@ -870,6 +873,13 @@ class Skill{
         const absoluteX = this.skillUserData.nowX + relativeX;
         const absoluteY = this.skillUserData.nowY + relativeY;
         return {x:absoluteX, y:absoluteY}
+    }
+
+    /* ステージの絶対座標からスキル使用者を原点とする相対座標に変換する */
+    static #convertAbsoluteToRelative(absoluteX, absoluteY){
+        const relativeX = absoluteX - this.skillUserData.nowX;
+        const relativeY = absoluteY - this.skillUserData.nowY;
+        return {x:relativeX, y:relativeY}
     }
 
     /* 座標の範囲をチェックする */

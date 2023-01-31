@@ -10,6 +10,8 @@ var LOAD_WEAPON = "loadWeapon";
 
 // 装備品変更
 function updateEquipWeaponData() {
+    // ここが出ていない→このメソッドは動いていない、けどエラーは出ていないので発見されてはいる
+    console.log("go");
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Equip = ncmb.DataStore(this.EQUIP_DB);
     var soad = document.getElementById("soad").src;
@@ -19,7 +21,6 @@ function updateEquipWeaponData() {
     Equip.equalTo("equipment_id", "1")
         .fetch()
         .then(function (results) {
-            // ここが出ていない
             console.log(results);
             results[0].set("soad", soad);
             results[0].set("shield", shield);
@@ -45,7 +46,7 @@ function getEquipWeaponData() {
             console.log(err);
         });
 }
-// 武器の画像(仮)とレベルをHTMLに埋め込む
+// 武器の画像をHTMLに埋め込む
 function setEquipWeapoImage(results) {
     // 情報取得
     var equip = results[0];
@@ -54,6 +55,7 @@ function setEquipWeapoImage(results) {
     // 作成した要素を追加
     document.getElementById("equipment").innerHTML = EquipHtml;
 }
+
 // 装備画面情報取得用
 // 武器情報(剣)取得
 function getEquipSoadData() {
@@ -68,7 +70,7 @@ function getEquipSoadData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setSoadImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -97,7 +99,7 @@ function getEquipShieldData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setShieldImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -126,7 +128,7 @@ function getEquipDecoraionData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setDecorationImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
