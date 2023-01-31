@@ -108,6 +108,7 @@ class Player{
             this.playerStatus.direction ='leftdown';
             return 'stay';
         case 'attack':
+            console.log("開始")
             Skill.playerUseNormalAttack(this.playerStatus.playerId);
             return 'skillReady'
         case 'skill1':

@@ -73,6 +73,7 @@ function loop() {
             break;
         case 'skillGo':
             // スキルの使用
+            console.log("normalAttack")
             Skill.skillGo();
             mode = 'enemy';
             break;
