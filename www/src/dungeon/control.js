@@ -25,7 +25,6 @@ class Control{
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
             // キーボードが押された場合
-            //console.log(e.key)
             switch(e.key) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left += 1;
@@ -106,6 +105,88 @@ class Control{
                     e.preventDefault(); return false;
             }
         });
+        this.arrow();
+    }
+    
+    static tapUp(i){
+        switch(i) {
+                case "4": // 左向きキー
+                    this.pressedKeyStatus.left = 0;
+                     return false;
+                case "8": // 上向きキー
+                    this.pressedKeyStatus.up = 0;
+                     return false;
+                case "6": // 右向きキー
+                    this.pressedKeyStatus.right = 0;
+                     return false;
+                case "2": // 下向きキー
+                    this.pressedKeyStatus.down = 0;
+                     return false;
+                case "7": // 左上向きキー
+                    this.pressedKeyStatus.leftup = 0;
+                     return false;
+                case "9": // 右上向きキー
+                    this.pressedKeyStatus.rightup = 0;
+                     return false;
+                case "3": // 右下向きキー
+                    this.pressedKeyStatus.rightdown = 0;
+                     return false;
+                case "1": // 左下向きキー
+                    this.pressedKeyStatus.leftdown = 0;
+                     return false;
+        }
+    }
+    static tapDown(i){
+        switch(i) {
+                case "4": // 左向きキー
+                    this.pressedKeyStatus.left += 1;
+                    if(this.pressedKeyStatus.left <= Config.keyPressedCount){
+                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    }
+                     return false;
+                case "8": // 上向きキー
+                    this.pressedKeyStatus.up += 1;
+                    if(this.pressedKeyStatus.up <= Config.keyPressedCount){
+                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    }
+                     return false;
+                case "6": // 右向きキー
+                    this.pressedKeyStatus.right += 1;
+                    if(this.pressedKeyStatus.right <= Config.keyPressedCount){
+                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    }
+                     return false;
+                case "2": // 下向きキー
+                    this.pressedKeyStatus.down += 1;
+                    if(this.pressedKeyStatus.down <= Config.keyPressedCount){
+                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    } 
+                     return false;
+                case "7": // 左上向きキー
+                    this.pressedKeyStatus.leftup += 1;
+                    if(this.pressedKeyStatus.leftup <= Config.keyPressedCount){
+                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    }
+                     return false;
+                case "9": // 右上向きキー
+                    this.pressedKeyStatus.rightup += 1;
+                    if(this.pressedKeyStatus.rightup <= Config.keyPressedCount){
+                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    }
+                     return false;
+                case "3": // 右下向きキー
+                    this.pressedKeyStatus.rightdown += 1;
+                    if(this.pressedKeyStatus.rightdown <= Config.keyPressedCount){
+                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    }
+                     return false;
+                case "1": // 左下向きキー
+                    this.pressedKeyStatus.leftdown += 1;
+                    if(this.pressedKeyStatus.leftdown <= Config.keyPressedCount){
+                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    }
+                     return false;
+        }
     }
 
 
@@ -193,6 +274,46 @@ class Control{
             return 'item';
         }
         return false;
+    }
+
+    static deleteArrow(){
+        const elem = document.getElementById("directionKey")
+        const array = Array.from(elem.children);
+        if(array[0].style.display == "none"){
+            array.forEach((child) => {
+                child.style.display = "inline"
+            });
+        }else{
+            array.forEach((child) => {
+                child.style.display = "none"
+            });
+        }
+    }
+
+    static arrow(){
+        const elem = document.getElementById("directionKey")
+        for(let i = 1; i < 10; i++){
+            if(i == 5){
+                continue
+            }
+            const imgElement = Image.getArrowImages(i)
+            imgElement.style.display = "none"
+            imgElement.style.top = this.arrowPosition(i,false)+ "px";
+            imgElement.style.left = this.arrowPosition(i,true)+ "px";
+            imgElement.setAttribute('onmousedown', `Control.tapDown('${i}')`);
+            imgElement.setAttribute('onmouseup', `Control.tapUp('${i}')`);
+            elem.appendChild(imgElement);
+        }
+    }
+
+    static arrowPosition(index,a){
+        const x = [0,0,53,106,0,53,106,0,53,106]
+        const y = [0,106,106,106,53,53,53,0,0,0]
+        if(a){
+            return x[index]
+        }else{
+            return y[index]
+        }
     }
 
         /* アイテムリストの表示 */
