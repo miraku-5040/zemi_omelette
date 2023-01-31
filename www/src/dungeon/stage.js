@@ -2,103 +2,128 @@ class Stage {
 
     static movingLayersElement;
     static stageLayerElement;
-
+    /*
+    
+    
+    */
     static initialize() {
-        // HTML からステージの元となる要素を取得し、大きさを設定する
-        //キャラ移動用のステージの座標
-        //ステージクリエイトで変更
-        this.stageStatusTop = 3; //開発用
-        this.stageStatusLeft = 7; //開発用
+        //ステージの基準座標を決める。（キャラクターの位置と同じ
         const startingPointElement = document.getElementById(`starting_point`);
-        startingPointElement.style.top = this.stageStatusTop * Config.stageImgHeight + "px";
-        startingPointElement.style.left = this.stageStatusLeft * Config.stageImgWidth + "px";
+        startingPointElement.style.top = Config.playerReferencePointTop * Config.stageImgHeight + "px";
+        startingPointElement.style.left = Config.playerReferencePointLeft * Config.stageImgWidth + "px";
         startingPointElement.style.position = 'absolute';
 
-        const movingLayersElement = document.getElementById(`moving_layers`);
-        movingLayersElement.style.top = -6 * Config.stageImgHeight + "px"; //開発用
-        movingLayersElement.style.left = -9 * Config.stageImgWidth + "px"; //開発用
-        movingLayersElement.style.position = 'absolute';
-        this.movingLayersElement = movingLayersElement;
-
+        //ステージ全体の大きさを作成する
         const stageLayerElement = document.getElementById("stage_layer");
         stageLayerElement.style.width = Config.stageImgWidth * Config.stageCols + 'px';
         stageLayerElement.style.height = Config.stageImgHeight * Config.stageRows + 'px';
-        this.stageElement = stageLayerElement; //old
         this.stageLayerElement = stageLayerElement; //new
 
+        //ミニマップのフィールドを取得
+        this.minmap = document.getElementById("min_map")
 
-                // メモリを準備する
-        this.board =[[9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,10],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6],
-                    [8,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,7]] 
-        
-        
-        for(let y = 0; y < Config.stageRows; y++) {
-            const line = this.board[y] || (this.board[y] = []);
-            for(let x = 0; x < Config.stageCols; x++) {
-                const stageImageNumber = line[x];
-                if(stageImageNumber >= 1  && stageImageNumber < 20) {
-                    this.setStageImage(x, y, stageImageNumber);
-                } else {
-                    line[x] = null;
-                }
-            }
-        }
+        //ステージの情報をDBから取得する
+        this.stageStatus = {
+            stageName: '始まりの遺跡',
+            bottomFloor: 4,
+            enemyArray: ['E0001'],
+            maxEnemy: 5,
+            itemArray: ['IW000','IS000','IT000'],
+            maxItem: 3,
+            trapArray: ['T0000','T0001'],
+            maxTrap:5
+        };
+        //ステージに出現する全オブジェクトを格納する領域を生成する
+        this.popEnemyArray = []
+        this.popItemArray = []
+        this.popTrapArray = []
+        //ステージを作成する
+        this.createStage()
         
 
     }
 
     static createStage(){
+        const possiblePositions = [];
         //ランダム生成
-        /*this.board = [
-        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,9,5,5,5,5,5,5,10,2,2,2,2,2,2,2,9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,10,2,2,2],
-        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,1,1,1,6,2,2,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2],
-        [2,2,2,9,5,5,5,5,5,5,5,5,5,10,2,2,2,2,2,2,4,1,1,1,1,1,1,14,5,5,5,5,5,5,5,13,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2],
-        [2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2],
-        [2,2,2,4,1,1,1,1,1,1,1,1,1,14,5,5,5,5,5,5,13,1,1,1,1,1,1,11,3,3,12,1,11,3,3,12,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2],
-        [2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,4,1,6,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2],
-        [2,2,2,4,1,1,1,1,1,1,1,1,1,11,3,3,3,3,3,3,12,1,1,1,1,1,1,6,2,2,4,1,6,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2],
-        [2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,2,4,1,1,1,1,1,1,6,2,2,4,1,6,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2],
-        [2,2,2,8,3,3,3,3,12,1,11,3,3,7,2,2,2,2,2,2,4,1,1,1,1,1,1,6,2,2,4,1,6,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2],
-        [2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,2,2,2,8,3,3,3,3,3,3,7,2,2,4,1,6,2,2,8,3,3,3,3,3,3,3,12,1,11,3,3,3,3,7,2,2,2],
-        [2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,2,2],
-        [2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,9,5,5,5,5,5,5,5,5,5,5,5,5,13,1,14,10,2,2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,2,2],
-        [2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,2,2],
-        [2,2,2,2,2,9,5,5,13,1,14,5,5,10,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,2,2,2,2,4,1,6,2,2,2,2,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,6,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,9,5,5,5,13,1,14,5,5,5,10,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,14,5,5,5,13,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,11,3,3,3,12,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,6,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,6,2,2,2,8,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,7,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,6,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,6,2,2,2,2,2,2,2,2,2,9,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,13,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,14,5,5,5,5,5,5,5,5,5,13,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,11,3,3,3,3,3,3,3,3,3,3,3,3,3,12,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,4,1,1,1,1,1,1,1,11,3,3,3,3,3,3,3,3,3,3,3,7,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,8,3,3,3,3,3,3,3,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,1,1,1,1,1,1,1,1,1,6,2,2,2,2],
-        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,8,3,3,3,3,3,3,3,3,3,7,2,2,2,2],
-        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]];
-        //キャラの最初の座標特定
+        this.board = CreateStage.randomStageSelect()//randomStageCreate
         this.board.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
+                this.setStageImage(indexX, indexY, element);
+                    if(element != 1){
+                        return
+                    }
+                    if(this.board[indexY+1][indexX] == 5 && this.board[indexY-1][indexX] == 3){
+                        return
+                    }
+                    if(this.board[indexY][indexX+1] == 6 && this.board[indexY][indexX-1] == 4){
+                        return
+                    }
+                    
+                    possiblePositions.push({y:indexY,
+                    x:indexX})
+                    
             });
-        });*/
+        });
+        let selectIndex = Tool.getRandomInt(possiblePositions.length)
+        //配置可能座標にキャラクターを配置
+        let selectPosition =possiblePositions[selectIndex]
+        //座標が重複しないように候補から削除
+        possiblePositions.splice(selectIndex, 1)
+        //キャラクターの座標に応じたレイヤーの座標を決定
+        const movingLayersElement = document.getElementById(`moving_layers`);
+        movingLayersElement.style.top = -selectPosition.y * Config.stageImgHeight + "px"; 
+        movingLayersElement.style.left = -selectPosition.x * Config.stageImgWidth + "px"; 
+        movingLayersElement.style.position = 'absolute';
+        this.movingLayersElement = movingLayersElement;
+        //プレイヤーの現在座標をセットする
+        Player.resetCharacterPosition(selectPosition.x,selectPosition.y)
+
+        Stage.createEnemys(possiblePositions)
+        Stage.createItems(possiblePositions)
+        Stage.createTraps(possiblePositions)
     }
+
+    static createEnemys(possiblePositions){
+        //敵を最大ポップ数生成
+        for(let i = 0; i < this.stageStatus.maxEnemy; i++){
+            //配置可能座標からランダムに座標を取得
+            const selectIndex = Tool.getRandomInt(possiblePositions.length)
+            const selectPosition = possiblePositions[selectIndex]
+            possiblePositions.splice(selectIndex, 1)
+            //ランダムにenemyIDを取得
+            const enemyId = this.stageStatus.enemyArray[Tool.getRandomInt(this.stageStatus.enemyArray.length)]
+            const enemyInfo ={id: enemyId, position:selectPosition}
+            this.popEnemyArray.push(enemyInfo)
+        }
+    }
+
+    static createItems(possiblePositions){
+        for(let i = 0; i < this.stageStatus.maxItem; i++){
+            //配置可能座標からランダムに座標を取得
+            const selectIndex = Tool.getRandomInt(possiblePositions.length)
+            const selectPosition = possiblePositions[selectIndex]
+            possiblePositions.splice(selectIndex, 1)
+            //ランダムにitemIDを取得
+            const itemId = this.stageStatus.itemArray[Tool.getRandomInt(this.stageStatus.itemArray.length)]
+            const itemInfo ={id: itemId, position:selectPosition}
+            this.popItemArray.push(itemInfo)
+        }
+    }
+
+    static createTraps(possiblePositions){
+        for(let i = 0; i < this.stageStatus.maxTrap; i++){
+            //配置可能座標からランダムに座標を取得
+            const selectIndex = Tool.getRandomInt(possiblePositions.length)
+            const selectPosition = possiblePositions[selectIndex]
+            possiblePositions.splice(selectIndex, 1)
+            //ランダムにtrapIDを取得
+            const trapId = this.stageStatus.trapArray[Tool.getRandomInt(this.stageStatus.trapArray.length)]
+            const trapInfo ={id: trapId, position:selectPosition}
+            this.popTrapArray.push(trapInfo)
+        }
+    }
+
     /**
      * ステージ画像や画像番号をステージの2次元配列に格納する
     **/
@@ -113,6 +138,23 @@ class Stage {
             stageImageNumber: stageImageNumber,
             element: stageImage
         }
+
+        const min = Image.getMinmapImage(stageImageNumber);
+        min.style.left = x * 5 + "px";
+        min.style.top = y * 5 + "px";
+        this.minmap.appendChild(min);
+    }
+
+    static popEnemy(){
+        return Tool.deepCopy(this.popEnemyArray)
+    }
+
+    static popItem(){
+        return Tool.deepCopy(this.popItemArray)
+    }
+
+    static popTrap(){
+        return Tool.deepCopy(this.popTrapArray)
     }
 
     /**
@@ -129,7 +171,7 @@ class Stage {
      * **/
     static checkStage(x,y){
         //移動できる床か判定
-        if(this.board[y][x].stageImageNumber != 1){
+        if(this.board[y][x].stageImageNumber != Config.regularField){
             return true;
         }
         if(Enemy.checkEnemy(x,y)){

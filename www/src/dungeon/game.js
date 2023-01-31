@@ -10,20 +10,22 @@ let frame; // ゲームの現在フレーム（1/60秒ごとに1追加される�
 let turn; // ゲームの現在ターン数
 
 function initialize() {
+    //DBを準備する
+    Database.initialize();
     // 画像を準備する
     Image.initialize();
-    // ステージを準備する
-    Stage.initialize();
     //プレイヤーの準備
     Player.initialize();
+    // ステージを準備する
+    Stage.initialize();
     //エネミーの準備
     Enemy.initialize();
     //アイテムの準備
     Item.initialize();
+     //トラップの準備
+    Trap.initialize();
     //スキルの準備
     Skill.initialize();
-    //トラップの準備
-    Trap.initialize();
     //コントローラを準備する
     Control.initialize();
     // 開始フラグ
@@ -107,8 +109,7 @@ function loop() {
             mode = 'player';
             break;
         case 'nextfloor':
-            //ランダム生成
-            //プレイヤーの現在地の更新
+            Stage.createStage()
             //アイテム生成
             //トラップ生成
             //敵の生成

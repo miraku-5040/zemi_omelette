@@ -131,7 +131,6 @@ class Aster{
 
 
     static enemyMove(maze,start,end){
-
         /*let maze =
         let start = {x:5, y:5}
         let end = {x:7, y:9}*/

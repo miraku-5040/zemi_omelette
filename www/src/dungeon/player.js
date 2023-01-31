@@ -21,11 +21,12 @@ class Player{
             next: {x:9, y:6},
             direction: 'down'
         };
+        //プレイヤーの画面上の位置を決定する
         const characterElement = document.getElementById("player_layer");
         characterElement.style.width = Config.stageImgWidth + 'px';
         characterElement.style.height = Config.stageImgHeight + 'px';
         this.characterElement = characterElement;
-        this.setCharacterImage();
+        this.setCharacterImage()
 
      }
 
@@ -115,17 +116,13 @@ class Player{
         default:
             return 'player';
         }
-        
-        //return 'attack';
-        //return 'item';
-        //return 'menu';
 
     }
     /**
      * キャラの進行方向を決める
      * **/
      static guide(){
-         //進行方向を表示する　TODO
+         //進行方向を表示する TODO
          this.steyCharacterPosition();
      }
     /**
@@ -164,12 +161,11 @@ class Player{
         Player.playerUseNormalAttack(this.playerStatus.playerId);
     }
 
-    /* キャラクターを画面の真ん中に配置する */
+    /* キャラクターを配置する */
     static setCharacterImage() {
-        // 画像を作成し配置する
         const characterImage = Image.getPlayerImage('P0000')
-        characterImage.style.left = 7 * Config.stageImgWidth + "px";
-        characterImage.style.top = 3 * Config.stageImgHeight + "px";
+        characterImage.style.left = Config.playerReferencePointLeft * Config.stageImgWidth + "px";
+        characterImage.style.top = Config.playerReferencePointTop * Config.stageImgHeight + "px";
         this.characterElement.appendChild(characterImage);
     }
 
@@ -184,12 +180,13 @@ class Player{
         this.playerStatus.next.y = this.playerStatus.now.y
     }
 
-    /*static resetCharacterPosition(){
-        this.playerStatus.now.x = 9
-        this.playerStatus.now.y = 6
+    static resetCharacterPosition(x,y){
+        //最初の地点決定
+        this.playerStatus.now.x = x
+        this.playerStatus.now.y = y
         this.playerStatus.next.x = this.playerStatus.now.x
         this.playerStatus.next.y = this.playerStatus.now.y
-    }*/
+    }
 
     /* ターンによる満腹度の減少 */
     static spDecrease(turn){

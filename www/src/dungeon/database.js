@@ -8,6 +8,7 @@ class Database{
 
     /* 初期化 */
     static initialize(){
+        this.enemyCount = 0
         //this.ncmb = new NCMB(this.applicationKey, this.clientKey);
     }
 
@@ -30,5 +31,70 @@ class Database{
     static getPlayer(id = NaN){
         let playerData = {};
         return playerData;
+    }
+
+    static getEnemy(id = NaN){
+        this.enemyCount += 1
+        const enemyData = {
+            enemyId:'E0001', //モンスターID
+            enemyName:"スライム",//名前
+            level: 1, //レベル
+            distinction: this.enemyCount,//同モンスターの重複番号
+            direction:"down",
+            hp:{current:10, max:999, min:0}, 
+            atk: {current: 2,max: 200 , min: 0},//攻撃力
+            def: {current: 1,max: 2 , min: 0},//防御力
+            cri: {current: 0.05,max: 0.25 , min: 0},//会心率
+            avd: {current: 0.01,max: 0.05 , min: 0},//回避率
+            dex: {current: 1,max: 100 , min: 0.5},//命中率 
+            exp: 2,//基礎経験値
+            size:1//モンスターの使用ます
+            };
+        
+        return enemyData
+    }
+
+    static getItem(id = NaN){
+        const itemArray = [{
+            itemId: 'IW000',//アイテムID
+            itemName: 'ひのきのぼう',
+            skill:'SA001',
+            usageLimit: null
+            }
+        ,{
+            itemId: 'IS000',//アイテムID
+            itemName: '木の盾',
+            usageLimit: null
+            }
+        ,{
+            itemId: 'IT000',//アイテムID
+            itemName: '薬草',
+            skillId:0,
+            usageLimit: 1
+            }]
+        for(let element of itemArray){
+            if(element.itemId == id){
+                return element
+
+            }
+        }
+    }
+
+    static getTrap(id = NaN){
+        const trapArray = [{
+            trapId: 'T0000',//アイテムID
+            trapName: '階段',
+            hideFlg: false
+            },{
+            trapId: 'T0001',//アイテムID
+            trapName: '地雷',
+            hideFlg: true
+            }]
+        for(let element of trapArray){
+            if(element.trapId == id){
+                return element
+
+            }
+        }
     }
 }
