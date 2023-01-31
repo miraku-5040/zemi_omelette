@@ -68,7 +68,7 @@ class Image {
         //エラー用の画像をセット
         const errorImage = this.createElement();
         this.playerImages.set(errorIndex, errorImage);
-        for(let i=0; i < Config.characterImageTotal; i++){
+        for(let i=1; i < Config.characterImageTotal; i++){
             const image = this.createElement(`P000${i}`);
             this.playerImages.set(`P000${i}`, image);
         }

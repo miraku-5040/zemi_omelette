@@ -26,8 +26,7 @@ class Player{
         characterElement.style.width = Config.stageImgWidth + 'px';
         characterElement.style.height = Config.stageImgHeight + 'px';
         this.characterElement = characterElement;
-        this.setCharacterImage()
-
+        this.setCharacterImage(5)
      }
 
     
@@ -37,30 +36,38 @@ class Player{
     static playing(){
         switch(Control.getPressedKeyStatus()){
         case 'up':
+            this.setCharacterImage(8)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             return 'move';
         case 'down':
+            this.setCharacterImage(2)
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             return 'move';
         case 'right':
+            this.setCharacterImage(6)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             return 'move';
         case 'left':
+            this.setCharacterImage(4)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             return 'move';
         case 'leftup':
+            this.setCharacterImage(7)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             return 'move';
         case 'rightup':
+            this.setCharacterImage(9)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             return 'move';
         case 'rightdown':
+            this.setCharacterImage(3)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             return 'move';
         case 'leftdown':
+            this.setCharacterImage(1)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             return 'move';
@@ -162,8 +169,9 @@ class Player{
     }
 
     /* キャラクターを配置する */
-    static setCharacterImage() {
-        const characterImage = Image.getPlayerImage('P0000')
+    static setCharacterImage(num) {
+        this.characterElement.innerHTML=""
+        const characterImage = Image.getPlayerImage('P000'+num)
         characterImage.style.left = Config.playerReferencePointLeft * Config.stageImgWidth + "px";
         characterImage.style.top = Config.playerReferencePointTop * Config.stageImgHeight + "px";
         this.characterElement.appendChild(characterImage);
