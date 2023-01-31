@@ -1,8 +1,10 @@
+/* 背景色 */
 body {
     background-color: #0064b0;
 }
 
 /* 戻るボタン */
+/* 戻るボタンのフレーム */
 .cansel_frame {
     border: solid rgb(189, 160, 0);
     position: absolute;
@@ -12,6 +14,7 @@ body {
     height: 32px;
 }
 
+/* 戻るボタンのボタン */
 .cansel {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -29,6 +32,7 @@ body {
     height: 35px;
 }
 
+/* ダイヤ購入画面のタイトル */
 .dia_buy_title {
     font-size: 30px;
     font-weight: bold;
@@ -38,6 +42,7 @@ body {
     left: 100px;
 }
 
+/* 購入品一覧 */
 .dia_buy {
     display: flex;
     gap: 10px;
@@ -48,6 +53,7 @@ body {
     overflow: scroll;
 }
 
+/* 購入品一覧の内の一つ */
 .solo_dia_buy {
     background-color: #003761;
     border-top: solid #005291;
@@ -58,6 +64,7 @@ body {
     height: 160px;
 }
 
+/* ダイヤの画像 */
 .solo_dia_buy_image {
     position: relative;
     top: 20px;
@@ -73,6 +80,7 @@ body {
     margin: auto;
 }
 
+/* ダイヤの量の画像 */
 .least_dia_image {
     position: relative;
     transform: translateY(-3px);
@@ -81,6 +89,7 @@ body {
     height: 30px;
 }
 
+/* ダイヤの量の個数 */
 .least_dia_text {
     color: rgb(231, 231, 231);
     font-size: 15px;
@@ -91,6 +100,7 @@ body {
     z-index: 10;
 }
 
+/* ダイヤの量のテキスト */
 .solo_dia_buy_text {
     text-align: center;
     font-weight: bold;

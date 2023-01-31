@@ -118,6 +118,10 @@
     height: 40px;
 }
 
+.dairy:hover{
+    background: rgb(146, 146, 146);
+}
+
 .dairy_button_image {
     width: 30px;
     height: 30px;
@@ -147,6 +151,10 @@
     left: 559px;
     width: 40px;
     height: 40px;
+}
+
+.achieve:hover{
+    background: rgb(146, 146, 146);
 }
 
 .achieve_button_image {

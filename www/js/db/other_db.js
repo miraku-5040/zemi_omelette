@@ -262,6 +262,7 @@ function updateEventPointCount(point) {
         .catch(function (err) {
             console.log(err);
         });
+    // イベントポイント数表示
     getEventPointCount();
 }
 
@@ -278,6 +279,7 @@ function updateEventPointCountUp(point) {
         .catch(function (err) {
             console.log(err);
         });
+    // イベントポイント数表示
     getEventPointCount();
     setTimeout('window.location.href = "../html/event.html"', 1500);
 }
@@ -340,6 +342,7 @@ function getSkillData() {
     }
 }
 
+// スキルレベル上昇
 function updateSkillData(skill) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -348,7 +351,7 @@ function updateSkillData(skill) {
     Skill.equalTo("skill_name", skill)
         .fetch()
         .then(function (results) {
-            console.log(results);
+            console.log("skill:"+results[0].skill_level);
             var skill_detail = results[0];
             results[0].set("skill_level", Number(skill_detail.skill_level) + 1);
             console.log("ok");
@@ -374,6 +377,7 @@ function updateSkillData(skill) {
     setTimeout('window.location.href = "skill.html"', 1500);
 }
 
+// スキル強化素材の残数表示
 function getskillItemData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -526,7 +530,7 @@ function guildBuy(item) {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results[0].set("guild_coin", Number(item.money - 2000));
+            results[0].set("guild_coin", Number(item.guild_coin - 2000));
             console.log("ok");
             return results[0].update();
         })
@@ -537,7 +541,7 @@ function guildBuy(item) {
     setTimeout('window.location.href = "../html/guildShop.html"', 1500);
 }
 
-// 毎日ログイン機能
+// 毎日ログイン機能のアイテム表示(通常)
 function getNomalLoginData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.DAIRY_DB);
@@ -566,6 +570,7 @@ function getNomalLoginData() {
     }
 }
 
+// 毎日ログイン機能のアイテム表示(レア)
 function getRareLoginData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.DAIRY_DB);
@@ -601,6 +606,7 @@ function updateLoginData(id, itemId, count) {
     audio.play();
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.DAIRY_DB);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
     Dairy.equalTo("id", id)
         .fetchAll()
         .then(function (results) {
@@ -610,7 +616,20 @@ function updateLoginData(id, itemId, count) {
         .catch(function (err) {
             console.log(err);
         });
-    updateSoloItemData(Number(itemId), count);
+    if (Number(itemId) == 10) {
+        Character.fetchAll()
+        .then(function (results) {
+            var item = results[0];
+            results[0].set("crystal", Number(item.crystal + Number(count)));
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    } else {
+        // アイテム増加(item_db.js)
+        updateSoloItemData(Number(itemId), count);
+    }
     setTimeout('window.location.href = "../html/dayLogin.html"', 1500);
 }
 
@@ -625,13 +644,15 @@ function updateCoin() {
         .then(function (results) {
             var item = results[0];
             results[0].set("money", Number(item.money + 1000));
-            results[0].set("crystal", Number(item.money - 10));
+            results[0].set("crystal", Number(item.crystal - 10));
             return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
         });
+    // コイン残量表示
     getMoneyCount();
+    // 水晶残量表示
     getCrystalCount();
     setTimeout('window.location.href = "home.html"', 1500);
 }
@@ -724,7 +745,7 @@ function getAchieveData() {
             var dairy = results[i];
             if (Number(dairy.count) >= Number(dairy.max)) {
                 // 新しいHTML要素を作成
-                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/diamond.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateAchieveData(' + dairy.id + ');updateCoinUp(1000)">完了</button></div>';
+                var itemHtml = '<div class="goal_box"><p class="goal_box_text">' + dairy.content + '</p><img class="goal_box_image" src="image/diamond.png"><p class="goal_box_count">×' + dairy.coin + '</p><button class="goal_box_button1" onclick="updateAchieveData(' + dairy.id + ');updateDiaUp(10)">完了</button></div>';
                 // 作成した要素を追加
                 document.getElementById("achieve_modal-body").insertAdjacentHTML('beforeend', itemHtml);
             } else {
@@ -1019,7 +1040,7 @@ function updateDiaUp(num) {
     Character.fetchAll()
         .then(function (results) {
             var item = results[0];
-            results[0].set("crystal", Number(item.money + Number(num)));
+            results[0].set("crystal", Number(item.crystal + Number(num)));
             return results[0].update();
         })
         .catch(function (err) {

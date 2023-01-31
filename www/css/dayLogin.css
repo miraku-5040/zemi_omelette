@@ -1,8 +1,10 @@
+/* 背景色 */
 body {
     background-color: aqua;
 }
 
 /* 戻るボタン */
+/* 戻るボタンのフレーム */
 .cansel_frame {
     border: solid rgb(189, 160, 0);
     position: absolute;
@@ -12,6 +14,7 @@ body {
     height: 32px;
 }
 
+/* 戻るボタンのボタン */
 .cansel {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -29,6 +32,7 @@ body {
     height: 35px;
 }
 
+/* 毎日ログインのフレームの画像 */
 .login_everyday {
     position: absolute;
     top: 50px;
@@ -37,6 +41,7 @@ body {
     height: 290px;
 }
 
+/* 「通常」のテキスト */
 .login_dairy_division {
     font-weight: bold;
     font-size: 20px;
@@ -45,6 +50,7 @@ body {
     left: 65px;
 }
 
+/* 「レア」のテキスト */
 .login_dairy_division2 {
     font-weight: bold;
     font-size: 20px;
@@ -53,6 +59,7 @@ body {
     left: 65px;
 }
 
+/* 通常のアイテム欄 */
 .nomal {
     display: flex;
     gap: 10px;
@@ -63,6 +70,7 @@ body {
     width: 450px;
 }
 
+/* レアのアイテム欄 */
 .rare {
     display: flex;
     gap: 10px;
@@ -73,10 +81,12 @@ body {
     width: 450px;
 }
 
+/* 「○日目」 */
 .login_dairy_title {
     font-weight: bold;
 }
 
+/* 貰えるアイテムの画像 */
 .login_dairy_image {
     position: relative;
     transform: translate(-10px, -5px);
@@ -84,6 +94,7 @@ body {
     height: 70px;
 }
 
+/* 貰えるアイテムの個数 */
 .login_dairy_count {
     font-weight: bold;
     position: relative;
