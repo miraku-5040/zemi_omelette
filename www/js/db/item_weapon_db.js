@@ -16,14 +16,13 @@ function getSoloExplainWeaponData(element) {
     Weapon.equalTo("weapon_id", Number(element.id))
         .fetchAll()
         .then(function (results) {
-            // 取れていない
             setItemImage(results);
         })
         .catch(function (err) {
             console.log(err);
         });
 
-    // 武器の画像(仮)と残数をHTMLに埋め込む
+    // 武器の画像と名前と説明をHTMLに埋め込む
     function setItemImage(results) {
         // 情報取得
         var weapon = results[0];
@@ -48,7 +47,7 @@ function getItemSoadData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setSoadImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -77,7 +76,7 @@ function getItemShieldData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setShieldImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -106,7 +105,7 @@ function getItemDecoraionData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setDecorationImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';

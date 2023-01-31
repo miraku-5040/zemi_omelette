@@ -2,12 +2,14 @@ class Image {
 
     static playerImages; //playerのimgElementのMap
     static enemyImages; //enemyのimgElementのMap
+    
 
     /* 画像の生成, elementを持つ */
     static initialize() {
         this.createStageImages();
         this.createPlayerImages();
         this.createDropItemImages();
+        this.createArrow()
     }
     /* 画像の要素を作成
      *  サンプル： <img src="img/stage_1.png" id="stage1"> */
@@ -66,7 +68,7 @@ class Image {
         //エラー用の画像をセット
         const errorImage = this.createElement();
         this.playerImages.set(errorIndex, errorImage);
-        for(let i=0; i < Config.characterImageTotal; i++){
+        for(let i=1; i < Config.characterImageTotal; i++){
             const image = this.createElement(`P000${i}`);
             this.playerImages.set(`P000${i}`, image);
         }
@@ -118,6 +120,16 @@ class Image {
         this.dropItemImages = [];
         const image = this.createElement('ID000');
         this.dropItemImages.push(image);
+    }
+
+    static createArrow(){
+        const index = [8,9,6,3,2,1,4,7]
+        this.arrowImages = new Array(9)
+        for(let i = 0; i < 8; i++){
+            const newImage = this.createElement("arrow").cloneNode(false);
+            newImage.style.transform  = "rotate("+45*i+"deg)"
+            this.arrowImages[index[i]] = newImage
+        }
     }
 
     /* stageImagesの要素を取得 */
@@ -192,6 +204,11 @@ class Image {
     /* itemImagesの要素を取得 */
     static getDropItemImage(index){
         const image = this.dropItemImages[index].cloneNode(true)
+        return image
+    }
+
+    static getArrowImages(index){
+        const image = this.arrowImages[index].cloneNode(true)
         return image
     }
 }

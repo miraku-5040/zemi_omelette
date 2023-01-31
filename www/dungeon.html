@@ -24,9 +24,15 @@
     <script src="src/dungeon/image.js"></script>
     <script src="src/dungeon/game.js"></script>
     <link rel="stylesheet" href="components/loader.css">
+    <style>
+        body {
+            -webkit-touch-callout:none; 
+            -webkit-user-select:none; 
+            }
+    </style>
 
 </head>
-    <body style="margin:0; background-color: #333333; overflow: hidden;">
+    <body style="margin:0; background-color: #333333; overflow: hidden; oncontextmenu='return false;' oncopy='return false;'">
 
         <!-- 移動するレイヤーをまとめたdiv、移動で動かす、ステージサイズに設定する -->
         <div id="starting_point" style="position:absolute; margin: 0;">
@@ -75,7 +81,7 @@
                  <div id="message2" style="position:absolute; background-color: #CCCCCC; padding: 5px; top: 35px; left: calc(50% - 150px); width: 290px; height: 25px; display: none;"></div>
             </div>
             <div id="control_layer" style="position:absolute; margin:0; top:0; left:0; height:100vh; width:100%;">
-                <div id="directionKey" onclick="" style="position:absolute; left: 50px; top: 275px;width:80px; height:80px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>
+                <div id="directionKey" onclick="Control.deleteArrow()" style="position:absolute; left: 318px; top: 106px;width:159px; height:159px; opacity: 0.5; margin: 0;"></div>
 
                 <div id="action" style="position:absolute; left: 600px; top: 250px; width:125px; height:125px;  margin: 0;">
                     <div id="attack" onclick="" style="position:absolute; left: 75px; top: 37.5px;width:50px; height:50px; border-radius: 50%; background-color: #FFFFFF; opacity: 0.5; margin: 0;"></div>

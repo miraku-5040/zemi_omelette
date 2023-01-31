@@ -1,10 +1,48 @@
+// 画面遷移ボタン
+// 以下フッターのボタン
 function toHome() {
     // 音声再生
     go_sound();
-    // マイページ画面へ遷移
+    // ホーム画面へ遷移
     setTimeout('window.location.href = "../home.html"', 600);
 }
 
+function toSelectDanjyon() {
+    // 音声再生
+    go_sound();
+    // ダンジョン選択画面へ遷移
+    setTimeout('window.location.href = "danjyonSelect.html"', 600);
+}
+
+function toEquip() {
+    // 音声再生
+    go_sound();
+    // 装備画面へ遷移
+    setTimeout('window.location.href = "equip.html"', 600);
+}
+
+function toItem() {
+    // 音声再生
+    go_sound();
+    // 持ち物画面へ遷移
+    setTimeout('window.location.href = "item.html"', 600);
+}
+
+function toPower() {
+    // 音声再生
+    go_sound();
+    // 強化選択画面へ遷移
+    setTimeout('window.location.href = "power.html"', 600);
+}
+
+function toGatya() {
+    // 音声再生
+    go_sound();
+    // ガチャ画面へ遷移
+    setTimeout('window.location.href = "gatya.html"', 600);
+}
+
+// 以下ダンジョン選択画面のボタン
 function toReady() {
     // 音声再生
     go_sound();
@@ -12,6 +50,7 @@ function toReady() {
     setTimeout('window.location.href = "../html/ready.html"', 600);
 }
 
+// 以下地図、街、ショップ画面のボタン
 function toMap() {
     // 音声再生
     go_sound();
@@ -34,28 +73,31 @@ function outShop() {
     setTimeout('window.location.href = "town.html"', 600);
 }
 
-function toSelectDanjyon() {
+function toShop1() {
     // 音声再生
-    go_sound();
-    // ダンジョン選択画面へ遷移
-    setTimeout('window.location.href = "danjyonSelect.html"', 600);
-}
-
-function toGameImage() {
-    // 音声再生
-    audio = new Audio("../sound/start.m4a");
+    audio = new Audio("../sound/shop.m4a");
     audio.play();
-    // スタート画面からのマイページ画面へ遷移
-    setTimeout('window.location.href = "../home.html"', 600);
+    // 武器屋画面へ遷移
+    setTimeout('window.location.href = "weaponShop.html"', 1000);
 }
 
-function toGatya() {
+function toShop2() {
     // 音声再生
-    go_sound();
-    // ガチャ画面へ遷移
-    setTimeout('window.location.href = "gatya.html"', 600);
+    audio = new Audio("../sound/shop.m4a");
+    audio.play();
+    // 書店画面へ遷移
+    setTimeout('window.location.href = "skillShop.html"', 1000);
 }
 
+function toShop3() {
+    // 音声再生
+    audio = new Audio("../sound/shop.m4a");
+    audio.play();
+    // 市場画面へ遷移
+    setTimeout('window.location.href = "itemShop.html"', 1000);
+}
+
+// 以下ガチャ画面に関するボタン
 function resultOne() {
     // 音声再生
     audio = new Audio("../sound/gatya.m4a");
@@ -88,27 +130,7 @@ function toPullItem10() {
     setTimeout('window.location.href = "eventResultTen.html"', 1200);
 }
 
-function toItem() {
-    // 音声再生
-    go_sound();
-    // 持ち物画面へ遷移
-    setTimeout('window.location.href = "item.html"', 600);
-}
-
-function toEquip() {
-    // 音声再生
-    go_sound();
-    // 装備画面へ遷移
-    setTimeout('window.location.href = "equip.html"', 600);
-}
-
-function toPower() {
-    // 音声再生
-    go_sound();
-    // 強化選択画面へ遷移
-    setTimeout('window.location.href = "power.html"', 600);
-}
-
+// 以下強化方法選択画面に関するボタン
 function toPowerStrengthen() {
     // 音声再生
     go_sound();
@@ -144,34 +166,13 @@ function toWeaponEvo() {
     setTimeout('window.location.href = "weaponSelectEvo.html"', 600);
 }
 
-function toShop1() {
+// 以下その他
+function toGameImage() {
     // 音声再生
-    audio = new Audio("../sound/shop.m4a");
+    audio = new Audio("../sound/start.m4a");
     audio.play();
-    // 武器屋画面へ遷移
-    setTimeout('window.location.href = "weaponShop.html"', 1000);
-}
-
-function toShop2() {
-    // 音声再生
-    audio = new Audio("../sound/shop.m4a");
-    audio.play();
-    // 書店画面へ遷移
-    setTimeout('window.location.href = "skillShop.html"', 1000);
-}
-
-function toShop3() {
-    // 音声再生
-    audio = new Audio("../sound/shop.m4a");
-    audio.play();
-    // 市場画面へ遷移
-    setTimeout('window.location.href = "itemShop.html"', 1000);
-}
-
-function toDanjyon() {
-    // 音声再生
-    audio = new Audio("../sound/danjyon_start.m4a");
-    audio.play();
+    // スタート画面からのマイページ画面へ遷移
+    setTimeout('window.location.href = "../home.html"', 600);
 }
 
 function toSet() {
@@ -188,6 +189,14 @@ function toStart() {
     setTimeout('window.location.href = "start.html"', 600);
 }
 
+// イベント画面のボタン
+function toEvent() {
+    // 音声再生
+    go_sound();
+    // イベント画面へ遷移
+    setTimeout('window.location.href = "../html/event.html"', 600);
+}
+
 function toEventGatya() {
     // 音声再生
     go_sound();
@@ -198,17 +207,11 @@ function toEventGatya() {
 function toEventStory() {
     // 音声再生
     go_sound();
-    // イベントガチャ画面へ遷移
+    // イベントストーリー画面へ遷移
     setTimeout('window.location.href = "eventStory.html"', 600);
 }
 
-function toEvent() {
-    // 音声再生
-    go_sound();
-    // イベント画面へ遷移
-    setTimeout('window.location.href = "../html/event.html"', 600);
-}
-
+// 以下ギルド画面のボタン
 function toGuild() {
     // 音声再生
     go_sound();
@@ -221,6 +224,14 @@ function toGuildShop() {
     go_sound();
     // ギルドショップ画面へ遷移
     setTimeout('window.location.href = "../html/guildShop.html"', 600);
+}
+
+// 以下動作
+// ダンジョン開始音声
+function toDanjyon() {
+    // 音声再生
+    audio = new Audio("../sound/danjyon_start.m4a");
+    audio.play();
 }
 
 // 項目ボタンの切り替え
@@ -259,7 +270,7 @@ function modalOpen() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // ダンジョン説明用モーダルウィンドウを開く
     const modal = document.getElementById('explanationModal');
     modal.style.display = 'block';
 }
@@ -268,7 +279,7 @@ function modalClose() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // ダンジョン説明用モーダルウィンドウを閉じる
     const modal = document.getElementById('explanationModal');
     modal.style.display = 'none';
 }
@@ -279,7 +290,7 @@ function modalOpen1() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // ガチャ確認用(1連用)モーダルウィンドウを開く
     const modal = document.getElementById('gatyaOneModal');
     modal.style.display = 'block';
 }
@@ -288,7 +299,7 @@ function modalClose1() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // ガチャ確認用(1連用)モーダルウィンドウを閉じる
     const modal = document.getElementById('gatyaOneModal');
     modal.style.display = 'none';
 }
@@ -298,7 +309,7 @@ function modalOpen10() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // ガチャ確認用(10連用)モーダルウィンドウを開く
     const modal = document.getElementById('gatyaTenModal');
     modal.style.display = 'block';
 }
@@ -307,7 +318,7 @@ function modalClose10() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // ガチャ確認用(10連用)モーダルウィンドウを閉じる
     const modal = document.getElementById('gatyaTenModal');
     modal.style.display = 'none';
 }
@@ -317,7 +328,7 @@ function targetOpen() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // イベント目標用モーダルウィンドウを開く
     const modal = document.getElementById('targetModal');
     modal.style.display = 'block';
 }
@@ -326,7 +337,7 @@ function targetClose() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // イベント目標用モーダルウィンドウを閉じる
     const modal = document.getElementById('targetModal');
     modal.style.display = 'none';
 }
@@ -336,7 +347,7 @@ function skillOpen() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // スキル選択用モーダルウィンドウを開く
     const modal = document.getElementById('skillModal');
     modal.style.display = 'block';
 }
@@ -345,7 +356,7 @@ function skillClose() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // スキル選択用モーダルウィンドウを閉じる
     const modal = document.getElementById('skillModal');
     modal.style.display = 'none';
 }
@@ -355,7 +366,7 @@ function memberOpen() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // ギルドメンバー用モーダルウィンドウを開く
     const modal = document.getElementById('memberModal');
     modal.style.display = 'block';
 }
@@ -364,7 +375,7 @@ function memberClose() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // ギルドメンバー用モーダルウィンドウを閉じる
     const modal = document.getElementById('memberModal');
     modal.style.display = 'none';
 }
@@ -374,7 +385,7 @@ function guildRewardOpen() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // 報酬用モーダルウィンドウを開く
     const modal = document.getElementById('guildRewardModal');
     modal.style.display = 'block';
 }
@@ -383,7 +394,7 @@ function guildRewardClose() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // 報酬用モーダルウィンドウを閉じる
     const modal = document.getElementById('guildRewardModal');
     modal.style.display = 'none';
 }
@@ -393,7 +404,7 @@ function pictExplainOpen() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // 辞書詳細説明用モーダルウィンドウを開く
     const modal = document.getElementById('PictDetailModal');
     modal.style.display = 'block';
 }
@@ -402,7 +413,7 @@ function pictExplainClose() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // 辞書詳細説明用モーダルウィンドウを閉じる
     const modal = document.getElementById('PictDetailModal');
     modal.style.display = 'none';
 }
@@ -437,11 +448,6 @@ function setStoryTitle() {
 function go_sound() {
     audio = new Audio("../sound/select.m4a");
     audio.play();
-}
-
-function go_movie() {
-    video = new Video("../image/train.gif");
-    video.play();
 }
 
 // 項目ボタンのCSS初期化

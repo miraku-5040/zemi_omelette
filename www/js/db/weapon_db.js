@@ -25,6 +25,7 @@ async function setSoloPowerWeaponId(element) {
         .then(function (results) {
             results.set("weapon_id", element)
                 .update();
+            // 強化画面へ遷移(page.js)
             toPowerStrengthen();
         })
         .catch(function (err) {
@@ -41,6 +42,7 @@ async function setSoloEvoWeaponId(element) {
         .then(function (results) {
             results.set("weapon_id", element)
                 .update();
+            // 進化画面へ遷移(page.js)
             toPowerEvolution()
         })
         .catch(function (err) {
@@ -70,7 +72,7 @@ function getSoloPowerWeaponData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像と情報をHTMLに埋め込む
     function setDecorationImage(results) {
         var weapon = results[0];
         document.getElementById("powerUpWeapon").src = weapon.weapon_image;
@@ -105,7 +107,7 @@ function getSoloEvoWeaponData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像と情報をHTMLに埋め込む
     function setDecorationImage(results) {
         var weapon = results[0];
         document.getElementById("powerUpWeapon").src = weapon.weapon_image;
@@ -149,6 +151,7 @@ function updateWeaponPowerUp() {
                     results.set("weapon_level", Number(results.weapon_level) + weapon_level)
                         .set("weapon_exp", weapon_exp);
                     results.update();
+                    // 強化アイテム残数更新(item_db.js)
                     updateItemSum();
                 })
                 .catch(function () {
@@ -171,11 +174,11 @@ function updateWeaponEvolution() {
     LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetch()
         .then(function (results) {
-            // 武器の重ね合わせ数変更(武器idを1に固定)
-            Weapon.equalTo("weapon_id", Number(1))
+            // 武器の重ね合わせ数変更
+            Weapon.equalTo("weapon_id", results[0].weapon_id)
                 .fetch()
                 .then(function (results) {
-                    results[0].set("overlap", Number(results.overlap) + Number(usedItem));
+                    results[0].set("overlap", Number(results[0].overlap) + Number(usedItem));
                     return results[0].update();
                 })
                 .catch(function (err) {
@@ -185,8 +188,9 @@ function updateWeaponEvolution() {
         .catch(function (err) {
             console.log(err);
         });
-
+    // 武器進化成功時のロジック(weapon.js)
     EvolutionSuccsess();
+    // 進化アイテム残数更新(item_db.js)
     updateEvoItemSum();
 }
 
@@ -204,6 +208,7 @@ function pullWeapon1() {
             var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
             // 作成した要素を追加
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+            // 水晶減少機能(other_db.js)
             updateCrystalCount(200);
         })
         .catch(function (err) {
@@ -227,12 +232,13 @@ function pullWeapon10() {
                 var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
                 // 作成した要素を追加
                 document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
-                updateCrystalCount(2000);
             })
             .catch(function (err) {
                 console.log(err);
             });
     }
+    // 水晶減少機能(other_db.js)
+    updateCrystalCount(2000);
 }
 
 // 強化武器情報取得用
@@ -249,7 +255,7 @@ function getPowerSoadData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setSoadImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -277,7 +283,7 @@ function getPowerShieldData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setShieldImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -306,7 +312,7 @@ function getPowerDecoraionData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setDecorationImage(results) {
         // 初期化 
         document.getElementById("items").innerHTML = '';
@@ -335,7 +341,7 @@ function getEvoSoadData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setSoadImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -364,7 +370,7 @@ function getEvoShieldData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setShieldImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -393,7 +399,7 @@ function getEvoDecoraionData() {
             console.log(err);
         });
 
-    // 武器の画像(仮)とレベルをHTMLに埋め込む
+    // 武器の画像とレベルと進化数をHTMLに埋め込む
     function setDecorationImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';

@@ -18,7 +18,7 @@ function getDanjyonData() {
             console.log("ng" + err);
         });
 
-    // ダンジョン名をHTMLに埋め込む
+    // ダンジョン名をタイプごとにHTMLに埋め込む
     function setDanjyonName(results) {
         // 初期化
         document.getElementById("note").innerHTML = '';

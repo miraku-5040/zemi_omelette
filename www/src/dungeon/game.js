@@ -44,9 +44,12 @@ function loop() {
             break;
         case 'player':
             // プレイヤーのターン
+            //ボタンを出す
             //ボタン入力待ち
+            
             //player,stay,move,attack,skillReady,itemSelect,menu
             mode = Player.playing()
+            //ボタンを消す
             break;
         case 'stay':
             //ターンを消費しない行動をする
@@ -70,6 +73,7 @@ function loop() {
             break;
         case 'skillGo':
             // スキルの使用
+            console.log("normalAttack")
             Skill.skillGo();
             mode = 'enemy';
             break;

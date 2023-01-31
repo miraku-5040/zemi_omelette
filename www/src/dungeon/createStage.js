@@ -86,7 +86,7 @@ class CreateStage{
         this.createRooms()
         return this.resultStage
     }
-
+    /*凍結*/
     static createRooms(){
         //フロア縦
         const divisionRow = 3
@@ -250,7 +250,6 @@ class CreateStage{
         //確定
 
         //道の生成
-        const roodPositions = []
         roomPositions.forEach((position) => {
             position.adjacent.forEach((direction,directionIndex) => {
                 if(Object.keys(direction).length == 0){

@@ -24,12 +24,13 @@
     background-color: rgba(0,0,0,0.3);
 }
 
-/* ダンジョン選択のボタン */
+/* ダンジョン選択のボタンの画像 */
 .note_button_image{
     width: 80px;
     height: 105px;
 }
 
+/* ダンジョン選択のボタンのテキスト */
 .note_button_text {
     position: relative;
     transform: translateY(-93px);
@@ -40,7 +41,7 @@
     font-weight: bold;
 }
 
-/* ダンジョン選択画面のボタン */
+/* ダンジョン選択画面のフッターのボタン */
 .danjyon {
     background: #0062ad;
     border-radius: 0;
@@ -87,11 +88,13 @@
     left: 335px;
 }
 
+/* ダンジョンの名前 */
 .modal_title {
     font-weight: bold;
     font-size: 22px
 }
 
+/* ダンジョンの説明 */
 .modal_note {
     font-size: 12px;
     position: absolute;
@@ -108,6 +111,7 @@
     gap: 10px;
 }
 
+/* キャンセルボタン */
 .calsel_button {
     background: rgb(231, 231, 231);
     border-top: 4px solid rgb(255, 255, 255);
@@ -121,6 +125,7 @@
     height: 30px;
 }
 
+/* はじめるボタン */
 .decision_button {
     background: gold;
     border-top: 4px solid rgb(255, 225, 52);

@@ -19,7 +19,7 @@ function getItemData() {
             console.log(err);
         });
 
-    // アイテムの画像(仮)と残数をHTMLに埋め込む
+    // アイテムの画像と残数をHTMLに埋め込む
     function setItemImage(results) {
         // 初期化
         document.getElementById("items").innerHTML = '';
@@ -47,7 +47,7 @@ function getSoloItemData(element) {
             console.log(err);
         });
 
-    // アイテムの画像(仮)と残数をHTMLに埋め込む
+    // アイテムの画像と残数をHTMLに埋め込む
     function setItemImage(results) {
         // 情報取得
         var item = results[0];
@@ -62,11 +62,11 @@ function getSoloItemData(element) {
 function updateSoloItemData(element, count) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
-    Item.equalTo("item_id", Number(element.id))
+    Item.equalTo("item_id", Number(element))
         .fetchAll()
         .then(function (results) {
             var item = results[0];
-            results[0].set("sum", Number(item.money + Number(count)));
+            results[0].set("sum", Number(item.sum + Number(count)));
             return results[0].update();
         })
         .catch(function (err) {
@@ -104,6 +104,7 @@ function updateItemSum() {
                             console.log(results);
                             results.set("sum", Number(remaining));
                             results.update();
+                            // 武器強化成功時のロジック(weapon.js)
                             PowerUpSuccsess();
                         })
                         .catch(function (err) {
@@ -157,21 +158,21 @@ function setItemImage(results) {
     // 情報取得
     var item = results[0];
     // 新しいHTML要素を作成
-    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/r_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown1()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter1" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp1()"><p class="count_button_text">＋</p></button></div></div>';
+    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/IW4000.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown1()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter1" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp1()"><p class="count_button_text">＋</p></button></div></div>';
     // 作成した要素を追加
     document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
 
     // 情報取得
     var item = results[1];
     // 新しいHTML要素を作成
-    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/sr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown2()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter2" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp2()"><p class="count_button_text">＋</p></button></div></div>';
+    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/IW4001.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown2()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter2" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp2()"><p class="count_button_text">＋</p></button></div></div>';
     // 作成した要素を追加
     document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
 
     // 情報取得
     var item = results[2];
     // 新しいHTML要素を作成
-    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/ssr_powerItem.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown3()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter3" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp3()"><p class="count_button_text">＋</p></button></div></div>';
+    var itemHtml = '<div class="power_for_item"><img class="power_for_item_image" src="../image/item/IW4002.png"><p class="power_for_item_text">' + item.item_name + '</p> <div class="power_for_item_count"><button class="power_for_item_count_minus" onclick="countDown3()"><p class="count_button_text">－</p></button><input class="power_for_item_count_number" id="counter3" value="0" max="' + item.sum + '"><button class="power_for_item_count_plus" onclick="countUp3()"><p class="count_button_text">＋</p></button></div></div>';
     // 作成した要素を追加
     document.getElementById("item_frame").insertAdjacentHTML('beforeend', itemHtml);
 }
@@ -202,7 +203,7 @@ function getEvoItemSum() {
     }
 }
 
-// ガチャロジック
+// イベントガチャロジック
 function pullItem1() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -217,7 +218,9 @@ function pullItem1() {
             var weaponHtml = '<img class="result_image" src="' + item.item_image + '">';
             // 作成した要素を追加
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+            // イベントポイント減少(other_db.js)
             updateEventPointCount(20);
+            // アイテム増加
             updateSoloItemData(Number(random), 1);
         })
         .catch(function (err) {
@@ -225,7 +228,7 @@ function pullItem1() {
         });
 }
 
-// ガチャロジック
+// イベントガチャロジック
 function pullItem10() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -241,11 +244,13 @@ function pullItem10() {
                 var weaponHtml = '<img class="result_image" src="' + item.item_image + '">';
                 // 作成した要素を追加
                 document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+                // アイテム増加
                 updateSoloItemData(Number(random), 1);
             })
             .catch(function (err) {
                 console.log(err);
             });
     }
+    // イベントポイント減少(other_db.js)
     updateEventPointCount(200);
 }

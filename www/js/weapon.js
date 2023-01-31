@@ -387,7 +387,7 @@ function item_detail() {
     // 音声再生
     audio = new Audio("../sound/menu_open.m4a");
     audio.play();
-    // モーダルウィンドウを開く
+    // アイテム説明用モーダルウィンドウを開く
     const modal = document.getElementById('itemDetailModal');
     modal.style.display = 'block';
 }
@@ -397,7 +397,7 @@ function detail_Close() {
     // 音声再生
     audio = new Audio("../sound/cansel.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // アイテム説明用モーダルウィンドウを閉じる
     const modal = document.getElementById('itemDetailModal');
     modal.style.display = 'none';
 }
@@ -407,7 +407,7 @@ function use_item() {
     // 音声再生
     audio = new Audio("../sound/succsess.m4a");
     audio.play();
-    // モーダルウィンドウを閉じる
+    // アイテム説明用モーダルウィンドウを閉じる
     const modal = document.getElementById('itemDetailModal');
     modal.style.display = 'none';
 }
