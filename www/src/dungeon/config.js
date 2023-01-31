@@ -16,7 +16,7 @@ Config.stageCols = 20; // テスト用ステージの横の個数
 Config.stageRows = 15; // テスト用ステージの縦の個数
 */
 Config.stageImageTotal = 5; //ステージの画像の個数
-Config.characterImageTotal = 1;//
+Config.characterImageTotal = 10;//
 
 Config.keyPressedCount = 5;//長押し判定のフレーム数
 

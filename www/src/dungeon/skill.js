@@ -151,7 +151,7 @@ class Skill{
         const skillData = this.skillData;
         if(skillData.length <= 0){
             //データエラー
-            return;
+            return "player";
         }
         const nowSkillData = skillData[this.skillDataIndex]; //メインのスキルデータを取得する
         // scopeで分岐する関数を設定
@@ -165,7 +165,7 @@ class Skill{
             this.targetCoordinateArray = targetCoordinateArray;
             this.skillData = skillData;
             this.nowSkillData = nowSkillData;
-            return;
+            return "skillGo";
         }
         /* 範囲を表示 */
         // TODO
@@ -181,6 +181,7 @@ class Skill{
         this.targetCoordinateArray = targetCoordinateArray;
         this.skillData = skillData;
         this.nowSkillData = nowSkillData;
+        return "skillGo"
     }
 
     /**
