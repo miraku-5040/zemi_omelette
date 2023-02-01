@@ -35,11 +35,11 @@
 }
 
 .power_button {
-    background: rgb(231, 231, 231, 0.8);
-    border-top: 12px solid rgb(255, 255, 255, 0.8);
-    border-right: 12px solid rgb(199, 199, 199, 0.8);
-    border-bottom: 12px solid rgb(177, 177, 177, 0.8);
-    border-left: 12px solid rgb(255, 255, 255, 0.8);
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 12px solid rgb(255, 255, 255, 0.9);
+    border-right: 12px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 12px solid rgb(177, 177, 177, 0.9);
+    border-left: 12px solid rgb(255, 255, 255, 0.9);
     border-radius: 0;
     position: relative;
     top: 38px;
