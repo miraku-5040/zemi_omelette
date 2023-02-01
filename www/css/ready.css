@@ -78,6 +78,15 @@
     left: 205px;
 }
 
+.equip_change_button_frame {
+    border: solid rgb(205, 175, 2);
+    width: 60px;
+    height: 59px;
+    position: relative;
+    transform: translateY(-142px);
+    left: 202px;
+}
+
 .skill_change_button {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -92,6 +101,15 @@
     position: relative;
     transform: translateY(-35px);
     left: 133px;
+}
+
+.skill_change_button_frame {
+    border: solid rgb(205, 175, 2);
+    width: 60px;
+    height: 39px;
+    position: relative;
+    transform: translateY(-77px);
+    left: 130px;
 }
 
 .skill_position {
@@ -110,6 +128,15 @@
     font-size: 20px;
     transform: translateY(-20px);
     padding: 0px 10px;
+}
+
+.go_button_frame {
+    border: solid rgb(205, 175, 2);
+    width: 100px;
+    height: 70px;
+    position: absolute;
+    bottom: 17px;
+    right: 17px;
 }
 
 .go_button {
