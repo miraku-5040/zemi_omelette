@@ -27,11 +27,11 @@
 
 /* 「装備する」ボタン */
 .equipment_button {
-    background: rgb(231, 231, 231);
-    border-top: 4px solid rgb(255, 255, 255);
-    border-right: 4px solid rgb(199, 199, 199);
-    border-bottom: 4px solid rgb(177, 177, 177);
-    border-left: 4px solid rgb(255, 255, 255);
+    background: rgb(231, 231, 231, 0.8);
+    border-top: 4px solid rgb(255, 255, 255, 0.8);
+    border-right: 4px solid rgb(199, 199, 199, 0.8);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.8);
+    border-left: 4px solid rgb(255, 255, 255, 0.8);
     border-radius: 0;
     color: black;
     font-size: 15px;
@@ -136,8 +136,8 @@
 
 /* 種別ボタンそれぞれ */
 .weapon_soad_button {
-    background: black;
-    border: black;
+    background: rgb(0, 0, 0);
+    border: rgb(0, 0, 0);
     border-right: 5px solid rgb(85, 85, 85);
     border-bottom: 5px solid rgb(99, 99, 99);
     border-radius: 0px 20px 20px 0px;
@@ -152,7 +152,7 @@
     background: rgb(231, 231, 231);
     border: rgb(231, 231, 231);
     border-right: 5px solid rgb(241, 241, 241);
-    border-bottom: 5px solid white;
+    border-bottom: 5px solid rgb(255, 255, 255);
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 15px;
