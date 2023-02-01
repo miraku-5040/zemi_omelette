@@ -26,11 +26,11 @@
 }
 
 .chat_open {
-    background: rgb(231, 231, 231);
-    border-top: 6px solid rgb(255, 255, 255);
-    border-right: 6px solid rgb(199, 199, 199);
-    border-bottom: 6px solid rgb(177, 177, 177);
-    border-left: 6px solid rgb(255, 255, 255);
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 6px solid rgb(255, 255, 255, 0.9);
+    border-right: 6px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
+    border-left: 6px solid rgb(255, 255, 255, 0.9);
     border-radius: 0;
     position: absolute;
     transform: translateX(-7px);
@@ -64,11 +64,11 @@
 }
 
 .member {
-    background: rgb(231, 231, 231);
-    border-top: 6px solid rgb(255, 255, 255);
-    border-right: 6px solid rgb(199, 199, 199);
-    border-bottom: 6px solid rgb(177, 177, 177);
-    border-left: 6px solid rgb(255, 255, 255);
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 6px solid rgb(255, 255, 255, 0.9);
+    border-right: 6px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
+    border-left: 6px solid rgb(255, 255, 255, 0.9);
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -78,22 +78,32 @@
     height: 100px;
 }
 
+.member_frame {
+    border: solid rgb(205, 175, 2);
+    width: 130px;
+    height: 100px;
+    position: relative;
+    transform: translate(-24px, -9px);
+}
+
 .member_button_image {
     width: 50px;
     height: 60px;
+    position: relative;
+    transform: translateY(-100px);
 }
 
 .member_button_text {
     position: relative;
-    transform: translateY(-15px);
+    transform: translateY(-120px);
 }
 
 .reward {
-    background: rgb(231, 231, 231);
-    border-top: 6px solid rgb(255, 255, 255);
-    border-right: 6px solid rgb(199, 199, 199);
-    border-bottom: 6px solid rgb(177, 177, 177);
-    border-left: 6px solid rgb(255, 255, 255);
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 6px solid rgb(255, 255, 255, 0.9);
+    border-right: 6px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
+    border-left: 6px solid rgb(255, 255, 255, 0.9);
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -104,24 +114,32 @@
     height: 100px;
 }
 
+.reward_frame {
+    border: solid rgb(205, 175, 2);
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform: translate(-24px, -9px);
+}
+
 .reward_button_image {
     width: 50px;
     height: 40px;
     position: relative;
-    top: 15px;
+    transform: translateY(-90px);
 }
 
 .reward_button_text {
     position: relative;
-    top: 5px;
+    transform: translateY(-100px);
 }
 
 .guild_shop {
-    background: rgb(231, 231, 231);
-    border-top: 6px solid rgb(255, 255, 255);
-    border-right: 6px solid rgb(199, 199, 199);
-    border-bottom: 6px solid rgb(177, 177, 177);
-    border-left: 6px solid rgb(255, 255, 255);
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 6px solid rgb(255, 255, 255, 0.9);
+    border-right: 6px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
+    border-left: 6px solid rgb(255, 255, 255, 0.9);
     color: black;
     font-size: 15px;
     font-weight: bold;
@@ -132,16 +150,24 @@
     height: 100px;
 }
 
+.guild_shop_frame {
+    border: solid rgb(205, 175, 2);
+    width: 200px;
+    height: 100px;
+    position: relative;
+    transform: translate(-24px, -9px);
+}
+
 .guild_button_image {
     width: 60px;
     height: 50px;
     position: relative;
-    top: 10px;
+    transform: translateY(-95px);
 }
 
 .guild_button_text {
     position: relative;
-    transform: translateY(-5px);
+    transform: translateY(-110px);
 }
 
 /* モーダルウィンドウの設定 */
