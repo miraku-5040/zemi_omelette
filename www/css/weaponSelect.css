@@ -80,10 +80,10 @@
 }
 
 .weapon_soad_button {
-    background: black;
-    border: black;
-    border-right: 5px solid rgb(85, 85, 85);
-    border-bottom: 5px solid rgb(99, 99, 99);
+    background: rgb(0, 0, 0, 0.9);
+    border: rgb(0, 0, 0, 0.9);
+    border-right: 5px solid rgb(85, 85, 85, 0.9);
+    border-bottom: 5px solid rgb(99, 99, 99, 0.9);
     border-radius: 0px 20px 20px 0px;
     color: white;
     font-size: 15px;
@@ -93,10 +93,10 @@
 }
 
 .weapon_shield_button {
-    background: rgb(231, 231, 231);
-    border: rgb(231, 231, 231);
-    border-right: 5px solid rgb(241, 241, 241);
-    border-bottom: 5px solid white;
+    background: rgb(231, 231, 231, 0.9);
+    border: rgb(231, 231, 231, 0.9);
+    border-right: 5px solid rgb(241, 241, 241, 0.9);
+    border-bottom: 5px solid rgb(255, 255, 255, 0.9);
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 15px;
@@ -106,10 +106,10 @@
 }
 
 .weapon_decoration_button {
-    background: rgb(231, 231, 231);
-    border: rgb(231, 231, 231);
-    border-right: 5px solid rgb(241, 241, 241);
-    border-bottom: 5px solid white;
+    background: rgb(231, 231, 231, 0.9);
+    border: rgb(231, 231, 231, 0.9);
+    border-right: 5px solid rgb(241, 241, 241, 0.9);
+    border-bottom: 5px solid rgb(255, 255, 255, 0.9);
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 15px;

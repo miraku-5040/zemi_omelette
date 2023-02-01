@@ -475,8 +475,11 @@
 .modal_close_button {
     position: absolute;
     left: 175px;
-    background-color: #F4F4E8;
-    border: solid 2px #c4c4b8;
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     color: black;
     width: 100px;
     height: 30px;
@@ -524,8 +527,11 @@
     position: absolute;
     transform: translateY(-80px);
     left: 175px;
-    background-color: #F4F4E8;
-    border: solid 2px #c4c4b8;
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     color: black;
     width: 100px;
     height: 30px;
@@ -637,8 +643,11 @@
     position: absolute;
     transform: translateY(-440px);
     left: 175px;
-    background-color: #F4F4E8;
-    border: solid 2px #c4c4b8;
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     color: black;
     width: 100px;
     height: 30px;
@@ -700,8 +709,11 @@
     position: relative;
     transform: translateY(-70px);
     left: 175px;
-    background-color: #F4F4E8;
-    border: solid 2px #c4c4b8;
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     color: black;
     width: 100px;
     height: 30px;
@@ -733,11 +745,19 @@
     position: relative;
     transform: translateY(-270px);
     left: 345px;
-    background-color: #F4F4E8;
-    border: solid 2px #c4c4b8;
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     color: black;
     width: 30px;
     height: 70px;
+}
+
+.chat_modal_close_button_text {
+    position: relative;
+    transform: translateX(-5px);
 }
 
 .chat_title {
@@ -818,8 +838,11 @@
     position: relative;
     transform: translateY(-40px);
     left: 175px;
-    background-color: #F4F4E8;
-    border: solid 2px #c4c4b8;
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     color: black;
     font-weight: bold;
     width: 100px;
