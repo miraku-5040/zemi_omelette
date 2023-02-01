@@ -30,7 +30,7 @@
     color: white;
     font-weight: bold;
     position: relative;
-    left: 10px;
+    left: 7px;
     transform: translateY(-10px);
 }
 
@@ -39,7 +39,7 @@
     color: white;
     position: relative;
     top: 5px;
-    transform: translateX(-40px);
+    transform: translateX(-43px);
 }
 
 .name_text2 {

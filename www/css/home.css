@@ -118,24 +118,29 @@
     height: 40px;
 }
 
-.dairy:hover{
-    background: rgb(146, 146, 146);
+.dairy_button_frame {
+    border: solid rgb(205, 175, 2);
+    width: 40px;
+    height: 40px;
+    position: relative;
+    transform: translate(-20px, -9px);
 }
 
 .dairy_button_image {
     width: 30px;
     height: 30px;
     position: relative;
-    transform: translate(-14px, -3px);
+    transform: translate(-14px, -50px);
 }
 
 .dairy_button_text {
     color: black;
-    font-size: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 8px;
     font-weight: bold;
     position: absolute;
     top: 287px;
-    left: 607px;
+    left: 610px;
 }
 
 /* 実績目標確認ボタン */
@@ -153,19 +158,16 @@
     height: 40px;
 }
 
-.achieve:hover{
-    background: rgb(146, 146, 146);
-}
-
 .achieve_button_image {
     width: 20px;
     height: 30px;
     position: relative;
-    transform: translate(-7px, -3px);
+    transform: translate(-7px, -50px);
 }
 
 .achieve_button_text {
     color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 10px;
     font-weight: bold;
     position: absolute;
@@ -192,16 +194,17 @@
     width: 30px;
     height: 30px;
     position: relative;
-    transform: translate(-12px, -3px);
+    transform: translate(-12px, -50px);
 }
 
 .guild_button_text {
     color: black;
-    font-size: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 9px;
     font-weight: bold;
     position: absolute;
     top: 289px;
-    left: 516px;
+    left: 517px;
 }
 
 /* フレンド確認ボタン */
@@ -221,11 +224,12 @@
 
 .friend_button_text {
     color: black;
-    font-size: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 8px;
     font-weight: bold;
     position: absolute;
-    top: 287px;
-    left: 461px;
+    top: 290px;
+    left: 465px;
 }
 
 /* キャラクター画像 */
@@ -311,6 +315,22 @@
     color: black;
 }
 
+.chat_open_text {
+    position: relative;
+    transform: translate(-5px, -85px);
+    font-weight: bold;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+.chat_open_frame {
+    border: solid rgb(205, 175, 2);
+    width: 30px;
+    height: 70px;
+    position: relative;
+    transform: translate(-19px, -9px);
+}
+
 .go_town {
     background: rgb(231, 231, 231);
     border-top: 6px solid rgb(255, 255, 255);
@@ -368,14 +388,6 @@
     transform: translateY(-38px);
     font-weight: bold;
     font-size: 20px;
-}
-
-.chat_open_text {
-    position: relative;
-    transform: translate(-5px, -10px);
-    font-weight: bold;
-    font-size: 11px;
-    letter-spacing: 0.5px;
 }
 
 .buttons {
@@ -717,61 +729,14 @@
     height: 70px;
 }
 
-.chat_type_button {
-    position: relative;
-    transform: translateX(-18px);
-}
-
-.all_chat_type {
-    background: rgb(231, 231, 231);
-    border-top: 6px solid rgb(255, 255, 255);
-    border-right: 6px solid rgb(199, 199, 199);
-    border-bottom: 6px solid rgb(177, 177, 177);
-    border-left: 6px solid rgb(255, 255, 255);
-    border-radius: 0;
-    width: 30px;
-    height: 50px;
-    color: black;
-    font-weight: bold;
-    position: relative;
-    left: 20px;
-}
-
-.all_chat_type_text {
-    position: relative;
-    transform: translate(-5px, -8px);
-}
-
-.guild_chat_type {
-    position: relative;
-    top: 51px;
-    transform: translateX(-18px);
-    background: rgb(231, 231, 231);
-    border-top: 6px solid rgb(255, 255, 255);
-    border-right: 6px solid rgb(199, 199, 199);
-    border-bottom: 6px solid rgb(177, 177, 177);
-    border-left: 6px solid rgb(255, 255, 255);
-    border-radius: 0;
-    width: 30px;
-    height: 50px;
-    color: black;
-    font-weight: bold;
-}
-
-.guild_chat_type_text {
-    position: relative;
-    transform: translate(-5px, -12px);
-}
-
 .chat_title {
     position: relative;
-    left: 20px;
+    left: 5px;
 }
 
 .chats {
     position: relative;
-    transform: translateY(-50px);
-    left: 33px;
+    left: 10px;
     background-color: rgb(255, 255, 255, 0.7);
     border: solid gold;
     width: 270px;
@@ -786,8 +751,8 @@
 
 .new_chat {
     position: relative;
-    transform: translateY(-55px);
-    left: 35px;
+    transform: translateY(-3px);
+    left: 10px;
 }
 
 .new_chat_text {

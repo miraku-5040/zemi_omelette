@@ -32,6 +32,10 @@
     <div class="cansel_frame"></div>
     <button class="cansel" onclick="toHome()">←</button>
 
+    <button class="chat_open" onclick="openGuildChat()">
+            <p class="chat_open_text">ギルドチャット</p>
+        </button>
+
     <p class="guild_name">Omelette</p>
     <div class="content_position">
         <button class="member" onclick="memberOpen()">
@@ -104,6 +108,29 @@
             </div>
             <div class="modal-fotter">
                 <button class="present_modal_close_button" onclick="guildRewardClose()">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- チャット用のモーダルウィンドウ -->
+    <div id="guildChatModal" class="modal">
+        <div class="chat_modal-content">
+            <div class="modal-header">
+                <h2 class="chat_title" id="chat_type">ギルドチャット</h2>
+            </div>
+            <div class="chat_modal-body" id="modal-body">
+                <div class="chats" id="chats">
+                    <div class="solo_chat">
+                        <p class="chat_text">player：こんにちは</p>
+                    </div>
+                </div>
+                <div class="new_chat">
+                    <input class="new_chat_text" id="new_chat_text">
+                    <button id="new_chat_button" class="new_chat_button" onclick="updateGuildChatData()"><p class="new_chat_button_text">送信</p></button>
+                </div>
+            </div>
+            <div class="modal-fotter">
+                <button class="chat_modal_close_button" onclick="closeGuildChat()">閉じる</button>
             </div>
         </div>
     </div>

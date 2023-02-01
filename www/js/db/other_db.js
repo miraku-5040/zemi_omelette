@@ -9,6 +9,7 @@ var ITEM_DB = "item";
 var SKILL_DB = "skill";
 var DAIRY_DB = "dairy";
 var CHAT_DB = "chat";
+var GUILD_CHAT_DB = "guildChat";
 var ENEMY_DB = "enemy";
 var DAIRY_AHIEVE_DB = "dairy_achieve";
 var ACHIEVE_DB = "achieve";
@@ -946,8 +947,7 @@ function updateEventAchieveCountUp(id) {
 function getAllChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Chat = ncmb.DataStore(this.CHAT_DB);
-    Chat.equalTo("type", "all")
-        .order("createDate", false)
+    Chat.order("createDate", false)
         .fetchAll()
         .then(function (results) {
             setChat(results);
@@ -957,8 +957,6 @@ function getAllChatData() {
         });
 
     function setChat(results) {
-        document.getElementById("chat_type").innerHTML = '全体チャット';
-        document.getElementById("new_chat_button").onclick = updateAllChatData();
         // 初期化
         document.getElementById("chats").innerHTML = '';
         for (var i = 0; i <= results.length - 1; i++) {
@@ -975,9 +973,8 @@ function getAllChatData() {
 // チャット読み込み機能
 function getGuildChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Chat = ncmb.DataStore(this.CHAT_DB);
-    Chat.equalTo("type", "guild")
-        .order("createDate", false)
+    var Chat = ncmb.DataStore(this.GUILD_CHAT_DB);
+    Chat.order("createDate", false)
         .fetchAll()
         .then(function (results) {
             setChat(results);
@@ -987,8 +984,6 @@ function getGuildChatData() {
         });
 
     function setChat(results) {
-        document.getElementById("chat_type").innerHTML = 'ギルドチャット';
-        document.getElementById("new_chat_button").onclick = updateGuildChatData();
         // 初期化
         document.getElementById("chats").innerHTML = '';
         for (var i = 0; i <= results.length - 1; i++) {
@@ -1007,12 +1002,11 @@ function updateAllChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Chat = ncmb.DataStore(this.CHAT_DB);
     let comment = document.getElementById('new_chat_text');
-    Chat.set("type", "all")
-        .set("name", "player")
+    Chat.set("name", "player")
         .set("comment", comment)
         .save()
-        .then(function (results) {
-            getAllChatData()
+        .then(function () {
+            getAllChatData();
         })
         .catch(function (err) {
             console.log(err);
@@ -1022,14 +1016,13 @@ function updateAllChatData() {
 // チャット更新機能
 function updateGuildChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Chat = ncmb.DataStore(this.CHAT_DB);
+    var Chat = ncmb.DataStore(this.GUILD_CHAT_DB);
     let comment = document.getElementById('new_chat_text');
-    Chat.set("type", "guild")
-        .set("name", "player")
+    Chat.set("name", "player")
         .set("comment", comment)
         .save()
-        .then(function (results) {
-            getAllChatData()
+        .then(function () {
+            getAllChatData();
         })
         .catch(function (err) {
             console.log(err);
