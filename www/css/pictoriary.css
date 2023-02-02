@@ -205,11 +205,11 @@
 }
 
 .calsel_button {
-    background-color: white;
-    border-top: 4px solid white;
-    border-right: 4px solid #adadad;
-    border-bottom: 4px solid #999999;
-    border-left: 4px solid white;
+    background-color: rgb(255, 255, 255, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     border-radius: 0;
     color: black;
     font-weight: bold;

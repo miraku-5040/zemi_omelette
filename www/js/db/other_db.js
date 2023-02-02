@@ -1001,12 +1001,18 @@ function getGuildChatData() {
 function updateAllChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Chat = ncmb.DataStore(this.CHAT_DB);
-    let comment = document.getElementById('new_chat_text');
-    Chat.set("name", "player")
-        .set("comment", comment)
-        .save()
-        .then(function () {
-            getAllChatData();
+    var comment = document.getElementById('new_chat_text').value;
+    Chat.fetchAll()
+        .then(function (results) {
+            results.set("name", "player")
+                .set("comment", comment)
+                .save()
+                .then(function () {
+                    getAllChatData();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
         })
         .catch(function (err) {
             console.log(err);
