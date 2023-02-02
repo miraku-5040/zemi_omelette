@@ -21,6 +21,7 @@
     height: 63px;
 }
 
+/* 画像の枠(アイテム) */
 .list_material1 {
     background-color: rgb(217, 217, 217);
     border-top: 2px solid white;
@@ -31,6 +32,7 @@
     height: 40px;
 }
 
+/* アイテムの個数 */
 .item_text_position1 {
     position: relative;
     transform: translateY(-40px);
@@ -38,6 +40,7 @@
     font-weight: bold;
 }
 
+/* 画像の枠(武器) */
 .list_material2 {
     background-color: rgb(217, 217, 217);
     border-top: 2px solid white;
@@ -49,6 +52,7 @@
     transform: translateY(-50px);
 }
 
+/* 武器のレベル */
 .item_text_position2 {
     position: relative;
     transform: translateY(-90px);
@@ -56,6 +60,7 @@
     font-weight: bold;
 }
 
+/* 進化数の枠 */
 .overlap_color {
     background: white;
     width: 18px;
@@ -172,7 +177,7 @@
     transform: translate(-3px, -11px);
 }
 
-/* アイテム画面のボタン */
+/* アイテム画面のフッターのボタン */
 .item_buttons {
     position: absolute;
     top: 310px;

@@ -25,6 +25,7 @@
     height: 35px;
 }
 
+/* ギルドチャットボタン */
 .chat_open {
     background: rgb(231, 231, 231, 0.9);
     border-top: 6px solid rgb(255, 255, 255, 0.9);
@@ -56,6 +57,7 @@
     letter-spacing: 0.5px;
 }
 
+/* ギルドの名前 */
 .guild_name {
     color: gold;
     font-weight: bold;
@@ -65,12 +67,14 @@
     left: 80px;
 }
 
+/* 「メンバー」、「報酬」、「ギルドショップ」のボタンの位置 */
 .content_position {
     position: absolute;
     top: 130px;
     left: 80px;
 }
 
+/* メンバーボタン */
 .member {
     background: rgb(231, 231, 231, 0.9);
     border-top: 6px solid rgb(255, 255, 255, 0.9);
@@ -106,6 +110,7 @@
     transform: translateY(-120px);
 }
 
+/* 報酬ボタン */
 .reward {
     background: rgb(231, 231, 231, 0.9);
     border-top: 6px solid rgb(255, 255, 255, 0.9);
@@ -142,6 +147,7 @@
     transform: translateY(-100px);
 }
 
+/* ギルドショップボタン */
 .guild_shop {
     background: rgb(231, 231, 231, 0.9);
     border-top: 6px solid rgb(255, 255, 255, 0.9);

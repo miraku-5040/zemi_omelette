@@ -9,6 +9,7 @@
     height: 100px;
 }
 
+/* 経験値のバー */
 .power_ber {
     border: solid rgb(189, 160, 0);
     background-color: white;
@@ -19,6 +20,7 @@
     height: 20px;
 }
 
+/* 経験値のテキスト */
 .exp_text {
     color: white;
     position: relative;
@@ -27,6 +29,7 @@
     left: 230px;
 }
 
+/* 強化する装備の情報 */
 .power_target_text {
     border: solid rgb(189, 160, 0);
     color: white;
@@ -98,6 +101,7 @@
     height: 22px;
 }
 
+/* マイナスボタン */
 .power_for_item_count_minus {
     background: rgb(231, 231, 231);
     border-top: 4px solid rgb(255, 255, 255);
@@ -113,6 +117,7 @@
     height: 30px;
 }
 
+/* プラスボタン */
 .power_for_item_count_plus {
     background: rgb(231, 231, 231);
     border-top: 4px solid rgb(255, 255, 255);
@@ -128,12 +133,13 @@
     height: 30px;
 }
 
+/* カウントボタンのテキスト */
 .count_button_text {
     position: relative;
     transform: translate(-5px,-7px);
 }
 
-/* 意思決定ボタン達 */
+/* 意思決定ボタンの位置 */
 .decition_buttons {
     position: absolute;
     top: 287px;
@@ -142,11 +148,13 @@
     gap: 20px;
 }
 
+/* 意思決定ボタンの文字 */
 .decition_button_text{
     position: relative;
     transform: translateY(-8px);
 }
 
+/* 意思決定ボタンの枠 */
 .decition_button_frame {
     border: solid rgb(189, 160, 0);
     width: 120px;

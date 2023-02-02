@@ -1,3 +1,4 @@
+/* 背景の画像 */
 .background_image {
     position: absolute;
     transform: translate(-40px, -25px);
@@ -5,6 +6,7 @@
     width: 700px;
 }
 
+/* 時計の画像 */
 .clock_image {
     width: 250px;
     height: 280px;
@@ -35,19 +37,14 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.skill_icon {
-    position: relative;
-    transform: translateY(-10px);
-    width: 50px;
-    height: 50px;
-}
-
+/* スキルの名前 */
 .skill_name {
     position: relative;
     transform: translateY(-5px);
     left: 15px;
 }
 
+/* スキルのレベル */
 .skill_level {
     position: relative;
     transform: translateY(-20px);
@@ -72,6 +69,7 @@
     height: 40px;
 }
 
+/* 強化ボタンのテキスト */
 .skill_power_up_text {
     position: relative;
     transform: translateY(-6px);

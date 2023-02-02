@@ -7,6 +7,21 @@
     left: 13px;
 }
 
+.power_button {
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 12px solid rgb(255, 255, 255, 0.9);
+    border-right: 12px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 12px solid rgb(177, 177, 177, 0.9);
+    border-left: 12px solid rgb(255, 255, 255, 0.9);
+    border-radius: 0;
+    position: relative;
+    top: 38px;
+    left: 30px;
+    width: 174px;
+    height: 200px;
+}
+
+/* 強化方法選択ボタンのフレーム */
 .power_button_frame1 {
     border: 5px solid rgb(189, 160, 0);
     position: absolute;
@@ -34,20 +49,7 @@
     height: 200px;
 }
 
-.power_button {
-    background: rgb(231, 231, 231, 0.9);
-    border-top: 12px solid rgb(255, 255, 255, 0.9);
-    border-right: 12px solid rgb(199, 199, 199, 0.9);
-    border-bottom: 12px solid rgb(177, 177, 177, 0.9);
-    border-left: 12px solid rgb(255, 255, 255, 0.9);
-    border-radius: 0;
-    position: relative;
-    top: 38px;
-    left: 30px;
-    width: 174px;
-    height: 200px;
-}
-
+/* 強化方法選択ボタンの画像 */
 .power_icon {
     position: relative;
     top: 15px;
@@ -55,6 +57,7 @@
     height: 110px;
 }
 
+/* 強化方法選択ボタンのテキスト */
 .power_method_button_text {
     color: black;
     font-size: 25px;
@@ -64,7 +67,7 @@
     left: 0px;
 }
 
-/* 強化画面のボタン */
+/* 強化画面のフッターのボタン */
 .power_buttons {
     background-color: #003761;
     position: absolute;

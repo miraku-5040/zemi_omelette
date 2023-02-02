@@ -49,6 +49,7 @@
     transform: translateX(-42px);
 }
 
+/* ランク、名前や経験値のバー等を仕切る棒 */
 .border_colom {
     position: relative;
     top: 4px;
@@ -64,6 +65,7 @@
     transform: translate(-60px, -60px);
 }
 
+/* 経験値のタイトル */
 .exp_ber_title {
     color: white;
     font-weight: bold;
@@ -72,6 +74,7 @@
     left: 65px;
 }
 
+/* 経験値のバー */
 .exp_ber {
     position: relative;
     transform: translateY(-14px);
@@ -81,6 +84,7 @@
     background-color: green;
 }
 
+/* 経験値の量 */
 .exp_ber_amount {
     position: relative;
     transform: translateY(-60px);
@@ -110,7 +114,7 @@
     right: 5px;
 }
 
-/* その他のアイコン */
+/* その他のヘッダーボタンの位置 */
 .other_icons {
     display: flex;
     gap: 10px;
@@ -119,6 +123,7 @@
     right: 50px;
 }
 
+/* その他のヘッダーボタン */
 .icon {
     background: rgb(231, 231, 231, 0.9);
     border: 2px solid rgb(189, 160, 0);
@@ -127,6 +132,7 @@
     height: 30px;
 }
 
+/* その他のヘッダーボタンの画像 */
 .icon_image {
   position: relative;
   transform: translateY(-3px);
@@ -147,7 +153,7 @@
     right: 0px;
 }
 
-/* フッターボタン */
+/* 以下フッターボタン */
 /* ボタンの背景 */
 .buttons {
     background-color: #003761;

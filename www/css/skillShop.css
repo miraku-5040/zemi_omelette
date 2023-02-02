@@ -5,6 +5,7 @@ body {
     background-size: 670px 380px;
 }
 
+/* 書店の画像 */
 .interior {
     position: absolute;
     transform: translate(-20px, -50px);

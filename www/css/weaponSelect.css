@@ -21,6 +21,7 @@
     height: 63px;
 }
 
+/* 武器の画像の枠 */
 .list_material {
     background-color: rgb(217, 217, 217);
     border-top: 2px solid white;
@@ -32,6 +33,7 @@
     transform: translateY(-50px);
 }
 
+/* 武器のレベル */
 .item_text_position {
     position: relative;
     text-align: center;
@@ -39,6 +41,7 @@
     font-weight: bold;
 }
 
+/* 進化数 */
 .overlap_color {
     background: white;
     width: 18px;
@@ -61,6 +64,7 @@
     left: 582px;
 }
 
+/* 種別ボタンの枠 */
 .weapon_type_frame {
     border: solid rgb(189, 160, 0);
     border-radius: 0px 20px 20px 0px;
@@ -79,6 +83,7 @@
     transform: translate(-17px, -69px);
 }
 
+/* 種別ボタン(武器) */
 .weapon_soad_button {
     background: rgb(0, 0, 0, 0.9);
     border: rgb(0, 0, 0, 0.9);
@@ -92,6 +97,7 @@
     height: 50px;
 }
 
+/* 種別ボタン(防具) */
 .weapon_shield_button {
     background: rgb(231, 231, 231, 0.9);
     border: rgb(231, 231, 231, 0.9);
@@ -105,6 +111,7 @@
     height: 50px;
 }
 
+/* 種別ボタン(装飾品) */
 .weapon_decoration_button {
     background: rgb(231, 231, 231, 0.9);
     border: rgb(231, 231, 231, 0.9);
@@ -118,12 +125,13 @@
     height: 50px;
 }
 
+/* 種別ボタンのテキスト */
 .weapon_type_text {
     position: relative;
     transform: translateY(-10px);
 }
 
-/* 意思決定ボタン達 */
+/* 意思決定ボタンの位置 */
 .decition_buttons {
     position: absolute;
     top: 295px;
