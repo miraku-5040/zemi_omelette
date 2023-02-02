@@ -344,7 +344,7 @@ function changeSoad(element) {
     audio.play();
     // 見かけ上装備する
     document.getElementById('soad').src = element.id;
-    localStorage.setItem(document.getElementById('soad').src)
+    // localStorage.setItem(document.getElementById('soad').src)
 }
 
 function changeShield(element) {
@@ -352,7 +352,7 @@ function changeShield(element) {
     audio.play();
     // 見かけ上装備する
     document.getElementById('shield').src = element.id;
-    localStorage.setItem(document.getElementById('shield').src)
+    // localStorage.setItem(document.getElementById('shield').src)
 }
 
 function changeDecoration(element) {
@@ -361,7 +361,7 @@ function changeDecoration(element) {
     // 見かけ上装備する
     // const decoration = localStorage.getItem("addDecoration");
     document.getElementById('decoration').src = element.id;
-    localStorage.setItem(document.getElementById('decoration').src)
+    // localStorage.setItem(document.getElementById('decoration').src)
     // console.log(decoration);
     // document.getElementById(id).src = decoration;
 }
@@ -370,6 +370,7 @@ function changeDecoration(element) {
 function equip() {
     audio = new Audio("../sound/equip.m4a");
     audio.play();
+    setTimeout('window.location.href = "equip.html"', 600);
 }
 
 // 音声再生用のjs

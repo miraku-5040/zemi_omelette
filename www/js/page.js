@@ -240,12 +240,12 @@ function weaponColumn(element) {
     go_sound();
     // 項目ボタンのCSS初期化
     ColumnButtonInitialization();
-    // ボタンを金色にする
+    // ボタンを黒色にする
     const weaponColumn = document.getElementById(element.id);
-    weaponColumn.style.background = 'black';
-    weaponColumn.style.border = 'black';
-    weaponColumn.style.borderRight = '5px solid rgb(85, 85, 85)';
-    weaponColumn.style.borderBottom = '5px solid rgb(99, 99, 99)';
+    weaponColumn.style.background = 'rgb(0, 0, 0, 0.9)';
+    weaponColumn.style.border = 'rgb(0, 0, 0, 0.9)';
+    weaponColumn.style.borderRight = '5px solid rgb(85, 85, 85, 0.9)';
+    weaponColumn.style.borderBottom = '5px solid rgb(99, 99, 99, 0.9)';
     weaponColumn.style.color = 'white';
 }
 
@@ -257,10 +257,10 @@ function itemColumn(element) {
     ColumnButtonInitializationPlus();
     // ボタンを金色にする
     const itemColumn = document.getElementById(element.id);
-    itemColumn.style.background = 'black';
-    itemColumn.style.border = 'black';
-    itemColumn.style.borderRight = '5px solid rgb(85, 85, 85)';
-    itemColumn.style.borderBottom = '5px solid rgb(99, 99, 99)';
+    itemColumn.style.background = 'rgb(0, 0, 0, 0.9)';
+    itemColumn.style.border = 'rgb(0, 0, 0, 0.9)';
+    itemColumn.style.borderRight = '5px solid rgb(85, 85, 85, 0.9)';
+    itemColumn.style.borderBottom = '5px solid rgb(99, 99, 99, 0.9)';
     itemColumn.style.color = 'white';
 }
 
@@ -473,48 +473,48 @@ function go_sound() {
 
 // 項目ボタンのCSS初期化
 function ColumnButtonInitialization() {
-    document.getElementById('soadcolumn').style.background = 'rgb(231, 231, 231)';
-    document.getElementById('soadcolumn').style.border = 'rgb(231, 231, 231)';
-    document.getElementById('soadcolumn').style.borderRight = '5px solid rgb(241, 241, 241)';
-    document.getElementById('soadcolumn').style.borderBottom = '5px solid white';
+    document.getElementById('soadcolumn').style.background = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('soadcolumn').style.border = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('soadcolumn').style.borderRight = '5px solid rgb(241, 241, 241, 0.9)';
+    document.getElementById('soadcolumn').style.borderBottom = '5px solid rgb(255, 255, 255, 0.9)';
     document.getElementById('soadcolumn').style.color = 'black';
 
-    document.getElementById('shieldcolumn').style.background = 'rgb(231, 231, 231)';
-    document.getElementById('shieldcolumn').style.border = 'rgb(231, 231, 231)';
-    document.getElementById('shieldcolumn').style.borderRight = '5px solid rgb(241, 241, 241)';
-    document.getElementById('shieldcolumn').style.borderBottom = '5px solid white';
+    document.getElementById('shieldcolumn').style.background = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('shieldcolumn').style.border = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('shieldcolumn').style.borderRight = '5px solid rgb(241, 241, 241, 0.9)';
+    document.getElementById('shieldcolumn').style.borderBottom = '5px solid rgb(255, 255, 255, 0.9)';
     document.getElementById('shieldcolumn').style.color = 'black';
 
-    document.getElementById('decorationcolumn').style.background = 'rgb(231, 231, 231)';
-    document.getElementById('decorationcolumn').style.border = 'rgb(231, 231, 231)';
-    document.getElementById('decorationcolumn').style.borderRight = '5px solid rgb(241, 241, 241)';
-    document.getElementById('decorationcolumn').style.borderBottom = '5px solid white';
+    document.getElementById('decorationcolumn').style.background = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('decorationcolumn').style.border = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('decorationcolumn').style.borderRight = '5px solid rgb(241, 241, 241, 0.9)';
+    document.getElementById('decorationcolumn').style.borderBottom = '5px solid rgb(255, 255, 255, 0.9)';
     document.getElementById('decorationcolumn').style.color = 'black';
 }
 
 function ColumnButtonInitializationPlus() {
-    document.getElementById('othercolumn').style.background = 'white';
-    document.getElementById('othercolumn').style.border = 'rgb(231, 231, 231)';
-    document.getElementById('othercolumn').style.borderRight = '5px solid rgb(241, 241, 241)';
-    document.getElementById('othercolumn').style.borderBottom = '5px solid white';
+    document.getElementById('othercolumn').style.background = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('othercolumn').style.border = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('othercolumn').style.borderRight = '5px solid rgb(241, 241, 241, 0.9)';
+    document.getElementById('othercolumn').style.borderBottom = '5px solid rgb(255, 255, 255, 0.9)';
     document.getElementById('othercolumn').style.color = 'black';
 
-    document.getElementById('soadcolumn').style.background = 'white';
-    document.getElementById('soadcolumn').style.border = 'rgb(231, 231, 231)';
-    document.getElementById('soadcolumn').style.borderRight = '5px solid rgb(241, 241, 241)';
-    document.getElementById('soadcolumn').style.borderBottom = '5px solid white';
+    document.getElementById('soadcolumn').style.background = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('soadcolumn').style.border = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('soadcolumn').style.borderRight = '5px solid rgb(241, 241, 241, 0.9)';
+    document.getElementById('soadcolumn').style.borderBottom = '5px solid rgb(255, 255, 255, 0.9)';
     document.getElementById('soadcolumn').style.color = 'black';
 
-    document.getElementById('shieldcolumn').style.background = 'white';
-    document.getElementById('shieldcolumn').style.border = 'rgb(231, 231, 231)';
-    document.getElementById('shieldcolumn').style.borderRight = '5px solid rgb(241, 241, 241)';
-    document.getElementById('shieldcolumn').style.borderBottom = '5px solid white';
+    document.getElementById('shieldcolumn').style.background = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('shieldcolumn').style.border = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('shieldcolumn').style.borderRight = '5px solid rgb(241, 241, 241, 0.9)';
+    document.getElementById('shieldcolumn').style.borderBottom = '5px solid rgb(255, 255, 255, 0.9)';
     document.getElementById('shieldcolumn').style.color = 'black';
 
-    document.getElementById('decorationcolumn').style.background = 'white';
-    document.getElementById('decorationcolumn').style.border = 'rgb(231, 231, 231)';
-    document.getElementById('decorationcolumn').style.borderRight = '5px solid rgb(241, 241, 241)';
-    document.getElementById('decorationcolumn').style.borderBottom = '5px solid white';
+    document.getElementById('decorationcolumn').style.background = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('decorationcolumn').style.border = 'rgb(231, 231, 231, 0.9)';
+    document.getElementById('decorationcolumn').style.borderRight = '5px solid rgb(241, 241, 241, 0.9)';
+    document.getElementById('decorationcolumn').style.borderBottom = '5px solid rgb(255, 255, 255, 0.9)';
     document.getElementById('decorationcolumn').style.color = 'black';
 }
 

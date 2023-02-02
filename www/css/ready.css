@@ -9,11 +9,11 @@
 }
 
 .cansel {
-    background: rgb(231, 231, 231);
-    border-top: 6px solid rgb(255, 255, 255);
-    border-right: 6px solid rgb(199, 199, 199);
-    border-bottom: 6px solid rgb(177, 177, 177);
-    border-left: 6px solid rgb(255, 255, 255);
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 6px solid rgb(255, 255, 255, 0.9);
+    border-right: 6px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
+    border-left: 6px solid rgb(255, 255, 255, 0.9);
     border-radius: 0;
     color: black;
     font-size: 15px;
@@ -25,6 +25,7 @@
     height: 35px;
 }
 
+/* キャラクターイラストの位置 */
 .character_position {
     width: 260px;
     height: 370px;
@@ -33,12 +34,14 @@
     left: 40px;
 }
 
+/* 装備品の位置 */
 .equipment_position {
     position: absolute;
     top: 50px;
     left: 300px;
 }
 
+/* 装備品の枠 */
 .equipment {
     background-color:rgba(0,0,0,0.3);
     border: solid rgb(189, 160, 0);
@@ -49,12 +52,14 @@
     transform: translateY(-20px);
 }
 
+/* 装備品のタイトル */
 .equipment_title {
     color: gold;
     font-size: 25px;
     font-weight: bold;
 }
 
+/* 個々の装備品の画像 */
 .material {
     background-color: white;
     border: solid rgb(189, 160, 0);
@@ -62,6 +67,7 @@
     height: 30px;
 }
 
+/* 装備品変更ボタン */
 .equip_change_button {
     background: rgb(231, 231, 231, 0.9);
     border-top: 6px solid rgb(255, 255, 255, 0.9);
@@ -79,6 +85,7 @@
     z-index: 10;
 }
 
+/* 装備品変更ボタンの枠 */
 .equip_change_button_frame {
     border: solid rgb(205, 175, 2);
     width: 60px;
@@ -88,6 +95,7 @@
     left: 202px;
 }
 
+/* スキル変更ボタン */
 .skill_change_button {
     background: rgb(231, 231, 231, 0.9);
     border-top: 6px solid rgb(255, 255, 255, 0.9);
@@ -105,6 +113,7 @@
     z-index: 10;
 }
 
+/* スキル変更ボタンの枠 */
 .skill_change_button_frame {
     border: solid rgb(205, 175, 2);
     width: 60px;
@@ -114,6 +123,7 @@
     left: 130px;
 }
 
+/* スキル表示の枠 */
 .skill_position {
     color: gold;
     font-weight: bold;
@@ -123,6 +133,7 @@
     left: 300px;
 }
 
+/* スキルのテキスト */
 .skill_level {
     background-color:rgba(0,0,0,0.3);
     border: solid rgb(189, 160, 0);
@@ -132,6 +143,7 @@
     padding: 0px 10px;
 }
 
+/* 出発ボタンの枠 */
 .go_button_frame {
     border: solid rgb(205, 175, 2);
     width: 100px;
@@ -141,6 +153,7 @@
     right: 17px;
 }
 
+/* 出発ボタン */
 .go_button {
     background: rgb(255, 217, 0, 0.9);
     border-top: 4px solid rgb(255, 225, 52, 0.9);
@@ -215,17 +228,6 @@
     height: 130px;
 }
 
-.notice_button {
-    background-color: #F4F4E8;
-    border: solid 2px #c4c4b8;
-    color: black;
-    width: 450px;
-    height: 70px;
-    border-radius: 10px;
-    position: relative;
-    top: 20px;
-}
-
 .modal-fotter {
     position: relative;
     top: 65px;
@@ -235,8 +237,11 @@
     position: relative;
     transform: translateY(-70px);
     left: 175px;
-    background-color: #F4F4E8;
-    border: solid 2px #c4c4b8;
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     color: black;
     width: 100px;
     height: 30px;

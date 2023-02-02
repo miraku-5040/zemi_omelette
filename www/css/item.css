@@ -21,6 +21,7 @@
     height: 63px;
 }
 
+/* 画像の枠(アイテム) */
 .list_material1 {
     background-color: rgb(217, 217, 217);
     border-top: 2px solid white;
@@ -31,6 +32,7 @@
     height: 40px;
 }
 
+/* アイテムの個数 */
 .item_text_position1 {
     position: relative;
     transform: translateY(-40px);
@@ -38,6 +40,7 @@
     font-weight: bold;
 }
 
+/* 画像の枠(武器) */
 .list_material2 {
     background-color: rgb(217, 217, 217);
     border-top: 2px solid white;
@@ -49,6 +52,7 @@
     transform: translateY(-50px);
 }
 
+/* 武器のレベル */
 .item_text_position2 {
     position: relative;
     transform: translateY(-90px);
@@ -56,6 +60,7 @@
     font-weight: bold;
 }
 
+/* 進化数の枠 */
 .overlap_color {
     background: white;
     width: 18px;
@@ -106,10 +111,10 @@
 }
 
 .weapon_other_button {
-    background: black;
-    border: black;
-    border-right: 5px solid rgb(85, 85, 85);
-    border-bottom: 5px solid rgb(99, 99, 99);
+    background: rgb(0, 0, 0, 0.9);
+    border: rgb(0, 0, 0, 0.9);
+    border-right: 5px solid rgb(85, 85, 85, 0.9);
+    border-bottom: 5px solid rgb(99, 99, 99, 0.9);
     border-radius: 0px 20px 20px 0px;
     color: white;
     font-size: 10px;
@@ -129,10 +134,10 @@
 }
 
 .weapon_soad_button {
-    background: rgb(231, 231, 231);
-    border: rgb(231, 231, 231);
-    border-right: 5px solid rgb(241, 241, 241);
-    border-bottom: 5px solid white;
+    background: rgb(231, 231, 231, 0.9);
+    border: rgb(231, 231, 231, 0.9);
+    border-right: 5px solid rgb(241, 241, 241, 0.9);
+    border-bottom: 5px solid rgb(255, 255, 255, 0.9);
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 13px;
@@ -142,10 +147,10 @@
 }
 
 .weapon_shield_button {
-    background: rgb(231, 231, 231);
-    border: rgb(231, 231, 231);
-    border-right: 5px solid rgb(241, 241, 241);
-    border-bottom: 5px solid white;
+    background: rgb(231, 231, 231, 0.9);
+    border: rgb(231, 231, 231, 0.9);
+    border-right: 5px solid rgb(241, 241, 241, 0.9);
+    border-bottom: 5px solid rgb(255, 255, 255, 0.9);
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 13px;
@@ -155,10 +160,10 @@
 }
 
 .weapon_decoration_button {
-    background: rgb(231, 231, 231);
-    border: rgb(231, 231, 231);
-    border-right: 5px solid rgb(241, 241, 241);
-    border-bottom: 5px solid white;
+    background: rgb(231, 231, 231, 0.9);
+    border: rgb(231, 231, 231, 0.9);
+    border-right: 5px solid rgb(241, 241, 241, 0.9);
+    border-bottom: 5px solid rgb(255, 255, 255, 0.9);
     border-radius: 0px 20px 20px 0px;
     color: black;
     font-size: 13px;
@@ -172,7 +177,7 @@
     transform: translate(-3px, -11px);
 }
 
-/* アイテム画面のボタン */
+/* アイテム画面のフッターのボタン */
 .item_buttons {
     position: absolute;
     top: 310px;
@@ -252,11 +257,11 @@
 }
 
 .calsel_button {
-    background-color: white;
-    border-top: 4px solid white;
+    background-color: rgb(255, 255, 255, 0.9);
+    border-top: 4px solid rgb(255, 255, 255);
     border-right: 4px solid #adadad;
     border-bottom: 4px solid #999999;
-    border-left: 4px solid white;
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     border-radius: 0;
     color: black;
     font-weight: bold;

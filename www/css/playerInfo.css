@@ -1,3 +1,4 @@
+/* 背景 */
 body {
     background-color: #005ba1;
 }
@@ -29,6 +30,7 @@ body {
     height: 35px;
 }
 
+/* プレイヤー情報表示用のカードの画像 */
 .card_image {
     position: absolute;
     top: 60px;
@@ -37,17 +39,20 @@ body {
     height: 300px;
 }
 
+/* プレイヤー情報の位置 */
 .info_position {
     position: absolute;
     top: 80px;
     left: 110px;
 }
 
+/* プレイヤーアイコンの画像 */
 .player_info_icon {
     width: 60px;
     height: 70px;
 }
 
+/* プレイヤーの名前 */
 .player_name {
     position: relative;
     transform: translateY(-100px);
@@ -56,6 +61,7 @@ body {
     font-weight: bold;
 }
 
+/* プレイヤーのランク */
 .player_rank {
     position: relative;
     transform: translateY(-115px);
@@ -64,6 +70,7 @@ body {
     font-weight: bold;
 }
 
+/* プレイヤーの所属ギルド */
 .player_guild {
     background-color: white;
     position: relative;
@@ -73,6 +80,7 @@ body {
     padding: 0px 10px;
 }
 
+/* プレイヤーの一言コメント */
 .player_comment {
     background-color: white;
     position: relative;

@@ -96,7 +96,7 @@
     left: 7px;
 }
 
-/* ガチャ画面のボタン */
+/* ガチャ画面のフッターのボタン */
 .home_button_text2 {
     position: relative;
     transform: translateY(-25px);
@@ -186,11 +186,11 @@
 }
 
 .calsel_button {
-    background: rgb(231, 231, 231);
-    border-top: 4px solid rgb(255, 255, 255);
-    border-right: 4px solid rgb(199, 199, 199);
-    border-bottom: 4px solid rgb(177, 177, 177);
-    border-left: 4px solid rgb(255, 255, 255);
+    background: rgb(231, 231, 231, 0.9);
+    border-top: 4px solid rgb(255, 255, 255, 0.9);
+    border-right: 4px solid rgb(199, 199, 199, 0.9);
+    border-bottom: 4px solid rgb(177, 177, 177, 0.9);
+    border-left: 4px solid rgb(255, 255, 255, 0.9);
     border-radius: 0;
     color: black;
     font-weight: bold;
@@ -199,11 +199,11 @@
 }
 
 .decision_button {
-    background: gold;
-    border-top: 4px solid rgb(255, 225, 52);
-    border-right: 4px solid rgb(238, 202, 0);
-    border-bottom: 4px solid rgb(207, 177, 3);
-    border-left: 4px solid rgb(255, 225, 52);
+    background: rgb(255, 217, 0, 0.9);
+    border-top: 4px solid rgb(255, 225, 52, 0.9);
+    border-right: 4px solid rgb(238, 202, 0, 0.9);
+    border-bottom: 4px solid rgb(207, 177, 3, 0.9);
+    border-left: 4px solid rgb(255, 225, 52, 0.9);
     border-radius: 0;
     color: black;
     font-weight: bold;

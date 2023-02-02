@@ -8,54 +8,28 @@ var WEAPON_DB = "weapon";
 var EQUIP_DB = "equipment";
 var LOAD_WEAPON = "loadWeapon";
 
-var getSoad;
-var getShield;
-var getDecoration;
-
-var setSoad;
-var setShield;
-var setDecoration;
-
-
 // 装備品変更
 function updateEquipWeaponData() {
-    // ここが出ていない→このメソッドは動いていない、けどエラーは出ていないので発見されてはいる
-    console.log("go");
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Equip = ncmb.DataStore(this.EQUIP_DB);
-    // var soad = localStorage.getItem("addSoad");
-    // console.log(document.getElementById("soad"));
-    // var shield = localStorage.getItem("addShield");
-    // var decoration = localStorage.getItem("addDecoration");
-    if(this.setSoad == localStorage.getItem('soad')){
-        this.getSoad = this.setSoad;
-    }else{
-        this.getSoad = localStorage.getItem('soad');
-    }
-    if(this.setShield == localStorage.getItem('shield')){
-        this.getShield = this.setShield;
-    }else{
-        this.getShield = localStorage.getItem('shield');
-    }
-    if(this.setDecoration == localStorage.getItem('decoration')){
-        this.getDecoration = this.setDecoration;
-    }else{
-        this.getDecoration = localStorage.getItem('decoration');
-    }
+    var soad = document.getElementById("soad").src;
+    var shield = document.getElementById("shield").src;
+    var decoration = document.getElementById("decoration").src;
     Equip.equalTo("equipment_id", "1")
         .fetchAll()
         .then(function (results) {
-            console.log(results[0]);
-            results[0].set("soad", this.getSoad);
-            results[0].set("shield", this.getShield);
-            results[0].set("decoration", this.getDecoration);
+            results[0].set("soad", soad);
+            results[0].set("shield", shield);
+            results[0].set("decoration", decoration);
             return results[0].update();
         })
         .catch(function (err) {
             console.log("outsideng");
+        })
+        .then(function () {
+            getEquipWeaponData();
+            equip();
         });
-    getEquipWeaponData();
-    equip();
 }
 
 // 装備品取得
@@ -69,18 +43,16 @@ function getEquipWeaponData() {
         .catch(function (err) {
             console.log(err);
         });
-}
-// 武器の画像をHTMLに埋め込む
-function setEquipWeapoImage(results) {
-    // 情報取得
-    var equip = results[0];
-    // 新しいHTML要素を作成
-    var EquipHtml = '<img class="material" id="soad" src="' + equip.soad + '"><img class="material" id="shield" src="' + equip.shield + '"><img class="material" id="decoration" src="' + equip.decoration + '">';
-    this.setSoad = equip.soad;
-    this.setShield = equip.shield;
-    this.setDecoration = equip.decoration;
-    // 作成した要素を追加
-    document.getElementById("equipment").innerHTML = EquipHtml;
+
+    // 武器の画像をHTMLに埋め込む
+    function setEquipWeapoImage(results) {
+        // 情報取得
+        var equip = results[0];
+        // 新しいHTML要素を作成
+        var equipHtml = '<img class="material" id="soad" src="' + equip.soad + '"><img class="material" id="shield" src="' + equip.shield + '"><img class="material" id="decoration" src="' + equip.decoration + '">';
+        // 作成した要素を追加
+        document.getElementById("equipment").innerHTML = equipHtml;
+    }
 }
 
 // 装備画面情報取得用
@@ -107,8 +79,6 @@ function getEquipSoadData() {
             // 新しいHTML要素を作成
             var weaponHtml = '<div class="item_border" id="' + weapon.weapon_image + '" onclick="changeSoad(this)"><p class="overlap_color">' + weapon.overlap + '</p><img id="' + weapon.weapon_id + '" class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
-            this.setSoad = weapon.weapon_image;
-            console.log(weapon.weapon_image);
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
     }
@@ -138,8 +108,6 @@ function getEquipShieldData() {
             // 新しいHTML要素を作成
             var weaponHtml = '<div class="item_border" id="' + weapon.weapon_image + '" onclick="changeShield(this)" ><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material" src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
-            this.setShield = weapon.weapon_image;
-            console.log(weapon.weapon_image);
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
     }
@@ -170,8 +138,6 @@ function getEquipDecoraionData() {
             // 新しいHTML要素を作成
             var weaponHtml = '<div class="item_border" id="' + weapon.weapon_image + '" onclick="changeDecoration(this)" ><p class="overlap_color">' + weapon.overlap + '</p><img class="list_material"  src="' + weapon.weapon_image + '"><p class="item_text_position">Lv' + weapon.weapon_level + '</p></div>';
             // 作成した要素を追加
-            this.setDecoration = weapon.weapon_image;
-            console.log(weapon.weapon_image);
             document.getElementById("items").insertAdjacentHTML('beforeend', weaponHtml);
         }
     }

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -21,6 +22,7 @@
     <!-- ショップ画面のCSS -->
     <link rel="stylesheet" href="../css/itemShop.css">
 </head>
+
 <body onload="soundCityBGM();getMoneyCount()">
     <!-- お店の画像 -->
     <img class="interior" src="../image/town/shop2.png">
@@ -30,7 +32,7 @@
         <p id="money" class="main_least_dia_coin">0</p>
     </div>
 
-    <!-- 品揃え -->
+    <!-- 商品欄 -->
     <div class="shop_list">
         <div class="shop_item" onclick="buy_item(5)">
             <img class="item" src="../image/item/IW4004.png">
@@ -113,6 +115,8 @@
         </div>
     </div>
 
+    <!-- 退出ボタン -->
     <button class="out_button" onclick="outShop()"><img class="out_button_image" src="../image/town/door.png"><p class="out_button_text">店を出る</p></button>
 </body>
+
 </html>

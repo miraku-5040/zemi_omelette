@@ -10,6 +10,7 @@
     font-weight: bold;
 }
 
+/* 設定の位置 */
 .settings {
     display: flex;
     gap: 20px;
@@ -22,6 +23,7 @@
     padding: 0px 40px 10px 30px;
 }
 
+/* 設定のテキスト */
 .setting_text {
     font-weight: bold;
 }
@@ -50,11 +52,13 @@
     height: 38px;
 }
 
+/* ホーム画面に戻るボタンのテキスト */
 .setting_button_text1 {
     position: relative;
     transform: translateY(-5px);
 }
 
+/* ホーム画面に戻るボタンの枠 */
 .button_frame1 {
     border: solid rgb(189, 160, 0);
     width: 119px;
@@ -63,20 +67,7 @@
     transform: translate(-20px, -50px);
 }
 
-.setting_button_text2 {
-    position: relative;
-    transform: translateY(-15px);
-}
-
-.button_frame2 {
-    border: solid rgb(189, 160, 0);
-    width: 119px;
-    height: 38px;
-    position: relative;
-    transform: translate(-20px, -67px);
-}
-
-/* ここ以下変更バーのデザイン */
+/* これ以下変更バーのデザイン */
 input[type="range"] {
     -webkit-appearance: none; /* これ無しだとスタイルがほぼ全く反映されないので注意 */
   appearance: none;

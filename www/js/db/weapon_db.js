@@ -139,6 +139,9 @@ function updateWeaponPowerUp() {
     getExp = getExp + Number(document.getElementById("power_ber").low);
     var weapon_level = Math.floor(getExp / 1000);
     var weapon_exp = getExp % 1000;
+    // 武器の総合力を取得する
+    var str = document.getElementById('weaponAttack');
+    var weapon_attack = String(str.textContent).slice(4);
 
     var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
@@ -149,7 +152,8 @@ function updateWeaponPowerUp() {
                 .fetch()
                 .then(function (results) {
                     results.set("weapon_level", Number(results.weapon_level) + weapon_level)
-                        .set("weapon_exp", weapon_exp);
+                        .set("weapon_exp", weapon_exp)
+                        .set("weapon_attack", weapon_attack);
                     results.update();
                     // 強化アイテム残数更新(item_db.js)
                     updateItemSum();
@@ -170,6 +174,9 @@ function updateWeaponEvolution() {
     var LoadWeapon = ncmb.DataStore(this.LOAD_WEAPON);
     // 進化のアイテム数取得
     var usedItem = Number(document.getElementById("counterEvo").value);
+    // 武器の総合力を取得する
+    var str = document.getElementById('weaponAttack');
+    var weapon_attack = String(str.textContent).slice(4);
     // 進化対象の武器を取得
     LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
         .fetchAll()
@@ -179,6 +186,7 @@ function updateWeaponEvolution() {
                 .fetchAll()
                 .then(function (results) {
                     results[0].set("overlap", Number(results[0].overlap) + Number(usedItem));
+                    results[0].set("weapon_attack", Number(weapon_attack));
                     return results[0].update();
                 })
                 .catch(function (err) {

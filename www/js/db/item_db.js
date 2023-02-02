@@ -101,7 +101,6 @@ function updateItemSum() {
                     Item.equalTo("item_id", 3)
                         .fetch()
                         .then(function (results) {
-                            console.log(results);
                             results.set("sum", Number(remaining));
                             results.update();
                             // 武器強化成功時のロジック(weapon.js)
@@ -124,16 +123,20 @@ function updateItemSum() {
 function updateEvoItemSum() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
-    let element = document.getElementById('power_ber');
+    let element = document.getElementById('counterEvo');
     var remaining = Number(element.max) - Number(element.value);
     Item.equalTo("item_id", 9)
         .fetchAll()
         .then(function (results) {
             results[0].set("sum", Number(remaining));
-            return results[0].update();
+            results[0].update();
         })
         .catch(function (err) {
             console.log(err);
+        })
+        .then(function () {
+            // 武器進化成功時のロジック(weapon.js)
+            EvolutionSuccsess();
         });
 }
 

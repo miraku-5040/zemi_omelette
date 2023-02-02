@@ -24,17 +24,22 @@
 </head>
 
 <body onload="soundBGM();getItemSum();getSoloPowerWeaponData()">
+    <!-- 背景 -->
     <img class="background_image" src="../image/background/cave.png">
-    <!-- 装備画面の表示 -->
     <!-- 強化対象装備 -->
     <img id="powerUpWeapon" class="power_item" src="../image/soad/soad-provisional.png" onclick="toWeaponPower()">
+    <!-- 強化対象装備の経験値のバー -->
     <meter class="power_ber" id="power_ber" max="1000" min="0" value="0"></meter>
+    <!-- 強化対象装備の経験値のテキスト -->
     <p class="exp_text" id="exp_text">0/1000</p>
+    <!-- 強化対象装備の情報 -->
     <div class="power_target_text">
         <h3 id="weaponName">&lt;ソード&gt;</h3>
         <p id="weaponLevel">レベル：50/100</p>
         <p id="weaponAttack">攻撃力：10</p>
     </div>
+
+    <!-- 意思決定ボタン -->
     <div class="decition_buttons">
         <button class="cansel" onclick="toPower()"><p class="decition_button_text">キャンセル</p><div class="decition_button_frame"></div></button>
         <button class="power_up" onclick="PowerUpOpen()"><p class="decition_button_text">強化する</p><div class="decition_button_frame"></div></button>
