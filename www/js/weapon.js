@@ -339,31 +339,31 @@ function selected(element) {
 }
 
 // 武器入れ替えjs
-function changeSoad(element, id) {
+function changeSoad(element) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
-    // 装備を入れ替える
-    var soad = document.getElementById('soad').src;
+    // 見かけ上装備する
     document.getElementById('soad').src = element.id;
-    document.getElementById(id).src = soad;
+    localStorage.setItem(document.getElementById('soad').src)
 }
 
-function changeShield(element, id) {
+function changeShield(element) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
-    // 装備を入れ替える
-    const shield = document.getElementById('shield').src;
+    // 見かけ上装備する
     document.getElementById('shield').src = element.id;
-    document.getElementById(id).src = shield;
+    localStorage.setItem(document.getElementById('shield').src)
 }
 
-function changeDecoration(element, id) {
+function changeDecoration(element) {
     audio = new Audio("../sound/change.m4a");
     audio.play();
-    // 装備を入れ替える
-    const decoration = document.getElementById('decoration').src;
+    // 見かけ上装備する
+    // const decoration = localStorage.getItem("addDecoration");
     document.getElementById('decoration').src = element.id;
-    document.getElementById(id).src = decoration;
+    localStorage.setItem(document.getElementById('decoration').src)
+    // console.log(decoration);
+    // document.getElementById(id).src = decoration;
 }
 
 // 装備js

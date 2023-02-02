@@ -172,26 +172,28 @@ function updateWeaponEvolution() {
     var usedItem = Number(document.getElementById("counterEvo").value);
     // 進化対象の武器を取得
     LoadWeapon.equalTo("objectId", "ReG7XyQhFYZnW7BM")
-        .fetch()
+        .fetchAll()
         .then(function (results) {
             // 武器の重ね合わせ数変更
             Weapon.equalTo("weapon_id", results[0].weapon_id)
-                .fetch()
+                .fetchAll()
                 .then(function (results) {
                     results[0].set("overlap", Number(results[0].overlap) + Number(usedItem));
                     return results[0].update();
                 })
                 .catch(function (err) {
                     console.log("sinka:ng");
+                })
+                .then(function () {
+                    // 進化アイテム残数更新(item_db.js)
+                    updateEvoItemSum();
+                    // 武器進化成功時のロジック(weapon.js)
+                    EvolutionSuccsess();
                 });
         })
         .catch(function (err) {
             console.log(err);
-        });
-    // 武器進化成功時のロジック(weapon.js)
-    EvolutionSuccsess();
-    // 進化アイテム残数更新(item_db.js)
-    updateEvoItemSum();
+        })
 }
 
 // ガチャロジック

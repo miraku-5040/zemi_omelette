@@ -9,6 +9,7 @@ var ITEM_DB = "item";
 var SKILL_DB = "skill";
 var DAIRY_DB = "dairy";
 var CHAT_DB = "chat";
+var GUILD_CHAT_DB = "guildChat";
 var ENEMY_DB = "enemy";
 var DAIRY_AHIEVE_DB = "dairy_achieve";
 var ACHIEVE_DB = "achieve";
@@ -349,9 +350,10 @@ function updateSkillData(skill) {
     var Skill = ncmb.DataStore(this.SKILL_DB);
     // スキルのレベルを上げる
     Skill.equalTo("skill_name", skill)
-        .fetch()
+        .fetchAll()
         .then(function (results) {
-            console.log("skill:"+results[0].skill_level);
+            console.log("ck:" + results[0].skill_name);
+            console.log("skill:" + results[0].skill_level);
             var skill_detail = results[0];
             results[0].set("skill_level", Number(skill_detail.skill_level) + 1);
             console.log("ok");
@@ -359,29 +361,34 @@ function updateSkillData(skill) {
         })
         .catch(function (err) {
             console.log(err);
-        });
-    // 書物冊数を減らす
-    Item.equalTo("item_id", 4)
-        .fetch()
-        .then(function (results) {
-            console.log(results);
-            var item = results[0];
-            results[0].set("sum", Number(item.sum) - 1);
-            console.log("ok");
-            return results[0].update();
         })
-        .catch(function (err) {
-            console.log(err);
+        .then(function () {
+            // 書物冊数を減らす
+            Item.equalTo("item_id", 4)
+                .fetchAll()
+                .then(function (results) {
+                    console.log("ckItem:" + results[0].item_id);
+                    console.log("cksum:" + results[0].sum);
+                    var item = results[0];
+                    results[0].set("sum", Number(item.sum) - 1);
+                    console.log("ok");
+                    return results[0].update();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+            // スキル強化素材の残数表示
+            getskillItemData();
+            // 画面更新
+            setTimeout('window.location.href = "skill.html"', 1500);
         });
-    // 画面更新
-    setTimeout('window.location.href = "skill.html"', 1500);
 }
 
 // スキル強化素材の残数表示
 function getskillItemData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
-    Item.equalTo("item_id", 9)
+    Item.equalTo("item_id", 4)
         .fetchAll()
         .then(function (results) {
             setItemText(results);
@@ -409,31 +416,35 @@ function buy_weapon(item) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
     var Character = ncmb.DataStore(this.CHARACTER_DB);
-    // アイテム追加(動かない)
+    // アイテム追加
     Item.equalTo("item_id", Number(item))
-        .fetch()
+        .fetchAll()
         .then(function (results) {
             var item = results[0];
+            console.log("ckItemSum:" + results[0].sum);
             results[0].set("sum", Number(item.sum) + 1);
             console.log("ok");
             return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
-        });
-    // コイン減少
-    Character.fetchAll()
-        .then(function (results) {
-            var item = results[0];
-            results[0].set("money", Number(item.money - 2000));
-            console.log("ok");
-            return results[0].update();
         })
-        .catch(function (err) {
-            console.log(err);
-        });
+        // コイン減少
+        .then(function () {
+            Character.fetchAll()
+                .then(function (results) {
+                    var item = results[0];
+                    console.log("ckbuki:" + item.money);
+                    results[0].set("money", Number(item.money - 2000));
+                    console.log("ok");
+                    return results[0].update();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
 
-    setTimeout('window.location.href = "weaponShop.html"', 1500);
+            setTimeout('window.location.href = "weaponShop.html"', 1500)
+        });
 }
 
 // ショップ機能(食料品店)
@@ -446,29 +457,33 @@ function buy_item(item) {
     var Character = ncmb.DataStore(this.CHARACTER_DB);
     // アイテム追加(動かない)
     Item.equalTo("item_id", Number(item))
-        .fetch()
+        .fetchAll()
         .then(function (results) {
             var item = results[0];
+            console.log("ckItem:" + results[0].sum);
             results[0].set("sum", Number(item.sum) + 1);
             console.log("ok");
             return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
-        });
-    // コイン減少
-    Character.fetchAll()
-        .then(function (results) {
-            var item = results[0];
-            results[0].set("money", Number(item.money - 2000));
-            console.log("ok");
-            return results[0].update();
         })
-        .catch(function (err) {
-            console.log(err);
-        });
+        // コイン減少
+        .then(function () {
+            Character.fetchAll()
+                .then(function (results) {
+                    var item = results[0];
+                    console.log("ckshokuryo:" + item.money);
+                    results[0].set("money", Number(item.money - 2000));
+                    console.log("ok");
+                    return results[0].update();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
 
-    setTimeout('window.location.href = "itemShop.html"', 600);
+            setTimeout('window.location.href = "itemShop.html"', 1500)
+        });
 }
 
 // ショップ機能(書店)
@@ -481,29 +496,33 @@ function buy_book(item) {
     var Character = ncmb.DataStore(this.CHARACTER_DB);
     // アイテム追加(動かない)
     Item.equalTo("item_id", Number(item))
-        .fetch()
+        .fetchAll()
         .then(function (results) {
             var item = results[0];
+            console.log("ckItem:" + results[0].sum);
             results[0].set("sum", Number(item.sum) + 1);
             console.log("ok");
             return results[0].update();
         })
         .catch(function (err) {
             console.log(err);
-        });
-    // コイン減少
-    Character.fetchAll()
-        .then(function (results) {
-            var item = results[0];
-            results[0].set("money", Number(item.money - 2000));
-            console.log("ok");
-            return results[0].update();
         })
-        .catch(function (err) {
-            console.log(err);
-        });
+        // コイン減少
+        .then(function () {
+            Character.fetchAll()
+                .then(function (results) {
+                    var item = results[0];
+                    console.log("ckshoten:" + item.money);
+                    results[0].set("money", Number(item.money - 2000));
+                    console.log("ok");
+                    return results[0].update();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
 
-    setTimeout('window.location.href = "skillShop.html"', 600);
+            setTimeout('window.location.href = "skillShop.html"', 1500)
+        });
 }
 
 // ショップ(ギルド)機能
@@ -525,20 +544,22 @@ function guildBuy(item) {
         })
         .catch(function (err) {
             console.log(err);
-        });
-    // ギルドコイン減少
-    Character.fetchAll()
-        .then(function (results) {
-            var item = results[0];
-            results[0].set("guild_coin", Number(item.guild_coin - 2000));
-            console.log("ok");
-            return results[0].update();
         })
-        .catch(function (err) {
-            console.log(err);
-        });
+        // ギルドコイン減少
+        .then(function () {
+            Character.fetchAll()
+                .then(function (results) {
+                    var item = results[0];
+                    results[0].set("guild_coin", Number(item.guild_coin - 2000));
+                    console.log("ok");
+                    return results[0].update();
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
 
-    setTimeout('window.location.href = "../html/guildShop.html"', 1500);
+            setTimeout('window.location.href = "../html/guildShop.html"', 1500);
+        });
 }
 
 // 毎日ログイン機能のアイテム表示(通常)
@@ -563,7 +584,7 @@ function getNomalLoginData() {
         for (var i = 0; i <= results.length - 1; i++) {
             var login = results[i];
             // 新しいHTML要素を作成
-            var itemHtml = '<div class="login_dairy" onclick="updateLoginData(' + login.id + ',' + login.item_id + ',' + login.count +  ')"><p class="login_dairy_title">' + login.id + '日目</p><img class="login_dairy_image" src="' + login.image + '"><p class="login_dairy_count">×' + login.count + '</p></div>';
+            var itemHtml = '<div class="login_dairy" onclick="updateLoginData(' + login.id + ',' + login.item_id + ',' + login.count + ')"><p class="login_dairy_title">' + login.id + '日目</p><img class="login_dairy_image" src="' + login.image + '"><p class="login_dairy_count">×' + login.count + '</p></div>';
             // 作成した要素を追加
             document.getElementById("nomalLogin").insertAdjacentHTML('beforeend', itemHtml);
         }
@@ -618,14 +639,14 @@ function updateLoginData(id, itemId, count) {
         });
     if (Number(itemId) == 10) {
         Character.fetchAll()
-        .then(function (results) {
-            var item = results[0];
-            results[0].set("crystal", Number(item.crystal + Number(count)));
-            return results[0].update();
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
+            .then(function (results) {
+                var item = results[0];
+                results[0].set("crystal", Number(item.crystal + Number(count)));
+                return results[0].update();
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
     } else {
         // アイテム増加(item_db.js)
         updateSoloItemData(Number(itemId), count);
@@ -926,8 +947,7 @@ function updateEventAchieveCountUp(id) {
 function getAllChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Chat = ncmb.DataStore(this.CHAT_DB);
-    Chat.equalTo("type", "all")
-        .order("createDate", false)
+    Chat.order("createDate", false)
         .fetchAll()
         .then(function (results) {
             setChat(results);
@@ -937,8 +957,6 @@ function getAllChatData() {
         });
 
     function setChat(results) {
-        document.getElementById("chat_type").innerHTML = '全体チャット';
-        document.getElementById("new_chat_button").onclick = updateAllChatData();
         // 初期化
         document.getElementById("chats").innerHTML = '';
         for (var i = 0; i <= results.length - 1; i++) {
@@ -955,9 +973,8 @@ function getAllChatData() {
 // チャット読み込み機能
 function getGuildChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Chat = ncmb.DataStore(this.CHAT_DB);
-    Chat.equalTo("type", "guild")
-        .order("createDate", false)
+    var Chat = ncmb.DataStore(this.GUILD_CHAT_DB);
+    Chat.order("createDate", false)
         .fetchAll()
         .then(function (results) {
             setChat(results);
@@ -967,8 +984,6 @@ function getGuildChatData() {
         });
 
     function setChat(results) {
-        document.getElementById("chat_type").innerHTML = 'ギルドチャット';
-        document.getElementById("new_chat_button").onclick = updateGuildChatData();
         // 初期化
         document.getElementById("chats").innerHTML = '';
         for (var i = 0; i <= results.length - 1; i++) {
@@ -987,12 +1002,11 @@ function updateAllChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Chat = ncmb.DataStore(this.CHAT_DB);
     let comment = document.getElementById('new_chat_text');
-    Chat.set("type", "all")
-        .set("name", "player")
+    Chat.set("name", "player")
         .set("comment", comment)
         .save()
-        .then(function (results) {
-            getAllChatData()
+        .then(function () {
+            getAllChatData();
         })
         .catch(function (err) {
             console.log(err);
@@ -1002,14 +1016,13 @@ function updateAllChatData() {
 // チャット更新機能
 function updateGuildChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Chat = ncmb.DataStore(this.CHAT_DB);
+    var Chat = ncmb.DataStore(this.GUILD_CHAT_DB);
     let comment = document.getElementById('new_chat_text');
-    Chat.set("type", "guild")
-        .set("name", "player")
+    Chat.set("name", "player")
         .set("comment", comment)
         .save()
-        .then(function (results) {
-            getAllChatData()
+        .then(function () {
+            getAllChatData();
         })
         .catch(function (err) {
             console.log(err);

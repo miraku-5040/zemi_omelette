@@ -97,14 +97,15 @@ body {
     position: absolute;
     top: 330px;
     left: 500px;
-    background-color: rgb(211, 211, 211);
+    background-color: rgb(211, 211, 211, 0.9);
     width: 160px;
     height: 40px;
+    border: solid rgb(205, 175, 2);
 }
 
 .out_button_image {
     position: relative;
-    top: 3px;
+    top: 0px;
     transform: translateX(-50px);
     width: 25px;
     height: 35px;
@@ -112,7 +113,7 @@ body {
 
 .out_button_text {
     position: relative;
-    transform: translateY(-43px);
+    transform: translateY(-45px);
     left: 20px;
     color: black;
     font-weight: bold;

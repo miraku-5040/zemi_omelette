@@ -58,7 +58,7 @@ function getSoloItemData(element) {
     }
 }
 
-// アイテム個数増加(1件)
+// アイテム個数増加(1件)←時々動く
 function updateSoloItemData(element, count) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -127,7 +127,7 @@ function updateEvoItemSum() {
     let element = document.getElementById('power_ber');
     var remaining = Number(element.max) - Number(element.value);
     Item.equalTo("item_id", 9)
-        .fetch()
+        .fetchAll()
         .then(function (results) {
             results[0].set("sum", Number(remaining));
             return results[0].update();

@@ -77,22 +77,29 @@ body {
     position: absolute;
     top: 335px;
     left: 505px;
-    background-color: rgb(211, 211, 211);
+    background-color: rgb(211, 211, 211, 0.9);
     width: 160px;
     height: 40px;
 }
 
+.out_button_frame {
+    border: solid rgb(205, 175, 2);
+    width: 160px;
+    height: 40px;
+    position: relative;
+    transform: translate(-12px, -1px);
+}
+
 .out_button_image {
     position: relative;
-    top: 6px;
-    transform: translateX(-50px);
+    transform: translate(-50px, -39px);
     width: 30px;
     height: 25px;
 }
 
 .out_button_text {
     position: relative;
-    transform: translateY(-33px);
+    transform: translateY(-78px);
     left: 25px;
     color: black;
     font-weight: bold;

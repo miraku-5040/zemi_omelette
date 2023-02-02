@@ -399,6 +399,27 @@ function guildRewardClose() {
     modal.style.display = 'none';
 }
 
+// チャット用モーダルウィンドウ用js
+//モーダルウィンドウを開く
+function openGuildChat() {
+    // 音声再生
+    audio = new Audio("../sound/menu_open.m4a");
+    audio.play();
+    // モーダルウィンドウを開く
+    const modal = document.getElementById('guildChatModal');
+    modal.style.display = 'block';
+    getGuildChatData();
+}
+
+function closeGuildChat() {
+    // 音声再生
+    audio = new Audio("../sound/cansel.m4a");
+    audio.play();
+    // モーダルウィンドウを閉じる
+    const modal = document.getElementById('guildChatModal');
+    modal.style.display = 'none';
+}
+
 //モーダルウィンドウを開く
 function pictExplainOpen() {
     // 音声再生
