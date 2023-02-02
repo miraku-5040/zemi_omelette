@@ -1012,34 +1012,32 @@ function getGuildChatData() {
 function updateAllChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Chat = ncmb.DataStore(this.CHAT_DB);
+    var chat = new Chat();
     var comment = document.getElementById('new_chat_text').value;
-    Chat.fetchAll()
-        .then(function (results) {
-            results.set("name", "player")
-                .set("comment", comment)
-                .save()
-                .then(function () {
-                    getAllChatData();
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
+    chat.set("name", "player")
+        .set("comment", comment)
+        .save()
+        .then(function () {
+            document.getElementById('new_chat_text').value = "";
+            getAllChatData();
         })
         .catch(function (err) {
             console.log(err);
         });
 }
 
-// チャット更新機能
+// ギルドチャット更新機能
 function updateGuildChatData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Chat = ncmb.DataStore(this.GUILD_CHAT_DB);
-    let comment = document.getElementById('new_chat_text');
-    Chat.set("name", "player")
+    var chat = new Chat();
+    var comment = document.getElementById('new_chat_text').value;
+    chat.set("name", "player")
         .set("comment", comment)
         .save()
         .then(function () {
-            getAllChatData();
+            document.getElementById('new_chat_text').value = "";
+            getGuildChatData();
         })
         .catch(function (err) {
             console.log(err);

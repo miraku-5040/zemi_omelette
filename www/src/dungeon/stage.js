@@ -46,23 +46,21 @@ class Stage {
     static createStage(){
         const possiblePositions = [];
         //ランダム生成
-        this.board = CreateStage.randomStageSelect()//randomStageCreate()
+        this.board = CreateStage.randomStageCreate()
         this.board.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
                 this.setStageImage(indexX, indexY, element);
-                    if(element != 1){
-                        return
+                if(this.board[indexY][indexX].stageImageNumber != Config.regularField){
+                    return
+                }
+                for(let i = -1; i <= 1; i++){
+                    for(let j = -1; j <= 1; j++){
+                        if(this.board[indexY + i][indexX + j].stageImageNumber == Config.wallField){
+                            return
+                        }
                     }
-                    if(this.board[indexY+1][indexX] == 5 && this.board[indexY-1][indexX] == 3){
-                        return
-                    }
-                    if(this.board[indexY][indexX+1] == 6 && this.board[indexY][indexX-1] == 4){
-                        return
-                    }
-                    
-                    possiblePositions.push({y:indexY,
-                    x:indexX})
-                    
+                }
+                possiblePositions.push({y:indexY,x:indexX})  
             });
         });
         let selectIndex = Tool.getRandomInt(possiblePositions.length)
@@ -118,10 +116,17 @@ class Stage {
             const selectPosition = possiblePositions[selectIndex]
             possiblePositions.splice(selectIndex, 1)
             //ランダムにtrapIDを取得
-            const trapId = this.stageStatus.trapArray[Tool.getRandomInt(this.stageStatus.trapArray.length)]
+            const trapId = this.stageStatus.trapArray[Tool.getRandomInt(this.stageStatus.trapArray.length, 1)]
             const trapInfo ={id: trapId, position:selectPosition}
             this.popTrapArray.push(trapInfo)
         }
+        //階段
+        const selectIndex = Tool.getRandomInt(possiblePositions.length)
+        const selectPosition = possiblePositions[selectIndex]
+        possiblePositions.splice(selectIndex, 1)
+        const trapId = this.stageStatus.trapArray[0]
+        const trapInfo ={id: trapId, position:selectPosition}
+        this.popTrapArray.push(trapInfo)
     }
 
     /**
@@ -140,8 +145,8 @@ class Stage {
         }
 
         const min = Image.getMinmapImage(stageImageNumber);
-        min.style.left = x * 5 + "px";
-        min.style.top = y * 5 + "px";
+        min.style.left = x * 3 + "px";
+        min.style.top = y * 3 + "px";
         this.minmap.appendChild(min);
     }
 

@@ -121,7 +121,7 @@ class CreateStage{
             }
         }
 
-        console.log(JSON.stringify(roomPositions))
+        //console.log(JSON.stringify(roomPositions))
         
         //部屋の数を減らす
         for(let i = 0; i < divisionNumber - roomQuantity; i++){
@@ -129,7 +129,7 @@ class CreateStage{
         }
 
         
-        console.log(JSON.stringify(roomPositions))
+        //console.log(JSON.stringify(roomPositions))
         //部屋が存在するか保持する
         const roomExistence = new Array(divisionNumber)
         roomExistence.fill(null)
@@ -141,45 +141,29 @@ class CreateStage{
             for(let y = 0; y < roomRows; y++){
                 for(let x = 0; x < roomCols; x++){
                     if(y == 0 && x == 0){
-                        //7番を配置する
-                        this.resultStage[position.stertY + y][position.stertX + x] = Config.upLeftField
                         continue
                     }
                     if(y == 0 && x == roomCols-1){
-                        //8番を配置する
-                        this.resultStage[position.stertY + y][position.stertX + x] = Config.upRightField
                         continue
                     }
                     if(y == roomRows-1 && x == roomCols-1){
-                        //9番を配置する
-                        this.resultStage[position.stertY + y][position.stertX + x] = Config.downRightField
                         continue
                     }
                     if(y == roomRows-1 && x == 0){
-                        //10番を配置する
-                        this.resultStage[position.stertY + y][position.stertX + x] = Config.downLeftField
                         continue
                     }
                     
                     if(y == roomRows-1){
-                        //3番を配置する
-                        this.resultStage[position.stertY + y][position.stertX + x] = Config.downField
                         continue
                     }
                     if(x == 0){
-                        //4番を配置する
-                        this.resultStage[position.stertY + y][position.stertX + x] = Config.leftField
                         continue
                     }
                     if(y == 0){
-                        //5番を配置する
-                        this.resultStage[position.stertY + y][position.stertX + x] = Config.upField
                         continue
                     }
 
                     if(x == roomCols-1){
-                        //6番を配置する
-                        this.resultStage[position.stertY + y][position.stertX + x] = Config.rightField
                         continue
                     }
                     this.resultStage[position.stertY + y][position.stertX + x] = Config.regularField
@@ -189,7 +173,7 @@ class CreateStage{
             position.endX = position.stertX + roomCols - 1
             position.endY = position.stertY + roomRows - 1
         });
-        console.log(this.resultStage)
+        //console.log(this.resultStage)
 
         //道の特定
         roomPositions.forEach((position) => {
@@ -248,156 +232,138 @@ class CreateStage{
             position.adjacent = [up,right,left,down]
         })
         //確定
-
+        const noRoodRoom = []
+        const upRood = []
+        const downRood = []
+        const rightRood = []
+        const leftRood = []
         //道の生成
         roomPositions.forEach((position) => {
+            if(position.adjacent == [{},{},{},{}]){
+                noRoodRoom.push(position.num)
+                return
+            }
             position.adjacent.forEach((direction,directionIndex) => {
                 if(Object.keys(direction).length == 0){
                     return
                 }
                 let halfway = 0
                 if(directionIndex % 3 != 0){
-                    halfway = (roomExistence[direction.num].adjacent[3 - directionIndex].selectX - direction.selectX)/2
+                    halfway = Math.floor((roomExistence[direction.num].adjacent[3 - directionIndex].selectX - direction.selectX)/2)
                 }else{
-                    halfway = (roomExistence[direction.num].adjacent[3 - directionIndex].selectY - direction.selectY)/2
+                    halfway = Math.floor((roomExistence[direction.num].adjacent[3 - directionIndex].selectY - direction.selectY)/2)
                 }
-                console.log(position)
-
                     switch(directionIndex){
                         case 0:
-                            for(let y = direction.selectY; y > direction.selectY + halfway; y--){
-                                if(direction.selectY == y){
-                                    this.resultStage[y][direction.selectX] =  Config.regularField
-                                    if(this.resultStage[y][direction.selectX + 1] == Config.upRightField){
-                                        this.resultStage[y][direction.selectX + 1] = Config.rightField
-                                    }else{
-                                        this.resultStage[y][direction.selectX + 1] = Config.upRightCornerField
-                                    }
-                                    if(this.resultStage[y][direction.selectX - 1] ==  Config.upLeftField){
-                                        this.resultStage[y][direction.selectX - 1] = Config.leftField
-                                    }else{
-                                        this.resultStage[y][direction.selectX - 1] = Config.upLeftCornerField
-                                    }
-                                }else{
-                                    this.createRoodVertical(direction,y)
-                                }
-                                if(this.resultStage[y - 1][direction.selectX] != Config.voidField){
-                                    //ぶつかったところ
-                                    this.createRoodConnect(direction)
-                                    break
-                                }
+                            upRood.push({x:direction.selectX, y: direction.selectY + halfway, stertNum: position.num, endNum: direction.num})
+                            for(let y = direction.selectY; y >= direction.selectY + halfway; y--){
+                                this.resultStage[y][direction.selectX] =  Config.regularField
                             }
                             break
                         case 1:
-                            for(let x = direction.selectX; x < halfway + direction.selectX; x++){
-                                if(direction.selectX == x){
-                                    this.resultStage[direction.selectY][x] =  Config.regularField
-                                    if(this.resultStage[direction.selectY + 1][x] == Config.downRightField){
-                                        this.resultStage[direction.selectY + 1][x] = Config.downField
-                                    }else{
-                                        this.resultStage[direction.selectY + 1][x] = Config.downRightCornerField
-                                    }
-                                    if(this.resultStage[direction.selectY - 1][x] == Config.upRightField){
-                                        this.resultStage[direction.selectY - 1][x] = Config.upField
-                                    }else{
-                                        this.resultStage[direction.selectY - 1][x] = Config.upRightCornerField
-                                    }
-                                }else{
-                                    this.createRoodHorizontal(direction,x)
-                                }
-                                if(this.resultStage[direction.selectY][x + 1] != Config.voidField){
-                                    //ぶつかったところ
-                                    this.createRoodConnect(direction)
-                                    break
-                                }
+                            rightRood.push({x: halfway + direction.selectX, y: direction.selectY,stertNum: position.num, endNum: direction.num})
+                            for(let x = direction.selectX; x <= halfway + direction.selectX; x++){
+                                this.resultStage[direction.selectY][x] =  Config.regularField
                             }
                             break
                         case 2:
+                            leftRood.push({x: direction.selectX + halfway, y: direction.selectY,stertNum: position.num, endNum: direction.num})
                             for(let x = direction.selectX; x >= direction.selectX + halfway; x--){
-                                if(direction.selectX == x){
-                                    this.resultStage[direction.selectY][x] =  Config.regularField
-                                    if(this.resultStage[direction.selectY + 1][x] == Config.downLeftField){
-                                        this.resultStage[direction.selectY + 1][x] = Config.downField
-                                    }else{
-                                        this.resultStage[direction.selectY + 1][x] = Config.downLeftCornerField
-                                    }
-                                    if(this.resultStage[direction.selectY - 1][x] == Config.upLeftField){
-                                        this.resultStage[direction.selectY - 1][x] = Config.upField
-                                    }else{
-                                        this.resultStage[direction.selectY - 1][x] = Config.upLeftCornerField
-                                    }
-                                }else{
-                                    this.createRoodHorizontal(direction,x)
-                                }
-                                if(this.resultStage[direction.selectY][x - 1] != Config.voidField){
-                                    //ぶつかったところ
-                                    this.createRoodConnect(direction)
-                                    break
-                                }
+                                this.resultStage[direction.selectY][x] =  Config.regularField
                             }
                             break
                         case 3:
+                            downRood.push({x:direction.selectX, y:halfway + direction.selectY,stertNum: position.num, endNum: direction.num})
                             for(let y = direction.selectY; y <= halfway + direction.selectY; y++){
-                                if(direction.selectY == y){
                                     this.resultStage[y][direction.selectX] =  Config.regularField
-                                    if(this.resultStage[y][direction.selectX + 1] == Config.downRightField){
-                                        this.resultStage[y][direction.selectX + 1] = Config.rightField
-                                    }else{
-                                        this.resultStage[y][direction.selectX + 1] = Config.downRightCornerField
-                                    }
-                                    if(this.resultStage[y][direction.selectX - 1] == Config.downLeftField){
-                                        this.resultStage[y][direction.selectX - 1] = Config.leftField
-                                    }else{
-                                        this.resultStage[y][direction.selectX - 1] = Config.downLeftCornerField
-                                    }
-                                }else{
-                                    this.createRoodVertical(direction,y)
-                                }
-                                if(this.resultStage[y + 1][direction.selectX] != Config.voidField){
-                                    //ぶつかったところ
-                                    this.createRoodConnect(direction)
-                                    break
-                                }
                             }
                             break
                     }
-                
+                //}
             });
+            
         });
+        //道をつなぐ
 
-    }
-
-    static createRoodHorizontal(direction,x){
-            this.resultStage[direction.selectY][x] =  Config.regularField
-            this.resultStage[direction.selectY + 1][x] = Config.downField
-            this.resultStage[direction.selectY - 1][x] = Config.upField
-    }
-
-    static createRoodVertical(direction,y){
-            this.resultStage[y][direction.selectX] =  Config.regularField
-            this.resultStage[y][direction.selectX + 1] = Config.rightField
-            this.resultStage[y][direction.selectX - 1] = Config.leftField
-    }
-    static checkRoodVerticalStert(x,y){
-        this.resultStage[y][x] =  Config.regularField
-        if(this.resultStage[y][x + 1] == 10){
-            this.resultStage[y][x + 1] = Config.rightField
-        }else{
-            this.resultStage[y][x + 1] = Config.upRightCornerField
+        //上下
+        for(let i = 0; i < upRood.length; i++){
+            let selectDownRood = ""
+            for(let j = 0; j < downRood.length; j++){
+                if(upRood[i].stertNum == downRood[j].endNum && upRood[i].endNum == downRood[j].stertNum){
+                    selectDownRood = downRood[j]
+                }
+            }
+            //y軸の確定
+            let y = upRood[i].y
+            //軸がかぶってない場合
+            if(selectDownRood.y != upRood[i].y){
+                y += 1
+            }
+            //x軸の確定、小さいほうを開始地点にする
+            let stertX = upRood[i].x
+            let endX = selectDownRood.x
+            if(upRood[i].x > selectDownRood.x){
+                stertX = selectDownRood.x
+                endX = upRood[i].x
+            }
+            for(let x = stertX + 1; x < endX; x++){
+                this.resultStage[y][x] =  Config.regularField
+            }
         }
-        if(this.resultStage[y][x - 1] == 9){
-            this.resultStage[y][x - 1] = Config.leftField
-        }else{
-            this.resultStage[y][x - 1] = Config.upLeftCornerField
+        //左右
+        for(let i = 0; i < leftRood.length; i++){
+            let selectRightRood = ""
+            for(let j = 0; j < rightRood.length; j++){
+                if(leftRood[i].stertNum == rightRood[j].endNum && leftRood[i].endNum == rightRood[j].stertNum){
+                    selectRightRood = rightRood[j]
+                }
+            }
+            let x = leftRood[i].x
+            if(selectRightRood.x != leftRood[i].x){
+                x += 1
+            }
+            let stertY = leftRood[i].y
+            let endY = selectRightRood.y
+            if(leftRood[i].y > selectRightRood.y){
+                stertY = selectRightRood.y
+                endY = leftRood[i].y
+            }
+            for(let y = stertY + 1; y < endY; y++){
+                this.resultStage[y][x] =  Config.regularField
+            }
         }
+        //壁を張る
+        for(let i = 2;i< Config.stageRows - 1; i++){
+            for(let j = 2;j< Config.stageCols; j++){
+                //周りを見て壁を置く
+                this.createWall(j,i)
+            }
+        }
+
     }
 
-    static createRoodConnect(direction){
-        console.log(direction)
-    }
+    static createWall(x,y){
+        if(this.resultStage[y][x] == Config.regularField){
+            return
+        }
+        const regularFieldArray = new Array(8)
+        regularFieldArray.fill(false)
+        let index = 0
+        for(let i = -1; i <= 1; i++){
+            for(let j = -1; j <= 1; j++){
+                if(i == 0 && j == 0){continue}
+                if(this.resultStage[y + i][x + j] == Config.regularField){
+                    regularFieldArray[index] = true
+                }
+                index++
+            }
+        }
+        if(JSON.stringify(regularFieldArray) == JSON.stringify([false,false,false,false,false,false,false,false])){
+            return
+        }
+        this.resultStage[y][x] = Config.wallField
 
-    /* 中間点が2より下の場合大部屋にする */
-    static halfwayBorder(){
+        
     }
 
 }
