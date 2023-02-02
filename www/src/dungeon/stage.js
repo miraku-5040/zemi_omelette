@@ -140,8 +140,8 @@ class Stage {
         }
 
         const min = Image.getMinmapImage(stageImageNumber);
-        min.style.left = x * 5 + "px";
-        min.style.top = y * 5 + "px";
+        min.style.left = x * 3 + "px";
+        min.style.top = y * 3 + "px";
         this.minmap.appendChild(min);
     }
 

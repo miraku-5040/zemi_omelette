@@ -284,10 +284,7 @@ class CreateStage{
             
         });
         //道をつなぐ
-        console.log(upRood)
-        console.log(downRood)
-        console.log(leftRood)
-        console.log(rightRood)
+
         //上下
         for(let i = 0; i < upRood.length; i++){
             let selectDownRood = ""
@@ -335,15 +332,38 @@ class CreateStage{
                 this.resultStage[y][x] =  Config.regularField
             }
         }
+        //壁を張る
+        for(let i = 2;i< Config.stageRows - 1; i++){
+            for(let j = 2;j< Config.stageCols; j++){
+                //周りを見て壁を置く
+                this.createWall(j,i)
+            }
+        }
 
     }
 
-    static createRoodConnect(direction){
-        //console.log(direction)
-    }
+    static createWall(x,y){
+        if(this.resultStage[y][x] == Config.regularField){
+            return
+        }
+        const regularFieldArray = new Array(8)
+        regularFieldArray.fill(false)
+        let index = 0
+        for(let i = -1; i <= 1; i++){
+            for(let j = -1; j <= 1; j++){
+                if(i == 0 && j == 0){continue}
+                if(this.resultStage[y + i][x + j] == Config.regularField){
+                    regularFieldArray[index] = true
+                }
+                index++
+            }
+        }
+        if(JSON.stringify(regularFieldArray) == JSON.stringify([false,false,false,false,false,false,false,false])){
+            return
+        }
+        this.resultStage[y][x] = Config.wallField
 
-    /* 中間点が2より下の場合大部屋にする */
-    static halfwayBorder(){
+        
     }
 
 }
