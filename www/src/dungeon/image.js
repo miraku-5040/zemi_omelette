@@ -6,9 +6,11 @@ class Image {
 
     /* 画像の生成, elementを持つ */
     static initialize() {
+        this.errorId = "00000"; //追加
         this.createStageImages();
         this.createPlayerImages();
         this.createDropItemImages();
+        this.effectImages = new Map();
         this.createArrow()
     }
     /* 画像の要素を作成
@@ -199,6 +201,29 @@ class Image {
         }
         const image = matchObject.cloneNode();
         return image;
+    }
+
+    /**
+     * idからエフェクト画像を取得する
+     */
+    static getEffectImage(effectId = this.errorId){
+        if(!this.effectImages.has(effectId)){
+            // mapに存在しない場合
+            this.setEffectImage(effectId);
+        }
+        const imgElement = this.effectImages.get(effectId);
+        return imgElement.cloneNode();
+    }
+
+    /**
+     *  idからエフェクト画像をmapにセットする */
+    static setEffectImage(effectId){
+        if(this.effectImages.has(effectId)){
+            // mapに存在する場合は終了
+            return;
+        }
+        const imgElement = this.createElement(effectId); // TODO gifに対応する
+        this.effectImages.set(effectId, imgElement);
     }
 
     /* itemImagesの要素を取得 */

@@ -148,10 +148,14 @@ class Effect {
 
     /* 全てのエフェクトデータをセットする */
     static #setAllEffectData() {
-        const effectEF000 = { move: true, rotation: true, audio: "EF000" };
-        this.effectData.set("EF000", effectEF000);
-        const effectEF001 = { move: false, rotation: true, audio: "EF000" };
-        this.effectData.set("EF001", effectEF001);
+        const effectSE000 = { move: true, rotation: true, audio: "EM000" };
+        this.effectData.set("SE000", effectSE000);
+        const effectSE001 = { move: false, rotation: true, audio: "EM000" };
+        this.effectData.set("SE001", effectSE001);
+        const effectTE000 = { move: true, rotation: true, audio: "EM000" };
+        this.effectData.set("TE000", effectTE000);
+        const effectTE001 = { move: false, rotation: true, audio: "EM000" };
+        this.effectData.set("TE001", effectTE001);
         // TODO 追加する
     }
 

@@ -26,6 +26,8 @@ function initialize() {
     Trap.initialize();
     //スキルの準備
     Skill.initialize();
+    //エフェクトの準備
+    Effect.initialize();
     //コントローラを準備する
     Control.initialize();
     // 開始フラグ
