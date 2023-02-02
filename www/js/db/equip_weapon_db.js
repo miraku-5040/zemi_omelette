@@ -24,7 +24,7 @@ function updateEquipWeaponData() {
             return results[0].update();
         })
         .catch(function (err) {
-            console.log("outsideng");
+            console.log(err);
         })
         .then(function () {
             getEquipWeaponData();
@@ -121,7 +121,6 @@ function getEquipDecoraionData() {
     Weapon.equalTo("weapon_type", "decoration")
         .fetchAll()
         .then(function (results) {
-            console.log(results[0]);
             setDecorationImage(results);
         })
         .catch(function (err) {

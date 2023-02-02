@@ -158,12 +158,12 @@ function updateWeaponPowerUp() {
                     // 強化アイテム残数更新(item_db.js)
                     updateItemSum();
                 })
-                .catch(function () {
-                    console.log("nng");
+                .catch(function (err) {
+                    console.log(err);
                 });
         })
-        .catch(function () {
-            console.log("loadWeapon:ng");
+        .catch(function (err) {
+            console.log(err);
         });
 }
 
@@ -190,7 +190,7 @@ function updateWeaponEvolution() {
                     return results[0].update();
                 })
                 .catch(function (err) {
-                    console.log("sinka:ng");
+                    console.log(err);
                 })
                 .then(function () {
                     // 進化アイテム残数更新(item_db.js)

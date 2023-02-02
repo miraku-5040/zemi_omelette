@@ -83,7 +83,6 @@ function updateItemSum() {
     Item.equalTo("item_id", 1)
         .fetch()
         .then(function (results) {
-            console.log(results);
             results.set("sum", Number(remaining));
             results.update();
 
@@ -92,7 +91,6 @@ function updateItemSum() {
             Item.equalTo("item_id", 2)
                 .fetch()
                 .then(function (results) {
-                    console.log(results);
                     results.set("sum", Number(remaining));
                     results.update();
 
