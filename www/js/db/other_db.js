@@ -713,6 +713,7 @@ function getDairyData() {
     }
 }
 
+// デイリー報酬取得機能
 function updateDairyData(id) {
     // 音声再生
     audio = new Audio("sound/succsess.m4a");
@@ -730,6 +731,7 @@ function updateDairyData(id) {
         });
 }
 
+// デイリー目標回数カウントボタン
 function updateDairyCountUp(id) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.DAIRY_AHIEVE_DB);
@@ -745,6 +747,7 @@ function updateDairyCountUp(id) {
         });
 }
 
+// 実績任務表示機能
 function getAchieveData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.ACHIEVE_DB);
@@ -779,6 +782,7 @@ function getAchieveData() {
     }
 }
 
+// 実績取得機能
 function updateAchieveData(id) {
     // 音声再生
     audio = new Audio("sound/succsess.m4a");
@@ -796,6 +800,7 @@ function updateAchieveData(id) {
         });
 }
 
+// 実績回数カウントアップ機能
 function updateAchieveCountUp(id) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.ACHIEVE_DB);
@@ -811,6 +816,7 @@ function updateAchieveCountUp(id) {
         });
 }
 
+// ギルド報酬表示機能
 function getGuildAchieveData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.GUILD_ACHIEVE_DB);
@@ -845,6 +851,7 @@ function getGuildAchieveData() {
     }
 }
 
+// ギルド報酬取得機能
 function updateGuildAchieveData(id) {
     // 音声再生
     audio = new Audio("../sound/succsess.m4a");
@@ -862,6 +869,7 @@ function updateGuildAchieveData(id) {
         });
 }
 
+// ギルド報酬カウント機能
 function updateGuildAchieveCountUp(id) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.GUILD_ACHIEVE_DB);
@@ -877,6 +885,7 @@ function updateGuildAchieveCountUp(id) {
         });
 }
 
+// イベント目標表示機能
 function getEventAchieveData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.EVENT_ACHIEVE_DB);
@@ -911,6 +920,7 @@ function getEventAchieveData() {
     }
 }
 
+// イベント目標取得機能
 function updateEventAchieveData(id) {
     // 音声再生
     audio = new Audio("../sound/succsess.m4a");
@@ -928,6 +938,7 @@ function updateEventAchieveData(id) {
         });
 }
 
+// イベント目標カウント機能
 function updateEventAchieveCountUp(id) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Dairy = ncmb.DataStore(this.EVENT_ACHIEVE_DB);
