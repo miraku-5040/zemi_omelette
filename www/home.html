@@ -73,13 +73,14 @@
         <p id="job">職業：</p>
     </div>
 
-    <button class="dairy" onclick="getDairyData();openDairy()"><img class="dairy_button_image" src="image/dairy.png"></button>
+    <!-- ホーム画面右下のボタン -->
+    <button class="dairy" onclick="getDairyData();openDairy()"><div class="dairy_button_frame"></div><img class="dairy_button_image" src="image/dairy.png"></button>
     <p class="dairy_button_text">デイリー</p>
-    <button class="achieve" onclick="getAchieveData();openAchieve()"><img class="achieve_button_image" src="image/achieve.png"></button>
+    <button class="achieve" onclick="getAchieveData();openAchieve()"><div class="dairy_button_frame"></div><img class="achieve_button_image" src="image/achieve.png"></button>
     <p class="achieve_button_text">実績</p>
-    <button class="guild" onclick="toGuild()"><img class="guild_button_image" src="image/guild_icon.png"></button>
+    <button class="guild" onclick="toGuild()"><div class="dairy_button_frame"></div><img class="guild_button_image" src="image/guild_icon.png"></button>
     <p class="guild_button_text">ギルド</p>
-    <button class="friend" onclick="openFriend()"><img class="guild_button_image" src="image/friend.png"></button>
+    <button class="friend" onclick="openFriend()"><div class="dairy_button_frame"></div><img class="guild_button_image" src="image/friend.png"></button>
     <p class="friend_button_text">フレンド</p>
 
     <!-- キャラクター表示 -->
@@ -91,19 +92,24 @@
             <img class="sound_icon" src="image/sound.png"></button>
         </div>
 
+        <!-- ホーム画面左側 -->
         <img class="event_adv" src="image/event.png" onclick="toEvent()">
         <img class="login_adv" src="image/login.png" onclick="toDayLogin()">
 
+        <!-- ホーム画面左下のボタン -->
         <button class="chat_open" onclick="openChat()">
+            <div class="chat_open_frame"></div>
             <p class="chat_open_text">チャット</p>
         </button>
 
         <button class="go_town" onclick="toMap()">
+            <div class="go_town_frame"></div>
             <img class="town_image" src="image/map_icon.png">
             <p class="town_text">地図</p>
         </button>
 
         <button class="pictoriary" onclick="toPict()">
+            <div class="go_town_frame"></div>
             <img class="pict_image" src="image/pictorary.png">
             <p class="pict_text">図鑑</p>
         </button>
@@ -285,13 +291,9 @@
     <div id="chatModal" class="modal">
         <div class="chat_modal-content">
             <div class="modal-header">
-                <h2 class="chat_title" id="chat_type">チャット</h2>
+                <h2 class="chat_title" id="chat_type">全体チャット</h2>
             </div>
             <div class="chat_modal-body" id="modal-body">
-                <div class="chat_type_button">
-                    <button class="all_chat_type" onclick="getAllChatData()"><p class="all_chat_type_text">全体</p></button>
-                    <button class="guild_chat_type" onclick="getGuildChatData()"><p class="guild_chat_type_text">ギルド</p></button>
-                </div>
                 <div class="chats" id="chats">
                     <div class="solo_chat">
                         <p class="chat_text">player：こんにちは</p>

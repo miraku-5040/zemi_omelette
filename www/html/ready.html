@@ -41,6 +41,7 @@
         <div class="equipment" id="equipment">
         </div>
         <button class="equip_change_button" onclick="toEquip()">変更</button>
+        <div class="equip_change_button_frame"></div>
     </div>
 
     <div class="skill_position">
@@ -49,8 +50,10 @@
             <p class="skill_level" style="color: red">火のスキル：Lv.10</p>
         </div>
         <button class="skill_change_button" onclick="skillOpen()">変更</button>
+        <div class="skill_change_button_frame"></div>
     </div>
 
+    <div class="go_button_frame"></div>
     <button class="go_button" onclick="toDanjyon();updateDairyCountUp(2);updateAchieveCountUp(2);updateGuildAchieveCountUp(2);getEventAchieveData(2)">出発</button>
 
     <!-- スキル選択用のモーダルウィンドウ -->

@@ -217,7 +217,6 @@ function openMenu() {
     // モーダルウィンドウを開く
     const modal = document.getElementById('settingModal');
     modal.style.display = 'block';
-    getAllChatData();
 }
 
 function closeMenu() {

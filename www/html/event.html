@@ -43,6 +43,9 @@
         <button class="event_target" onclick="getEventAchieveData();targetOpen()">目標</button>
         <button class="event_gatya" onclick="toEventGatya()">イベントガチャ</button>
         <button class="event_story" onclick="toEventStory()">イベントストーリー</button>
+        <div class="event_target_frame"></div>
+        <div class="event_gatya_frame"></div>
+        <div class="event_story_frame"></div>
     </div>
 
     <!-- 目標用のモーダルウィンドウ -->
@@ -59,7 +62,7 @@
                     <button class="goal_box_button1" onclick="updateEventPointCountUp(1000)">完了</button>
                 </div>
                 <div class="goal_box">
-                    <p  class="goal_box_text">戦闘を1回完了</p>
+                    <p class="goal_box_text">戦闘を1回完了</p>
                     <img class="goal_box_image" src="../image/event_coins.png">
                     <p class="goal_box_count">×1000</p>
                     <button class="goal_box_button2">未完了</button>
