@@ -54,11 +54,14 @@ class Effect {
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElementArray = [];
         relativePositionArray.forEach((position) => {
-            const angle = this.#getAngle(position.direction);
             const cloneImgElement = effectReadyData.imgElement.cloneNode();
             cloneImgElement.style.top = position.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
             cloneImgElement.style.left = position.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
-            cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+            if(effectReadyData.rotation){
+                //回転する場合
+                const angle = this.#getAngle(position.direction);
+                cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+            }
             cloneImgElement.style.display = "none"; //非表示で配置する
             effectLayerElement.appendChild(cloneImgElement);
             imgElementArray.push(cloneImgElement);
@@ -98,10 +101,13 @@ class Effect {
         const displayTime = effectReadyData.time;
         relativePositionArray.forEach((relativePosition) => {
             const cloneImgElement = imgElement.cloneNode();
-            const angle = this.#getAngle(relativePosition.direction);
             cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
             cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
-            cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+            if(effectReadyData.rotation){
+                //回転する場合
+                const angle = this.#getAngle(relativePosition.direction);
+                cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+            }
             cloneImgElement.style.display = "none"; //非表示で配置する
             effectLayerElement.appendChild(cloneImgElement);
             imgElementArray.push(cloneImgElement);
@@ -144,14 +150,17 @@ class Effect {
         const imgElement = effectReadyData.imgElement;
         const imgElementArray = [];
         relativePositionArray.forEach((relativePosition) => {
-            const angle = this.#getAngle(relativePosition.direction);
             const getNextPositionFunction = this.#getNextPositionFunction(relativePosition.direction);
             let nextPosition = relativePosition;
             for (let i = relativePosition.length; i >= 0; i--) {
                 const cloneElement = imgElement.cloneNode();
                 cloneElement.style.top = nextPosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
                 cloneElement.style.left = nextPosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
-                cloneElement.style.transform = "rotate(" + angle + "deg)";
+                if(effectReadyData.rotation){
+                    //回転する場合
+                    const angle = this.#getAngle(relativePosition.direction);
+                    cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+                }
                 cloneElement.style.display = "none"; //非表示で配置する
                 effectLayerElement.appendChild(cloneElement);
                 imgElementArray.push(cloneElement);
@@ -177,7 +186,7 @@ class Effect {
         this.effectData.set("SE001", effectSE001);
         const effectSE002 = { move: true, rotation: true, time: 1000, audio: "EM000", image: "EF001" };
         this.effectData.set("SE002", effectSE002);
-        const effectTE000 = { move: false, rotation: true, time: 1000, audio: "EM000", image: "EF000" };
+        const effectTE000 = { move: false, rotation: false, time: 1000, audio: "EM000", image: "EF000" };
         this.effectData.set("TE000", effectTE000);
         const effectTE001 = { move: false, rotation: true, time: 1000, audio: "EM000", image: "EF001" };
         this.effectData.set("TE001", effectTE001);
