@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -20,13 +21,15 @@
     <!-- 進化画面のCSS -->
     <link rel="stylesheet" href="../css/weaponSelect.css">
 </head>
+
 <body onload="soundBGM();getPowerSoadData()">
     <img class="background_image" src="../image/background/cave.png">
     <!-- 強化対象アイテム一覧 -->
     <div class="item_list" id="items">
-        
+
     </div>
 
+    <!-- 種別ボタン -->
     <div class="weapon_type_buttons">
         <button class="weapon_soad_button" id="soadcolumn" onclick="weaponColumn(this);getPowerSoadData()">
             <p class="weapon_type_text">武器</p><div class="weapon_type_frame"></div></button>
@@ -35,9 +38,12 @@
         <button class="weapon_decoration_button" id="decorationcolumn" onclick="weaponColumn(this);getPowerDecoraionData()">
             <p class="weapon_type_text">装飾</p><div class="weapon_type_frame2"></div></button>
     </div>
+
+    <!-- キャンセルボタン -->
     <div class="decition_buttons">
         <div class="cansel_frame"></div>
         <button class="cansel" onclick="toPower()">キャンセル</button>
     </div>
 </body>
+
 </html>
