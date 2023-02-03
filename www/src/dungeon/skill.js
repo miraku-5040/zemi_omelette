@@ -213,6 +213,7 @@ class Skill {
         const checkEnemyFunction = effectUseFunction.get("checkEnemy");
         let isSkillEnd = new Array(nowSkillData.effect.length); //ターゲット数の上限でスキップするフラグ
         isSkillEnd.fill(false);
+        const targetedEnemyNameSet = new Set(); //スキル効果が同じenemyに複数回当たらないようにするために使用する
         let continueCount = nowSkillData.effect.length;
         // 範囲エフェクト表示
         const scopeEffectId = nowSkillData.scope.scopeEffectId;
@@ -249,6 +250,15 @@ class Skill {
             let playerDefenceStatus = {};
             let playerId = "";
             if (isTargetEnemy) {
+                //enemyの重複チェック
+                const enemyName = Enemy.getEnemyName(coordinate.x, coordinate.y);
+                if(targetedEnemyNameSet.has(enemyName)){
+                    // 存在する場合はスキル効果発動済みなのでスキップする
+                    continue;
+                }else{
+                    // 存在しない場合はsetに追加する
+                    targetedEnemyNameSet.add(enemyName);
+                }
                 enemyDefenceStatus = getEnemyDefenceStatusFunction(coordinate);
             } else if (isTargetPlayer) {
                 playerId = Player.getPlayerId(coordinate.x, coordinate.y);
@@ -266,6 +276,7 @@ class Skill {
                     // 設定がある場合は表示する
                     const effectCoordinate = this.#convertAbsoluteToRelative(coordinate.x, coordinate.y);
                     effectCoordinate.direction = this.skillUserData.direction;
+                    // TODO enemyからサイズを取得してする
                     Effect.targetEffectDisplay(effectReadyKey, [effectCoordinate]);
                 }
                 // 計算とスキル効果反映
