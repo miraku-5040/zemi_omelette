@@ -52,6 +52,11 @@ class Message{
         this.#updateMessage(enemyName + "のhpが" + increase + "回復");
     }
 
+    /* エネミーキル */
+    static enemyKillMessage(enemyName){
+        this.#updateMessage(enemyName + "は倒れた");
+    }
+
     /* スキル使用 */
     static useSkillMessage(skillUserName, skillName){
         this.#updateMessage(skillUserName + "が" + skillName + "を発動した");

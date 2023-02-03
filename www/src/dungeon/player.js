@@ -26,7 +26,11 @@ class Player{
         characterElement.style.width = Config.stageImgWidth + 'px';
         characterElement.style.height = Config.stageImgHeight + 'px';
         this.characterElement = characterElement;
-        this.setCharacterImage(5)
+        const characterImage = Image.getPlayerImage('P0005')
+        characterImage.style.left = Config.playerReferencePointLeft * Config.stageImgWidth + "px";
+        characterImage.style.top = Config.playerReferencePointTop * Config.stageImgHeight + "px";
+        characterImage.id = "player"
+        this.characterElement.appendChild(characterImage);
      }
 
     
@@ -170,11 +174,8 @@ class Player{
 
     /* キャラクターを配置する */
     static setCharacterImage(num) {
-        this.characterElement.innerHTML=""
-        const characterImage = Image.getPlayerImage('P000'+num)
-        characterImage.style.left = Config.playerReferencePointLeft * Config.stageImgWidth + "px";
-        characterImage.style.top = Config.playerReferencePointTop * Config.stageImgHeight + "px";
-        this.characterElement.appendChild(characterImage);
+        const characterImage = document.getElementById("player")
+        characterImage.src = `img/P000${num}.png`
     }
 
     /* 新しい座標をセットする */

@@ -33,10 +33,6 @@ class Stage {
             trapArray: ['T0000','T0001'],
             maxTrap:5
         };
-        //ステージに出現する全オブジェクトを格納する領域を生成する
-        this.popEnemyArray = []
-        this.popItemArray = []
-        this.popTrapArray = []
         //ステージを作成する
         this.createStage()
         
@@ -44,6 +40,11 @@ class Stage {
     }
 
     static createStage(){
+        this.stageLayerElement.innerHTML = ""
+        //ステージに出現する全オブジェクトを格納する領域を生成する
+        this.popEnemyArray = []
+        this.popItemArray = []
+        this.popTrapArray = []
         const possiblePositions = [];
         //ランダム生成
         this.board = CreateStage.randomStageCreate()
@@ -63,6 +64,7 @@ class Stage {
                 possiblePositions.push({y:indexY,x:indexX})  
             });
         });
+        console.log(JSON.stringify(possiblePositions))
         let selectIndex = Tool.getRandomInt(possiblePositions.length)
         //配置可能座標にキャラクターを配置
         let selectPosition =possiblePositions[selectIndex]
@@ -83,6 +85,7 @@ class Stage {
     }
 
     static createEnemys(possiblePositions){
+        document.getElementById("enemy_layer").innerHTML = ""
         //敵を最大ポップ数生成
         for(let i = 0; i < this.stageStatus.maxEnemy; i++){
             //配置可能座標からランダムに座標を取得
@@ -97,6 +100,7 @@ class Stage {
     }
 
     static createItems(possiblePositions){
+        document.getElementById("item_layer").innerHTML = ""
         for(let i = 0; i < this.stageStatus.maxItem; i++){
             //配置可能座標からランダムに座標を取得
             const selectIndex = Tool.getRandomInt(possiblePositions.length)
@@ -110,6 +114,7 @@ class Stage {
     }
 
     static createTraps(possiblePositions){
+        document.getElementById("trap_layer").innerHTML = ""
         for(let i = 0; i < this.stageStatus.maxTrap; i++){
             //配置可能座標からランダムに座標を取得
             const selectIndex = Tool.getRandomInt(possiblePositions.length)

@@ -39,7 +39,6 @@ class Enemy{
 
     /* 階開始の処理 */
     static startFloor(){
-
         const generateEnemyArray = Stage.popEnemy()
         generateEnemyArray.forEach((enemy) => {
             this.enemyStatusArray[enemy.position.y][enemy.position.x] = Database.getEnemy(enemy.id)
@@ -312,7 +311,7 @@ class Enemy{
         }else{ //hpの最大値より大きい
             enemyStatus.hp.current = enemyStatus.hp.max;
         }
-        //メッセージ
+        //ダメージ(回復)メッセージ
         if(incrementValue <= 0){
             //ダメージ
             Message.enemyHpDecreaseMessage(enemyStatus.enemyName+enemyStatus.distinction, -incrementValue);
@@ -320,6 +319,30 @@ class Enemy{
             //回復
             // TODO
         }
+        //キル確認
+        if(enemyStatus.hp.current <= 0){
+            //hpが0以下でキルする
+            this.enemyKill(x, y);
+        }
+    }
+
+    /**
+     * 座標に存在するエネミーをキルする
+     * キルメッセージを表示する
+     */
+    static enemyKill(x, y){
+        const enemyStatus = this.enemyStatusArray[y][x];
+        if(enemyStatus === this.noDataItem){
+            //存在しない場合終了
+            return;
+        }
+        const elementId = "enemy_" + enemyStatus.enemyId + "_" + enemyStatus.distinction;
+        const enemyImgElement = document.getElementById(elementId);
+        Message.enemyKillMessage(enemyStatus.enemyName + enemyStatus.distinction);
+        enemyImgElement.style.display = "none";
+        enemyImgElement.remove();
+        this.enemyStatusArray[y][x] = this.noDataItem;
+        return true;
     }
 
 }

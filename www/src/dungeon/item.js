@@ -19,7 +19,6 @@ class Item{
     }
 
     static startFloor(){
-
         const generateItemArray = Stage.popItem()
         generateItemArray.forEach((item) => {
             this.itemArray[item.position.y][item.position.x]  = Database.getItem(item.id)
