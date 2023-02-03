@@ -58,7 +58,7 @@ function getSoloItemData(element) {
     }
 }
 
-// アイテム個数増加(1件)←時々動く
+// アイテム個数増加(1件)
 function updateSoloItemData(element, count) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Item = ncmb.DataStore(this.ITEM_DB);
@@ -83,7 +83,6 @@ function updateItemSum() {
     Item.equalTo("item_id", 1)
         .fetch()
         .then(function (results) {
-            console.log(results);
             results.set("sum", Number(remaining));
             results.update();
 
@@ -92,7 +91,6 @@ function updateItemSum() {
             Item.equalTo("item_id", 2)
                 .fetch()
                 .then(function (results) {
-                    console.log(results);
                     results.set("sum", Number(remaining));
                     results.update();
 
@@ -217,7 +215,6 @@ function pullItem1() {
         .fetchAll()
         .then(function (results) {
             var item = results[0];
-            // 背景色変更
             var weaponHtml = '<img class="result_image" src="' + item.item_image + '">';
             // 作成した要素を追加
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
@@ -248,7 +245,7 @@ function pullItem10() {
                 // 作成した要素を追加
                 document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
                 // アイテム増加
-                updateSoloItemData(Number(random), 1);
+                setTimeout(updateSoloItemData, 1000, Number(random), 1);
             })
             .catch(function (err) {
                 console.log(err);

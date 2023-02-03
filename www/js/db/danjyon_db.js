@@ -15,7 +15,7 @@ function getDanjyonData() {
             setDanjyonName(results);
         })
         .catch(function (err) {
-            console.log("ng" + err);
+            console.log(err);
         });
 
     // ダンジョン名をタイプごとにHTMLに埋め込む
@@ -54,7 +54,7 @@ function searchDanjyonData(danjyonId) {
             setDanjyonDetail(results);
         })
         .catch(function (err) {
-            console.log("ng" + err);
+            console.log(err);
         });
 
     // ダンジョンの説明をHTMLに埋め込む

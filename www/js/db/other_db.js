@@ -352,11 +352,8 @@ function updateSkillData(skill) {
     Skill.equalTo("skill_name", skill)
         .fetchAll()
         .then(function (results) {
-            console.log("ck:" + results[0].skill_name);
-            console.log("skill:" + results[0].skill_level);
             var skill_detail = results[0];
             results[0].set("skill_level", Number(skill_detail.skill_level) + 1);
-            console.log("ok");
             return results[0].update();
         })
         .catch(function (err) {
@@ -367,11 +364,8 @@ function updateSkillData(skill) {
             Item.equalTo("item_id", 4)
                 .fetchAll()
                 .then(function (results) {
-                    console.log("ckItem:" + results[0].item_id);
-                    console.log("cksum:" + results[0].sum);
                     var item = results[0];
                     results[0].set("sum", Number(item.sum) - 1);
-                    console.log("ok");
                     return results[0].update();
                 })
                 .catch(function (err) {
@@ -421,9 +415,7 @@ function buy_weapon(item) {
         .fetchAll()
         .then(function (results) {
             var item = results[0];
-            console.log("ckItemSum:" + results[0].sum);
             results[0].set("sum", Number(item.sum) + 1);
-            console.log("ok");
             return results[0].update();
         })
         .catch(function (err) {
@@ -434,9 +426,7 @@ function buy_weapon(item) {
             Character.fetchAll()
                 .then(function (results) {
                     var item = results[0];
-                    console.log("ckbuki:" + item.money);
                     results[0].set("money", Number(item.money - 2000));
-                    console.log("ok");
                     return results[0].update();
                 })
                 .catch(function (err) {
@@ -460,9 +450,7 @@ function buy_item(item) {
         .fetchAll()
         .then(function (results) {
             var item = results[0];
-            console.log("ckItem:" + results[0].sum);
             results[0].set("sum", Number(item.sum) + 1);
-            console.log("ok");
             return results[0].update();
         })
         .catch(function (err) {
@@ -473,9 +461,7 @@ function buy_item(item) {
             Character.fetchAll()
                 .then(function (results) {
                     var item = results[0];
-                    console.log("ckshokuryo:" + item.money);
                     results[0].set("money", Number(item.money - 2000));
-                    console.log("ok");
                     return results[0].update();
                 })
                 .catch(function (err) {
@@ -499,9 +485,7 @@ function buy_book(item) {
         .fetchAll()
         .then(function (results) {
             var item = results[0];
-            console.log("ckItem:" + results[0].sum);
             results[0].set("sum", Number(item.sum) + 1);
-            console.log("ok");
             return results[0].update();
         })
         .catch(function (err) {
@@ -512,9 +496,7 @@ function buy_book(item) {
             Character.fetchAll()
                 .then(function (results) {
                     var item = results[0];
-                    console.log("ckshoten:" + item.money);
                     results[0].set("money", Number(item.money - 2000));
-                    console.log("ok");
                     return results[0].update();
                 })
                 .catch(function (err) {
@@ -539,7 +521,6 @@ function guildBuy(item) {
         .then(function (results) {
             var item = results[0];
             results[0].set("sum", Number(item.sum) + 1);
-            console.log("ok");
             return results[0].update();
         })
         .catch(function (err) {
@@ -551,7 +532,6 @@ function guildBuy(item) {
                 .then(function (results) {
                     var item = results[0];
                     results[0].set("guild_coin", Number(item.guild_coin - 2000));
-                    console.log("ok");
                     return results[0].update();
                 })
                 .catch(function (err) {

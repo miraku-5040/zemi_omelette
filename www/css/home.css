@@ -1,7 +1,7 @@
 /* 残量 */
 .leasts {
     position: relative;
-    top: 0px;
+    transform: translateY(-3px);
     left: 325px;
 }
 

@@ -8,13 +8,7 @@ var WEAPON_DB = "weapon";
 var EQUIP_DB = "equipment";
 var LOAD_WEAPON = "loadWeapon";
 var MAX_EXP = "max_exp";
-
-const wait = (sec) => { // タイマ
-    return new Promise((resolve, reject) => {
-        setTimeout(resolve, sec * 1000);
-        //setTimeout(() => {reject(new Error("エラー！"))}, sec*1000);
-    });
-};
+var PICTORIARY_DB = "pictorialWeapon";
 
 // 1件分の武器情報取得のためのid保存(強化)
 async function setSoloPowerWeaponId(element) {
@@ -158,12 +152,12 @@ function updateWeaponPowerUp() {
                     // 強化アイテム残数更新(item_db.js)
                     updateItemSum();
                 })
-                .catch(function () {
-                    console.log("nng");
+                .catch(function (err) {
+                    console.log(err);
                 });
         })
-        .catch(function () {
-            console.log("loadWeapon:ng");
+        .catch(function (err) {
+            console.log(err);
         });
 }
 
@@ -190,7 +184,7 @@ function updateWeaponEvolution() {
                     return results[0].update();
                 })
                 .catch(function (err) {
-                    console.log("sinka:ng");
+                    console.log(err);
                 })
                 .then(function () {
                     // 進化アイテム残数更新(item_db.js)
@@ -220,6 +214,8 @@ function pullWeapon1() {
             document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
             // 水晶減少機能(other_db.js)
             updateCrystalCount(200);
+            // 武器追加
+            updateWeaponData(weapon);
         })
         .catch(function (err) {
             console.log(err);
@@ -229,10 +225,10 @@ function pullWeapon1() {
 // ガチャロジック
 function pullWeapon10() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
-    var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    var Weapon = ncmb.DataStore(this.PICTORIARY_DB);
     for (var i = 1; i <= 10; i++) {
-        // 乱数発生(1から6)
-        var random = Math.floor(Math.random() * 6) + 1;
+        // 乱数発生(1から17)
+        var random = Math.floor(Math.random() * 17) + 1;
         // 武器の全データ取得
         Weapon.equalTo("weapon_id", Number(random))
             .fetchAll()
@@ -242,6 +238,8 @@ function pullWeapon10() {
                 var weaponHtml = '<img class="result_image" src="' + weapon.weapon_image + '">';
                 // 作成した要素を追加
                 document.getElementById("results").insertAdjacentHTML('beforeend', weaponHtml);
+                // 武器追加
+                setTimeout(updateWeaponData, 1000, weapon);
             })
             .catch(function (err) {
                 console.log(err);
@@ -249,6 +247,37 @@ function pullWeapon10() {
     }
     // 水晶減少機能(other_db.js)
     updateCrystalCount(2000);
+}
+
+// 武器個数増加(1件のみ)
+function updateWeaponData(element) {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Weapon = ncmb.DataStore(this.WEAPON_DB);
+    Weapon.order("weapon_id", true)
+        .fetchAll()
+        .then(function (results) {
+            var weapon = results[0];
+            var weaponDb = new Weapon();
+            weaponDb.set("weapon_id", Number(weapon.weapon_id) + 1)
+                .set("weapon_name", element.weapon_name)
+                .set("weapon_explain", element.weapon_explain)
+                .set("weapon_image", element.weapon_image)
+                .set("weapon_type", element.weapon_type)
+                .set("weapon_level", 1)
+                .set("weapon_exp", 0)
+                .set("weapon_attack", 30)
+                .set("overlap", 1)
+                .save()
+                .then(function () {
+                    
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
 }
 
 // 強化武器情報取得用
