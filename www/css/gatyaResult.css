@@ -49,6 +49,17 @@
     font-weight: bold;
     width: 110px;
     height: 30px;
+    position: relative;
+    z-index: 10;
+}
+
+.result_button_frame {
+    border: solid rgb(205, 175, 2);
+    width: 110px;
+    height: 30px;
+    position: relative;
+    transform: translateY(-3px);
+    left: 269px;
 }
 
 .result_button2 {
@@ -63,6 +74,17 @@
     font-weight: bold;
     width: 110px;
     height: 30px;
+    position: relative;
+    z-index: 10;
+}
+
+.result_button2_frame {
+    border: solid rgb(205, 175, 2);
+    width: 110px;
+    height: 30px;
+    position: relative;
+    transform: translateY(-3px);
+    left: 263px;
 }
 
 /* モーダルウィンドウの設定 */
@@ -70,7 +92,7 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 20;
   left: 0px;
   top: 0px;
   height: 100%;

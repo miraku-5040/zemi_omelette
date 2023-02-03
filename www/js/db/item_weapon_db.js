@@ -12,7 +12,6 @@ var LOAD_WEAPON = "loadWeapon";
 function getSoloExplainWeaponData(element) {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Weapon = ncmb.DataStore(this.WEAPON_DB);
-    console.log(element.id);
     Weapon.equalTo("weapon_id", Number(element.id))
         .fetchAll()
         .then(function (results) {
