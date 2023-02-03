@@ -12,43 +12,70 @@ class Effect {
         // {imgElement, sound, direction}
         this.stageImgHeight = Config.stageImgHeight;
         this.stageImgWidth = Config.stageImgWidth;
-        this.topReferencePoint = 0; // TODO 画面表示の基準点 player画像の左上の位置
-        this.leftReferencePoint = 0; // TODO
+        this.topReferencePoint = Config.playerReferencePointTop * Config.stageImgHeight;
+        this.leftReferencePoint = Config.playerReferencePointLeft * Config.stageImgWidth;
     }
 
     /**
-     * スキル範囲のエフェクトを表示する
-     * effectIdが"SE"(scopeEffect)のものを処理する
-     * positionArrayの形式:[{x, y, direction, length}, ...]
-     */
-    static scopeEffectDisplay(effectId, positionArray) {
-        const displayTime = 1000; //ms
-        const readyKey = this.#setEffectReadyData(effectId, displayTime);
-        this.effectDisplay(readyKey, positionArray);
+ * スキル範囲のエフェクトを表示する
+ * effectIdが"SE"(scopeEffect)のものを処理する
+ * positionArrayの形式:[{x, y, direction, length}, ...]
+ */
+    static scopeEffectDisplay(effectId, relativePositionArray) {
+        const readyKey = this.#setEffectReadyData(effectId);
+        const effectReadyData = this.effectReadyData.get(readyKey);
+        if (effectReadyData.move) { //画像移動あり
+            this.#moveEffectDisplay(effectReadyData, relativePositionArray);
+        } else { //画像移動なし
+            this.#fixEffectDisplay(effectReadyData, relativePositionArray);
+        }
         this.endEffectDisplay(readyKey);
     }
 
     /**
-     * スキル対象のエフェクトの準備をする
-     * effectIdが"TE"(targetEffect)のものを処理する
-     */
+ * スキル対象のエフェクトの準備をする
+ * effectIdが"TE"(targetEffect)のものを処理する
+ */
     static targetEffectReady(effectId) {
-        const displayTime = 1000; //ms
-        const readyKey = this.#setEffectReadyData(effectId, displayTime);
+        const readyKey = this.#setEffectReadyData(effectId);
         return readyKey;
     }
 
     /**
-     * エフェクト表示を行う
+     *  ターゲットエフェクトを表示する
      */
-    static effectDisplay(readyKey, positionArray) {
+    static targetEffectDisplay(readyKey, relativePositionArray) {
+        // データ準備
         const effectReadyData = this.effectReadyData.get(readyKey);
-        // 表示処理
-        if (effectReadyData.move) { //画像移動あり
-            this.#moveEffectDisplay(effectReadyData, positionArray);
-        } else { //画像移動なし
-            this.#fixEffectDisplay(effectReadyData, positionArray);
+        if (effectReadyData === undefined) { //keyエラー
+            console.error("readyKeyエラー");
+            return;
         }
+        const effectLayerElement = document.getElementById("effect_layer");
+        const imgElementArray = [];
+        relativePositionArray.forEach((position) => {
+            const cloneImgElement = effectReadyData.imgElement.cloneNode();
+            cloneImgElement.style.top = position.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
+            cloneImgElement.style.left = position.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
+            if(effectReadyData.rotation){
+                //回転する場合
+                const angle = this.#getAngle(position.direction);
+                cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+            }
+            cloneImgElement.style.display = "none"; //非表示で配置する
+            effectLayerElement.appendChild(cloneImgElement);
+            imgElementArray.push(cloneImgElement);
+        });
+        // 表示と削除
+        const audioElement = effectReadyData.audioElement;
+        audioElement.play();
+        const displayTime = effectReadyData.time;
+        imgElementArray.forEach((imgElement) => {
+            imgElement.style.display = "block";
+            setTimeout((imgElement) => {
+                imgElement.remove();
+            }, displayTime, imgElement);
+        });
     }
 
     /**
@@ -66,22 +93,26 @@ class Effect {
     }
 
     /* 座標移動するエフェクトを表示する */
-    static #moveEffectDisplay(effectReadyData, positionArray) {
+    static #moveEffectDisplay(effectReadyData, relativePositionArray) {
         // データ準備
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElement = effectReadyData.imgElement;
         const imgElementArray = [];
-        positionArray.forEach((position) => {
+        const displayTime = effectReadyData.time;
+        relativePositionArray.forEach((relativePosition) => {
             const cloneImgElement = imgElement.cloneNode();
-            const angle = this.#getAngle(position.direction);
-            cloneImgElement.style.top = position.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
-            cloneImgElement.style.left = position.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
-            cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+            cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
+            cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
+            if(effectReadyData.rotation){
+                //回転する場合
+                const angle = this.#getAngle(relativePosition.direction);
+                cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+            }
             cloneImgElement.style.display = "none"; //非表示で配置する
             effectLayerElement.appendChild(cloneImgElement);
             imgElementArray.push(cloneImgElement);
             //animation
-            const endPosition = this.#getNextPosition({ x: 0, y: 0 }, position.direction, position.length);
+            const endPosition = this.#getNextPosition({ x: 0, y: 0 }, relativePosition.direction, relativePosition.length);
             const moveX = endPosition.x * this.stageImgWidth;
             const moveY = endPosition.y * this.stageImgHeight;
             const animateKeyfreames = [
@@ -91,7 +122,7 @@ class Effect {
             const animateOption = {
                 fill: "forwards",
                 iterations: 1,
-                duration: 1000,
+                duration: displayTime,
                 composite: 'accumulate'
             }; //オプション
             const animate = cloneImgElement.animate(animateKeyfreames, animateOption);
@@ -100,7 +131,6 @@ class Effect {
         // 表示と削除
         const audioElement = effectReadyData.audioElement;
         audioElement.play();
-        const displayTime = effectReadyData.time;
         imgElementArray.forEach((imgElement) => {
             imgElement.style.display = "block";
             const animateArray = imgElement.getAnimations();
@@ -114,20 +144,23 @@ class Effect {
     }
 
     /* 座標移動しないエフェクトを表示する */
-    static #fixEffectDisplay(effectReadyData, positionArray) {
+    static #fixEffectDisplay(effectReadyData, relativePositionArray) {
         // データ準備
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElement = effectReadyData.imgElement;
         const imgElementArray = [];
-        positionArray.forEach((position) => {
-            const angle = this.#getAngle(position.direction);
-            const getNextPositionFunction = this.#getNextPositionFunction(position.direction);
-            let nextPosition = position;
-            for (let i = position.length; i >= 0; i--) {
+        relativePositionArray.forEach((relativePosition) => {
+            const getNextPositionFunction = this.#getNextPositionFunction(relativePosition.direction);
+            let nextPosition = relativePosition;
+            for (let i = relativePosition.length; i >= 0; i--) {
                 const cloneElement = imgElement.cloneNode();
                 cloneElement.style.top = nextPosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
                 cloneElement.style.left = nextPosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
-                cloneElement.style.transform = "rotate(" + angle + "deg)";
+                if(effectReadyData.rotation){
+                    //回転する場合
+                    const angle = this.#getAngle(relativePosition.direction);
+                    cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+                }
                 cloneElement.style.display = "none"; //非表示で配置する
                 effectLayerElement.appendChild(cloneElement);
                 imgElementArray.push(cloneElement);
@@ -145,32 +178,35 @@ class Effect {
             }, displayTime, imgElement);
         });
     }
-
     /* 全てのエフェクトデータをセットする */
     static #setAllEffectData() {
-        const effectSE000 = { move: true, rotation: true, audio: "EM000" };
+        const effectSE000 = { move: true, rotation: true, time: 1000, audio: "EM000", image: "EF000" };
         this.effectData.set("SE000", effectSE000);
-        const effectSE001 = { move: false, rotation: true, audio: "EM000" };
+        const effectSE001 = { move: false, rotation: true, time: 1000, audio: "EM000", image: "EF001" };
         this.effectData.set("SE001", effectSE001);
-        const effectTE000 = { move: true, rotation: true, audio: "EM000" };
+        const effectSE002 = { move: true, rotation: true, time: 1000, audio: "EM000", image: "EF001" };
+        this.effectData.set("SE002", effectSE002);
+        const effectTE000 = { move: false, rotation: false, time: 1000, audio: "EM000", image: "EF000" };
         this.effectData.set("TE000", effectTE000);
-        const effectTE001 = { move: false, rotation: true, audio: "EM000" };
+        const effectTE001 = { move: false, rotation: true, time: 1000, audio: "EM000", image: "EF001" };
         this.effectData.set("TE001", effectTE001);
+        const effectTE002 = { move: false, rotation: true, time: 1000, audio: "EM000", image: "EF001" };
+        this.effectData.set("TE002", effectTE002);
         // TODO 追加する
     }
 
     /* エフェクト準備データをセットする */
-    static #setEffectReadyData(effectId, time) {
+    static #setEffectReadyData(effectId) {
         // readyData作成と設定
         const effectData = this.effectData.get(effectId);
         const data = {};
-        // {type, move, rotation, time, audioElement, imgElement}
-        data.type = effectData.type;
+        // {id, move, rotation, time, audioElement, imgElement}
+        data.id = effectId;
         data.move = effectData.move;
         data.rotation = effectData.rotation;
-        data.time = time;
+        data.time = effectData.time;
         data.audioElement = this.#createAudioElement(effectData.audio);
-        const imgElement = Image.getEffectImage(effectId);
+        const imgElement = Image.getEffectImage(effectData.image);
         imgElement.style.height = this.stageImgHeight;
         imgElement.style.width = this.stageImgWidth;
         data.imgElement = imgElement;
@@ -182,6 +218,10 @@ class Effect {
 
     /* audioElementを作成する */
     static #createAudioElement(audioId) {
+        if (audioId === "") {
+            //効果音なしの場合
+            return new Audio();
+        }
         const fileExtension = ".mp3";
         const fileName = audioId + fileExtension;
         const basePath = "./sound/";

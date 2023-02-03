@@ -15,11 +15,11 @@ class Image {
     }
     /* 画像の要素を作成
      *  サンプル： <img src="img/stage_1.png" id="stage1"> */
-    static createElement(id = '00000'){
+    static createElement(id = '00000', fileExtension = ".png"){
         // 要素を作成
         const elem = document.createElement(`img`);
         //src
-        elem.src = `img/${id}.png`;
+        elem.src = `img/${id}${fileExtension}`;
         elem.width = Config.stageImgWidth;
         elem.height = Config.stageImgHeight;
         elem.style.position = 'absolute';
@@ -46,20 +46,8 @@ class Image {
     static createStageImages(){
         this.stageImages = [];
         for(let i=1; i <= Config.stageImageTotal; i++){
-            const image = this.createElement(`F000${i}`);
+            let image = this.createElement(`F000${i}`);
             this.stageImages.push(image);
-            if(i > 2){
-                this.quadrupleDirection(image);
-            }
-        }
-    }
-
-    /* 回転させて挿入する処理 */
-    static quadrupleDirection(image){
-        for(let i=1; i < 4 ; i++){
-        const newImage = image.cloneNode(false);
-        newImage.style.transform  = "rotate("+90*i+"deg)"
-        this.stageImages.push(newImage);
         }
     }
 
@@ -222,7 +210,7 @@ class Image {
             // mapに存在する場合は終了
             return;
         }
-        const imgElement = this.createElement(effectId); // TODO gifに対応する
+        const imgElement = this.createElement(effectId, ".gif");
         this.effectImages.set(effectId, imgElement);
     }
 
