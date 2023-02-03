@@ -152,6 +152,13 @@ function toSkill() {
     setTimeout('window.location.href = "skill.html"', 600);
 }
 
+function toStatus() {
+    // 音声再生
+    go_sound();
+    // ステータス強化画面へ遷移
+    setTimeout('window.location.href = "status.html"', 600);
+}
+
 function toWeaponPower() {
     // 音声再生
     go_sound();
