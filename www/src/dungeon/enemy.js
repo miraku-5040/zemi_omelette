@@ -39,7 +39,6 @@ class Enemy{
 
     /* 階開始の処理 */
     static startFloor(){
-
         const generateEnemyArray = Stage.popEnemy()
         generateEnemyArray.forEach((enemy) => {
             this.enemyStatusArray[enemy.position.y][enemy.position.x] = Database.getEnemy(enemy.id)

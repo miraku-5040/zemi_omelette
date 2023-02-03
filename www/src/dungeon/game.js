@@ -114,10 +114,15 @@ function loop() {
             mode = 'player';
             break;
         case 'nextfloor':
+            Control.startLoading()
             Stage.createStage()
             //アイテム生成
+            Item.initialize()
             //トラップ生成
+            Trap.initialize()
             //敵の生成
+            Enemy.initialize()
+            Control.endLoading()
             mode = 'player'
             break;
     }

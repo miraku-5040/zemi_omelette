@@ -403,6 +403,12 @@ class Control{
         this.itemListIndex = 99;
         this.itemAction = null
     }
+    static startLoading(){
+        document.getElementById("loading_layer").display = "inline"
+    }
+    static endLoading(){
+        document.getElementById("loading_layer").display = "none"
+    }
 
 
 

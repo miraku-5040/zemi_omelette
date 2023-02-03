@@ -17,7 +17,6 @@ class Trap{
     }
 
     static startFloor(){
-
         const generateTrapArray = Stage.popTrap()
         generateTrapArray.forEach((trap) => {
             this.trapArray[trap.position.y][trap.position.x]  = Database.getTrap(trap.id)
