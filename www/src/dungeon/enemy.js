@@ -327,6 +327,10 @@ class Enemy{
         }
     }
 
+    /**
+     * 座標に存在するエネミーをキルする
+     * キルメッセージを表示する
+     */
     static enemyKill(x, y){
         const enemyStatus = this.enemyStatusArray[y][x];
         if(enemyStatus === this.noDataItem){
