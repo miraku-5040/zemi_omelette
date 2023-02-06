@@ -15,21 +15,21 @@ class CreateStage{
     /*凍結*/
     static createRooms(){
         //フロア縦
-        const divisionRow = 3
+        const divisionRow = Config.divisionRow
         //フロア横
-        const divisionCol = 5
+        const divisionCol = Config.divisionCol
         //フロア分割数
         const divisionNumber = divisionCol * divisionRow
         //部屋ごとの最大縦
-        const roomRowsMax = 10
+        const roomRowsMax = Config.roomRowsMax
         //部屋ごとの最大横
-        const roomColsMax = 10
+        const roomColsMax = Config.roomColsMax
         //部屋ごとの最小縦
-        const roomRowsMin = 6
+        const roomRowsMin = Config.roomRowsMin
         //部屋ごとの最小横
-        const roomColsMin = 6
+        const roomColsMin = Config.roomColsMin
         //フロアに作る部屋の数
-        const roomQuantity = Tool.getRandomInt(11,6)
+        const roomQuantity = Tool.getRandomInt(Config.roomCountMax,Config.roomCountMin)
         //部屋生成開始地点生成
         const roomPositions = []
         let num = 0

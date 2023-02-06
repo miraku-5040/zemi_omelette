@@ -276,6 +276,23 @@ class Control{
         return false;
     }
 
+    static chengeStatusDisplay(){
+        const min_map = document.getElementById("min_map")
+        const status = document.getElementById("status")
+        const statusChange = document.getElementById("statusChange")
+        if(status.style.display == "none"){
+                status.style.display = "inline"
+                min_map.style.display = "none"
+                statusChange.style.height = 100+"px"
+                statusChange.style.width = 100+"px"
+        }else{
+                min_map.style.display = "inline"
+                status.style.display = "none"
+                statusChange.style.height = 93+"px"
+                statusChange.style.width = 162+"px"
+        }
+    }
+
     static deleteArrow(){
         const elem = document.getElementById("directionKey")
         const array = Array.from(elem.children);

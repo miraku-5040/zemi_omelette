@@ -41,6 +41,7 @@ class Stage {
 
     static createStage(){
         this.stageLayerElement.innerHTML = ""
+        this.minmap.innerHTML = ""
         //ステージに出現する全オブジェクトを格納する領域を生成する
         this.popEnemyArray = []
         this.popItemArray = []
@@ -64,7 +65,6 @@ class Stage {
                 possiblePositions.push({y:indexY,x:indexX})  
             });
         });
-        console.log(JSON.stringify(possiblePositions))
         let selectIndex = Tool.getRandomInt(possiblePositions.length)
         //配置可能座標にキャラクターを配置
         let selectPosition =possiblePositions[selectIndex]
