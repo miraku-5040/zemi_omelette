@@ -38,7 +38,9 @@ class Player{
      * control.jsから取得できる入力キーから次の動作を判断する
      * **/
     static playing(){
-        switch(Control.getPressedKeyStatus()){
+        const keyStatus = Control.getPressedKeyStatus()
+        console.log(keyStatus)
+        switch(keyStatus){
         case 'up':
             this.setCharacterImage(8)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
@@ -76,37 +78,45 @@ class Player{
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             return 'move';
         case 'upDirection':
+            this.setCharacterImage(8)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.direction ='up';
             return 'stay';
         case 'downDirection':
+            this.setCharacterImage(2)
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             this.playerStatus.direction ='down';
             return 'stay';
         case 'rightDirection':
+            this.setCharacterImage(6)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             this.playerStatus.direction ='right';
             return 'stay';
         case 'leftDirection':
+            this.setCharacterImage(4)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.direction ='left';
             return 'stay';
         case 'leftupDirection':
+            this.setCharacterImage(7)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.direction ='leftup';
             return 'stay';
         case 'rightupDirection':
+            this.setCharacterImage(9)
             this.playerStatus.next.y = this.playerStatus.now.x + 1;
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.direction ='rightup';
             return 'stay';
         case 'rightdownDirection':
+            this.setCharacterImage(3)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             this.playerStatus.direction ='rightdown';
             return 'stay';
         case 'leftdownDirection':
+            this.setCharacterImage(1)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             this.playerStatus.direction ='leftdown';

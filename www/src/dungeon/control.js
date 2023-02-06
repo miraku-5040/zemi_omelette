@@ -6,18 +6,18 @@ class Control{
     static initialize () {
         // キーボードの入力を確認する
         this.pressedKeyStatus = {
-            right: 0,       //右
-            left: 0,        //左
-            up: 0,          //上
-            down: 0,        //下
-            leftup: 0,      //左上
-            rightup: 0,     //右上
-            rightdown: 0,   //右下
-            leftdown: 0,    //左下
-            attack: 0,      //通常攻撃
-            defence: 0,     //ぼうぎょ
-            skill: 0,       //スキル攻撃
-            item: 0         //道具
+            right: 1,       //右
+            left: 1,        //左
+            up: 1,          //上
+            down: 1,        //下
+            leftup: 1,      //左上
+            rightup: 1,     //右上
+            rightdown: 1,   //右下
+            leftdown: 1,    //左下
+            attack: 1,      //通常攻撃
+            defence: 1,     //ぼうぎょ
+            skill: 1,       //スキル攻撃
+            item: 1         //道具
         };
 
         this.itemListIndex = 99;
@@ -25,6 +25,7 @@ class Control{
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
             // キーボードが押された場合
+            console.log(e.key)
             switch(e.key) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left += 1;
@@ -66,6 +67,7 @@ class Control{
         });
         document.addEventListener('keyup', (e) => {
             // キーボードが離された場合
+            console.log(e.key)
             switch(e.key) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left = 0;
@@ -109,6 +111,7 @@ class Control{
     }
     
     static tapUp(i){
+        console.log(i)
         switch(i) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left = 0;
@@ -137,55 +140,56 @@ class Control{
         }
     }
     static tapDown(i){
+        console.log(i)
         switch(i) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left += 1;
-                    if(this.pressedKeyStatus.left <= Config.keyPressedCount){
-                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    if(this.pressedKeyStatus.left <= 1){
+                        break 
                     }
-                     return false;
+                     requestAnimationFrame(() =>this.tapDown(i)); break
                 case "8": // 上向きキー
                     this.pressedKeyStatus.up += 1;
-                    if(this.pressedKeyStatus.up <= Config.keyPressedCount){
-                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    if(this.pressedKeyStatus.up <= 1){
+                        break 
                     }
-                     return false;
+                     requestAnimationFrame(() =>this.tapDown(i)); break
                 case "6": // 右向きキー
                     this.pressedKeyStatus.right += 1;
-                    if(this.pressedKeyStatus.right <= Config.keyPressedCount){
-                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    if(this.pressedKeyStatus.right <= 1){
+                        break 
                     }
-                     return false;
+                     requestAnimationFrame(() =>this.tapDown(i)); break
                 case "2": // 下向きキー
                     this.pressedKeyStatus.down += 1;
-                    if(this.pressedKeyStatus.down <= Config.keyPressedCount){
-                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    if(this.pressedKeyStatus.down <= 1){
+                        break 
                     } 
-                     return false;
+                     requestAnimationFrame(() =>this.tapDown(i)); break
                 case "7": // 左上向きキー
                     this.pressedKeyStatus.leftup += 1;
-                    if(this.pressedKeyStatus.leftup <= Config.keyPressedCount){
-                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    if(this.pressedKeyStatus.leftup <= 1){
+                        break 
                     }
-                     return false;
+                     requestAnimationFrame(() =>this.tapDown(i)); break
                 case "9": // 右上向きキー
                     this.pressedKeyStatus.rightup += 1;
-                    if(this.pressedKeyStatus.rightup <= Config.keyPressedCount){
-                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    if(this.pressedKeyStatus.rightup <= 1){
+                        break 
                     }
-                     return false;
+                     requestAnimationFrame(() =>this.tapDown(i)); break
                 case "3": // 右下向きキー
                     this.pressedKeyStatus.rightdown += 1;
-                    if(this.pressedKeyStatus.rightdown <= Config.keyPressedCount){
-                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    if(this.pressedKeyStatus.rightdown <= 1){
+                        break 
                     }
-                     return false;
+                     requestAnimationFrame(() =>this.tapDown(i)); break
                 case "1": // 左下向きキー
                     this.pressedKeyStatus.leftdown += 1;
-                    if(this.pressedKeyStatus.leftdown <= Config.keyPressedCount){
-                        requestAnimationFrame(() =>this.tapDown(i)); 
+                    if(this.pressedKeyStatus.leftdown <= 1){
+                        break 
                     }
-                     return false;
+                     requestAnimationFrame(() =>this.tapDown(i)); break
         }
     }
 
@@ -194,65 +198,57 @@ class Control{
     static getPressedKeyStatus(){
         //どのキーがtrueか確認
         if(this.pressedKeyStatus.up > Config.keyPressedCount) {
-            this.pressedKeyStatus.up = 0;
             return 'up';
-        }else if (this.pressedKeyStatus.up <= Config.keyPressedCount && this.pressedKeyStatus.up > 0){
+        }else if (this.pressedKeyStatus.up <= Config.keyPressedCount && this.pressedKeyStatus.up > 1){
             return 'upDirection';
         }else{
         }
 
         if(this.pressedKeyStatus.down > Config.keyPressedCount) {
-            this.pressedKeyStatus.down = 0;
             return 'down';
-        }else if (this.pressedKeyStatus.down <= Config.keyPressedCount && this.pressedKeyStatus.down > 0){
+        }else if (this.pressedKeyStatus.down <= Config.keyPressedCount && this.pressedKeyStatus.down > 1){
             return 'downDirection';
         }else{
         }
 
         if(this.pressedKeyStatus.right > Config.keyPressedCount) {
-            this.pressedKeyStatus.right = 0;
             return 'right';
-        }else if (this.pressedKeyStatus.right <= Config.keyPressedCount && this.pressedKeyStatus.right > 0){
+        }else if (this.pressedKeyStatus.right <= Config.keyPressedCount && this.pressedKeyStatus.right > 1){
             return 'rightDirection';
         }else{
         }
         
         if(this.pressedKeyStatus.left > Config.keyPressedCount) {
-            this.pressedKeyStatus.left = 0;
             return 'left';
-        }else if (this.pressedKeyStatus.left <= Config.keyPressedCount && this.pressedKeyStatus.left > 0){
+        }else if (this.pressedKeyStatus.left <= Config.keyPressedCount && this.pressedKeyStatus.left > 1){
             return 'leftDirection';
         }else{
         }
 
         if(this.pressedKeyStatus.leftup > Config.keyPressedCount) {
-            this.pressedKeyStatus.leftup = 0;
             return 'leftup';
-        }else if (this.pressedKeyStatus.leftup <= Config.keyPressedCount && this.pressedKeyStatus.leftup > 0){
+        }else if (this.pressedKeyStatus.leftup <= Config.keyPressedCount && this.pressedKeyStatus.leftup > 1){
             return 'leftupDirection';
         }else{
         }
 
         if(this.pressedKeyStatus.rightup > Config.keyPressedCount) {
-            this.pressedKeyStatus.rightup = 0;
             return 'rightup';
-        }else if (this.pressedKeyStatus.rightup <= Config.keyPressedCount && this.pressedKeyStatus.rightup > 0){
+        }else if (this.pressedKeyStatus.rightup <= Config.keyPressedCount && this.pressedKeyStatus.rightup > 1){
             return 'rightupDirection';
         }else{
         }
 
         if(this.pressedKeyStatus.rightdown > Config.keyPressedCount) {
-            this.pressedKeyStatus.rightdown = 0;
             return 'rightdown';
-        }else if (this.pressedKeyStatus.rightdown <= Config.keyPressedCount && this.pressedKeyStatus.rightdown > 0){
+        }else if (this.pressedKeyStatus.rightdown <= Config.keyPressedCount && this.pressedKeyStatus.rightdown > 1){
             return 'rightdownDirection';
         }else{
         }
 
         if(this.pressedKeyStatus.leftdown > Config.keyPressedCount) {
-            this.pressedKeyStatus.leftdown = 0;
             return 'leftdown';
-        }else if (this.pressedKeyStatus.leftdown <= Config.keyPressedCount && this.pressedKeyStatus.leftdown > 0){
+        }else if (this.pressedKeyStatus.leftdown <= Config.keyPressedCount && this.pressedKeyStatus.leftdown > 1){
             return 'leftdownDirection';
         }else{
         }
@@ -314,6 +310,7 @@ class Control{
                 continue
             }
             const imgElement = Image.getArrowImages(i)
+            imgElement.classList.add("arrow")
             imgElement.style.display = "none"
             imgElement.style.top = this.arrowPosition(i,false)+ "px";
             imgElement.style.left = this.arrowPosition(i,true)+ "px";
