@@ -24,36 +24,41 @@
     <link rel="stylesheet" href="../css/status.css">
 </head>
 
-<body>
+<body onload="getStatusData()">
     <!-- 背景 -->
     <img class="background_image" src="../image/background/cave.png">
-    <!-- 本の残数 -->
+    <!-- ポイントの残数 -->
     <div class="least_coin">
-        <p class="least_dia_coin" id="skill_item">0</p>
+        <p class="least_coin_text">ステータスポイント</p>
+        <p class="least_dia_coin" id="status_point">0</p>
     </div>
+    <!-- 強化方法選択画面へ戻るボタン -->
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toPower()">←</button>
+    <!-- ステータス -->
     <div class="statuses">
         <div class="solo_status">
             <p id="attack">攻撃力：0/1000</p>
             <meter class="ber" id="attack_ber" max="1000" value="0"></meter>
-            <button class="status_button">＋</button>
+            <button class="status_button" onclick="updateAttackData()"><p class="status_button_text">＋</p></button>
         </div>
 
         <div class="solo_status">
             <p id="avoid">回避率：0/100</p>
             <meter class="ber" id="avoid_ber" max="100" value="0"></meter>
-            <button class="status_button">＋</button>
+            <button class="status_button" onclick="updateAvoidData()"><p class="status_button_text">＋</p></button>
         </div>
 
         <div class="solo_status">
             <p id="avd">会心率：0/100</p>
             <meter class="ber" id="avd_ber" max="100" value="0"></meter>
-            <button class="status_button">＋</button>
+            <button class="status_button" onclick="updateAvdData()"><p class="status_button_text">＋</p></button>
         </div>
 
         <div class="solo_status">
             <p id="hit">命中率：0/100</p>
             <meter class="ber" id="hit_ber" max="100" value="0"></meter>
-            <button class="status_button">＋</button>
+            <button class="status_button" onclick="updateHitData()"><p class="status_button_text">＋</p></button>
         </div>
     </div>
 </body>
