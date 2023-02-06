@@ -29,4 +29,22 @@ Config.regularField = 1
 Config.voidField = 2
 Config.wallField = 3
 
+//ステージの設定
+    //フロア縦
+    Config.divisionRow = 3
+    //フロア横
+    Config.divisionCol = 5
+    //部屋ごとの最大縦
+    Config.roomRowsMax = 10
+    //部屋ごとの最大横
+    Config.roomColsMax = 10
+    //部屋ごとの最小縦
+    Config.roomRowsMin = 6
+    //部屋ごとの最小横
+    Config.roomColsMin = 6
+    //生成数最大値
+    Config.roomCountMax = 11
+    //生成数最小値
+    Config.roomCountMin = 6
+
 

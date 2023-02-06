@@ -41,6 +41,7 @@ class Stage {
 
     static createStage(){
         this.stageLayerElement.innerHTML = ""
+        this.minmap.innerHTML = ""
         //ステージに出現する全オブジェクトを格納する領域を生成する
         this.popEnemyArray = []
         this.popItemArray = []
