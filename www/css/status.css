@@ -66,6 +66,7 @@
     z-index: 30;
 }
 
+/* ステータス一覧 */
 .statuses {
     border: solid rgb(189, 160, 0);
     background-color: rgba(0,0,0,0.3);
@@ -74,6 +75,7 @@
     height: 300px;
 }
 
+/* 個々のステータス */
 .solo_status {
     color: gold;
     font-weight: bold;
@@ -83,6 +85,7 @@
     margin-bottom: -25px;
 }
 
+/* ステータスバー */
 .ber {
     position: relative;
     transform: translateY(-25px);
@@ -91,6 +94,7 @@
     background-color: green;
 }
 
+/* ステータス上昇ボタン */
 .status_button {
     background: gold;
     border-top: 6px solid rgb(255, 225, 52);
@@ -104,6 +108,7 @@
     left: 10px;
 }
 
+/* ステータス上昇ボタンのテキスト */
 .status_button_text {
     color: black;
     font-weight: bold;
