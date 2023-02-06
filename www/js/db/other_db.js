@@ -152,15 +152,97 @@ function getStatusData() {
     // キャラクター情報をHTMLに埋め込む
     function setCharacterData(results) {
         var character = results[0];
+        // ステータスポイント入れ替え
+        document.getElementById("status_point").innerHTML = character.status_point;
         // 攻撃力入れ替え
         document.getElementById("attack").innerHTML = '攻撃力：' + character.character_attack + '/1000';
+        document.getElementById("attack_ber").value = character.character_attack;
         // 回避率入れ替え
         document.getElementById("avoid").innerHTML = '回避率：' + character.character_avoid + '/100';
+        document.getElementById("avoid_ber").value = character.character_avoid;
         // 会心率入れ替え
         document.getElementById("avd").innerHTML = '会心率：' + character.character_avd + '/100';
+        document.getElementById("avd_ber").value = character.character_avd;
         // 命中率入れ替え
         document.getElementById("hit").innerHTML = '命中率：' + character.character_hit + '/100';
+        document.getElementById("hit_ber").value = character.character_hit;
     }
+}
+
+// ステータス情報変更(攻撃力)
+function updateAttackData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            character = results[0];
+            results[0].set("character_attack", Number(character.character_attack) + 1);
+            results[0].set("status_point", Number(character.status_point) - 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
+        .then(function () {
+            getStatusData();
+        });
+}
+
+// ステータス情報変更(回避率)
+function updateAvoidData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            character = results[0];
+            results[0].set("character_avoid", Number(character.character_avoid) + 1);
+            results[0].set("status_point", Number(character.status_point) - 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
+        .then(function () {
+            getStatusData();
+        });
+}
+
+// ステータス情報変更(会心率)
+function updateAvdData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            character = results[0];
+            results[0].set("character_avd", Number(character.character_avd) + 1);
+            results[0].set("status_point", Number(character.status_point) - 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
+        .then(function () {
+            getStatusData();
+        });
+}
+
+// ステータス情報変更(命中率)
+function updateHitData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            character = results[0];
+            results[0].set("character_hit", Number(character.character_hit) + 1);
+            results[0].set("status_point", Number(character.status_point) - 1);
+            return results[0].update();
+        })
+        .catch(function (err) {
+            console.log(err);
+        })
+        .then(function () {
+            getStatusData();
+        });
 }
 
 // キャラクター情報取得(プレイヤー情報版)
