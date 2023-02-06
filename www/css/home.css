@@ -107,11 +107,11 @@
 
 /* デイリー目標確認ボタン */
 .dairy {
-    background: rgb(231, 231, 231, 0.9);
-    border-top: 6px solid rgb(255, 255, 255, 0.9);
-    border-right: 6px solid rgb(199, 199, 199, 0.9);
-    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
-    border-left: 6px solid rgb(255, 255, 255, 0.9);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
     border-radius: 0;
     position: absolute;
     top: 275px;
@@ -139,7 +139,8 @@
 
 /* デイリー目標確認ボタンのテキスト */
 .dairy_button_text {
-    color: black;
+    color: white;
+    -webkit-text-stroke: 0.1px #000;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 8px;
     font-weight: bold;
@@ -150,11 +151,11 @@
 
 /* 実績目標確認ボタン */
 .achieve {
-    background: rgb(231, 231, 231, 0.9);
-    border-top: 6px solid rgb(255, 255, 255, 0.9);
-    border-right: 6px solid rgb(199, 199, 199, 0.9);
-    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
-    border-left: 6px solid rgb(255, 255, 255, 0.9);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
     border-radius: 0;
     position: absolute;
     top: 275px;
@@ -173,7 +174,8 @@
 
 /* 実績目標確認ボタンのテキスト */
 .achieve_button_text {
-    color: black;
+    color: white;
+    -webkit-text-stroke: 0.1px #000;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 10px;
     font-weight: bold;
@@ -184,11 +186,11 @@
 
 /* ギルド画面遷移ボタン */
 .guild {
-    background: rgb(231, 231, 231, 0.9);
-    border-top: 6px solid rgb(255, 255, 255, 0.9);
-    border-right: 6px solid rgb(199, 199, 199, 0.9);
-    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
-    border-left: 6px solid rgb(255, 255, 255, 0.9);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
     border-radius: 0;
     position: absolute;
     top: 275px;
@@ -207,22 +209,23 @@
 
 /* ギルド画面遷移ボタンのテキスト */
 .guild_button_text {
-    color: black;
+    color: white;
+    -webkit-text-stroke: 0.1px #000;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 9px;
     font-weight: bold;
     position: absolute;
     top: 289px;
-    left: 517px;
+    left: 518px;
 }
 
 /* フレンド確認ボタン */
 .friend {
-    background: rgb(231, 231, 231, 0.9);
-    border-top: 6px solid rgb(255, 255, 255, 0.9);
-    border-right: 6px solid rgb(199, 199, 199, 0.9);
-    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
-    border-left: 6px solid rgb(255, 255, 255, 0.9);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
     border-radius: 0;
     position: absolute;
     top: 275px;
@@ -233,7 +236,8 @@
 
 /* フレンド確認ボタンのテキスト */
 .friend_button_text {
-    color: black;
+    color: white;
+    -webkit-text-stroke: 0.1px #000;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 8px;
     font-weight: bold;
@@ -315,18 +319,19 @@
 
 /* チャットボタン */
 .chat_open {
-    background: rgb(231, 231, 231, 0.9);
-    border-top: 6px solid rgb(255, 255, 255, 0.9);
-    border-right: 6px solid rgb(199, 199, 199, 0.9);
-    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
-    border-left: 6px solid rgb(255, 255, 255, 0.9);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
     border-radius: 0;
     position: absolute;
     transform: translateX(-77px);
     top: 130px;
     width: 30px;
     height: 70px;
-    color: black;
+    color: white;
+    -webkit-text-stroke: 0.1px #000;
 }
 
 /* チャットボタンのテキスト */
@@ -349,16 +354,17 @@
 
 /* 地図ボタン */
 .go_town {
-    background: rgb(231, 231, 231, 0.9);
-    border-top: 6px solid rgb(255, 255, 255, 0.9);
-    border-right: 6px solid rgb(199, 199, 199, 0.9);
-    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
-    border-left: 6px solid rgb(255, 255, 255, 0.9);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
     border-radius: 0;
     position: absolute;
     top: 130px;
     transform: translateX(-35px);
-    color: black;
+    color: white;
+    -webkit-text-stroke: 0.5px #000;
     width: 78px;
     height: 70px;
 }
@@ -390,16 +396,17 @@
 
 /* 図鑑ボタン */
 .pictoriary {
-    background: rgb(231, 231, 231, 0.9);
-    border-top: 6px solid rgb(255, 255, 255, 0.9);
-    border-right: 6px solid rgb(199, 199, 199, 0.9);
-    border-bottom: 6px solid rgb(177, 177, 177, 0.9);
-    border-left: 6px solid rgb(255, 255, 255, 0.9);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
     border-radius: 0;
     position: absolute;
     top: 130px;
     left: 53px;
-    color: black;
+    color: white;
+    -webkit-text-stroke: 0.5px #000;
     width: 78px;
     height: 70px;
 }
@@ -755,6 +762,7 @@
 
 .chat_modal-body {
     overflow: scroll;
+    flex-wrap: wrap;
     position: relative;
     transform: translateY(-20px);
     width: 400px;

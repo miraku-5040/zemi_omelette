@@ -137,6 +137,32 @@ function getShorteCharacterData() {
     }
 }
 
+// ステータス情報取得
+function getStatusData() {
+    var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
+    var Character = ncmb.DataStore(this.CHARACTER_DB);
+    Character.fetchAll()
+        .then(function (results) {
+            setCharacterData(results);
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+    // キャラクター情報をHTMLに埋め込む
+    function setCharacterData(results) {
+        var character = results[0];
+        // 攻撃力入れ替え
+        document.getElementById("attack").innerHTML = '攻撃力：' + character.character_attack + '/1000';
+        // 回避率入れ替え
+        document.getElementById("avoid").innerHTML = '回避率：' + character.character_avoid + '/100';
+        // 会心率入れ替え
+        document.getElementById("avd").innerHTML = '会心率：' + character.character_avd + '/100';
+        // 命中率入れ替え
+        document.getElementById("hit").innerHTML = '命中率：' + character.character_hit + '/100';
+    }
+}
+
 // キャラクター情報取得(プレイヤー情報版)
 function getPlayerCharacterData() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
