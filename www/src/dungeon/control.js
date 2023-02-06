@@ -25,6 +25,7 @@ class Control{
         // ブラウザのキーボードの入力を取得するイベントリスナを登録する
         document.addEventListener('keydown', (e) => {
             // キーボードが押された場合
+            console.log(e.key)
             switch(e.key) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left += 1;
@@ -66,6 +67,7 @@ class Control{
         });
         document.addEventListener('keyup', (e) => {
             // キーボードが離された場合
+            console.log(e.key)
             switch(e.key) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left = 0;
@@ -109,6 +111,7 @@ class Control{
     }
     
     static tapUp(i){
+        console.log(i)
         switch(i) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left = 0;
@@ -137,6 +140,7 @@ class Control{
         }
     }
     static tapDown(i){
+        console.log(i)
         switch(i) {
                 case "4": // 左向きキー
                     this.pressedKeyStatus.left += 1;
@@ -306,6 +310,7 @@ class Control{
                 continue
             }
             const imgElement = Image.getArrowImages(i)
+            imgElement.classList.add("arrow")
             imgElement.style.display = "none"
             imgElement.style.top = this.arrowPosition(i,false)+ "px";
             imgElement.style.left = this.arrowPosition(i,true)+ "px";
