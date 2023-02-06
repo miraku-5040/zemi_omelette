@@ -65,7 +65,6 @@ class Stage {
                 possiblePositions.push({y:indexY,x:indexX})  
             });
         });
-        console.log(JSON.stringify(possiblePositions))
         let selectIndex = Tool.getRandomInt(possiblePositions.length)
         //配置可能座標にキャラクターを配置
         let selectPosition =possiblePositions[selectIndex]
