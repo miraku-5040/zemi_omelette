@@ -66,6 +66,14 @@ function goTown() {
     setTimeout('window.location.href = "town.html"', 600);
 }
 
+function goHome() {
+    // 音声再生
+    audio = new Audio("../sound/zoom.m4a");
+    audio.play();
+    // 街画面へ遷移
+    setTimeout('window.location.href = "../home.html"', 600);
+}
+
 function outShop() {
     // 音声再生
     go_sound();
@@ -448,26 +456,44 @@ function pictExplainClose() {
 
 // 辞書の題名変更
 function setSoadTitle() {
+    // 音声再生
+    audio = new Audio("../sound/page.m4a");
+    audio.play();
     document.getElementById('pict_title').innerHTML = "武器";
 }
 
 function setShieldTitle() {
+    // 音声再生
+    audio = new Audio("../sound/page.m4a");
+    audio.play();
     document.getElementById('pict_title').innerHTML = "防具";
 }
 
 function setDecorationTitle() {
+    // 音声再生
+    audio = new Audio("../sound/page.m4a");
+    audio.play();
     document.getElementById('pict_title').innerHTML = "装飾";
 }
 
 function setItemTitle() {
+    // 音声再生
+    audio = new Audio("../sound/page.m4a");
+    audio.play();
     document.getElementById('pict_title').innerHTML = "アイテム";
 }
 
 function setEnemyTitle() {
+    // 音声再生
+    audio = new Audio("../sound/page.m4a");
+    audio.play();
     document.getElementById('pict_title').innerHTML = "敵";
 }
 
 function setStoryTitle() {
+    // 音声再生
+    audio = new Audio("../sound/page.m4a");
+    audio.play();
     document.getElementById('pict_title').innerHTML = "物語";
 }
 
@@ -552,6 +578,14 @@ function soundCityBGM() {
 function soundGuildBGM() {
     // BGM再生
     audio = new Audio("../sound/guildBGM.m4a");
+    audio.loop = true;
+    audio.volume = 0.1;
+    audio.play();
+}
+
+function soundPictBGM() {
+    // BGM再生
+    audio = new Audio("../sound/pictBGM.m4a");
     audio.loop = true;
     audio.volume = 0.1;
     audio.play();
