@@ -365,5 +365,15 @@ class Player{
             // TODO
         }
     }
+
+    static setStatusTest(){
+        document.getElementById("hp").innerHTML = this.playerStatus.hp.current
+        document.getElementById("atk").innerHTML = this.playerStatus.atk.current
+        document.getElementById("def").innerHTML = this.playerStatus.def.current
+        document.getElementById("cri").innerHTML = this.playerStatus.cri.current
+        document.getElementById("avd").innerHTML = this.playerStatus.avd.current
+        document.getElementById("dex").innerHTML = this.playerStatus.dex.current
+        document.getElementById("exp").innerHTML = this.playerStatus.exp
+    }
 }
 

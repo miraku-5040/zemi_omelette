@@ -109,7 +109,7 @@ function loop() {
             break;
         case 'end':
             Player.spDecrease(turn);
-            
+            Player.setStatusTest();
             turn++
             mode = 'player';
             break;
