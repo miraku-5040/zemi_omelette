@@ -323,8 +323,8 @@ class Player{
         }
         const matchPlayerStatus = this.playerStatus;
         const playerDefenseStatus = {};
-        playerAttackStatus.def = this.checkLimitValue(matchPlayerStatus,'def')
-        playerAttackStatus.avd = this.checkLimitValue(matchPlayerStatus,'avd')
+        playerDefenseStatus.def = this.checkLimitValue(matchPlayerStatus,'def')
+        playerDefenseStatus.avd = this.checkLimitValue(matchPlayerStatus,'avd')
 
         return playerDefenseStatus;
     }
