@@ -111,6 +111,7 @@ class Enemy{
                 let next = {};
                 if(this.checkAround(indexX,indexY)){
                     /* attack */
+                    element.direction = this.checkAroundDirection(indexX,indexY)
                     next.type = "attack";
                     next.x = indexX;
                     next.y = indexY;
@@ -219,6 +220,21 @@ class Enemy{
             }
         }
         //いない
+        return false;
+    }
+
+    static checkAroundDirection(enemyX,enemyY){
+        const direction = [["leftup","up","rightup"],["left","","right"],["leftdown","down","rightdown"]]
+        //周り８マスを確認する
+        for(let x = -1; x <= 1; x++){
+            for(let y = -1; y <= 1; y++){
+                if(Player.isPlayerExistence(enemyX + x, enemyY + y)){
+                    
+                    return direction[y+1][x+1];
+                }
+
+            }
+        }
         return false;
     }
 
