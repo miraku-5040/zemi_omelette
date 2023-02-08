@@ -274,7 +274,9 @@ class Skill {
                 const effectReadyKey = effectReadyKeyArray[index];
                 if (effectReadyKey !== null) {
                     // 設定がある場合は表示する
-                    const effectCoordinate = this.#convertAbsoluteToRelative(coordinate.x, coordinate.y);
+                    const effectCoordinate = {};
+                    effectCoordinate.x = coordinate.x;
+                    effectCoordinate.y = coordinate.y;
                     effectCoordinate.direction = this.skillUserData.direction;
                     // TODO enemyからサイズを取得してする
                     Effect.targetEffectDisplay(effectReadyKey, [effectCoordinate]);
@@ -447,7 +449,9 @@ class Skill {
                         return [targetCoordinateArray, effectDisplayArray];
                     }
                     targetCoordinateArray.push(baseCoordinate);
-                    const effectDisplayArrayItem = this.#convertAbsoluteToRelative(baseCoordinate.x, baseCoordinate.y);
+                    const effectDisplayArrayItem =  {};
+                    effectDisplayArrayItem.x = baseCoordinate.x;
+                    effectDisplayArrayItem.y = baseCoordinate.y;
                     effectDisplayArrayItem.direction = afterDirection;
                     effectDisplayArrayItem.length = 0;
                     effectDisplayArray.push(effectDisplayArrayItem);
@@ -589,7 +593,9 @@ class Skill {
                         }
                         oneLineArray[0] = absoluteCoordinate;
                         targetCoordinateArray.push(absoluteCoordinate);
-                        const effectDisplayArrayItem = this.#convertAbsoluteToRelative(absoluteCoordinate.x, absoluteCoordinate.y);
+                        const effectDisplayArrayItem = {};
+                        effectDisplayArrayItem.x = absoluteCoordinate.x;
+                        effectDisplayArrayItem.y = absoluteCoordinate.y;
                         effectDisplayArrayItem.direction = afterDirection;
                         let effectLengthCount = 0;
                         for (let i = 0; i < scopeData.length; i++) {
@@ -760,7 +766,7 @@ class Skill {
         if (isTargetPlayer) {
             // playerがターゲットの場合
             const checkPlayer = (coordinate) => {
-                const isPlayer = Player.isPlayerExistence(coordinate.x.coordinate.y)
+                const isPlayer = Player.isPlayerExistence(coordinate.x,coordinate.y);
                 return isPlayer;
             };
             functionMap.set("checkPlayer", checkPlayer);

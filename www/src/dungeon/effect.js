@@ -21,13 +21,13 @@ class Effect {
  * effectIdが"SE"(scopeEffect)のものを処理する
  * positionArrayの形式:[{x, y, direction, length}, ...]
  */
-    static scopeEffectDisplay(effectId, relativePositionArray) {
+    static scopeEffectDisplay(effectId, positionArray) {
         const readyKey = this.#setEffectReadyData(effectId);
         const effectReadyData = this.effectReadyData.get(readyKey);
         if (effectReadyData.move) { //画像移動あり
-            this.#moveEffectDisplay(effectReadyData, relativePositionArray);
+            this.#moveEffectDisplay(effectReadyData, positionArray);
         } else { //画像移動なし
-            this.#fixEffectDisplay(effectReadyData, relativePositionArray);
+            this.#fixEffectDisplay(effectReadyData, positionArray);
         }
         this.endEffectDisplay(readyKey);
     }
@@ -44,7 +44,7 @@ class Effect {
     /**
      *  ターゲットエフェクトを表示する
      */
-    static targetEffectDisplay(readyKey, relativePositionArray) {
+    static targetEffectDisplay(readyKey, positionArray) {
         // データ準備
         const effectReadyData = this.effectReadyData.get(readyKey);
         if (effectReadyData === undefined) { //keyエラー
@@ -53,13 +53,14 @@ class Effect {
         }
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElementArray = [];
-        relativePositionArray.forEach((position) => {
+        positionArray.forEach((position) => {
+            const relativePosition = this.#convertAbsoluteToRelative(position);
             const cloneImgElement = effectReadyData.imgElement.cloneNode();
-            cloneImgElement.style.top = position.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
-            cloneImgElement.style.left = position.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
+            cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
+            cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
             if(effectReadyData.rotation){
                 //回転する場合
-                const angle = this.#getAngle(position.direction);
+                const angle = this.#getAngle(relativePosition.direction);
                 cloneImgElement.style.transform = "rotate(" + angle + "deg)";
             }
             cloneImgElement.style.display = "none"; //非表示で配置する
@@ -93,13 +94,14 @@ class Effect {
     }
 
     /* 座標移動するエフェクトを表示する */
-    static #moveEffectDisplay(effectReadyData, relativePositionArray) {
+    static #moveEffectDisplay(effectReadyData, positionArray) {
         // データ準備
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElement = effectReadyData.imgElement;
         const imgElementArray = [];
         const displayTime = effectReadyData.time;
-        relativePositionArray.forEach((relativePosition) => {
+        positionArray.forEach((position) => {
+            const relativePosition = this.#convertAbsoluteToRelative(position);
             const cloneImgElement = imgElement.cloneNode();
             cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
             cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
@@ -149,7 +151,8 @@ class Effect {
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElement = effectReadyData.imgElement;
         const imgElementArray = [];
-        relativePositionArray.forEach((relativePosition) => {
+        relativePositionArray.forEach((position) => {
+            const relativePosition = this.#convertAbsoluteToRelative(position);
             const getNextPositionFunction = this.#getNextPositionFunction(relativePosition.direction);
             let nextPosition = relativePosition;
             for (let i = relativePosition.length; i >= 0; i--) {
@@ -386,5 +389,13 @@ class Effect {
                 break;
         }
         return nextPosition;
+    }
+
+    /* ステージ座標(絶対座標)からプレイヤー相対座標に変換 */
+    static #convertAbsoluteToRelative(absoluteX, absoluteY){
+        const startingPoint = Player.getPlayerNowPosition();
+        const relativeX = absoluteX - startingPoint.x;
+        const relativeY = absoluteY - startingPoint.y;
+        return { x: relativeX, y: relativeY }
     }
 }
