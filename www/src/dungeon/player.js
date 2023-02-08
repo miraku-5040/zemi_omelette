@@ -39,7 +39,6 @@ class Player{
      * **/
     static playing(){
         const keyStatus = Control.getPressedKeyStatus()
-        console.log(keyStatus)
         switch(keyStatus){
         case 'up':
             this.setCharacterImage(8)

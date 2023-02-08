@@ -47,15 +47,19 @@ class CreateStage{
             }
         }
 
-        //console.log(JSON.stringify(roomPositions))
-        
         //部屋の数を減らす
-        for(let i = 0; i < divisionNumber - roomQuantity; i++){
+        //部屋の数が8未満の場合、右端の列の部屋を消す
+        let removeStertNum = 0
+        if(roomQuantity < 8){
+            roomPositions.splice(14,1)
+            roomPositions.splice(9,1)
+            roomPositions.splice(4,1)
+            removeStertNum = 3
+        }
+        for(let i = removeStertNum; i < divisionNumber - roomQuantity; i++){
             roomPositions.splice(Tool.getRandomInt(roomPositions.length),1)
         }
 
-        
-        //console.log(JSON.stringify(roomPositions))
         //部屋が存在するか保持する
         const roomExistence = new Array(divisionNumber)
         roomExistence.fill(null)
@@ -208,6 +212,8 @@ class CreateStage{
             });
             
         });
+
+        
         //道をつなぐ
 
         //上下
@@ -257,6 +263,18 @@ class CreateStage{
                 this.resultStage[y][x] =  Config.regularField
             }
         }
+        const searchStertRoom = roomPositions[0]
+        this.connectedRooms = Tool.deepCopy(roomExistence)
+        this.searchRooms(searchStertRoom)
+        if(JSON.stringify(this.connectedRooms) != JSON.stringify([null,null,null,null,null,null,null,null,null,null,null,null,null,null,null])){
+            const selectRooms = []
+            for(room of this.connectedRooms){
+                if(room != null){
+                    selectRooms.push(room)
+                }
+            }
+            
+        }
         //壁を張る
         for(let i = 2;i< Config.stageRows - 1; i++){
             for(let j = 2;j< Config.stageCols; j++){
@@ -265,6 +283,29 @@ class CreateStage{
             }
         }
 
+    }
+
+    
+    //部屋がつながってるか再起探索
+    static searchRooms(searchStertRoom){
+        if(searchStertRoom == null){
+            return
+        }
+        //４方向見る
+        searchStertRoom.adjacent.forEach((direction) => {
+            //情報がない
+            if(Object.keys(direction).length == 0){
+                return
+            }
+            //あるなら中身のルーム情報を保存
+            const nextRoom = this.connectedRooms[direction.num]
+            if(this.connectedRooms[direction.num]  == null){
+                return
+            }else{
+                this.connectedRooms[direction.num] = null
+            }
+            this.searchRooms(nextRoom)
+        })
     }
 
     static createWall(x,y){

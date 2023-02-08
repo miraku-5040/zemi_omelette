@@ -148,7 +148,6 @@ class Stage {
             stageImageNumber: stageImageNumber,
             element: stageImage
         }
-
         const min = Image.getMinmapImage(stageImageNumber);
         min.style.left = x * 3 + "px";
         min.style.top = y * 3 + "px";
