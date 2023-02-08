@@ -19,7 +19,8 @@ class Player{
             items:[],
             now:  {x:9, y:6},
             next: {x:9, y:6},
-            direction: 'down'
+            direction: 'down',
+            nextDirection: 'down'
         };
         //プレイヤーの画面上の位置を決定する
         const characterElement = document.getElementById("player_layer");
@@ -43,38 +44,46 @@ class Player{
         case 'longup':
             this.setCharacterImage(8)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
+            this.playerStatus.nextDirection ='up';
             return 'move';
         case 'longdown':
             this.setCharacterImage(2)
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
+            this.playerStatus.nextDirection ='down';
             return 'move';
         case 'longright':
             this.setCharacterImage(6)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
+            this.playerStatus.nextDirection ='right';
             return 'move';
         case 'longleft':
             this.setCharacterImage(4)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
+            this.playerStatus.nextDirection ='left';
             return 'move';
         case 'longleftup':
             this.setCharacterImage(7)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
+            this.playerStatus.nextDirection ='leftup';
             return 'move';
         case 'longrightup':
             this.setCharacterImage(9)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
+            this.playerStatus.nextDirection ='rightup';
             return 'move';
         case 'longrightdown':
             this.setCharacterImage(3)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
+            this.playerStatus.nextDirection ='rightdown';
             return 'move';
         case 'longleftdown':
             this.setCharacterImage(1)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
+            this.playerStatus.nextDirection ='leftdown';
             return 'move';
         case 'up':
             this.setCharacterImage(8)
@@ -158,6 +167,8 @@ class Player{
         this.setCharacterPosition();
         //ステージの位置更新
         Stage.moveStage(this.playerStatus.now.x, this.playerStatus.now.y);
+        //方向更新
+        this.playerStatus.direction = this.playerStatus.nextDirection;
         //足元チェック
         if(Item.checkItem(this.playerStatus.now.x, this.playerStatus.now.y)){
             //アイテムがある
@@ -358,10 +369,10 @@ class Player{
         //メッセージ
         if(incrementValue <= 0){
             //ダメージ
-            Message.playerHpDecreaseMessage(this.playerStatus.playerName, incrementValue);
+            Message.playerHpDecreaseMessage(this.playerStatus.playerName, -incrementValue);
         }else{
             //回復
-            // TODO
+            Message.playerHpIncreaseMessage(this.playerStatus.playerName, incrementValue);
         }
     }
 
