@@ -37,85 +37,84 @@ class Player{
     /**
      * control.jsから取得できる入力キーから次の動作を判断する
      * **/
-    static playing(){
-        const keyStatus = Control.getPressedKeyStatus()
-        console.log(keyStatus)
-        switch(keyStatus){
-        case 'up':
+    static async playing(){
+        const inputKey = await Control.getPlayingKeyStatus()
+        switch(inputKey){
+        case 'longup':
             this.setCharacterImage(8)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             return 'move';
-        case 'down':
+        case 'longdown':
             this.setCharacterImage(2)
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             return 'move';
-        case 'right':
+        case 'longright':
             this.setCharacterImage(6)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             return 'move';
-        case 'left':
+        case 'longleft':
             this.setCharacterImage(4)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             return 'move';
-        case 'leftup':
+        case 'longleftup':
             this.setCharacterImage(7)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             return 'move';
-        case 'rightup':
+        case 'longrightup':
             this.setCharacterImage(9)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             return 'move';
-        case 'rightdown':
+        case 'longrightdown':
             this.setCharacterImage(3)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             return 'move';
-        case 'leftdown':
+        case 'longleftdown':
             this.setCharacterImage(1)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             return 'move';
-        case 'upDirection':
+        case 'up':
             this.setCharacterImage(8)
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.direction ='up';
             return 'stay';
-        case 'downDirection':
+        case 'down':
             this.setCharacterImage(2)
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             this.playerStatus.direction ='down';
             return 'stay';
-        case 'rightDirection':
+        case 'right':
             this.setCharacterImage(6)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             this.playerStatus.direction ='right';
             return 'stay';
-        case 'leftDirection':
+        case 'left':
             this.setCharacterImage(4)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.direction ='left';
             return 'stay';
-        case 'leftupDirection':
+        case 'leftup':
             this.setCharacterImage(7)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.direction ='leftup';
             return 'stay';
-        case 'rightupDirection':
+        case 'rightup':
             this.setCharacterImage(9)
             this.playerStatus.next.y = this.playerStatus.now.x + 1;
             this.playerStatus.next.y = this.playerStatus.now.y - 1;
             this.playerStatus.direction ='rightup';
             return 'stay';
-        case 'rightdownDirection':
+        case 'rightdown':
             this.setCharacterImage(3)
             this.playerStatus.next.x = this.playerStatus.now.x + 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
             this.playerStatus.direction ='rightdown';
             return 'stay';
-        case 'leftdownDirection':
+        case 'leftdown':
             this.setCharacterImage(1)
             this.playerStatus.next.x = this.playerStatus.now.x - 1;
             this.playerStatus.next.y = this.playerStatus.now.y + 1;
