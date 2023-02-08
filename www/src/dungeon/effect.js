@@ -54,7 +54,7 @@ class Effect {
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElementArray = [];
         positionArray.forEach((position) => {
-            const relativePosition = this.#convertAbsoluteToRelative(position);
+            const relativePosition = this.#convertAbsoluteToRelative(position.x, position.y);
             const cloneImgElement = effectReadyData.imgElement.cloneNode();
             cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
             cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
@@ -101,7 +101,7 @@ class Effect {
         const imgElementArray = [];
         const displayTime = effectReadyData.time;
         positionArray.forEach((position) => {
-            const relativePosition = this.#convertAbsoluteToRelative(position);
+            const relativePosition = this.#convertAbsoluteToRelative(position.x, position.y);
             const cloneImgElement = imgElement.cloneNode();
             cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
             cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
@@ -152,7 +152,7 @@ class Effect {
         const imgElement = effectReadyData.imgElement;
         const imgElementArray = [];
         relativePositionArray.forEach((position) => {
-            const relativePosition = this.#convertAbsoluteToRelative(position);
+            const relativePosition = this.#convertAbsoluteToRelative(position.x, position.y);
             const getNextPositionFunction = this.#getNextPositionFunction(relativePosition.direction);
             let nextPosition = relativePosition;
             for (let i = relativePosition.length; i >= 0; i--) {
