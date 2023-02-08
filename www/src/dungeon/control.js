@@ -73,7 +73,6 @@ class Control{
         });
         // マウスの入力を取得するイベントリスナーを登録する
         document.addEventListener('mousedown', (e) => {
-            console.log("mousedown"); //test
             // マウスが押された場合
             const elementId = e.target.id;
             if(elementId === ""){
@@ -98,6 +97,15 @@ class Control{
         document.addEventListener('touchstart', (e) => {
             // TODO タッチ操作
             e.preventDefault();
+            const elementId = e.target.id;
+            if(elementId === ""){
+                // クリック先がボタンではない場合
+                return;
+            }
+            this.clickMouse.count = 0;
+            this.clickMouse.isClick = true;
+            this.clickMouse.targetId = elementId;
+            this.#updateClickMouse();
         });
     }
 
@@ -327,6 +335,9 @@ class Control{
         }
     }
 
+    /**
+     * 移動用の矢印のトグル
+     */
     static deleteArrow(){
         const elem = document.getElementById("directionKey")
         const array = Array.from(elem.children);
@@ -341,6 +352,7 @@ class Control{
         }
     }
 
+    /* 矢印画像を配置する */
     static arrow(){
         const elem = document.getElementById("directionKey")
         for(let i = 1; i < 10; i++){
@@ -357,6 +369,7 @@ class Control{
         }
     }
 
+    /* 矢印の位置を返す */
     static arrowPosition(index,a){
         const x = [0,0,53,106,0,53,106,0,53,106]
         const y = [0,106,106,106,53,53,53,0,0,0]
@@ -367,7 +380,7 @@ class Control{
         }
     }
 
-        /* アイテムリストの表示 */
+    /* アイテムリストの表示 */
     static itemDisplay(playerId){
         const elem = document.getElementById('itemList');
         elem.style.display = "inline";
@@ -387,14 +400,13 @@ class Control{
         this.itemListIndex = index;
     }
     static getItemListIndex(){
-        console.log(this.pressedKeyStatus.item)
         if(this.itemListIndex === undefined){
             return  null
-        }else if(this.pressedKeyStatus.item > Config.keyPressedCount){
-            this.pressedKeyStatus.item = 0
+        //}else if(this.pressedKeyStatus.item > Config.keyPressedCount){
+            //this.pressedKeyStatus.item = 0
             const elem = document.getElementById('itemList');
-            elem.style.display = "none";
-            return  'cancel'
+            //elem.style.display = "none";
+            //return  'cancel'
         }else{
             return this.itemListIndex
         }
