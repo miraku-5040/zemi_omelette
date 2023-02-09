@@ -1,13 +1,10 @@
-    window.addEventListener("load", () => {
-        initialize()
-        loop()
-    });
+class Game{
 
-    let gameEndFlg
-    let mode
-    let turn
+    static load(){
+        Game.loop()
+    }
 
-    function initialize() {
+    static initialize() {
         //DBを準備する
         Database.initialize();
         // 画像を準備する
@@ -29,38 +26,38 @@
         //コントローラを準備する
         Control.initialize();
         //ターンの経過
-        turn = 1;
-        //
-        mode = 'start';
+        this.turn = 1;
+        //フェーズ
+        this.mode = 'start';
         //ゲームの終了フラグ
-        gameEndFlg = false
+        this.gameEndFlg = false
     }
 
-    async function loop() {
-        switch(mode) {
+    static async loop() {
+        switch(this.mode) {
             case 'start':
                 // 開始
-                mode = 'player';
+                this.mode = 'player';
                 break;
             case 'player':
                 // プレイヤーのターン
                 //ボタンを出す
                 //ボタン入力待ち
                 //player,stay,move,attack,skillReady,itemSelect,menu
-                playerInput();
-                mode = 'controlWait'
+                Game.playerInput();
+                this.mode = 'controlWait'
             case 'controlWait':
                 //入力待ち
                 break;
             case 'stay':
                 //ターンを消費しない行動をする
                 Player.guide();
-                mode = 'player'
+                this.mode = 'player'
                 break;
             case 'move':
                 // 移動に関するとこ
                 //動ける床の判定含む
-                mode = Player.moving();
+                this.mode = Player.moving();
                 break;
             case 'attack':
                 // 攻撃に関するとこ
@@ -69,57 +66,57 @@
             case 'skillReady':
                 // スキルの前準備に関するとこ
                 //skillGo or player or skillReady
-                mode = Skill.skillReady();
+                this.mode = Skill.skillReady();
                 break;
             case 'skillGo':
                 // スキルの使用
                 Skill.skillGo();
-                mode = 'enemy';
+                this.mode = 'enemy';
                 break;
             case 'itemSelect':
                 //アイテムリストからの選択
                 //'itemUse or player or itemSelect
-                mode = Item.itemSelect();
+                this.mode = Item.itemSelect();
                 break;
             case 'itemChoice':
                 //選択したアイテムに対する動作の選択
-                mode = Item.itemChoiceAction()
+                this.mode = Item.itemChoiceAction()
                 break;
             case 'itemUse':
                 // アイテムの使用
-                mode = Item.itemUse();
+                this.mode = Item.itemUse();
                 break;
             case 'menu':
                 // メニュー
-                mode = 'player';
+                this.mode = 'player';
                 break;
             case 'trap':
-                mode = Trap.activateTrap()
+                this.mode = Trap.activateTrap()
                 break;
             case 'itemPick':
                 Item.itemPick();
-                mode = 'enemy';
+                this.mode = 'enemy';
                 break;
             case 'enemy':
-                if(gameEndFlg){
-                    mode = 'alive';
+                if(this.gameEndFlg){
+                    this.mode = 'alive';
                     break
                 }
                 await Tool.sleep(0.3)
                 // 敵のターン
                 Enemy.action();
                 await Tool.sleep(0.3)
-                if(gameEndFlg){
-                    mode = 'die';
+                if(this.gameEndFlg){
+                    this.mode = 'die';
                 }else{
-                    mode = 'end';
+                    this.mode = 'end';
                 }
                 break;
             case 'end':
-                Player.spDecrease(turn);
+                Player.spDecrease(this.turn);
                 Player.setStatusTest();
-                turn++
-                mode = 'player';
+                this.turn++
+                this.mode = 'player';
                 break;
             case 'nextfloor':
                 Stage.setFloor()
@@ -133,7 +130,7 @@
                 Enemy.initialize()
                 await Tool.sleep(3)
                 Control.endLoading()
-                mode = 'player'
+                this.mode = 'player'
                 break;
             case 'die':
 
@@ -142,11 +139,16 @@
 
                 return
         }
-        requestAnimationFrame(loop); // 1/60秒後にもう一度呼び出す
+        requestAnimationFrame(this.load); // 1/60秒後にもう一度呼び出す
     }
 
-    async function playerInput(){
-        mode = await Player.playing();
+    static async playerInput(){
+        this.mode = await Player.playing();
     }
+}
 
+window.addEventListener("load", () => {
+        Game.initialize()
+        Game.loop()
+    });
 
