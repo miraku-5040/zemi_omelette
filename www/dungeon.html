@@ -109,6 +109,7 @@
                 </div>
                  <div id="message1" style="position:absolute; background-color: #CCCCCC; padding: 5px; top: 10px; left: calc(50% - 150px); width: 290px; height: 25px;"></div>
                  <div id="message2" style="position:absolute; background-color: #CCCCCC; padding: 5px; top: 35px; left: calc(50% - 150px); width: 290px; height: 25px; "></div>
+                 <div id="floor" style="position:absolute; background-color: #000000; color: #FFFFFF; top: 5px; left: 90%; width: 50px; height: 25px;" ></div>
             </div>
             <div id="control_layer" style="position:absolute; margin:0; top:0; left:0; height:100vh; width:100%;">
                 <div id="statusChange" onclick="Control.chengeStatusDisplay()" style="position:absolute; margin:0; top:10px; left:10px; height: 100px; width: 100px;"></div>
@@ -128,7 +129,10 @@
                     <!--選択しを表示-->
                 </div>
             </div>
-            <div id = "loading_layer" style="position: absolute; top:0; left:0; height:100vh; width:100%; background-color: #000000; margin: 0; display: none;"></div>
+            <div id = "loading_layer" style="position: absolute; top:0; left:0; height:100vh; width:100%; background-color: #000000; margin: 0; display: none;">
+                <span style="color: #FFFFFF; text-align: center;">NOW LOODING</span>
+            </div>
+            
         </div>
     </body>
 </html>

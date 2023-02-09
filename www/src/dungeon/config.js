@@ -35,9 +35,9 @@ Config.wallField = 3
     //フロア横
     Config.divisionCol = 5
     //部屋ごとの最大縦
-    Config.roomRowsMax = 10
+    Config.roomRowsMax = 9
     //部屋ごとの最大横
-    Config.roomColsMax = 10
+    Config.roomColsMax = 9
     //部屋ごとの最小縦
     Config.roomRowsMin = 6
     //部屋ごとの最小横

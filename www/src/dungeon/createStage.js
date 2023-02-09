@@ -12,7 +12,7 @@ class CreateStage{
         this.createRooms()
         return this.resultStage
     }
-    /*凍結*/
+    
     static createRooms(){
         //フロア縦
         const divisionRow = Config.divisionRow
@@ -268,7 +268,7 @@ class CreateStage{
         this.searchRooms(searchStertRoom)
         if(JSON.stringify(this.connectedRooms) != JSON.stringify([null,null,null,null,null,null,null,null,null,null,null,null,null,null,null])){
             const selectRooms = []
-            for(room of this.connectedRooms){
+            for(let room of this.connectedRooms){
                 if(room != null){
                     selectRooms.push(room)
                 }

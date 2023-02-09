@@ -467,10 +467,10 @@ class Control{
         this.itemAction = null
     }
     static startLoading(){
-        document.getElementById("loading_layer").display = "inline"
+        document.getElementById("loading_layer").style.display = "block"
     }
     static endLoading(){
-        document.getElementById("loading_layer").display = "none"
+        document.getElementById("loading_layer").style.display = "none"
     }
 
 

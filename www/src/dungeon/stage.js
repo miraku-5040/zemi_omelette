@@ -33,7 +33,9 @@ class Stage {
             trapArray: ['T0000','T0001'],
             maxTrap:5
         };
+        this.nowFloor = 0;
         //ステージを作成する
+        this.setFloor()
         this.createStage()
         
 
@@ -52,16 +54,21 @@ class Stage {
         this.board.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
                 this.setStageImage(indexX, indexY, element);
-                if(this.board[indexY][indexX].stageImageNumber != Config.regularField){
+                if(this.board[indexY][indexX] != Config.regularField){
                     return
                 }
+                let wallCount = 0;
                 for(let i = -1; i <= 1; i++){
                     for(let j = -1; j <= 1; j++){
-                        if(this.board[indexY + i][indexX + j].stageImageNumber == Config.wallField){
-                            return
+                        if(this.board[indexY + i][indexX + j] == Config.wallField){
+                            wallCount++
                         }
                     }
                 }
+                if(wallCount > 1){
+                    return
+                }
+                console
                 possiblePositions.push({y:indexY,x:indexX})  
             });
         });
@@ -143,11 +150,6 @@ class Stage {
         stageImage.style.left = x * Config.stageImgWidth + "px";
         stageImage.style.top = y * Config.stageImgHeight + "px";
         this.stageLayerElement.appendChild(stageImage);
-        // メモリにセットする
-        this.board[y][x] = {
-            stageImageNumber: stageImageNumber,
-            element: stageImage
-        }
         const min = Image.getMinmapImage(stageImageNumber);
         min.style.left = x * 3 + "px";
         min.style.top = y * 3 + "px";
@@ -172,7 +174,6 @@ class Stage {
     static moveStage(x, y){
         this.movingLayersElement.style.top = -y * Config.stageImgHeight + "px";
         this.movingLayersElement.style.left = -x * Config.stageImgWidth + "px";
-
     }
 
     /**
@@ -180,7 +181,7 @@ class Stage {
      * **/
     static checkStage(x,y){
         //移動できる床か判定
-        if(this.board[y][x].stageImageNumber != Config.regularField){
+        if(this.board[y][x] != Config.regularField){
             return true;
         }
         if(Enemy.checkEnemy(x,y)){
@@ -194,7 +195,7 @@ class Stage {
      * 床の場合はtrueを返す
      */
     static isFloor(x, y){
-        if(this.board[y][x].stageImageNumber === 1){
+        if(this.board[y][x] === 1){
             // 床の場合
             return true;
         }
@@ -228,6 +229,11 @@ class Stage {
 
     static getStageBoard(){
         return this.board
+    }
+
+    static setFloor(){
+        this.nowFloor++
+        document.getElementById("floor").innerHTML = "B"+ this.nowFloor +"階"
     }
 
 
