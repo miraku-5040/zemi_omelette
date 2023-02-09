@@ -36,7 +36,7 @@
         gameEndFlg = false
     }
 
-    function loop() {
+    async function loop() {
         switch(mode) {
             case 'start':
                 // 開始
