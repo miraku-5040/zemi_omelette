@@ -109,16 +109,19 @@ class Enemy{
                     return;
                 }
                 let next = {};
-                /* move */
-                next.type = 'move';
-                
                 if(this.checkAround(indexX,indexY)){
+                    /* attack */
+                    element.direction = this.checkAroundDirection(indexX,indexY)
+                    next.type = "attack";
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
                     element.next = next;
                     return;
                 }
+                
+                /* move */
+                next.type = 'move';
                 const result = Aster.enemyMove(Stage.getStageBoard(),{x: indexX,y: indexY},Player.getPlayerNowPosition());
                 if(result == "TypeError"){
                     next.x = indexX;
@@ -154,10 +157,7 @@ class Enemy{
                 element.next = next;
                 return;
 
-                /* attack */
-                //next.type = "attack";
-                //element.next = next;
-                // TODO 処理を追加する
+                
                     
             });
         });
@@ -223,6 +223,21 @@ class Enemy{
         return false;
     }
 
+    static checkAroundDirection(enemyX,enemyY){
+        const direction = [["leftup","up","rightup"],["left","","right"],["leftdown","down","rightdown"]]
+        //周り８マスを確認する
+        for(let x = -1; x <= 1; x++){
+            for(let y = -1; y <= 1; y++){
+                if(Player.isPlayerExistence(enemyX + x, enemyY + y)){
+                    
+                    return direction[y+1][x+1];
+                }
+
+            }
+        }
+        return false;
+    }
+
     /* 座標に応じた敵名を取得 */
     static getEnemyName(x, y){
         if(this.enemyStatusArray[y][x] === this.noDataItem){
@@ -236,12 +251,12 @@ class Enemy{
 
     /*座標に応じた敵のレベル取得*/
     static getEnemyLevel(x,y){
-        return this.enemyStatusArray[x][y].level
+        return this.enemyStatusArray[y][x].level
     }
 
     /* 座標に応じた敵の方向取得 */
     static getDirection(x,y){
-        return this.enemyStatusArray[x][y].direction;
+        return this.enemyStatusArray[y][x].direction;
     }
 
     /*座標に応じた敵の現在の攻撃能力取得*/
@@ -253,7 +268,7 @@ class Enemy{
         }else if(enemyStatus.atk.current < enemyStatus.atk.min){
             enemyAttackStatus.atk = enemyStatus.atk.min
         }else{
-            enemyAttackStatus.atk = enemyStatus.current
+            enemyAttackStatus.atk = enemyStatus.atk.current
         }
 
         if(enemyStatus.cri.current > enemyStatus.cri.max){

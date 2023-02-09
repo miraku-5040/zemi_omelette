@@ -39,6 +39,7 @@ function initialize() {
 }
 
 function loop() {
+    //console.log(mode); //test
     switch(mode) {
         case 'start':
             // 開始
@@ -50,8 +51,10 @@ function loop() {
             //ボタン入力待ち
             
             //player,stay,move,attack,skillReady,itemSelect,menu
-            mode = Player.playing()
-            //ボタンを消す
+            playerInput();
+            mode = 'controlWait'
+        case 'controlWait':
+            //入力待ち
             break;
         case 'stay':
             //ターンを消費しない行動をする
@@ -128,4 +131,8 @@ function loop() {
     }
     frame++;
     requestAnimationFrame(loop); // 1/60秒後にもう一度呼び出す
+}
+
+async function playerInput(){
+    mode = await Player.playing();
 }
