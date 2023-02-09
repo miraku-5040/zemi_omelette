@@ -4,8 +4,10 @@ class Enemy{
     static enemyStatusArray; //座標に対応するエネミーのステータスを持つ二次元配列 [y][x]
     static tempEnemyStatusArray; //移動時の一時データ
     static noDataItem;
+    static bigSizeDataItem; //{type:"sub", ｘ:relativeX, y:relativeY}アンカーの相対座標 TODO 追加
     static enemyIdArray; //エネミーのidの配列
-    /*      enemyId:1, //モンスターID
+    /*      type:main, //データタイプ TODO 追加
+            enemyId:1, //モンスターID
             enemyName:"スライム",//名前
             level: 1, //レベル
             distinction:2,//同モンスターの重複番号
@@ -256,7 +258,21 @@ class Enemy{
 
     /* 座標に応じた敵の方向取得 */
     static getDirection(x,y){
+        if(this.enemyStatusArray[y][x] === this.noDataItem){
+            // 敵が存在しない
+            return null;
+        }
         return this.enemyStatusArray[y][x].direction;
+    }
+
+    /* 座標に応じた敵のサイズを取得 */
+    static getEnemySize(x, y){
+        if(this.enemyStatusArray[y][x] === this.noDataItem){
+            // 敵が存在しない
+            return null;
+        }
+        // TODO 左上の座標を取得できるように修正する
+        return {x:x, y:y};
     }
 
     /*座標に応じた敵の現在の攻撃能力取得*/
