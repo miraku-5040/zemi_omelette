@@ -6,9 +6,7 @@ class Skill {
     //スキル実行
 
     // public
-    /**
-     * 初期化
-     */
+    /* 初期化 */
     static initialize() {
         this.skillDataMap = new Map();
         this.#skillEndInitialize(); //初期化
@@ -31,16 +29,12 @@ class Skill {
         this.testSkillId2 = "SA002"; //line magic
     }
 
-    /**
-     * playerから通常攻撃を呼び出し
-     */
+    /* playerから通常攻撃を呼び出し */
     static playerUseNormalAttack(playerId) {
         this.playerUseSkill(this.normalAttackId, playerId);
     }
 
-    /**
-     * playerからスキル呼び出し
-     */
+    /* playerからスキル呼び出し */
     static playerUseSkill(skillId, playerId) {
         //skillUserDataをセット
         const skillUserData = {};
@@ -66,16 +60,12 @@ class Skill {
         };
     }
 
-    /**
-     * enemyから通常攻撃呼び出し
-     */
+    /* enemyから通常攻撃呼び出し */
     static enemyUseNormalAttack(nowX, nowY) {
         this.enemyUseSkill(this.normalAttackId, nowX, nowY);
     }
 
-    /**
-     * enemyからスキル呼び出し
-     */
+    /* enemyからスキル呼び出し */
     static enemyUseSkill(skillId, nowX, nowY) {
         //skillUserDataをセット
         const skillUserData = {};
