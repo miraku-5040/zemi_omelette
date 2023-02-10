@@ -334,11 +334,20 @@ class CreateStage{
 
     static bossStageCreate(){
         const col = new Array(Config.stageCols); //横の配列
+        const walls = new Array(Config.stageCols);
             col.fill(Config.regularField); //横の配列を2で埋める
+            col[0] = Config.wallField
+            col[col.length - 1] = Config.wallField
+            walls.fill(Config.wallField)
             const row = new Array(Config.stageRows); //縦の配列
             for(let y = 0; y < row.length; y++){
-                row[y]=col.concat();
+                if(y == 0 || y == row.length - 1){
+                    row[y]=walls.concat();
+                }else{
+                    row[y]=col.concat();
+                }
             }
+            
         this.resultStage = JSON.parse(JSON.stringify(row));
         return this.resultStage
     }

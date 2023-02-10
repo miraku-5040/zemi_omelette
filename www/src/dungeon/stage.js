@@ -25,14 +25,14 @@ class Stage {
         //ステージの情報をDBから取得する
         this.stageStatus = {
             stageName: '始まりの遺跡',
-            bottomFloor: 2,
+            bottomFloor: 4,
             enemyArray: ['E0001'],
             maxEnemy: 5,
             itemArray: ['IW000','IS000','IT000'],
             maxItem: 3,
             trapArray: ['T0000','T0001'],
             maxTrap:5,
-            bossEnemyId:'B000'
+            bossEnemyId:'E0001'
         };
         this.nowFloor = 0;
         //ステージを作成する
@@ -77,17 +77,22 @@ class Stage {
     static createBossStage(){
         this.stageElementInitialize()
         this.board =CreateStage.bossStageCreate()
+        this.board.forEach((col, indexY) => {
+            col.forEach((element, indexX) => {
+                this.setStageImage(indexX, indexY, element);
+            })
+        })
         //キャラクターの座標に応じたレイヤーの座標を決定
         const movingLayersElement = document.getElementById(`moving_layers`);
-        movingLayersElement.style.top = -20 * Config.stageImgHeight + "px"; 
+        movingLayersElement.style.top = -16 * Config.stageImgHeight + "px"; 
         movingLayersElement.style.left = -26 * Config.stageImgWidth + "px"; 
         movingLayersElement.style.position = 'absolute';
         this.movingLayersElement = movingLayersElement;
         //プレイヤーの現在座標をセットする
         Player.resetCharacterPosition(26,20)
 
-        const enemyId = stageStatus.bossEnemyId
-        const enemyInfo ={id: enemyId, position:selectPosition}
+        const enemyId = this.stageStatus.bossEnemyId
+        const enemyInfo ={id: enemyId, position:{x: 26,y:12}}
         this.popEnemyArray.push(enemyInfo)
     }
 
@@ -280,7 +285,7 @@ class Stage {
     }
 
     static checkFloor(){
-        if(this.nowFloor >= stageStatus.bottomFloor){
+        if(this.nowFloor >= this.stageStatus.bottomFloor){
             return true
         }
         return false
