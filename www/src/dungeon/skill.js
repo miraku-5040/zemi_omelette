@@ -239,6 +239,7 @@ class Skill {
             let enemyDefenceStatus = {};
             let playerDefenceStatus = {};
             let playerId = "";
+            let targetEffectDisplayFunction = () => {};
             if (isTargetEnemy) {
                 //enemyの重複チェック
                 const enemyName = Enemy.getEnemyName(coordinate.x, coordinate.y);
@@ -250,9 +251,11 @@ class Skill {
                     targetedEnemyNameSet.add(enemyName);
                 }
                 enemyDefenceStatus = getEnemyDefenceStatusFunction(coordinate);
+                targetEffectDisplayFunction = Effect.enemyTargetEffectDisplay;
             } else if (isTargetPlayer) {
                 playerId = Player.getPlayerId(coordinate.x, coordinate.y);
                 playerDefenceStatus = getPlayerDefenceStatusFunction(playerId);
+                targetEffectDisplayFunction = Effect.playerTargetEffectDisplay;
             }
             nowSkillData.effect.forEach((effectData, index) => {
                 // 効果を順に実行する
@@ -262,14 +265,8 @@ class Skill {
                 }
                 // ターゲットエフェクトを表示する
                 const effectReadyKey = effectReadyKeyArray[index];
-                if (effectReadyKey !== null) {
-                    // 設定がある場合は表示する
-                    const effectCoordinate = {};
-                    effectCoordinate.x = coordinate.x;
-                    effectCoordinate.y = coordinate.y;
-                    effectCoordinate.direction = this.skillUserData.direction;
-                    // TODO enemyからサイズを取得してする
-                    //Effect.targetEffectDisplay(effectReadyKey, [effectCoordinate]);
+                if (effectReadyKey !== null) { //キーがない場合はスキップする
+                    targetEffectDisplayFunction.call(Effect, effectReadyKey, coordinate.x, coordinate.y, this.skillUserData.direction);
                 }
                 // 計算とスキル効果反映
                 switch (true) {
