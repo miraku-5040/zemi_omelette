@@ -202,8 +202,8 @@ function updateWeaponEvolution() {
 function pullWeapon1() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Weapon = ncmb.DataStore(this.PICTORIARY_DB);
-    // 乱数発生(1から23)
-    var random = Math.floor(Math.random() * 23) + 1;
+    // 乱数発生(1から24)
+    var random = Math.floor(Math.random() * 24) + 1;
     // 武器の全データ取得
     Weapon.equalTo("weapon_id", Number(random))
         .fetchAll()
@@ -227,8 +227,8 @@ function pullWeapon10() {
     var ncmb = new NCMB(this.APPLICATION_KEY, this.CLIENT_KEY);
     var Weapon = ncmb.DataStore(this.PICTORIARY_DB);
     for (var i = 1; i <= 10; i++) {
-        // 乱数発生(1から23)
-        var random = Math.floor(Math.random() * 23) + 1;
+        // 乱数発生(1から24)
+        var random = Math.floor(Math.random() * 24) + 1;
         // 武器の全データ取得
         Weapon.equalTo("weapon_id", Number(random))
             .fetchAll()
