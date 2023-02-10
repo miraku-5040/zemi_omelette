@@ -36,6 +36,7 @@ class Database{
     static getEnemy(id = NaN){
         this.enemyCount += 1
         const enemyData = {
+            type:"main",//データの種類
             enemyId:'E0001', //モンスターID
             enemyName:"スライム",//名前
             level: 1, //レベル

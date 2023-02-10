@@ -1,5 +1,12 @@
 /* 敵の処理 */
 class Enemy{
+    /*memo
+    * 大きいサイズのデータを追加する
+    * 生成
+    * check
+    * get
+    * kill
+    */
 
     static enemyStatusArray; //座標に対応するエネミーのステータスを持つ二次元配列 [y][x]
     static tempEnemyStatusArray; //移動時の一時データ
@@ -26,14 +33,15 @@ class Enemy{
     static initialize() {
         /* enemyStatusArrayの準備 */
         this.noDataItem = 0;
+        this.bigSizeDataType = "sub";
         const col = new Array(Config.stageCols); //横の配列
         col.fill(this.noDataItem); //横の配列を0で埋める
         const row = new Array(Config.stageRows); //縦の配列
         for(let y = 0; y < row.length; y++){
             row[y]=col.concat();
         }
-        this.enemyStatusArray = JSON.parse(JSON.stringify(row));
-        this.tempEnemyStatusArray = JSON.parse(JSON.stringify(row));
+        this.enemyStatusArray = Tool.deepCopy(row);
+        this.tempEnemyStatusArray = Tool.deepCopy(row);
 
         this.enemyIdArray = [];
         this.startFloor();
@@ -45,11 +53,16 @@ class Enemy{
         generateEnemyArray.forEach((enemy) => {
             this.enemyStatusArray[enemy.position.y][enemy.position.x] = Database.getEnemy(enemy.id)
             this.enemyIdArray.push(enemy.id);
+            if(enemy.size === 1){
+                // 1マスの場合はそのまま終了する
+                return;
+            }
+            //subデータを配置する
+            this.putBigSizeDataToEnemyStatusArray(enemy.position.x, enemy.position.y);
         });
         
         //Imageでenemyの画像を読み込む
         Image.createEnemyImages(this.enemyIdArray);
-        /* end */
         /* 敵を描画 */
         this.screenRenderingAll();
 
@@ -59,7 +72,7 @@ class Enemy{
     static screenRenderingAll() {
         this.enemyStatusArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
-                if(element === this.noDataItem){
+                if(element === this.noDataItem || element.type === this.bigSizeDataType){
                     return;
                 }
                 this.screenRenderingOne(indexX, indexY);
@@ -69,10 +82,16 @@ class Enemy{
     static screenRenderingOne(indexX, indexY) {
         const enemyLayerElement = document.getElementById("enemy_layer");
         const enemyStatusArrayElement = this.enemyStatusArray[indexY][indexX];
+        const size = enemyStatusArrayElement.size;
         const imgElement = Image.getEnamyImage(enemyStatusArrayElement.enemyId);
         imgElement.id = "enemy_" + enemyStatusArrayElement.enemyId + "_" + enemyStatusArrayElement.distinction;
         imgElement.style.top = indexY * Config.stageImgHeight + "px";
         imgElement.style.left = indexX * Config.stageImgWidth + "px";
+        if(size > 1){
+            //大きいサイズの敵の場合は画像を大きくする
+            imgElement.style.height = size * Config.stageImgHeight + "px";
+            imgElement.style.width = size * Config.stageImgWidth + "px"; 
+        }
         enemyLayerElement.appendChild(imgElement);
     }
 
@@ -81,7 +100,7 @@ class Enemy{
         this.updateNextMove(); //次の行動(移動先)を設定
         this.enemyStatusArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
-                if(element === this.noDataItem){
+                if(element === this.noDataItem || element.type === this.bigSizeDataType){
                     return;
                 }
                 switch(element.next.type){
@@ -107,7 +126,7 @@ class Enemy{
     static updateNextMove() {
         this.enemyStatusArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
-                if(element === this.noDataItem){
+                if(element === this.noDataItem || element.type === this.bigSizeDataType){
                     return;
                 }
                 let next = {};
@@ -118,6 +137,9 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
+                    if(element.size > 1){
+                        //TODO
+                    }
                     element.next = next;
                     return;
                 }
@@ -129,6 +151,7 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
+                    this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                     element.next = next;
                     return;
                 }
@@ -136,6 +159,7 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
+                    this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                     element.next = next;
                     return;
                 }
@@ -143,6 +167,7 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
+                    this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                     element.next = next;
                     return;
                 }
@@ -150,17 +175,16 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
+                    this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                     element.next = next;
                     return;
                 }
                 next.x = result.x;
                 next.y = result.y;
                 this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
+                this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                 element.next = next;
                 return;
-
-                
-                    
             });
         });
         /* end */
@@ -171,6 +195,7 @@ class Enemy{
     /* 敵移動 */
     static moving(currentX, currentY){
         const elementItem = this.enemyStatusArray[currentY][currentX];
+        console.log("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
         const nextX = elementItem.next.x;
         const nextY = elementItem.next.y;
         const imgElement = document.getElementById("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
@@ -189,6 +214,44 @@ class Enemy{
      * 敵作成時にデータベースから敵のデータを取得する
     */
     static findDataBase(){
+    }
+
+    /* サイズが大きいエネミーのデータをenemyStatusArrayに配置する */
+    static putBigSizeDataToEnemyStatusArray(anchorX, anchorY){
+        const mainData = this.enemyStatusArray[anchorY][anchorX];
+        const size = mainData.size;
+        for(let colIndex = 0; colIndex < size; colIndex++){
+            for(let rowIndex = 0; rowIndex < size; rowIndex++){
+                if(colIndex <= 0 && rowIndex <= 0){
+                    //mainの位置(0, 0)はスキップする
+                    continue;
+                }
+                const subData = {};
+                subData.type = this.bigSizeDataType;
+                subData.relativeX = -rowIndex;
+                subData.relativeY = -colIndex;
+                this.enemyStatusArray[anchorY + rowIndex][anchorX + colIndex] = subData;
+            }
+        }
+    }
+
+    /* サイズが大きいエネミーのデータをtempEnemyStatusArrayに配置する */
+    static putBigSizeDataToTempEnemyStatusArray(anchorX, anchorY){
+        const mainData = this.tempEnemyStatusArray[anchorY][anchorX];
+        const size = mainData.size;
+        for(let colIndex = 0; colIndex < size; colIndex++){
+            for(let rowIndex = 0; rowIndex < size; rowIndex++){
+                if(colIndex <= 0 && rowIndex <= 0){
+                    //mainの位置(0, 0)はスキップする
+                    continue;
+                }
+                const subData = {};
+                subData.type = this.bigSizeDataType;
+                subData.relativeX = -rowIndex;
+                subData.relativeY = -colIndex;
+                this.tempEnemyStatusArray[anchorY + rowIndex][anchorX + colIndex] = subData;
+            }
+        }
     }
 
     /* 指定マスに敵の存在チェック */
@@ -242,42 +305,64 @@ class Enemy{
 
     /* 座標に応じた敵名を取得 */
     static getEnemyName(x, y){
-        if(this.enemyStatusArray[y][x] === this.noDataItem){
-            // 敵が存在しない
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
             return null;
         }
-        const name = this.enemyStatusArray[y][x].enemyName;
-        const distinction = this.enemyStatusArray[y][x].distinction;
+        const name = this.enemyStatusArray[checkedPosition.y][checkedPosition.x].enemyName;
+        const distinction = this.enemyStatusArray[checkedPosition.y][checkedPosition.x].distinction;
         return name + distinction;
     }
 
     /*座標に応じた敵のレベル取得*/
     static getEnemyLevel(x,y){
-        return this.enemyStatusArray[y][x].level
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
+            return null;
+        }
+        return this.enemyStatusArray[checkedPosition.y][checkedPosition.x].level
     }
 
     /* 座標に応じた敵の方向取得 */
     static getDirection(x,y){
-        if(this.enemyStatusArray[y][x] === this.noDataItem){
-            // 敵が存在しない
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
             return null;
         }
-        return this.enemyStatusArray[y][x].direction;
+        return this.enemyStatusArray[checkedPosition.y][checkedPosition.x].direction;
     }
 
     /* 座標に応じた敵のサイズを取得 */
     static getEnemySize(x, y){
-        if(this.enemyStatusArray[y][x] === this.noDataItem){
-            // 敵が存在しない
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
             return null;
         }
-        // TODO 左上の座標を取得できるように修正する
-        return {x:x, y:y};
+        return this.enemyStatusArray[checkedPosition.y][checkedPosition.x].size;
+    }
+
+    /* 座標に応じた敵のアンカー座標を取得 */
+    static getEnemyAnchorPoint(x, y){
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
+            return null;
+        }
+        return {x:checkedPosition.x, y:checkedPosition.y};
     }
 
     /*座標に応じた敵の現在の攻撃能力取得*/
     static getEnemyAttackStatus(x,y){
-        const enemyStatus = this.enemyStatusArray[y][x];
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
+            return null;
+        }
+        const enemyStatus = this.enemyStatusArray[checkedPosition.y][checkedPosition.x];
         const enemyAttackStatus = {};
         if(enemyStatus.atk.current > enemyStatus.atk.max){
             enemyAttackStatus.atk = enemyStatus.atk.max
@@ -307,7 +392,12 @@ class Enemy{
 
     /*座標に応じた敵の現在の防御能力取得*/
     static getEnemyDefenceStatus(x,y){
-        const enemyStatus = this.enemyStatusArray[y][x];
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
+            return null;
+        }
+        const enemyStatus = this.enemyStatusArray[checkedPosition.y][checkedPosition.x];
         const enemyDefenceStatus = {};
         if(enemyStatus.def.current > enemyStatus.def.max){
             enemyDefenceStatus.def = enemyStatus.def.max
@@ -329,11 +419,12 @@ class Enemy{
 
     /* hp変化 */
     static enemyHpFluctuation(x, y, incrementValue){
-        const enemyStatus = this.enemyStatusArray[y][x]
-        if(enemyStatus === this.noDataItem){
-            //存在しない場合終了
-            return;
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
+            return null;
         }
+        const enemyStatus = this.enemyStatusArray[checkedPosition.y][checkedPosition.x]
         const updateValue = enemyStatus.hp.current + incrementValue;
         if(enemyStatus.hp.min <= updateValue && updateValue <= enemyStatus.hp.max){ //hpの範囲内
             enemyStatus.hp.current = updateValue;
@@ -362,18 +453,42 @@ class Enemy{
      * キルメッセージを表示する
      */
     static enemyKill(x, y){
-        const enemyStatus = this.enemyStatusArray[y][x];
-        if(enemyStatus === this.noDataItem){
-            //存在しない場合終了
-            return;
+        const checkedPosition = this.#checkEnemyStatusArray(x, y);
+        if(checkedPosition === null){
+            //エネミーが存在しないので終了する
+            return false;
         }
+        const enemyStatus = this.enemyStatusArray[checkedPosition.y][checkedPosition.x];
         const elementId = "enemy_" + enemyStatus.enemyId + "_" + enemyStatus.distinction;
         const enemyImgElement = document.getElementById(elementId);
         Message.enemyKillMessage(enemyStatus.enemyName + enemyStatus.distinction);
         enemyImgElement.style.display = "none";
         enemyImgElement.remove();
-        this.enemyStatusArray[y][x] = this.noDataItem;
+        const size = enemyStatus.size;
+        for(let colIndex = 0; colIndex < size; colIndex++){
+            for(let rowIndex = 0; rowIndex < size; rowIndex++){
+                this.enemyStatusArray[checkedPosition.y + rowIndex][checkedPosition.x + colIndex] = this.noDataItem;
+            }
+        }
         return true;
     }
 
+    /* enemyStatusArrayのデータをチェックする get系のメソッドで使用 */
+    static #checkEnemyStatusArray(x, y){
+        if(x >= Config.stageCols && y >= Config.stageRows){
+            //座標が配列外の場合はエラー
+            return null;
+        }
+        if(this.enemyStatusArray[y][x] === this.noDataItem){
+            // 敵が存在しない
+            return null;
+        }
+        if(this.enemyStatusArray[y][x].type === this.bigSizeDataType){
+            //subデータの場合
+            const subData = this.enemyStatusArray[y][x];
+            x = x + subData.relativeX;
+            y = y + subData.relativeY;
+        }
+        return {x:x, y:y};
+    }
 }
