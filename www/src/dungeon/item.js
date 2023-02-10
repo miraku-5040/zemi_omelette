@@ -1,8 +1,7 @@
 // アイテム優先
 class Item{
 
-    
-
+    /*初期化*/
     static initialize() {
         /* itemArrayの準備 */
         this.noDataItem = 0;
@@ -18,6 +17,7 @@ class Item{
         this.startFloor();
     }
 
+    /*フロアの生成*/
     static startFloor(){
         const generateItemArray = Stage.popItem()
         generateItemArray.forEach((item) => {
@@ -28,7 +28,7 @@ class Item{
         Image.createItemImages(this.itemIdArray);
         this.screenRenderingAll();
     }
-
+    /*フィールド上のすべてのアイテムの画像をセットする*/
     static screenRenderingAll() {
         this.itemArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
@@ -39,7 +39,7 @@ class Item{
             });
         });
     }
-
+    /*画像セット*/
     static screenRenderingOne(indexX, indexY) {
         const itemLayerElement = document.getElementById("item_layer");
         const imgElement = Image.getDropItemImage(0);

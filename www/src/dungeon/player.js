@@ -34,9 +34,7 @@ class Player{
      }
 
     
-    /**
-     * control.jsから取得できる入力キーから次の動作を判断する
-     * **/
+    /* control.jsから取得できる入力キーから次の動作を判断する */
     static async playing(){
         const inputKey = await Control.getPlayingKeyStatus()
         switch(inputKey){
@@ -146,16 +144,12 @@ class Player{
         }
 
     }
-    /**
-     * キャラの進行方向を決める
-     * **/
+    /* キャラの進行方向を決める */
      static guide(){
          //進行方向を表示する TODO
          this.steyCharacterPosition();
      }
-    /**
-     * キャラの移動に関することをする
-     * **/
+    /* キャラの移動に関することをする */
     static moving(){
         //床判定
         if(Stage.checkStage(this.playerStatus.next.x, this.playerStatus.next.y)){
@@ -206,7 +200,7 @@ class Player{
         this.playerStatus.next.x = this.playerStatus.now.x
         this.playerStatus.next.y = this.playerStatus.now.y
     }
-
+    /*座標のリセット(主にフロアの生成時に使われる)*/
     static resetCharacterPosition(x,y){
         //最初の地点決定
         this.playerStatus.now.x = x
@@ -251,7 +245,8 @@ class Player{
     }
 
     /* 座標に応じたプレイヤーのplayerIdを取得
-     * 座標にプレイヤーが存在しない場合はNullを返す */
+     * 座標にプレイヤーが存在しない場合はNullを返す
+     */
     static getPlayerId(x, y) {
         const nowCoordinate = this.playerStatus.now;
         if(nowCoordinate.x === x && nowCoordinate.y === y){
@@ -322,9 +317,7 @@ class Player{
         return playerAttackStatus;
     }
 
-    /**
-     * playerIdに応じたプレイヤーの現在の防御能力取得
-     */
+    /* playerIdに応じたプレイヤーの現在の防御能力取得 */
     static getPlayerDefenseStatus(playerId){
         if(this.playerStatus.playerId !== playerId){
             //playerIdが存在しない
@@ -337,15 +330,17 @@ class Player{
 
         return playerDefenseStatus;
     }
-
+    /* プレイヤーのアイテムを参照する */
     static getPlayerItems(playerId){
         return Tool.deepCopy(Player.playerStatus.items);
     }
 
+    /* アイテムリストに追加する */
     static addPlayerItem(item){
         this.playerStatus.items.push(item)
     }
 
+    /*アイテムリストから削除する*/
     static splicePlayerItem(index){
         this.playerStatus.items.splice(index, 1)
     }
@@ -378,6 +373,7 @@ class Player{
         }
     }
 
+    /* ステータスの表示 */
     static setStatusTest(){
         document.getElementById("hp").innerHTML = this.playerStatus.hp.current
         document.getElementById("atk").innerHTML = this.playerStatus.atk.current

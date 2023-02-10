@@ -41,9 +41,6 @@ class Game{
                 break;
             case 'player':
                 // プレイヤーのターン
-                //ボタンを出す
-                //ボタン入力待ち
-                //player,stay,move,attack,skillReady,itemSelect,menu
                 Game.playerInput();
                 this.mode = 'controlWait'
             case 'controlWait':
@@ -56,7 +53,6 @@ class Game{
                 break;
             case 'move':
                 // 移動に関するとこ
-                //動ける床の判定含む
                 this.mode = Player.moving();
                 break;
             case 'attack':
@@ -86,26 +82,29 @@ class Game{
                 // アイテムの使用
                 this.mode = Item.itemUse();
                 break;
+            case 'itemPick':
+                Item.itemPick();
+                this.mode = 'enemy';
+                break;
             case 'menu':
                 // メニュー
                 this.mode = 'player';
                 break;
             case 'trap':
+                //トラップの発動処理（階段含む）
                 this.mode = Trap.activateTrap()
                 break;
-            case 'itemPick':
-                Item.itemPick();
-                this.mode = 'enemy';
-                break;
             case 'enemy':
+                //ボスと倒したかの判定（べつのcaseに変えるべき）
                 if(this.gameEndFlg){
                     this.mode = 'alive';
                     break
                 }
-                await Tool.sleep(0.5)
+
                 // 敵のターン
                 Enemy.action();
-                await Tool.sleep(0.5)
+
+                //HPが０になったかの判定
                 if(this.gameEndFlg){
                     this.mode = 'die';
                 }else{
@@ -113,24 +112,25 @@ class Game{
                 }
                 break;
             case 'end':
-                Player.spDecrease(this.turn);
-                Player.setStatusTest();
+                Player.spDecrease(this.turn);//満腹度の減少
+                Player.setStatusTest();//テスト用のステータス表示
                 this.turn++
                 this.mode = 'player';
                 break;
             case 'nextfloor':
-                Stage.setFloor()
-                Control.startLoading()
-                Stage.createFloor()
-                await Tool.sleep(3)
-                Control.endLoading()
+                Stage.setFloor()//
+                Control.startLoading()//画面の暗転
+                Stage.createFloor()//次のステージの作成
+                await Tool.sleep(3)//ステージの切り替わりなので3秒間止める
+                Control.endLoading()//画面の明転
                 this.mode = 'player'
                 break;
             case 'die':
+                //気絶
                 Control.endGame()
-                return
+                return亡
             case 'alive':
-
+                //生還時
                 return
         }
         requestAnimationFrame(this.load); // 1/60秒後にもう一度呼び出す

@@ -2,8 +2,8 @@
 class Config {
 }
 
-Config.playerReferencePointTop = 3
-Config.playerReferencePointLeft = 7
+Config.playerReferencePointTop = 3 //プレイヤーの画面上の位置
+Config.playerReferencePointLeft = 7 //プレイヤーの画面上の位置
 
 Config.stageImgWidth = 53; //横ひとマス
 Config.stageImgHeight = 53;//縦ひとマス
@@ -18,8 +18,8 @@ Config.characterImageTotal = 10;//
 Config.keyPressedCount = 5;//長押し判定のフレーム数
 
 Config.playerItemTotal = 40;//持てる持ち物の上限
-Config.itemListImageHeight = 50;
-Config.itemListImageWidth = 50;
+Config.itemListImageHeight = 50;//所持アイテムの画像のサイズ
+Config.itemListImageWidth = 50;//所持アイテムの画像のサイズ
 
 //ステージの画像番号
 Config.regularField = 1

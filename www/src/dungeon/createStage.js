@@ -70,6 +70,7 @@ class CreateStage{
             const roomCols =   Tool.getRandomInt(roomColsMax,roomColsMin)
             for(let y = 0; y < roomRows; y++){
                 for(let x = 0; x < roomCols; x++){
+                    //部屋の縁の場合すべて戻る（なくてもできる）*
                     if(y == 0 && x == 0){
                         continue
                     }
@@ -96,6 +97,7 @@ class CreateStage{
                     if(x == roomCols-1){
                         continue
                     }
+                    //ここまで*
                     this.resultStage[position.stertY + y][position.stertX + x] = Config.regularField
                 }
             }
@@ -286,7 +288,7 @@ class CreateStage{
     }
 
     
-    //部屋がつながってるか再起探索
+    //部屋が全部つながってるか再帰探索
     static searchRooms(searchStertRoom){
         if(searchStertRoom == null){
             return
@@ -308,6 +310,7 @@ class CreateStage{
         })
     }
 
+    //壁の設置
     static createWall(x,y){
         if(this.resultStage[y][x] == Config.regularField){
             return
@@ -315,6 +318,7 @@ class CreateStage{
         const regularFieldArray = new Array(8)
         regularFieldArray.fill(false)
         let index = 0
+        //8方向のフィールド情報を記録した配列を作る
         for(let i = -1; i <= 1; i++){
             for(let j = -1; j <= 1; j++){
                 if(i == 0 && j == 0){continue}
@@ -324,14 +328,15 @@ class CreateStage{
                 index++
             }
         }
+        //配列の要素すべてがFALSE（床じゃない）場合の比較
         if(JSON.stringify(regularFieldArray) == JSON.stringify([false,false,false,false,false,false,false,false])){
             return
         }
         this.resultStage[y][x] = Config.wallField
 
-        
     }
 
+    //ボス部屋の作成 フロアの最大値を取った大部屋
     static bossStageCreate(){
         const col = new Array(Config.stageCols); //横の配列
         const walls = new Array(Config.stageCols);

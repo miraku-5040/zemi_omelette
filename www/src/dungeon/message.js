@@ -5,9 +5,7 @@ class Message{
     //aはsした
     //aはiした
 
-    
-    /* 以下アイテム */
-
+    /*アイテムを使った*/
     static itemUseMessage(itemName,isSuccess){
         if(isSuccess){
             this.#updateMessage(itemName+"を使った")
@@ -15,15 +13,17 @@ class Message{
             this.#updateMessage(itemName+"が壊れた")
         }
     }
-
+    /*アイテムを装備した*/
     static itemEquipMessage(itemName){
             document.getElementById("message1").innerHTML =  itemName+"を装備した";
     }
 
+    /*アイテムを装備した*/
     static itemPutMessage(itemName){
             document.getElementById("message1").innerHTML =  itemName+"を捨てた";
     }
 
+    /*アイテムを拾った*/
     static itemPickMessage(itemName,isSuccess){
         if(isSuccess){
             this.#updateMessage(itemName+"を拾った")

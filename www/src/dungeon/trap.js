@@ -1,5 +1,6 @@
 class Trap{
 
+    /* 初期化 */
     static initialize() {
         /* trapArrayの準備 */
         this.underTrap = null
@@ -16,6 +17,7 @@ class Trap{
         this.startFloor();
     }
 
+    /*フロアの生成*/
     static startFloor(){
         const generateTrapArray = Stage.popTrap()
         generateTrapArray.forEach((trap) => {
@@ -27,6 +29,7 @@ class Trap{
         this.screenRenderingAll();
     }
 
+    /*フィールド上のすべてのトラップの画像をセットする*/
     static screenRenderingAll() {
         this.trapArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
@@ -38,6 +41,7 @@ class Trap{
         });
     }
 
+    /*画像セット*/
     static screenRenderingOne(indexX, indexY) {
         const itemLayerElement = document.getElementById("trap_layer");
         const imgElement = Image.getTrapImage(this.trapArray[indexY][indexX].trapId)
@@ -50,6 +54,7 @@ class Trap{
         itemLayerElement.appendChild(imgElement);
     }
 
+    /*トラップがあるか*/
     static checkTrap(x,y){
         if(this.trapArray[y][x] === this.noDataItem){
             return false
@@ -59,9 +64,10 @@ class Trap{
         this.underTrap = this.trapArray[y][x]
         return true
     }
-
+    /*トラップの発動*/
     static activateTrap(){
         if(this.underTrap.trapId == 'T0000'){
+            //階段
             return 'nextfloor'
         }
         //その他トラップ発動

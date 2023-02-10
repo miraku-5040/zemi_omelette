@@ -42,7 +42,7 @@ class Image {
         });
     }
 
-    /* stageImagesに床、無、壁上右下左、角上右下左、道角上右下左の14個の画像が入る */
+    /* stageImagesに床、無、壁の3個の画像が入る */
     static createStageImages(){
         this.stageImages = [];
         for(let i=1; i <= Config.stageImageTotal; i++){
@@ -79,6 +79,7 @@ class Image {
         });
     }
 
+    /*trapImageにトラップの画像が入る*/
     static createTrapImages(trapIdArray = []){
         const errorIndex = 0;
         this.trapImages = new Map();
@@ -92,7 +93,8 @@ class Image {
         });
     }
 
-     static createItemImages(itemIdArray = []){
+    /*itemImagesにアイテムの画像が入る*/
+    static createItemImages(itemIdArray = []){
         const errorIndex = 0;
         this.itemImages = new Map();
         //エラー用の画像をセット
@@ -103,7 +105,7 @@ class Image {
             const image = this.createElement(element);
             this.enemyImages.set(element, image);
         });
-     }
+    }
 
     /* itemImagesにフィールド上に落ちているアイテムの画像を格納 */
     static createDropItemImages(){
@@ -112,6 +114,7 @@ class Image {
         this.dropItemImages.push(image);
     }
 
+    /*プレイヤーの移動キーの画像*/
     static createArrow(){
         const index = [8,9,6,3,2,1,4,7]
         this.arrowImages = new Array(9)
@@ -171,6 +174,7 @@ class Image {
         return image;
     }
 
+    /* itemImagesの要素を取得 */
     static getItemImage(itemId){
         const errorIndex = 0;
         const matchObject = this.itemImages.get(itemId);
@@ -181,6 +185,7 @@ class Image {
         return image;
     }
 
+    /* trapImagesの要素を取得 */
     static getTrapImage(trapId){
         const errorIndex = 0;
         const matchObject = this.trapImages.get(trapId);
@@ -191,9 +196,7 @@ class Image {
         return image;
     }
 
-    /**
-     * idからエフェクト画像を取得する
-     */
+    /* idからエフェクト画像を取得する */
     static getEffectImage(effectId = this.errorId){
         if(!this.effectImages.has(effectId)){
             // mapに存在しない場合
@@ -203,8 +206,7 @@ class Image {
         return imgElement.cloneNode();
     }
 
-    /**
-     *  idからエフェクト画像をmapにセットする */
+    /* idからエフェクト画像をmapにセットする */
     static setEffectImage(effectId){
         if(this.effectImages.has(effectId)){
             // mapに存在する場合は終了
@@ -220,6 +222,7 @@ class Image {
         return image
     }
 
+    /* arrowImagesの要素を取得 */
     static getArrowImages(index){
         const image = this.arrowImages[index].cloneNode(true)
         return image

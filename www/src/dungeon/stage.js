@@ -2,10 +2,7 @@ class Stage {
 
     static movingLayersElement;
     static stageLayerElement;
-    /*
-    
-    
-    */
+    /* 初期化 */
     static initialize() {
         //ステージの基準座標を決める。（キャラクターの位置と同じ
         const startingPointElement = document.getElementById(`starting_point`);
@@ -42,6 +39,7 @@ class Stage {
 
     }
 
+    /* ステージの作成 */
     static createStage(){
         this.stageElementInitialize()
         const possiblePositions = [];
@@ -73,7 +71,7 @@ class Stage {
         Stage.createItems(possiblePositions)
         Stage.createTraps(possiblePositions)
     }
-
+    /* ボスステージの作成 */
     static createBossStage(){
         this.stageElementInitialize()
         this.board =CreateStage.bossStageCreate()
@@ -95,7 +93,7 @@ class Stage {
         const enemyInfo ={id: enemyId, position:{x: 26,y:12}}
         this.popEnemyArray.push(enemyInfo)
     }
-
+    /* 前フロアの情報の初期化 */
     static stageElementInitialize(){
         this.stageLayerElement.innerHTML = ""
         this.minmap.innerHTML = ""
@@ -107,7 +105,7 @@ class Stage {
         this.popItemArray = []
         this.popTrapArray = []
     }
-
+    /* ステージ上のプレーヤーの座標の設定 */
     static createPlayer(possiblePositions){
         let selectIndex = Tool.getRandomInt(possiblePositions.length)
         //配置可能座標にキャラクターを配置
@@ -124,6 +122,7 @@ class Stage {
         Player.resetCharacterPosition(selectPosition.x,selectPosition.y)
     }
 
+    /*出現するエネミーの選定*/
     static createEnemys(possiblePositions){
         //敵を最大ポップ数生成
         for(let i = 0; i < this.stageStatus.maxEnemy; i++){
@@ -137,7 +136,7 @@ class Stage {
             this.popEnemyArray.push(enemyInfo)
         }
     }
-
+    /*出現するアイテムの選定*/
     static createItems(possiblePositions){
         for(let i = 0; i < this.stageStatus.maxItem; i++){
             //配置可能座標からランダムに座標を取得
@@ -150,7 +149,7 @@ class Stage {
             this.popItemArray.push(itemInfo)
         }
     }
-
+    /*出現するトラップの選定*/
     static createTraps(possiblePositions){
         for(let i = 0; i < this.stageStatus.maxTrap; i++){
             //配置可能座標からランダムに座標を取得
@@ -171,9 +170,7 @@ class Stage {
         this.popTrapArray.push(trapInfo)
     }
 
-    /**
-     * ステージ画像や画像番号をステージの2次元配列に格納する
-    **/
+    /* ステージ画像や画像番号をステージの2次元配列に格納する */
     static setStageImage(x, y, stageImageNumber) {
         // 画像を作成し配置する
         const stageImage = Image.getStageImage(stageImageNumber);
@@ -186,29 +183,24 @@ class Stage {
         this.minmap.appendChild(min);
     }
 
+    /* 各リストの参照用メソッド */
     static popEnemy(){
         return Tool.deepCopy(this.popEnemyArray)
     }
-
     static popItem(){
         return Tool.deepCopy(this.popItemArray)
     }
-
     static popTrap(){
         return Tool.deepCopy(this.popTrapArray)
     }
 
-    /**
-     * キャラクターの移動の際キャラクターの座標に応じてムービングレイヤーを動かす
-     * **/
+    /* キャラクターの移動の際キャラクターの座標に応じてムービングレイヤーを動かす */
     static moveStage(x, y){
         this.movingLayersElement.style.top = -y * Config.stageImgHeight + "px";
         this.movingLayersElement.style.left = -x * Config.stageImgWidth + "px";
     }
 
-    /**
-     * 引数からそのマスが移動可能か判断する
-     * **/
+    /* 引数からそのマスが移動可能か判断する */
     static checkStage(x,y){
         //移動できる床か判定
         if(this.board[y][x] != Config.regularField){
@@ -231,32 +223,32 @@ class Stage {
         }
         return false;
     }
-
+    /* ステージ移動の際,角抜けできないようにする（適用してない） */
     static checkStageCorner(direction, x, y){
         switch(direction){
         case 'leftup':
-            if(this.board[y][x - 1] == 12 || this.board[y - 1][x] == 14){
+            if(this.board[y][x - 1] == 3 || this.board[y - 1][x] == 3){
                 return false
             }
             return true;
         case 'rightup':
-            if(this.board[y][x + 1] == 11 || this.board[y - 1][x] == 13){
+            if(this.board[y][x + 1] == 3 || this.board[y - 1][x] == 3){
                 return false
             }
             return true;
         case 'rightdown':
-            if(this.board[y][x + 1] == 14 || this.board[y + 1][x] == 12){
+            if(this.board[y][x + 1] == 3 || this.board[y + 1][x] == 3){
                 return false
             }
             return true;
         case 'leftdown':
-            if(this.board[y][x - 1] == 13 || this.board[y + 1][x] == 11){
+            if(this.board[y][x - 1] == 3 || this.board[y + 1][x] == 3){
                 return false
             }
             return true;
         }
     }
-
+    /* ボス部屋または部屋の作成 */
     static createFloor(){
         if(this.checkFloor()){
             this.createBossStage()
@@ -270,26 +262,26 @@ class Stage {
         Trap.initialize()
         //敵の生成
         Enemy.initialize()
-        
     }
-
-    
-
-    static getStageBoard(){
-        return this.board
-    }
-
-    static setFloor(){
-        this.nowFloor++
-        document.getElementById("floor").innerHTML = "B"+ this.nowFloor +"階"
-    }
-
     static checkFloor(){
         if(this.nowFloor >= this.stageStatus.bottomFloor){
             return true
         }
         return false
     }
+
+    /* ステージ情報の取得 */
+    static getStageBoard(){
+        return this.board
+    }
+
+    /*階層更新*/
+    static setFloor(){
+        this.nowFloor++
+        document.getElementById("floor").innerHTML = "B"+ this.nowFloor +"階"
+    }
+
+    
 
 
 }
