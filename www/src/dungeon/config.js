@@ -11,10 +11,7 @@ Config.stageImgHeight = 53;//縦ひとマス
 
 Config.stageCols = 54; // ステージの横の個数
 Config.stageRows = 30; // ステージの縦の個数
-/*
-Config.stageCols = 20; // テスト用ステージの横の個数
-Config.stageRows = 15; // テスト用ステージの縦の個数
-*/
+
 Config.stageImageTotal = 3; //ステージの画像の個数
 Config.characterImageTotal = 10;//
 
@@ -35,9 +32,9 @@ Config.wallField = 3
     //フロア横
     Config.divisionCol = 5
     //部屋ごとの最大縦
-    Config.roomRowsMax = 10
+    Config.roomRowsMax = 9
     //部屋ごとの最大横
-    Config.roomColsMax = 10
+    Config.roomColsMax = 9
     //部屋ごとの最小縦
     Config.roomRowsMin = 6
     //部屋ごとの最小横
@@ -45,6 +42,6 @@ Config.wallField = 3
     //生成数最大値
     Config.roomCountMax = 11
     //生成数最小値
-    Config.roomCountMin = 6
+    Config.roomCountMin = 7
 
 

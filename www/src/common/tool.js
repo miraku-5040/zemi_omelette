@@ -19,4 +19,8 @@ class Tool{
         }
     }
 
+    static async sleep(second){
+        await new Promise(resolve => setTimeout(resolve, second * 1000))
+    }
+
 }

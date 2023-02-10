@@ -1,15 +1,30 @@
 /* エフェクトを表示するjs */
 class Effect {
+    /*memo
+    * SE スコープエフェクト：ステージの複数マスに表示する
+    * TE ターゲットエフェクト：キャラクター1人に対して表示する
+    * 座標はステージの絶対座標で受ける
+    */
+
 
     /**
      * 初期化
      */
     static initialize() {
-        this.effectData = new Map();
+        this.effectData = new Map(); //エフェクト表示内容
         this.#setAllEffectData();
-        this.effectReadyData = new Map();
-        this.effectReadyData.set(0, "");
+        this.effectReadyData = new Map(); //エフェクトの準備をしたデータ 繰り返し表示する場合のロード減少
+        this.effectReadyData.set(0, ""); //エラー用準備データ
         // {imgElement, sound, direction}
+        this.updateConfig(); // Configのデータから設定する変数を設定する
+    }
+
+    /**
+     * Configからの設定値を更新する
+     * Config更新時に呼び出す
+     */
+    static updateConfig() {
+        // Configから取得しているすべてのthis変数を更新する
         this.stageImgHeight = Config.stageImgHeight;
         this.stageImgWidth = Config.stageImgWidth;
         this.topReferencePoint = Config.playerReferencePointTop * Config.stageImgHeight;
@@ -17,11 +32,15 @@ class Effect {
     }
 
     /**
- * スキル範囲のエフェクトを表示する
- * effectIdが"SE"(scopeEffect)のものを処理する
- * positionArrayの形式:[{x, y, direction, length}, ...]
- */
+     * スキル範囲のエフェクトを表示する
+     * effectIdが"SE"(scopeEffect)のものを処理する
+     * positionArrayの形式:[{x, y, direction, addLength}, ...]
+     */
     static scopeEffectDisplay(effectId, positionArray) {
+        if(positionArray.length <= 0){
+            // 対象座標が存在しない場合は終了
+            return;
+        }
         const readyKey = this.#setEffectReadyData(effectId);
         const effectReadyData = this.effectReadyData.get(readyKey);
         if (effectReadyData.move) { //画像移動あり
@@ -33,18 +52,35 @@ class Effect {
     }
 
     /**
- * スキル対象のエフェクトの準備をする
- * effectIdが"TE"(targetEffect)のものを処理する
- */
+     * スキル対象のエフェクトの準備をする
+     * effectIdが"TE"(targetEffect)のものを処理する
+     */
     static targetEffectReady(effectId) {
         const readyKey = this.#setEffectReadyData(effectId);
         return readyKey;
     }
 
     /**
-     *  ターゲットエフェクトを表示する
+     * プレイヤーのターゲットエフェクトを表示する
+     * サイズ1に設定する
      */
-    static targetEffectDisplay(readyKey, positionArray) {
+    static playerTargetEffectDisplay(readyKey, x, y, direction){
+        const size = 0;
+        this.#targetEffectDisplay(readyKey, x, y, direction, size);
+    }
+
+    /**
+     * エネミーのターゲットエフェクトを表示する
+     * サイズ・左上のステージ座標を取得して設定する
+     */
+    static enemyTargetEffectDisplay(readyKey, x, y, direction){
+        const size = Enemy.getEnemySize(x, y); //enemyに追加
+        const enemyPosition = Enemy.getEnemyAnchorPoint(x, y);
+        this.#targetEffectDisplay(readyKey, enemyPosition.x, enemyPosition.y, direction, size);
+    }
+
+    /* ターゲットエフェクト表示処理 */
+    static #targetEffectDisplay(readyKey, x, y, direction, size){
         // データ準備
         const effectReadyData = this.effectReadyData.get(readyKey);
         if (effectReadyData === undefined) { //keyエラー
@@ -52,31 +88,27 @@ class Effect {
             return;
         }
         const effectLayerElement = document.getElementById("effect_layer");
-        const imgElementArray = [];
-        positionArray.forEach((position) => {
-            const relativePosition = this.#convertAbsoluteToRelative(position.x, position.y);
-            const cloneImgElement = effectReadyData.imgElement.cloneNode();
-            cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
-            cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
-            if(effectReadyData.rotation){
-                //回転する場合
-                const angle = this.#getAngle(relativePosition.direction);
-                cloneImgElement.style.transform = "rotate(" + angle + "deg)";
-            }
-            cloneImgElement.style.display = "none"; //非表示で配置する
-            effectLayerElement.appendChild(cloneImgElement);
-            imgElementArray.push(cloneImgElement);
-        });
+        const relativePosition = this.#convertAbsoluteToRelative(x, y);
+        const cloneImgElement = effectReadyData.imgElement.cloneNode();
+        cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
+        cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
+        cloneImgElement.style.height = this.stageImgHeight * size + "px";
+        cloneImgElement.style.width = this.stageImgWidth * size + "px";
+        if (effectReadyData.rotation) {
+            //回転する場合
+            const angle = this.#getAngle(direction);
+            cloneImgElement.style.transform = "rotate(" + angle + "deg)";
+        }
+        cloneImgElement.style.display = "none"; //非表示で配置する
+        effectLayerElement.appendChild(cloneImgElement);
         // 表示と削除
+        const displayTime = effectReadyData.time;
         const audioElement = effectReadyData.audioElement;
         audioElement.play();
-        const displayTime = effectReadyData.time;
-        imgElementArray.forEach((imgElement) => {
-            imgElement.style.display = "block";
-            setTimeout((imgElement) => {
-                imgElement.remove();
-            }, displayTime, imgElement);
-        });
+        cloneImgElement.style.display = "block";
+        setTimeout((imgElement) => {
+            imgElement.remove();
+        }, displayTime, cloneImgElement);
     }
 
     /**
@@ -105,7 +137,7 @@ class Effect {
             const cloneImgElement = imgElement.cloneNode();
             cloneImgElement.style.top = relativePosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
             cloneImgElement.style.left = relativePosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
-            if(effectReadyData.rotation){
+            if (effectReadyData.rotation) {
                 //回転する場合
                 const angle = this.#getAngle(relativePosition.direction);
                 cloneImgElement.style.transform = "rotate(" + angle + "deg)";
@@ -159,7 +191,7 @@ class Effect {
                 const cloneElement = imgElement.cloneNode();
                 cloneElement.style.top = nextPosition.y * this.stageImgHeight + this.topReferencePoint + "px"; // 位置を設定する(相対)
                 cloneElement.style.left = nextPosition.x * this.stageImgWidth + this.leftReferencePoint + "px"; // 位置を設定する(相対)
-                if(effectReadyData.rotation){
+                if (effectReadyData.rotation) {
                     //回転する場合
                     const angle = this.#getAngle(relativePosition.direction);
                     cloneImgElement.style.transform = "rotate(" + angle + "deg)";
@@ -392,7 +424,7 @@ class Effect {
     }
 
     /* ステージ座標(絶対座標)からプレイヤー相対座標に変換 */
-    static #convertAbsoluteToRelative(absoluteX, absoluteY){
+    static #convertAbsoluteToRelative(absoluteX, absoluteY) {
         const startingPoint = Player.getPlayerNowPosition();
         const relativeX = absoluteX - startingPoint.x;
         const relativeY = absoluteY - startingPoint.y;

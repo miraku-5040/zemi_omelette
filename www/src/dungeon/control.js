@@ -467,10 +467,16 @@ class Control{
         this.itemAction = null
     }
     static startLoading(){
-        document.getElementById("loading_layer").display = "inline"
+        document.getElementById("loading_layer").style.display = "block"
     }
     static endLoading(){
-        document.getElementById("loading_layer").display = "none"
+        document.getElementById("loading_layer").style.display = "none"
+    }
+
+    static endGame(){
+        const elem = document.getElementById("loading_layer")
+        elem.innerHTML = "GAME OVER"
+        elem.style.display = "block"
     }
 
 
