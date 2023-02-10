@@ -279,7 +279,7 @@ class Skill {
                     effectCoordinate.y = coordinate.y;
                     effectCoordinate.direction = this.skillUserData.direction;
                     // TODO enemyからサイズを取得してする
-                    Effect.targetEffectDisplay(effectReadyKey, [effectCoordinate]);
+                    //Effect.targetEffectDisplay(effectReadyKey, [effectCoordinate]);
                 }
                 // 計算とスキル効果反映
                 switch (true) {
