@@ -242,11 +242,13 @@ function toGuildShop() {
 }
 
 // 以下動作
-// ダンジョン開始音声
+// ダンジョン開始
 function toDanjyon() {
     // 音声再生
     audio = new Audio("../sound/danjyon_start.m4a");
     audio.play();
+    // ダンジョン画面へ遷移
+    setTimeout('window.location.href = "../dungeon.html"', 1000);
 }
 
 // 項目ボタンの切り替え
