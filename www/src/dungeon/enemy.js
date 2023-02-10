@@ -72,7 +72,7 @@ class Enemy{
     static screenRenderingAll() {
         this.enemyStatusArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
-                if(element === this.noDataItem){
+                if(element === this.noDataItem || element.type === this.bigSizeDataType){
                     return;
                 }
                 this.screenRenderingOne(indexX, indexY);
@@ -100,7 +100,7 @@ class Enemy{
         this.updateNextMove(); //次の行動(移動先)を設定
         this.enemyStatusArray.forEach((col, indexY) => {
             col.forEach((element, indexX) => {
-                if(element === this.noDataItem){
+                if(element === this.noDataItem || element.type === this.bigSizeDataType){
                     return;
                 }
                 switch(element.next.type){
@@ -151,7 +151,7 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
-                    this.putBigSizeDataToTempEnemyStatusArray(nextX, nextY);
+                    this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                     element.next = next;
                     return;
                 }
@@ -159,7 +159,7 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
-                    this.putBigSizeDataToTempEnemyStatusArray(nextX, nextY);
+                    this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                     element.next = next;
                     return;
                 }
@@ -167,7 +167,7 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
-                    this.putBigSizeDataToTempEnemyStatusArray(nextX, nextY);
+                    this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                     element.next = next;
                     return;
                 }
@@ -175,14 +175,14 @@ class Enemy{
                     next.x = indexX;
                     next.y = indexY;
                     this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
-                    this.putBigSizeDataToTempEnemyStatusArray(nextX, nextY);
+                    this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                     element.next = next;
                     return;
                 }
                 next.x = result.x;
                 next.y = result.y;
                 this.tempEnemyStatusArray[next.y][next.x] = Tool.deepCopy(element); //一時配列に次のデータをセットする
-                this.putBigSizeDataToTempEnemyStatusArray(nextX, nextY);
+                this.putBigSizeDataToTempEnemyStatusArray(next.x, next.y);
                 element.next = next;
                 return;
             });
@@ -195,6 +195,7 @@ class Enemy{
     /* 敵移動 */
     static moving(currentX, currentY){
         const elementItem = this.enemyStatusArray[currentY][currentX];
+        console.log("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
         const nextX = elementItem.next.x;
         const nextY = elementItem.next.y;
         const imgElement = document.getElementById("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
@@ -229,7 +230,7 @@ class Enemy{
                 subData.type = this.bigSizeDataType;
                 subData.relativeX = -rowIndex;
                 subData.relativeY = -colIndex;
-                this.enemyStatusArray[anchorX + colIndex][anchorY + rowIndex].push(subData);
+                this.enemyStatusArray[anchorY + rowIndex][anchorX + colIndex] = subData;
             }
         }
     }
@@ -248,7 +249,7 @@ class Enemy{
                 subData.type = this.bigSizeDataType;
                 subData.relativeX = -rowIndex;
                 subData.relativeY = -colIndex;
-                this.tempEnemyStatusArray[anchorX + colIndex][anchorY + rowIndex].push(subData);
+                this.tempEnemyStatusArray[anchorY + rowIndex][anchorX + colIndex] = subData;
             }
         }
     }
@@ -466,7 +467,7 @@ class Enemy{
         const size = enemyStatus.size;
         for(let colIndex = 0; colIndex < size; colIndex++){
             for(let rowIndex = 0; rowIndex < size; rowIndex++){
-                this.enemyStatusArray[checkedPosition.y + rowIndex][checkedPosition.x = colIndex] = this.noDataItem;
+                this.enemyStatusArray[checkedPosition.y + rowIndex][checkedPosition.x + colIndex] = this.noDataItem;
             }
         }
         return true;
