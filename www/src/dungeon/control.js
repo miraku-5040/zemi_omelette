@@ -473,6 +473,12 @@ class Control{
         document.getElementById("loading_layer").style.display = "none"
     }
 
+    static endGame(){
+        const elem = document.getElementById("loading_layer")
+        elem.innerHTML = "GAME OVER"
+        elem.style.display = "block"
+    }
+
 
 
 

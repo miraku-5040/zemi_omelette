@@ -102,10 +102,10 @@ class Game{
                     this.mode = 'alive';
                     break
                 }
-                await Tool.sleep(0.3)
+                await Tool.sleep(0.5)
                 // 敵のターン
                 Enemy.action();
-                await Tool.sleep(0.3)
+                await Tool.sleep(0.5)
                 if(this.gameEndFlg){
                     this.mode = 'die';
                 }else{
@@ -133,7 +133,7 @@ class Game{
                 this.mode = 'player'
                 break;
             case 'die':
-
+                Control.endGame()
                 return
             case 'alive':
 
