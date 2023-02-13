@@ -121,13 +121,7 @@ class Game{
             case 'nextfloor':
                 Stage.setFloor()
                 Control.startLoading()
-                Stage.createStage()
-                //アイテム生成
-                Item.initialize()
-                //トラップ生成
-                Trap.initialize()
-                //敵の生成
-                Enemy.initialize()
+                Stage.createFloor()
                 await Tool.sleep(3)
                 Control.endLoading()
                 this.mode = 'player'

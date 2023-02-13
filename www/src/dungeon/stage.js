@@ -31,7 +31,8 @@ class Stage {
             itemArray: ['IW000','IS000','IT000'],
             maxItem: 3,
             trapArray: ['T0000','T0001'],
-            maxTrap:5
+            maxTrap:5,
+            bossEnemyId:'E0001'
         };
         this.nowFloor = 0;
         //ステージを作成する
@@ -42,12 +43,7 @@ class Stage {
     }
 
     static createStage(){
-        this.stageLayerElement.innerHTML = ""
-        this.minmap.innerHTML = ""
-        //ステージに出現する全オブジェクトを格納する領域を生成する
-        this.popEnemyArray = []
-        this.popItemArray = []
-        this.popTrapArray = []
+        this.stageElementInitialize()
         const possiblePositions = [];
         //ランダム生成
         this.board = CreateStage.randomStageCreate()
@@ -68,10 +64,51 @@ class Stage {
                 if(wallCount > 1){
                     return
                 }
-                console
                 possiblePositions.push({y:indexY,x:indexX})  
             });
         });
+        
+        Stage.createPlayer(possiblePositions)
+        Stage.createEnemys(possiblePositions)
+        Stage.createItems(possiblePositions)
+        Stage.createTraps(possiblePositions)
+    }
+
+    static createBossStage(){
+        this.stageElementInitialize()
+        this.board =CreateStage.bossStageCreate()
+        this.board.forEach((col, indexY) => {
+            col.forEach((element, indexX) => {
+                this.setStageImage(indexX, indexY, element);
+            })
+        })
+        //キャラクターの座標に応じたレイヤーの座標を決定
+        const movingLayersElement = document.getElementById(`moving_layers`);
+        movingLayersElement.style.top = -16 * Config.stageImgHeight + "px"; 
+        movingLayersElement.style.left = -26 * Config.stageImgWidth + "px"; 
+        movingLayersElement.style.position = 'absolute';
+        this.movingLayersElement = movingLayersElement;
+        //プレイヤーの現在座標をセットする
+        Player.resetCharacterPosition(26,20)
+
+        const enemyId = this.stageStatus.bossEnemyId
+        const enemyInfo ={id: enemyId, position:{x: 26,y:12}}
+        this.popEnemyArray.push(enemyInfo)
+    }
+
+    static stageElementInitialize(){
+        this.stageLayerElement.innerHTML = ""
+        this.minmap.innerHTML = ""
+        document.getElementById("enemy_layer").innerHTML = ""
+        document.getElementById("item_layer").innerHTML = ""
+        document.getElementById("trap_layer").innerHTML = ""
+        //ステージに出現する全オブジェクトを格納する領域を生成する
+        this.popEnemyArray = []
+        this.popItemArray = []
+        this.popTrapArray = []
+    }
+
+    static createPlayer(possiblePositions){
         let selectIndex = Tool.getRandomInt(possiblePositions.length)
         //配置可能座標にキャラクターを配置
         let selectPosition =possiblePositions[selectIndex]
@@ -85,14 +122,9 @@ class Stage {
         this.movingLayersElement = movingLayersElement;
         //プレイヤーの現在座標をセットする
         Player.resetCharacterPosition(selectPosition.x,selectPosition.y)
-
-        Stage.createEnemys(possiblePositions)
-        Stage.createItems(possiblePositions)
-        Stage.createTraps(possiblePositions)
     }
 
     static createEnemys(possiblePositions){
-        document.getElementById("enemy_layer").innerHTML = ""
         //敵を最大ポップ数生成
         for(let i = 0; i < this.stageStatus.maxEnemy; i++){
             //配置可能座標からランダムに座標を取得
@@ -107,7 +139,6 @@ class Stage {
     }
 
     static createItems(possiblePositions){
-        document.getElementById("item_layer").innerHTML = ""
         for(let i = 0; i < this.stageStatus.maxItem; i++){
             //配置可能座標からランダムに座標を取得
             const selectIndex = Tool.getRandomInt(possiblePositions.length)
@@ -121,7 +152,6 @@ class Stage {
     }
 
     static createTraps(possiblePositions){
-        document.getElementById("trap_layer").innerHTML = ""
         for(let i = 0; i < this.stageStatus.maxTrap; i++){
             //配置可能座標からランダムに座標を取得
             const selectIndex = Tool.getRandomInt(possiblePositions.length)
@@ -227,6 +257,24 @@ class Stage {
         }
     }
 
+    static createFloor(){
+        if(this.checkFloor()){
+            this.createBossStage()
+        }else{
+            //通常
+            this.createStage()
+        }
+        //アイテム生成
+        Item.initialize()
+        //トラップ生成
+        Trap.initialize()
+        //敵の生成
+        Enemy.initialize()
+        
+    }
+
+    
+
     static getStageBoard(){
         return this.board
     }
@@ -234,6 +282,13 @@ class Stage {
     static setFloor(){
         this.nowFloor++
         document.getElementById("floor").innerHTML = "B"+ this.nowFloor +"階"
+    }
+
+    static checkFloor(){
+        if(this.nowFloor >= this.stageStatus.bottomFloor){
+            return true
+        }
+        return false
     }
 
 

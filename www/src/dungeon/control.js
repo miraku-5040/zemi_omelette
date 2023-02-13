@@ -18,9 +18,9 @@ class Control{
         //new 入力終了フラグ
         this.inputEndFlag = false;
         // new 長押し判定の入力時間(ms)
-        this.longPressCount = 500;
+        this.longPressCount = 300;
         //new 長押しで入力を返却する時間(ms)
-        this.longPressReturnTime = 700;
+        this.longPressReturnTime = 500;
         //delete 入力中のkeyNameを持つset
         this.pressedKeySet = new Set();
         //new timeoutIdのマップ [keyName:timeoutId]
