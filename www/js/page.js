@@ -251,6 +251,23 @@ function toDanjyon() {
     setTimeout('window.location.href = "../dungeon.html"', 1000);
 }
 
+// マイルーム画面の移動
+function upMove() {
+    document.getElementById( 'character' ).style.top = y + "px";
+}
+
+function leftMove() {
+    document.getElementById( 'character' ).style.top = y + "px";
+}
+
+function downMove() {
+    document.getElementById( 'character' ).style.top = y + "px";
+}
+
+function rightMove() {
+    document.getElementById( 'character' ).style.top = y + "px";
+}
+
 // 項目ボタンの切り替え
 function weaponColumn(element) {
     // 音声再生
