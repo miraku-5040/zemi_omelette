@@ -253,6 +253,8 @@ function toDanjyon() {
 
 // マイルーム画面の移動
 function upMove() {
+    audio = new Audio("../sound/walk.m4a");
+    audio.play();
     const rect = document.getElementById('character').getBoundingClientRect();
     const top = rect.top + window.pageYOffset;
     var result = Number(top) - 10;
@@ -261,6 +263,8 @@ function upMove() {
 }
 
 function leftMove() {
+    audio = new Audio("../sound/walk.m4a");
+    audio.play();
     const rect = document.getElementById('character').getBoundingClientRect();
     const left = rect.left + window.pageXOffset;
     var result = Number(left) - 10;
@@ -269,6 +273,8 @@ function leftMove() {
 }
 
 function downMove() {
+    audio = new Audio("../sound/walk.m4a");
+    audio.play();
     const rect = document.getElementById('character').getBoundingClientRect();
     const top = rect.top + window.pageYOffset;
     var result = Number(top) + 10;
@@ -277,6 +283,8 @@ function downMove() {
 }
 
 function rightMove() {
+    audio = new Audio("../sound/walk.m4a");
+    audio.play();
     const rect = document.getElementById('character').getBoundingClientRect();
     const left = rect.left + window.pageXOffset;
     var result = Number(left) + 10;
@@ -285,6 +293,8 @@ function rightMove() {
 }
 
 function jump() {
+    audio = new Audio("../sound/jump.m4a");
+    audio.play();
     const rect = document.getElementById('character').getBoundingClientRect();
     const top = rect.top + window.pageYOffset;
     var result = Number(top) - 10;
@@ -630,6 +640,14 @@ function soundGuildBGM() {
 function soundPictBGM() {
     // BGM再生
     audio = new Audio("../sound/pictBGM.m4a");
+    audio.loop = true;
+    audio.volume = 0.1;
+    audio.play();
+}
+
+function soundRoomBGM() {
+    // BGM再生
+    audio = new Audio("../sound/roomBGM.m4a");
     audio.loop = true;
     audio.volume = 0.1;
     audio.play();
