@@ -35,6 +35,13 @@ function toCharaInfo() {
     setTimeout('window.location.href = "html/character_info.html"', 600);
 }
 
+function toMyRoom() {
+    // 音声再生
+    go_sound();
+    // マイルーム画面へ遷移
+    setTimeout('window.location.href = "html/myroom.html"', 600);
+}
+
 function toDiaBuy() {
     // 音声再生
     go_sound();

@@ -1,2 +1,97 @@
-/* This is a CSS file */
+/* タンスの画像 */
+.tansu_image {
+    position: relative;
+    top: 20px;
+    left: 300px;
+    width: 130px;
+    height: 125px;
+}
 
+/* 本棚の画像 */
+.hondana_image {
+    position: relative;
+    top: 20px;
+    left: 300px;
+    width: 130px;
+    height: 125px;
+}
+
+.character_mini_image {
+    position: relative;
+    top: 130px;
+    left: 0px;
+    width: 70px;
+    height: 70px;
+}
+
+/* 移動ボタンの位置 */
+.arrow_buttons {
+    position: relative;
+    top: 180px;
+    background-color: rgb(0, 0, 0, 0.7);
+}
+
+/* 上矢印 */
+.up_arrow {
+    position: relative;
+    transform: translateY(-55px);
+    left: 62px;
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+}
+
+/* 左矢印 */
+.left_arrow {
+    position: relative;
+    transform: translateX(-50px);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+}
+
+/* 下矢印 */
+.down_arrow {
+    position: relative;
+    transform: translateX(-50px);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+}
+
+/* 右矢印 */
+.right_arrow {
+    position: relative;
+    transform: translateX(-50px);
+    background: rgba(0, 100, 176, 0.8);
+    border-top: 6px solid rgba(0, 145, 255, 0.8);
+    border-right: 6px solid rgba(0, 93, 164, 0.8);
+    border-bottom: 6px solid rgba(0, 69, 122, 0.8);
+    border-left: 6px solid rgba(0, 145, 255, 0.8);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+}
