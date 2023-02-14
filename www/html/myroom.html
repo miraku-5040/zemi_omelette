@@ -27,6 +27,10 @@
     <!-- 背景 -->
     <img class="background_image" src="../image/background/cave.png">
 
+    <!-- ホーム画面へ戻るボタン -->
+    <div class="cansel_frame"></div>
+    <button class="cansel" onclick="toHome()">←</button>
+
     <!-- 家具 -->
     <img class="tansu_image" src="../image/tansu.png">
     <img class="hondana_image" src="../image/hondana.png">
@@ -36,11 +40,13 @@
 
     <!-- 矢印ボタン -->
     <div class="arrow_buttons">
-        <button class="up_arrow" onclick="upMove()">↑</button>
-        <button class="left_arrow" onclick="leftMove()">←</button>
-        <button class="down_arrow" onclick="downMove()">↓</button>
-        <button class="right_arrow" onclick="rightMove()">→</button>
+        <button class="up_arrow" onclick="upMove()"><p class="button_text">↑</p></button>
+        <button class="left_arrow" onclick="leftMove()"><p class="button_text">←</p></button>
+        <button class="down_arrow" onclick="downMove()"><p class="button_text">↓</p></button>
+        <button class="right_arrow" onclick="rightMove()"><p class="button_text">→</p></button>
     </div>
+
+    <button class="jump" onclick="jump()">ジャンプ</button>
 </body>
 
 </html>

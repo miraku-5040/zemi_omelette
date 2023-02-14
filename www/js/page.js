@@ -253,19 +253,44 @@ function toDanjyon() {
 
 // マイルーム画面の移動
 function upMove() {
-    document.getElementById( 'character' ).style.top = y + "px";
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const top = rect.top + window.pageYOffset;
+    var result = Number(top) - 10;
+    document.getElementById('character').style.top = result + "px";
+    document.getElementById('character').src = "../image/character/back.png";
 }
 
 function leftMove() {
-    document.getElementById( 'character' ).style.top = y + "px";
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const left = rect.left + window.pageXOffset;
+    var result = Number(left) - 10;
+    document.getElementById('character').style.left = result + "px";
+    document.getElementById('character').src = "../image/character/left.png";
 }
 
 function downMove() {
-    document.getElementById( 'character' ).style.top = y + "px";
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const top = rect.top + window.pageYOffset;
+    var result = Number(top) + 10;
+    document.getElementById('character').style.top = result + "px";
+    document.getElementById('character').src = "../image/character/front.png";
 }
 
 function rightMove() {
-    document.getElementById( 'character' ).style.top = y + "px";
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const left = rect.left + window.pageXOffset;
+    var result = Number(left) + 10;
+    document.getElementById('character').style.left = result + "px";
+    document.getElementById('character').src = "../image/character/right.png";
+}
+
+function jump() {
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const top = rect.top + window.pageYOffset;
+    var result = Number(top) - 10;
+    document.getElementById('character').style.top = result + "px";
+    document.getElementById('character').src = "../image/character/front.png";
+    setTimeout(downMove, 150);
 }
 
 // 項目ボタンの切り替え
