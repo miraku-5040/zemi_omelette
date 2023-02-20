@@ -33,8 +33,10 @@ class Database{
         return playerData;
     }
 
+    /* ダンジョンごとのIDをもとに取得*/
     static getEnemy(id = NaN){
         this.enemyCount += 1
+        /*ニフクラで取得*/
         const enemyData = {
             type:"main",//データの種類
             enemyId:'E0001', //モンスターID
@@ -55,7 +57,9 @@ class Database{
         return enemyData
     }
 
+    /* ダンジョンごとのIDをもとに取得*/
     static getItem(id = NaN){
+         /*ニフクラで取得*/
         const itemArray = [{
             itemId: 'IW000',//アイテムID
             itemName: 'ひのきのぼう',
@@ -81,7 +85,9 @@ class Database{
         }
     }
 
+    /* ダンジョンごとのIDをもとに取得*/
     static getTrap(id = NaN){
+         /*ニフクラで取得*/
         const trapArray = [{
             trapId: 'T0000',//アイテムID
             trapName: '階段',
