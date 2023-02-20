@@ -1,29 +1,13 @@
 /* スキルの処理を行う */
 class Skill {
 
-    //playerから呼び出し
-    //スキル確認
-    //スキル実行
-
-    // public
+    // publicメソッド
     /* 初期化 */
     static initialize() {
-        this.skillDataMap = new Map();
-        this.#skillEndInitialize(); //初期化
-        this.skillUseMessegeFunction = () => { };
-        this.scopeLayerElement = document.getElementById("scope_layer");
-        const scopeElement = document.createElement("div");
-        scopeElement.style.position = "absolute";
-        scopeElement.style.display = "block";
-        scopeElement.style.margin = 0;
-        scopeElement.style.height = Config.stageImgHeight;
-        scopeElement.style.width = Config.stageImgWidth;
-        scopeElement.style.backgroundColor = "red";
-        scopeElement.style.opacity = 0.5;
-        this.scopeElement = scopeElement;
+        this.skillDataMap = new Map(); //スキルデータを保持する skillId:skillData
+        this.#skillEndInitialize(); //スキルごとに設定するthis変数を初期化する
         this.normalAttackId = "SA0000"; //通常攻撃のスキルid
         this.defaultDirection = "up"; //標準の方向
-        this.defaultScopeLength = 20; //スキル範囲作成時の標準最大長
         /* テスト用 */
         this.testSkillId1 = "SA001"; // one attack
         this.testSkillId2 = "SA002"; //line magic
@@ -31,6 +15,7 @@ class Skill {
 
     /* playerから通常攻撃を呼び出し */
     static playerUseNormalAttack(playerId) {
+        // 通常攻撃のskillIdをセットしてuseSkillを呼び出す
         this.playerUseSkill(this.normalAttackId, playerId);
     }
 
@@ -62,6 +47,7 @@ class Skill {
 
     /* enemyから通常攻撃呼び出し */
     static enemyUseNormalAttack(nowX, nowY) {
+        // 通常攻撃のskillIdをセットしてuseSkillを呼び出す
         this.enemyUseSkill(this.normalAttackId, nowX, nowY);
     }
 
@@ -114,7 +100,7 @@ class Skill {
      * アイテムを使用するplayerIdで設定する
      */
     static itemUseSkill(skillId, playerId) {
-        //skillUserDataをセット
+        //skillUserDataをセット(playerの情報を使用する)
         const skillUserData = {};
         skillUserData.type = "item";
         skillUserData.playerId = playerId;
@@ -137,22 +123,22 @@ class Skill {
      * スキル準備
      */
     static skillReady() {
-        //useSkillからデータ受け取りと初期化
+        //useSkillからデータ受け取りとthis変数を初期化
         const skillData = this.skillData;
         if (skillData.length <= 0) {
             //データエラー
             return 'player';
         }
-        const nowSkillData = skillData[this.skillDataIndex]; //メインのスキルデータを取得する
+        const nowSkillData = skillData[this.skillDataIndex]; //スキル効果の配列から先頭のメイン効果をセットする
         // scopeで分岐する関数を設定
         const scopeUseFunctionMap = this.#scopeBranch(nowSkillData.scope);
-        const createTargetCoordinateArrayFunction = scopeUseFunctionMap.get("createTargetCoordinateArray");
+        const createTargetCoordinateArrayFunction = scopeUseFunctionMap.get("createTargetCoordinateArray"); //スキル対象座標の配列を作成する関数
         // targetCoordinateArrayとeffectDisplayArray作成
         const resultArray = createTargetCoordinateArrayFunction(nowSkillData.scope);
         const targetCoordinateArray = resultArray.shift(); // 配列の先頭の要素を取得と削除
         const scopeEffectDisplayArray = resultArray.shift();
         // スキル座標を設定する
-        if (skillData.skillId === this.normalAttackId) { //通常攻撃の場合は準備をスキップする
+        if (this.skillDataIndex > 0 || skillData.skillId === this.normalAttackId) { //サブスキル、通常攻撃の場合は準備をスキップする
             // skillGoに渡すデータをクラス変数に設定する
             this.targetCoordinateArray = targetCoordinateArray;
             this.scopeEffectDisplayArray = scopeEffectDisplayArray;
@@ -161,16 +147,12 @@ class Skill {
             return 'skillGo';
         }
         /* 範囲を表示 */
-        // TODO
-        //this.#screenRenderingScope(this.targetCoordinateArray); //スキル範囲表示
+        // TODO スキル範囲確認用の表示
 
         /* controlから操作を取得 */
-        // TODO 操作別の分岐を取得
+        // TODO 方向変更やスキル範囲指定を予定
 
-        /* 準備終了処理 */
-        //this.#deleteScreenRenderingScope(); //範囲表示の描画を削除
-
-        /* skillGoに渡すデータをクラス変数に設定する */
+        // skillGoに渡すデータをクラス変数に設定する
         this.targetCoordinateArray = targetCoordinateArray;
         this.scopeEffectDisplayArray = scopeEffectDisplayArray;
         this.skillData = skillData;
@@ -182,7 +164,7 @@ class Skill {
      * スキル使用
      */
     static skillGo() {
-        /* useSkill, skillReadyからのデータ取得と初期化 */
+        /* useSkill, skillReadyからのデータ取得とthis変数を初期化 */
         const nowSkillData = this.nowSkillData;
         const targetCoordinateArray = this.targetCoordinateArray;
         const scopeEffectDisplayArray = this.scopeEffectDisplayArray;
@@ -191,20 +173,20 @@ class Skill {
         this.scopeEffectDisplayArray = []; //new
         /* スキル使用メッセージ表示 */
         this.skillUseMessegeFunction();
-        this.skillUseMessegeFunction = () => { }; //2回目以降は表示しない
+        this.skillUseMessegeFunction = () => { }; //2回目以降の呼び出しでは表示しない
         /* effectで分岐する関数の設定 */
         const effectUseFunction = this.#effectBranch(nowSkillData.effect);
-        const getPlayerDefenceStatusFunction = effectUseFunction.get("getPlayerDefenseStatus");
-        const getEnemyDefenceStatusFunction = effectUseFunction.get("getEnemyDefenceStatus");
-        const calcFunctionFunctionArray = effectUseFunction.get("calcFunctionArray");
-        const playerStatusFluctuationFunctionArray = effectUseFunction.get("playerStatusFluctuationArray");
-        const enemyStatusFluctuationFunctionArray = effectUseFunction.get("enemyStatusFluctuationArray");
-        const checkPlayerFunction = effectUseFunction.get("checkPlayer");
-        const checkEnemyFunction = effectUseFunction.get("checkEnemy");
+        const getPlayerDefenceStatusFunction = effectUseFunction.get("getPlayerDefenseStatus"); //playerの防御ステータスを取得する関数
+        const getEnemyDefenceStatusFunction = effectUseFunction.get("getEnemyDefenceStatus"); //enemyの防御ステータスを取得する関数
+        const calcFunctionFunctionArray = effectUseFunction.get("calcFunctionArray"); //スキル計算用の関数の配列(効果ごとに設定する)
+        const playerStatusFluctuationFunctionArray = effectUseFunction.get("playerStatusFluctuationArray"); //playerのステータス変動を行う関数の配列(効果ごとに設定する)
+        const enemyStatusFluctuationFunctionArray = effectUseFunction.get("enemyStatusFluctuationArray"); //enemyのステータス変動を行う関数の配列(効果ごとに設定する)
+        const checkPlayerFunction = effectUseFunction.get("checkPlayer"); //plyerの存在チェックを行う関数
+        const checkEnemyFunction = effectUseFunction.get("checkEnemy"); //enemyの存在チェックを行う関数
         let isSkillEnd = new Array(nowSkillData.effect.length); //ターゲット数の上限でスキップするフラグ
         isSkillEnd.fill(false);
         const targetedEnemyNameSet = new Set(); //スキル効果が同じenemyに複数回当たらないようにするために使用する
-        let continueCount = nowSkillData.effect.length;
+        let continueCount = nowSkillData.effect.length; //全スキップを検知するために使用する
         // 範囲エフェクト表示
         const scopeEffectId = nowSkillData.scope.scopeEffectId;
         if (scopeEffectId !== undefined) {
@@ -212,7 +194,7 @@ class Skill {
             Effect.scopeEffectDisplay(scopeEffectId, scopeEffectDisplayArray);
         }
         // ターゲットエフェクト準備
-        const effectReadyKeyArray = [];
+        const effectReadyKeyArray = []; //readyKeyの配列(効果ごとに設定する)
         nowSkillData.effect.forEach((effectData) => {
             const targetEffectId = effectData.targetEffectId;
             if (targetEffectId !== undefined) {
@@ -284,6 +266,7 @@ class Skill {
                         // エラー
                         return;
                 }
+                // ヒット数を更新する
                 effectData.hits = effectData.hits - 1;
                 if (effectData.hits <= 0) {
                     isSkillEnd[index] = true;
@@ -299,20 +282,21 @@ class Skill {
             }
         });
 
-        // サブスキル処理
+        // サブ効果処理
         this.#nextSkillExecute();
 
         /* スキル終了処理 */
         this.#skillEndInitialize();
     }
 
-    // private
+    // privateメソッド
     /* スキル終了時の初期化 */
     static #skillEndInitialize() {
-        this.skillUserData = {};
-        this.skillData = {};
-        this.skillDataIndex = 0;
-        this.scopeArray = [];
+        this.skillUserData = {}; //スキル使用者のデータ
+        this.skillData = {}; //DBから取得するスキルデータ
+        this.skillDataIndex = 0; //スキル効果のindex(0:メイン, 1以上:サブ)
+        this.scopeArray = []; //効果先座標の配列
+        this.skillUseMessegeFunction = () => { }; //メッセージ表示関数
     }
 
     /* スキルデータをセットする */
@@ -365,7 +349,7 @@ class Skill {
                         // "all", "player", "enemy"は加工しない
                         break;
                 }
-                //skillData.effectのhitsを数字に直す
+                //skillData.effectのhitsを数字に直す "all"の場合はNaNになる
                 effectData.hits = Number(effectData.hits);
             });
         });
@@ -374,7 +358,7 @@ class Skill {
 
     /* スキル情報をDBから取得してskillDataMapにセットする (DB接続の修正を行う) */
     static #addSkillDataMap(skillIdArray = []) {
-        /* 開発用にデータをセット 指定したスキルidに一つ上のマスの敵に攻撃するスキルを設定*/
+        /* 開発用にデータをセット*/
         skillIdArray.forEach((skillId) => {
             let skillData;
             switch (skillId) {
@@ -409,8 +393,7 @@ class Skill {
     static #scopeBranch(scope) {
         const functionMap = new Map();
         switch (scope.type) {
-            case "one":
-                // TODO ターゲット座標配列作成
+            case "one": //1マス範囲
                 const typeOne = (scopeData) => {
                     // 基準点設定
                     const afterDirection = this.skillUserData.direction;
@@ -436,6 +419,7 @@ class Skill {
                         return [targetCoordinateArray, effectDisplayArray];
                     }
                     targetCoordinateArray.push(baseCoordinate);
+                    // エフェクト表示用のデータを作成する
                     const effectDisplayArrayItem =  {};
                     effectDisplayArrayItem.x = baseCoordinate.x;
                     effectDisplayArrayItem.y = baseCoordinate.y;
@@ -446,7 +430,7 @@ class Skill {
                 }
                 functionMap.set("createTargetCoordinateArray", typeOne);
                 break;
-            case "line":
+            case "line": //線形範囲
                 const typeLine = (scopeData) => {
                     // 基準点を設定する
                     const afterDirection = this.skillUserData.direction;
@@ -623,7 +607,7 @@ class Skill {
                 };
                 functionMap.set("createTargetCoordinateArray", typeLine);
                 break;
-            // TODO タイプを追加する
+            /* caseでタイプを追加する */
             default:
                 //エラー
                 functionMap.set("createTargetCoordinateArray", () => { });
@@ -654,7 +638,7 @@ class Skill {
             return defenseStatus;
         };
         functionMap.set("getEnemyDefenceStatus", getEnemyDefenceStatus);
-
+        // 効果別の関数を設定する
         let isTargetPlayer = false;
         let isTargetEnemy = false;
         const calcFunctionArray = [];
@@ -683,7 +667,7 @@ class Skill {
                     enemyStatusFluctuationFunctionArray.push(normalEnemyStatusFluctuation);
                     break;
                 case "attack": // 物理攻撃
-                    // TODO 計算関数設定
+                    // 計算関数設定
                     const attackCalc = (effectData, defenseStatus) => {
                         const level = this.skillUserData.level;
                         const magnification = effectData.magnification;
@@ -722,7 +706,7 @@ class Skill {
                     };
                     enemyStatusFluctuationFunctionArray.push(magicEnemyStatusFluctuation);
                     break;
-                // TODO 種類を追加する
+                /* 種類を追加する */
                 default:
                     //エラー
                     calcFunctionArray.push(() => { });
@@ -731,7 +715,10 @@ class Skill {
                     break;
 
             }
-
+            functionMap.set("calcFunctionArray", calcFunctionArray);
+            functionMap.set("playerStatusFluctuationArray", playerStatusFluctuationFunctionArray);
+            functionMap.set("enemyStatusFluctuationArray", enemyStatusFluctuationFunctionArray);
+            // ターゲットのフラグを更新
             switch (effectElement.target) {
                 case "enemy":
                     isTargetEnemy = true;
@@ -745,10 +732,7 @@ class Skill {
                     break;
             }
         });
-        functionMap.set("calcFunctionArray", calcFunctionArray);
-        functionMap.set("playerStatusFluctuationArray", playerStatusFluctuationFunctionArray);
-        functionMap.set("enemyStatusFluctuationArray", enemyStatusFluctuationFunctionArray);
-
+        
         // 効果対象チェック関数設定
         if (isTargetPlayer) {
             // playerがターゲットの場合
@@ -758,7 +742,7 @@ class Skill {
             };
             functionMap.set("checkPlayer", checkPlayer);
         } else {
-            // playerがターゲットでない場合
+            // playerがターゲットでない場合はチェックしない
             const noCheckPlayer = () => {
                 return false;
             };
@@ -772,7 +756,7 @@ class Skill {
             };
             functionMap.set("checkEnemy", checkEnemy);
         } else {
-            // enemyがターゲットでない場合
+            // enemyがターゲットでない場合はチェックしない
             const noCheckEnemy = () => {
                 return false;
             };
@@ -856,7 +840,7 @@ class Skill {
                 break;
         }
         // (45°, 90°, 180°)回転メソッドを呼び出して回転する
-        let rotatedTargetCoordinateArray = JSON.parse(JSON.stringify(targetCoordinateArray)); //ディープコピー
+        let rotatedTargetCoordinateArray = Tool.deepCopy(targetCoordinateArray); //ディープコピー
         let rotateAngle = Math.abs(nextAngle - nowAngle);
         while (rotateAngle > 0) {
             if (rotateAngle >= 180) {
@@ -948,7 +932,7 @@ class Skill {
         return { x: relativeX, y: relativeY }
     }
 
-    /* 座標の範囲をチェックする */
+    /* 座標の範囲がステージ内かチェックする */
     static #isInCoordinateRange(x, y) {
         if (x === null || y === null) {
             //nullの場合
