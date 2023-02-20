@@ -251,6 +251,84 @@ function toDanjyon() {
     setTimeout('window.location.href = "../dungeon.html"', 1000);
 }
 
+// マイルーム画面の移動
+function upMove() {
+    audio = new Audio("../sound/walk.m4a");
+    audio.play();
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const top = rect.top + window.pageYOffset;
+    var result = Number(top) - 10;
+    document.getElementById('character').style.top = result + "px";
+    document.getElementById('character').src = "../image/character/back.png";
+}
+
+function leftMove() {
+    audio = new Audio("../sound/walk.m4a");
+    audio.play();
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const left = rect.left + window.pageXOffset;
+    var result = Number(left) - 10;
+    document.getElementById('character').style.left = result + "px";
+    document.getElementById('character').src = "../image/character/left.png";
+}
+
+function downMove() {
+    audio = new Audio("../sound/walk.m4a");
+    audio.play();
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const top = rect.top + window.pageYOffset;
+    var result = Number(top) + 10;
+    document.getElementById('character').style.top = result + "px";
+    document.getElementById('character').src = "../image/character/front.png";
+}
+
+function rightMove() {
+    audio = new Audio("../sound/walk.m4a");
+    audio.play();
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const left = rect.left + window.pageXOffset;
+    var result = Number(left) + 10;
+    document.getElementById('character').style.left = result + "px";
+    document.getElementById('character').src = "../image/character/right.png";
+}
+
+function jump() {
+    audio = new Audio("../sound/jump.m4a");
+    audio.play();
+    const rect = document.getElementById('character').getBoundingClientRect();
+    const top = rect.top + window.pageYOffset;
+    var result = Number(top) - 10;
+    document.getElementById('character').style.top = result + "px";
+    document.getElementById('character').src = "../image/character/front.png";
+    setTimeout(downMove, 150);
+}
+
+function turn() {
+    audio = new Audio("../sound/jump.m4a");
+    audio.play();
+     document.getElementById('character').src = "../image/character/front.png";
+     setTimeout(left, 150);
+     setTimeout(back, 300);
+     setTimeout(right, 450);
+     setTimeout(front, 600);
+
+    function left() {
+        document.getElementById('character').src = "../image/character/left.png";
+    }
+
+    function back() {
+        document.getElementById('character').src = "../image/character/back.png";
+    }
+
+    function right() {
+        document.getElementById('character').src = "../image/character/right.png";
+    }
+
+    function front() {
+        document.getElementById('character').src = "../image/character/front.png";
+    }
+}
+
 // 項目ボタンの切り替え
 function weaponColumn(element) {
     // 音声再生
@@ -588,6 +666,14 @@ function soundGuildBGM() {
 function soundPictBGM() {
     // BGM再生
     audio = new Audio("../sound/pictBGM.m4a");
+    audio.loop = true;
+    audio.volume = 0.1;
+    audio.play();
+}
+
+function soundRoomBGM() {
+    // BGM再生
+    audio = new Audio("../sound/roomBGM.m4a");
     audio.loop = true;
     audio.volume = 0.1;
     audio.play();
