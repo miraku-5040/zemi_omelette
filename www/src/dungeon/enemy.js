@@ -194,7 +194,6 @@ class Enemy{
     /* 敵移動 */
     static moving(currentX, currentY){
         const elementItem = this.enemyStatusArray[currentY][currentX];
-        console.log("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
         const nextX = elementItem.next.x;
         const nextY = elementItem.next.y;
         const imgElement = document.getElementById("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);

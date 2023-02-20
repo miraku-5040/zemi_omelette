@@ -119,10 +119,12 @@ class Item{
 
     }
 
-    /* 装備 */
+    /* 装備 TODO */
     static itemEquip(index){
         const equipItem = Player.getPlayerItems()[index]
         Control.deleteAllIitemElement(Player.getPlayerItems())
+        //アイテムリストから消しているだけなのでプレイヤーに武器ををセットする必要がある
+        //アイテムリストから消さずに装備マークみたいなのを表示したほうがいいかも
         Player.splicePlayerItem(index)
         Message.itemEquipMessage(equipItem.itemName)
         Control.elementNone()
