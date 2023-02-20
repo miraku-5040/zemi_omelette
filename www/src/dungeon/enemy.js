@@ -108,7 +108,6 @@ class Enemy{
                         this.moving(indexX, indexY);
                         break;
                     case "attack": //攻撃の場合
-                        console.log("enemy_attack_test"); //test
                         Skill.enemyUseNormalAttack(indexX, indexY);
                         Skill.skillReady();
                         Skill.skillGo();

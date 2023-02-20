@@ -33,7 +33,6 @@ class Aster{
         while(this.open_list.length > 0){
             i++
             if(i > 100){
-                console.log('見失っちゃった')
                 break;
             }
             //現在のノードを取得する
