@@ -95,7 +95,7 @@ class Game{
                 this.mode = Trap.activateTrap()
                 break;
             case 'enemy':
-                //ボスと倒したかの判定（べつのcaseに変えるべき）
+                //ボスと倒したかの判定（べつのcaseに分岐するべき）
                 if(this.gameEndFlg){
                     this.mode = 'alive';
                     break
@@ -131,6 +131,7 @@ class Game{
                 return
             case 'alive':
                 //生還時
+                //TODO:クリアした時のメソッドを呼ぶ
                 return
         }
         requestAnimationFrame(this.load); // 1/60秒後にもう一度呼び出す
@@ -144,5 +145,5 @@ class Game{
 window.addEventListener("load", () => {
         Game.initialize()
         Game.loop()
-    });
+});
 

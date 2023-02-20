@@ -33,7 +33,7 @@ class Aster{
         while(this.open_list.length > 0){
             i++
             if(i > 100){
-                console.log('見失っちゃった')
+
                 break;
             }
             //現在のノードを取得する
@@ -92,7 +92,7 @@ class Aster{
 
             // Child is on the closed list
             let closed_child_list = []
-            for(let closed_child in this.closed_list){
+            for(let closed_child of this.closed_list){
                 if(closed_child == children[index]){
                     closed_child_list.push(closed_child)
                 }
@@ -111,7 +111,7 @@ class Aster{
 
             // Child is already in the open list
             let open_node_list = []
-            for(let open_node in this.open_list){
+            for(let open_node of this.open_list){
                 if(open_node == children[index]){
                     open_node_list.push(open_node)
                 }

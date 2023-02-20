@@ -108,7 +108,6 @@ class Enemy{
                         this.moving(indexX, indexY);
                         break;
                     case "attack": //攻撃の場合
-                        console.log("enemy_attack_test"); //test
                         Skill.enemyUseNormalAttack(indexX, indexY);
                         Skill.skillReady();
                         Skill.skillGo();
@@ -195,7 +194,6 @@ class Enemy{
     /* 敵移動 */
     static moving(currentX, currentY){
         const elementItem = this.enemyStatusArray[currentY][currentX];
-        console.log("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
         const nextX = elementItem.next.x;
         const nextY = elementItem.next.y;
         const imgElement = document.getElementById("enemy_" + elementItem.enemyId + "_" + elementItem.distinction);
