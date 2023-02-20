@@ -1,17 +1,11 @@
 /* エフェクトを表示するjs */
 class Effect {
-    /*memo
-    * SE スコープエフェクト：ステージの複数マスに表示する
-    * TE ターゲットエフェクト：キャラクター1人に対して表示する
-    * 座標はステージの絶対座標で受ける
-    */
-
 
     /**
      * 初期化
      */
     static initialize() {
-        this.effectData = new Map(); //エフェクト表示内容
+        this.effectData = new Map(); //エフェクト表示内容データ
         this.#setAllEffectData();
         this.effectReadyData = new Map(); //エフェクトの準備をしたデータ 繰り返し表示する場合のロード減少
         this.effectReadyData.set(0, ""); //エラー用準備データ
@@ -62,7 +56,7 @@ class Effect {
 
     /**
      * プレイヤーのターゲットエフェクトを表示する
-     * サイズ1に設定する
+     * サイズ0(1マス)に設定する
      */
     static playerTargetEffectDisplay(readyKey, x, y, direction){
         const size = 0;
@@ -87,6 +81,7 @@ class Effect {
             console.error("readyKeyエラー");
             return;
         }
+        // HTMLの要素を準備する
         const effectLayerElement = document.getElementById("effect_layer");
         const relativePosition = this.#convertAbsoluteToRelative(x, y);
         const cloneImgElement = effectReadyData.imgElement.cloneNode();
@@ -101,7 +96,7 @@ class Effect {
         }
         cloneImgElement.style.display = "none"; //非表示で配置する
         effectLayerElement.appendChild(cloneImgElement);
-        // 表示と削除
+        // エフェクト表示と削除設定
         const displayTime = effectReadyData.time;
         const audioElement = effectReadyData.audioElement;
         audioElement.play();
@@ -127,7 +122,7 @@ class Effect {
 
     /* 座標移動するエフェクトを表示する */
     static #moveEffectDisplay(effectReadyData, positionArray) {
-        // データ準備
+        // HTMLの要素を準備する
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElement = effectReadyData.imgElement;
         const imgElementArray = [];
@@ -162,7 +157,7 @@ class Effect {
             const animate = cloneImgElement.animate(animateKeyfreames, animateOption);
             animate.pause();
         });
-        // 表示と削除
+        // エフェクト表示と削除設定
         const audioElement = effectReadyData.audioElement;
         audioElement.play();
         imgElementArray.forEach((imgElement) => {
@@ -179,7 +174,7 @@ class Effect {
 
     /* 座標移動しないエフェクトを表示する */
     static #fixEffectDisplay(effectReadyData, relativePositionArray) {
-        // データ準備
+        // HTMLの要素を準備する
         const effectLayerElement = document.getElementById("effect_layer");
         const imgElement = effectReadyData.imgElement;
         const imgElementArray = [];
@@ -202,7 +197,7 @@ class Effect {
                 nextPosition = getNextPositionFunction(nextPosition);
             }
         });
-        // 表示と削除
+        // エフェクト表示と削除設定
         const audioElement = effectReadyData.audioElement;
         audioElement.play();
         const displayTime = effectReadyData.time;
@@ -227,7 +222,7 @@ class Effect {
         this.effectData.set("TE001", effectTE001);
         const effectTE002 = { move: false, rotation: true, time: 1000, audio: "EM000", image: "EF001" };
         this.effectData.set("TE002", effectTE002);
-        // TODO 追加する
+        /* エフェクトの種類を追加する */
     }
 
     /* エフェクト準備データをセットする */
@@ -254,7 +249,7 @@ class Effect {
     /* audioElementを作成する */
     static #createAudioElement(audioId) {
         if (audioId === "") {
-            //効果音なしの場合
+            //効果音なしの場合は空の要素を返す
             return new Audio();
         }
         const fileExtension = ".mp3";
