@@ -128,7 +128,7 @@ class Game{
             case 'die':
                 //気絶
                 Control.endGame()
-                return亡
+                return
             case 'alive':
                 //生還時
                 return
