@@ -13,6 +13,7 @@ class Image {
         this.effectImages = new Map();
         this.createArrow()
     }
+
     /* 画像の要素を作成
      *  サンプル： <img src="img/stage_1.png" id="stage1"> */
     static createElement(id = '00000', fileExtension = ".png"){
@@ -26,7 +27,7 @@ class Image {
         return elem;
     }
 
-
+    /* アイテムリストの作成 */
     static createItemList(playerId, itemList){
         Player.getPlayerItems(playerId).forEach((item,i) => {
             var elem = document.createElement(`img`);
@@ -42,11 +43,12 @@ class Image {
         });
     }
 
-    /* stageImagesに床、無、壁の3個の画像が入る */
-    static createStageImages(){
+    /* stageImagesに床、無、壁の3個の画像が入る
+     * フィールドのIDを取得しそれごとの画像を保存する  */
+    static createStageImages(id = 'F000'){
         this.stageImages = [];
         for(let i=1; i <= Config.stageImageTotal; i++){
-            let image = this.createElement(`F000${i}`);
+            let image = this.createElement(`${id}${i}`);
             this.stageImages.push(image);
         }
     }
